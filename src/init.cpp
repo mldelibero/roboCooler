@@ -2,4 +2,5 @@
 
 void init(void)
 {
+    init_scheduler();
 }
