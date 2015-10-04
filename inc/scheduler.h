@@ -1,4 +1,4 @@
-#ifdef __SCHEDULER_H
+#ifndef __SCHEDULER_HA
+#define __SCHEDULER_HA
 void init_scheduler(void);
-#define __SCHEDULER_H
-#endif // __SCHEDULER_H
+#endif // __SCHEDULER_HA
