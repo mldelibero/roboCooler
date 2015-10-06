@@ -370,10 +370,10 @@
             <vShortEn>0</vShortEn>
             <vShortWch>0</vShortWch>
             <VariousControls>
-              <MiscControls>--cpp</MiscControls>
+              <MiscControls></MiscControls>
               <Define>STM32F40_41xxx, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\inc;..\lib;..\lib\stdPeriph;..\lib\stdPeriph\inc</IncludePath>
+              <IncludePath>..\dev;..\inc;..\lib\stdPeriph\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -434,36 +434,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>lib</GroupName>
-          <Files>
-            <File>
-              <FileName>system_stm32f4xx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\lib\system_stm32f4xx.h</FilePath>
-            </File>
-            <File>
-              <FileName>startup_stm32f407xx.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\lib\startup_stm32f407xx.s</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f4xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lib\system_stm32f4xx.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\lib\stm32f4xx.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\lib\stm32f4xx_conf.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>inc</GroupName>
           <Files>
             <File>
@@ -479,8 +449,18 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>stdLib</GroupName>
+          <GroupName>lib</GroupName>
           <Files>
+            <File>
+              <FileName>misc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lib\stdPeriph\src\misc.c</FilePath>
+            </File>
+            <File>
+              <FileName>misc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\lib\stdPeriph\inc\misc.h</FilePath>
+            </File>
             <File>
               <FileName>stm32f4xx_gpio.c</FileName>
               <FileType>1</FileType>
@@ -511,15 +491,124 @@
               <FileType>5</FileType>
               <FilePath>..\lib\stdPeriph\inc\stm32f4xx_tim.h</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>dev</GroupName>
+          <GroupOption>
+            <CommonProperty>
+              <UseCPPCompiler>0</UseCPPCompiler>
+              <RVCTCodeConst>0</RVCTCodeConst>
+              <RVCTZI>0</RVCTZI>
+              <RVCTOtherData>0</RVCTOtherData>
+              <ModuleSelection>0</ModuleSelection>
+              <IncludeInBuild>2</IncludeInBuild>
+              <AlwaysBuild>2</AlwaysBuild>
+              <GenerateAssemblyFile>2</GenerateAssemblyFile>
+              <AssembleAssemblyFile>2</AssembleAssemblyFile>
+              <PublicsOnly>2</PublicsOnly>
+              <StopOnExitCode>11</StopOnExitCode>
+              <CustomArgument></CustomArgument>
+              <IncludeLibraryModules></IncludeLibraryModules>
+              <ComprImg>1</ComprImg>
+            </CommonProperty>
+            <GroupArmAds>
+              <Cads>
+                <interw>2</interw>
+                <Optim>0</Optim>
+                <oTime>2</oTime>
+                <SplitLS>2</SplitLS>
+                <OneElfS>2</OneElfS>
+                <Strict>2</Strict>
+                <EnumInt>2</EnumInt>
+                <PlainCh>2</PlainCh>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <wLevel>2</wLevel>
+                <uThumb>2</uThumb>
+                <uSurpInc>2</uSurpInc>
+                <uC99>2</uC99>
+                <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>0</vShortEn>
+                <vShortWch>0</vShortWch>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath>..\dev;..\inc;..\lib\stdPeriph\inc</IncludePath>
+                </VariousControls>
+              </Cads>
+              <Aads>
+                <interw>2</interw>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <thumb>2</thumb>
+                <SplitLS>2</SplitLS>
+                <SwStkChk>2</SwStkChk>
+                <NoWarn>2</NoWarn>
+                <uSurpInc>2</uSurpInc>
+                <useXO>2</useXO>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Aads>
+            </GroupArmAds>
+          </GroupOption>
+          <Files>
             <File>
-              <FileName>misc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lib\stdPeriph\src\misc.c</FilePath>
+              <FileName>core_cm4.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\core_cm4.h</FilePath>
             </File>
             <File>
-              <FileName>misc.h</FileName>
+              <FileName>core_cmFunc.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\lib\stdPeriph\inc\misc.h</FilePath>
+              <FilePath>..\dev\core_cmFunc.h</FilePath>
+            </File>
+            <File>
+              <FileName>core_cmInstr.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\core_cmInstr.h</FilePath>
+            </File>
+            <File>
+              <FileName>core_cmSimd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\core_cmSimd.h</FilePath>
+            </File>
+            <File>
+              <FileName>startup_stm32f407xx.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\dev\startup_stm32f407xx.s</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\stm32f4xx.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\stm32f4xx_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f407xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\stm32f407xx.h</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f4xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\dev\system_stm32f4xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f4xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\system_stm32f4xx.h</FilePath>
             </File>
           </Files>
         </Group>
