@@ -4,4 +4,5 @@
 void init(void)
 {
     init_scheduler();
+    init_leds();
 }
