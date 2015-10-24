@@ -422,6 +422,11 @@
               <FilePath>..\src\init.cpp</FilePath>
             </File>
             <File>
+              <FileName>leds.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\leds.cpp</FilePath>
+            </File>
+            <File>
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\main.cpp</FilePath>
@@ -440,6 +445,11 @@
               <FileName>init.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\inc\init.h</FilePath>
+            </File>
+            <File>
+              <FileName>leds.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\inc\leds.h</FilePath>
             </File>
             <File>
               <FileName>scheduler.h</FileName>
@@ -482,6 +492,16 @@
               <FilePath>..\lib\stdPeriph\inc\stm32f4xx_rcc.h</FilePath>
             </File>
             <File>
+              <FileName>stm32f4xx_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lib\stdPeriph\src\stm32f4xx_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_spi.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\lib\stdPeriph\inc\stm32f4xx_spi.h</FilePath>
+            </File>
+            <File>
               <FileName>stm32f4xx_tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lib\stdPeriph\src\stm32f4xx_tim.c</FilePath>
@@ -490,6 +510,26 @@
               <FileName>stm32f4xx_tim.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\lib\stdPeriph\inc\stm32f4xx_tim.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lib\stdPeriph\src\stm32f4xx_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_usart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\lib\stdPeriph\inc\stm32f4xx_usart.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lib\stdPeriph\src\stm32f4xx_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_dma.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\lib\stdPeriph\inc\stm32f4xx_dma.h</FilePath>
             </File>
           </Files>
         </Group>
