@@ -130,7 +130,6 @@ void init_leds(void)
 
 
     // Init GPIO
-    GPIO_DeInit(LED_GPIOx);
 
     GPIO_PinAFConfig(LED_GPIOx, LED_GPIO_PinSourcex, LED_GPIO_AF_USARTx);
 
