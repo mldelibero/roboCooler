@@ -417,6 +417,11 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
+              <FileName>capsense.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\capsense.cpp</FilePath>
+            </File>
+            <File>
               <FileName>init.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\init.cpp</FilePath>
@@ -441,6 +446,11 @@
         <Group>
           <GroupName>inc</GroupName>
           <Files>
+            <File>
+              <FileName>capsense.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\inc\capsense.h</FilePath>
+            </File>
             <File>
               <FileName>init.h</FileName>
               <FileType>5</FileType>
@@ -482,6 +492,26 @@
               <FilePath>..\lib\stdPeriph\inc\stm32f4xx_gpio.h</FilePath>
             </File>
             <File>
+              <FileName>stm32f4xx_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lib\stdPeriph\src\stm32f4xx_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_dma.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\lib\stdPeriph\inc\stm32f4xx_dma.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lib\stdPeriph\src\stm32f4xx_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_i2c.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\lib\stdPeriph\inc\stm32f4xx_i2c.h</FilePath>
+            </File>
+            <File>
               <FileName>stm32f4xx_rcc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lib\stdPeriph\src\stm32f4xx_rcc.c</FilePath>
@@ -520,16 +550,6 @@
               <FileName>stm32f4xx_usart.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\lib\stdPeriph\inc\stm32f4xx_usart.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lib\stdPeriph\src\stm32f4xx_dma.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_dma.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\lib\stdPeriph\inc\stm32f4xx_dma.h</FilePath>
             </File>
           </Files>
         </Group>
