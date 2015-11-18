@@ -56,6 +56,8 @@
 #ifdef __cplusplus
  extern "C" {
 #endif /* __cplusplus */
+
+#include "stm32f4xx_conf.h"
   
 /** @addtogroup Library_configuration_section
   * @{
