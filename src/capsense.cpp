@@ -7,8 +7,8 @@
 
 bool check_csIrq(void);
 void mpr121_init(void);
-uint8_t mpr121Read(unsigned char address);
-static char touchstatus = 0;
+uint16_t mpr121Read(unsigned char address);
+uint16_t touchstatus = 0;
 
 // PB8
 #define CS_SCL_GPIO_AHBxPeriphClockCmd  RCC_AHB1PeriphClockCmd
@@ -107,6 +107,18 @@ static char touchstatus = 0;
 // Global Constants
 #define TOU_THRESH    0x0F
 #define REL_THRESH    0x0A
+void forceBusRelease(void)
+{
+    int dlyTime = 0x1A9;
+    for (int cycles = 0; cycles < 10; cycles++)
+    {
+        GPIO_ResetBits(CS_SCL_GPIOx, CS_SCL_GPIO_PIN_X);
+        for (int dly = dlyTime;dly>0;dly--);
+        GPIO_SetBits  (CS_SCL_GPIOx, CS_SCL_GPIO_PIN_X);
+        for (int dly = dlyTime;dly>0;dly--);
+    }
+}
+
 void init_cs(void)
 {
     GPIO_InitTypeDef GPIO_InitStruct;
@@ -121,16 +133,21 @@ void init_cs(void)
     CS_RCC_APBxPeriphClockCmd(CS_APBxPeriph_I2Cx, ENABLE);
 
     // Init GPIO
+    GPIO_StructInit(&GPIO_InitStruct);
+    GPIO_InitStruct.GPIO_OType = GPIO_OType_OD;
+    GPIO_InitStruct.GPIO_PuPd  = GPIO_PuPd_UP;
+
+    GPIO_InitStruct.GPIO_Speed = CS_SCL_GPIO_SPEED;
+    GPIO_InitStruct.GPIO_Pin   = CS_SCL_GPIO_PIN_X;
+    GPIO_InitStruct.GPIO_Mode  = GPIO_Mode_OUT;
+    GPIO_Init(CS_SCL_GPIOx,&GPIO_InitStruct);
+
+    forceBusRelease();
+
     GPIO_PinAFConfig(CS_SCL_GPIOx, CS_SCL_GPIO_PinSourcex, CS_SCL_GPIO_AF);
     GPIO_PinAFConfig(CS_SDA_GPIOx, CS_SDA_GPIO_PinSourcex, CS_SDA_GPIO_AF);
 
-    GPIO_StructInit(&GPIO_InitStruct);
-    GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStruct.GPIO_PuPd  = GPIO_PuPd_NOPULL;
-
     GPIO_InitStruct.GPIO_Mode  = CS_SCL_GPIO_MODE;
-    GPIO_InitStruct.GPIO_Speed = CS_SCL_GPIO_SPEED;
-    GPIO_InitStruct.GPIO_Pin   = CS_SCL_GPIO_PIN_X;
     GPIO_Init(CS_SCL_GPIOx,&GPIO_InitStruct);
 
     GPIO_InitStruct.GPIO_Mode  = CS_SDA_GPIO_MODE;
@@ -148,8 +165,9 @@ void init_cs(void)
     GPIO_InitStruct.GPIO_Pin   = CS_ADD_GPIO_PIN_X;
     GPIO_Init(CS_ADD_GPIOx,&GPIO_InitStruct);
 
-    // Set Address Pin Low
-    GPIO_ResetBits(CS_ADD_GPIOx, CS_ADD_GPIO_PIN_X);
+
+
+    //    I2C_SoftwareResetCmd(CS_I2Cx, ENABLE);
 
     // Init I2C Peripheral
     I2C_DeInit(CS_I2Cx);
@@ -166,20 +184,20 @@ void init_cs(void)
 
     I2C_Cmd(CS_I2Cx, ENABLE);
 
-
     mpr121_init();
+
     while(1)
     {
         while(check_csIrq() == false);
         touchstatus = mpr121Read(0x00);	// Read touch status
-        touchstatus = touchstatus << 2;	// Shift two bits over
+//        touchstatus = touchstatus << 2;	// Shift two bits over
     }
 } // end - void init_cs(void)
 
 bool check_csIrq(void)
 {
-    if (GPIO_ReadInputDataBit(CS_IRQ_GPIOx, CS_IRQ_GPIO_PIN_X) == 1) return true;
-    else                                                             return false;
+    if (GPIO_ReadInputDataBit(CS_IRQ_GPIOx, CS_IRQ_GPIO_PIN_X) == 1) return false;
+    else                                                             return true;
 } // end - bool check_csIrq(void)
 
 void mpr121Write(unsigned char address, unsigned char data)
@@ -199,35 +217,31 @@ void mpr121Write(unsigned char address, unsigned char data)
     I2C_GenerateSTOP(CS_I2Cx, ENABLE);
 } // end - void mpr121Write(unsigned char address, unsigned char data)
 
-uint8_t mpr121Read(unsigned char address)
+uint16_t mpr121Read(unsigned char address)
 {
-    uint8_t data;
-    
-    I2C_GenerateSTART(CS_I2Cx, ENABLE);
-    while (I2C_CheckEvent(CS_I2Cx, I2C_EVENT_MASTER_MODE_SELECT) == ERROR);
-    
-    I2C_Send7bitAddress(CS_I2Cx, CS_I2C_ADDR_WR, I2C_Direction_Transmitter);
-    while (I2C_CheckEvent(CS_I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED) == ERROR);
-    
-    I2C_SendData(CS_I2Cx, address);
-    while (I2C_CheckEvent(CS_I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING) == ERROR);
-    
-    // Read
+    uint16_t data;
+
+    // Restart
+    CS_I2Cx->CR1 |= I2C_Ack_Enable; // Set ACK for single byte reception
     I2C_GenerateSTART(CS_I2Cx, ENABLE);
     while (I2C_CheckEvent(CS_I2Cx, I2C_EVENT_MASTER_MODE_SELECT) == ERROR);
 
-    I2C_Send7bitAddress(CS_I2Cx, CS_I2C_ADDR_RE, I2C_Direction_Transmitter);
-    I2C_NACKPositionConfig(CS_I2Cx, I2C_NACKPosition_Current);
-    while (I2C_CheckEvent(CS_I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED) == ERROR);
-    
+    // Address Write
+    I2C_Send7bitAddress(CS_I2Cx, CS_I2C_ADDR_RE, I2C_Direction_Receiver);
+    while (I2C_CheckEvent(CS_I2Cx, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED) == ERROR);
 
     while (I2C_CheckEvent(CS_I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED) == ERROR);
     data = I2C_ReceiveData(CS_I2Cx);
+    CS_I2Cx->CR1 &= ~I2C_Ack_Enable; // Set NACK for single byte reception
 
+    while (I2C_CheckEvent(CS_I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED) == ERROR);
+    data |= (I2C_ReceiveData(CS_I2Cx) << 8);
+
+    // Stop Condition
     I2C_GenerateSTOP(CS_I2Cx, ENABLE);
 
     return data;
-}
+} // end - uint16_t mpr121Read(unsigned char address)
 
 void mpr121_init(void)
 {
@@ -259,7 +273,7 @@ void mpr121_init(void)
     mpr121Write(ELE4_R, REL_THRESH);
     mpr121Write(ELE5_T, TOU_THRESH);
     mpr121Write(ELE5_R, REL_THRESH);
-    /*mpr121Write(ELE6_T, TOU_THRESH);
+    mpr121Write(ELE6_T, TOU_THRESH);
     mpr121Write(ELE6_R, REL_THRESH);
     mpr121Write(ELE7_T, TOU_THRESH);
     mpr121Write(ELE7_R, REL_THRESH);
@@ -270,7 +284,7 @@ void mpr121_init(void)
     mpr121Write(ELE10_T, TOU_THRESH);
     mpr121Write(ELE10_R, REL_THRESH);
     mpr121Write(ELE11_T, TOU_THRESH);
-    mpr121Write(ELE11_R, REL_THRESH);*/
+    mpr121Write(ELE11_R, REL_THRESH);
     
     // Section D
     // Set the Filter Configuration
@@ -281,8 +295,8 @@ void mpr121_init(void)
     // Electrode Configuration
     // Enable 6 Electrodes and set to run mode
     // Set ELE_CFG to 0x00 to return to standby mode
-    // mpr121Write(ELE_CFG, 0x0C);    // Enables all 12 Electrodes
-    mpr121Write(ELE_CFG, 0x06);        // Enable first 6 electrodes
+    mpr121Write(ELE_CFG, 0x0C);    // Enables all 12 Electrodes
+   // mpr121Write(ELE_CFG, 0x06);        // Enable first 6 electrodes
     
     // Section F
     // Enable Auto Config and auto Reconfig
