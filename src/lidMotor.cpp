@@ -16,6 +16,7 @@
 #define MOTOR_GPIO_AF                    GPIO_AF_TIM1
 
 // PE9
+#define FWD_HI_CHANNEL                   TIM_Channel_1
 #define FWD_HI_OCxInit                   TIM_OC1Init
 #define FWD_HI_AHB1Periph_GPIOx          RCC_AHB1Periph_GPIOE
 #define FWD_HI_GPIOx                     GPIOE
@@ -23,6 +24,7 @@
 #define FWD_HI_GPIO_PIN_X                GPIO_Pin_9
 
 // PE11
+#define FWD_LO_CHANNEL                   TIM_Channel_2
 #define FWD_LO_OCxInit                   TIM_OC2Init
 #define FWD_LO_AHB1Periph_GPIOx          RCC_AHB1Periph_GPIOE
 #define FWD_LO_GPIOx                     GPIOE
@@ -30,6 +32,7 @@
 #define FWD_LO_GPIO_PIN_X                GPIO_Pin_11
 
 // PE13
+#define REV_HI_CHANNEL                   TIM_Channel_3
 #define REV_HI_OCxInit                   TIM_OC3Init
 #define REV_HI_AHB1Periph_GPIOx          RCC_AHB1Periph_GPIOE
 #define REV_HI_GPIOx                     GPIOE
@@ -37,6 +40,7 @@
 #define REV_HI_GPIO_PIN_X                GPIO_Pin_13
 
 // PE14
+#define REV_LO_CHANNEL                   TIM_Channel_4
 #define REV_LO_OCxInit                   TIM_OC4Init
 #define REV_LO_AHB1Periph_GPIOx          RCC_AHB1Periph_GPIOE
 #define REV_LO_GPIOx                     GPIOE
@@ -112,3 +116,28 @@ void init_lidMotor(void)
     TIM_Cmd           (LIDMOTOR_TIMx, ENABLE);
 } // end - void init_scheduler(void)
 
+void lidMotor_Open(void)
+{
+    TIM_CCxCmd(LIDMOTOR_TIMx, FWD_HI_CHANNEL, TIM_CCx_Enable);
+    TIM_CCxCmd(LIDMOTOR_TIMx, FWD_LO_CHANNEL, TIM_CCx_Enable);
+
+    TIM_CCxCmd(LIDMOTOR_TIMx, REV_HI_CHANNEL, TIM_CCx_Disable);
+    TIM_CCxCmd(LIDMOTOR_TIMx, REV_LO_CHANNEL, TIM_CCx_Disable);
+}
+
+void lidMotor_Close(void)
+{
+    TIM_CCxCmd(LIDMOTOR_TIMx, FWD_HI_CHANNEL, TIM_CCx_Disable);
+    TIM_CCxCmd(LIDMOTOR_TIMx, FWD_LO_CHANNEL, TIM_CCx_Disable);
+
+    TIM_CCxCmd(LIDMOTOR_TIMx, REV_HI_CHANNEL, TIM_CCx_Enable);
+    TIM_CCxCmd(LIDMOTOR_TIMx, REV_LO_CHANNEL, TIM_CCx_Enable);
+}
+
+void lidMotor_Off(void)
+{
+    TIM_CCxCmd(LIDMOTOR_TIMx, FWD_HI_CHANNEL, TIM_CCx_Disable);
+    TIM_CCxCmd(LIDMOTOR_TIMx, FWD_LO_CHANNEL, TIM_CCx_Disable);
+    TIM_CCxCmd(LIDMOTOR_TIMx, REV_HI_CHANNEL, TIM_CCx_Disable);
+    TIM_CCxCmd(LIDMOTOR_TIMx, REV_LO_CHANNEL, TIM_CCx_Disable);
+}
