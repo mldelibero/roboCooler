@@ -7,6 +7,8 @@
 
 #define LED_GPIO_AHBxPeriphClockCmd  RCC_AHB1PeriphClockCmd
 #define LED_AHBxPeriph_GPIOx         RCC_AHB1Periph_GPIOB
+
+// PB6
 #define LED_GPIOx                    GPIOB
 #define LED_GPIO_PinSourcex          GPIO_PinSource6
 #define LED_GPIO_AF_USARTx           GPIO_AF_USART1
