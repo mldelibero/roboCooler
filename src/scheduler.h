@@ -1,6 +1,6 @@
 #ifndef __SCHEDULER_H
 #define __SCHEDULER_H
-#define SCHED_IRQHandler   TIM1_UP_TIM10IRQHandler
+#define SCHED_IRQHandler   TIM2_IRQ_Handler
 
 void init_scheduler(void);
 extern "C"
