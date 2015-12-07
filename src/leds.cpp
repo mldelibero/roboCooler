@@ -8,24 +8,24 @@
 #define LED_GPIO_AHBxPeriphClockCmd  RCC_AHB1PeriphClockCmd
 #define LED_AHBxPeriph_GPIOx         RCC_AHB1Periph_GPIOB
 
-// PB6
-#define LED_GPIOx                    GPIOB
-#define LED_GPIO_PinSourcex          GPIO_PinSource6
-#define LED_GPIO_AF_USARTx           GPIO_AF_USART1
-#define LED_GPIO_PIN_X               GPIO_Pin_6
+// PA2
+#define LED_GPIOx                    GPIOA
+#define LED_GPIO_PinSourcex          GPIO_PinSource2
+#define LED_GPIO_AF_USARTx           GPIO_AF_USART2
+#define LED_GPIO_PIN_X               GPIO_Pin_2
 #define LED_GPIO_MODE                GPIO_Mode_AF
 #define LED_GPIO_SPEED               GPIO_High_Speed
 
-#define LED_RCC_APBxPeriphClockCmd   RCC_APB2PeriphClockCmd
-#define LED_APBxPeriph_USARTx        RCC_APB2Periph_USART1
-#define LED_USARTx                   USART1
+#define LED_RCC_APBxPeriphClockCmd   RCC_APB1PeriphClockCmd
+#define LED_APBxPeriph_USARTx        RCC_APB1Periph_USART2
+#define LED_USARTx                   USART2
 #define BAUD_RATE                    2700000
 
 #define LED_DMA_AHBxPeriphClockCmd   RCC_AHB1PeriphClockCmd
-#define LED_AHBxPeriph_DMAx          RCC_AHB1Periph_DMA2
+#define LED_AHBxPeriph_DMAx          RCC_AHB1Periph_DMA1
 #define USARTx_TX_DMA_CHANNEL        DMA_Channel_4
-#define USARTx_TX_DMA_STREAM         DMA2_Stream7
-#define USARTx_TX_DMA_FLAG_TCIF      DMA_FLAG_TCIF7
+#define USARTx_TX_DMA_STREAM         DMA2_Stream6
+#define USARTx_TX_DMA_FLAG_TCIF      DMA_FLAG_TCIF6
 
 #define BUFFERSIZE  56
 #define BITS_000    0xDB
