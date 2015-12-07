@@ -7,10 +7,10 @@
 #include "stm32f4xx.h"
 #include "stm32f407xx.h"
 
-#define RCC_APBxPeriph_SCHED_RCC      RCC_APB1Periph_TIM2
+#define RCC_APBxPeriph_SCHED_RCC      RCC_APB1Periph_TIM4
 #define SCHED_RCC_APBxPeriphClockCmd  RCC_APB1PeriphClockCmd
-#define SCHED_TIMx_IRQn               TIM2_IRQn
-#define SCHED_TIMx                    TIM2
+#define SCHED_TIMx_IRQn               TIM4_IRQn
+#define SCHED_TIMx                    TIM4
 #define SCHED_CLK                     10000
 #define SCHED_FREQ                    1000
 #define SCHED_PER                     (SCHED_CLK / SCHED_FREQ - 1)
