@@ -319,11 +319,11 @@ Text GLabel 3650 1900 2    60   Input ~ 0
 CS_SDA
 Text GLabel 1200 2100 0    60   Input ~ 0
 LID_FWD_HI
-Text GLabel 1200 2200 0    60   Input ~ 0
+Text GLabel 1700 2300 2    60   Input ~ 0
 LID_FWD_LO
 Text GLabel 1200 2300 0    60   Input ~ 0
 LID_REF_HI
-Text GLabel 1700 2300 2    60   Input ~ 0
+Text GLabel 1200 2200 0    60   Input ~ 0
 LID_REV_LO
 Text GLabel 1200 2500 0    60   Input ~ 0
 HALL_1
@@ -337,9 +337,9 @@ Text GLabel 1150 3750 0    60   Input ~ 0
 PUSH_1
 Text GLabel 3100 3750 0    60   Input ~ 0
 PUSH_2
-Text GLabel 3150 2600 0    60   Input ~ 0
+Text GLabel 1700 3000 2    60   Input ~ 0
 PUSH_1
-Text GLabel 3150 2700 0    60   Input ~ 0
+Text GLabel 1700 3100 2    60   Input ~ 0
 PUSH_2
 Text GLabel 3150 2000 0    60   Input ~ 0
 PUMP
