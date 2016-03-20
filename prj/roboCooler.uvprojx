@@ -173,12 +173,12 @@
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
-            <Capability>0</Capability>
-            <DriverSelection>-1</DriverSelection>
+            <Capability>1</Capability>
+            <DriverSelection>4096</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -417,14 +417,44 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
+              <FileName>capsense.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\capsense.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>capsense.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\capsense.h</FilePath>
+            </File>
+            <File>
               <FileName>init.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\init.cpp</FilePath>
             </File>
             <File>
+              <FileName>init.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\init.h</FilePath>
+            </File>
+            <File>
               <FileName>leds.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\leds.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>leds.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\leds.h</FilePath>
+            </File>
+            <File>
+              <FileName>lidMotor.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\lidMotor.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lidMotor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\lidMotor.h</FilePath>
             </File>
             <File>
               <FileName>main.cpp</FileName>
@@ -436,25 +466,10 @@
               <FileType>8</FileType>
               <FilePath>..\src\scheduler.cpp</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>inc</GroupName>
-          <Files>
-            <File>
-              <FileName>init.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\inc\init.h</FilePath>
-            </File>
-            <File>
-              <FileName>leds.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\inc\leds.h</FilePath>
-            </File>
             <File>
               <FileName>scheduler.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\inc\scheduler.h</FilePath>
+              <FilePath>..\src\scheduler.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -480,6 +495,26 @@
               <FileName>stm32f4xx_gpio.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\lib\stdPeriph\inc\stm32f4xx_gpio.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lib\stdPeriph\src\stm32f4xx_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_dma.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\lib\stdPeriph\inc\stm32f4xx_dma.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\lib\stdPeriph\src\stm32f4xx_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_i2c.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\lib\stdPeriph\inc\stm32f4xx_i2c.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_rcc.c</FileName>
@@ -520,16 +555,6 @@
               <FileName>stm32f4xx_usart.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\lib\stdPeriph\inc\stm32f4xx_usart.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lib\stdPeriph\src\stm32f4xx_dma.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_dma.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\lib\stdPeriph\inc\stm32f4xx_dma.h</FilePath>
             </File>
           </Files>
         </Group>
