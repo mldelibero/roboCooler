@@ -21,10 +21,10 @@ CPP_PLATFORM = Gcc
 # so that memory leak detection does not conflict with stl.
 #CPPUTEST_MEMLEAK_DETECTOR_NEW_MACRO_FILE = -include ExamplesNewOverrides.h
 SRC_DIRS = \
-        ../src
+	../src
 
 TEST_SRC_DIRS = \
-	src
+	allTests
 
 INCLUDE_DIRS =\
   .\
