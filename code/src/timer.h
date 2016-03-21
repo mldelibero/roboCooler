@@ -5,8 +5,10 @@
 
 #define NUM_TIMERS 5
 
-void	 AllocateTimer(uint32_t** timer);
+void	 AT(uint32_t** timer);
+int32_t  AllocateTimer(void);
 uint32_t Get_NumTimersAllocated(void);
 uint32_t Init_Timers(void);
+bool     IsTimerExpired(int32_t timer);
 
 #endif //#define _TIMER__H

@@ -23,13 +23,17 @@ uint32_t Init_Timers(void)
 	return numTimersAllocated;
 }
 
-void AllocateTimer(uint32_t** timer)
+int32_t AllocateTimer(void)
 {
-	if (numTimersAllocated < NUM_TIMERS) 
-	{
-		*timer = &timers[numTimersAllocated];
-		numTimersAllocated++;
-	}
-	else *timer = NULL;
-} // end - void AllocateTimer(uint32_t** timer)
+	if (numTimersAllocated < NUM_TIMERS) return (int32_t)numTimersAllocated++;
+	else 								 return -1;
+}
+
+bool IsTimerExpired(int32_t timer)
+{
+	if (timer > -10000) return true;
+	else 			    return false;
+//	if (timer > -1 && timer < NUM_TIMERS && timers[timer] == 0) return true;
+//  else 		  											    return false;
+}
 

@@ -3,14 +3,14 @@
 #include <stdio.h>
 #include "timer.h"
 
-uint32_t* timer_p = NULL;
+int32_t timer = -1;
 
 TEST_GROUP(TimeTests)
 {
 	void setup()
 	{
 		Init_Timers();
-		timer_p = NULL;
+		timer = -1;
 	}
 	void teardown()
 	{
@@ -29,27 +29,27 @@ TEST(TimeTests, NoTimersAllocatedAfterInit)
 
 TEST(TimeTests, CanAllocateTimerIfAvailable)
 {
-	AllocateTimer(&timer_p);
-	CHECK(timer_p != NULL);
+	CHECK(AllocateTimer() == 0);
 }
 
 TEST(TimeTests, CannotAllocateTimerIfNotAvailable)
 {
 	for (int t = 0; t < NUM_TIMERS; t++)
 	{
-		AllocateTimer(&timer_p);
+		timer = AllocateTimer();
 	}
-	CHECK(timer_p != NULL);
+	CHECK(timer != -1);
 
 	// No more timers
-	AllocateTimer(&timer_p);
-	CHECK(timer_p == NULL);
+	timer = AllocateTimer();
+	CHECK(timer == -1);
+	CHECK(timer != NUM_TIMERS);
 }
 
 TEST(TimeTests, AllocatedTimerInitializedtoZero)
 {
-	AllocateTimer(&timer_p);
-	CHECK(*timer_p == 0);
+	timer = AllocateTimer();
+	CHECK(IsTimerExpired(timer) == true);
 }
 
 /*
@@ -61,8 +61,6 @@ This is a list of the time functionality that has yet to be tested here.
 * Interrput is enabled
 
 -Use
-* Can poll if a particular timer is expired
 * Can reset a timer
-
 */
 
