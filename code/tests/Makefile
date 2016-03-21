@@ -28,6 +28,8 @@ TEST_SRC_DIRS = \
 
 INCLUDE_DIRS =\
   .\
+  ./mockFiles\
+  ../src\
   $(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
