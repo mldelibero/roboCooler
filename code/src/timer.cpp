@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-static uint32_t timers[NUM_TIMERS];
+static int32_t timers[NUM_TIMERS];
 static uint32_t numTimersAllocated = 0;
 
 uint32_t Get_NumTimersAllocated(void)
@@ -34,6 +34,16 @@ bool IsTimerExpired(int32_t timer)
 	if (timer > -10000) return true;
 	else 			    return false;
 //	if (timer > -1 && timer < NUM_TIMERS && timers[timer] == 0) return true;
-//  else 		  											    return false;
+//  else  		  											    return false;
+}
+
+void  Set_TimerValue(int32_t timer, int32_t timerValue)
+{
+	if (timer >= 0 && timer < NUM_TIMERS) timers[timer] = timerValue;
+}
+
+int32_t Get_TimerValue(int32_t timer)
+{
+	return timers[timer];
 }
 
