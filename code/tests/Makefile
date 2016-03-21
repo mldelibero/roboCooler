@@ -12,6 +12,8 @@ endif
 #--- Inputs ----#
 COMPONENT_NAME = roboCooler
 CPPUTEST_HOME = /usr/local/lib/cpputest
+# Uncomment to temporarily allow warnings
+#CPPUTEST_WARNINGFLAGS = -Wall
 
 CPPUTEST_USE_EXTENSIONS = Y
 CPP_PLATFORM = Gcc
