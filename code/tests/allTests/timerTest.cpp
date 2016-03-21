@@ -52,6 +52,13 @@ TEST(TimeTests, AllocatedTimerInitializedtoZero)
 	CHECK(IsTimerExpired(timer) == true);
 }
 
+TEST(TimeTests, CanSetTimerToValue)
+{
+	timer = AllocateTimer();
+	Set_TimerValue(timer, 100);
+	CHECK(Get_TimerValue(timer) == 100);
+}
+
 /*
 This is a list of the time functionality that has yet to be tested here.
 
