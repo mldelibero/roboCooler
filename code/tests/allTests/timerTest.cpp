@@ -5,7 +5,7 @@
 
 int32_t timer = -1;
 
-TEST_GROUP(TimeTests)
+TEST_GROUP(TimerTests)
 {
 	void setup()
 	{
@@ -17,22 +17,22 @@ TEST_GROUP(TimeTests)
 	}
 };
 
-TEST(TimeTests, NumTimersGreaterThanZero)
+TEST(TimerTests, NumTimersGreaterThanZero)
 {
 	CHECK(NUM_TIMERS > 0);
 }
 
-TEST(TimeTests, NoTimersAllocatedAfterInit)
+TEST(TimerTests, NoTimersAllocatedAfterInit)
 {
 	CHECK(Get_NumTimersAllocated() == 0);	
 }
 
-TEST(TimeTests, CanAllocateTimerIfAvailable)
+TEST(TimerTests, CanAllocateTimerIfAvailable)
 {
 	CHECK(AllocateTimer() == 0);
 }
 
-TEST(TimeTests, CannotAllocateTimerIfNotAvailable)
+TEST(TimerTests, CannotAllocateTimerIfNotAvailable)
 {
 	for (int t = 0; t < NUM_TIMERS; t++)
 	{
@@ -46,17 +46,43 @@ TEST(TimeTests, CannotAllocateTimerIfNotAvailable)
 	CHECK(timer != NUM_TIMERS);
 }
 
-TEST(TimeTests, AllocatedTimerInitializedtoZero)
+TEST(TimerTests, AllocatedTimerInitializedtoZero)
 {
 	timer = AllocateTimer();
 	CHECK(IsTimerExpired(timer) == true);
 }
 
-TEST(TimeTests, CanSetTimerToValue)
+TEST(TimerTests, CanSetTimerToValue)
 {
-	timer = AllocateTimer();
-	Set_TimerValue(timer, 100);
-	CHECK(Get_TimerValue(timer) == 100);
+    timer = AllocateTimer();
+    Set_TimerValue(timer, 100);
+    CHECK(Get_TimerValue(timer) == 100);
+}
+
+TEST_GROUP(TimerDriverTests)
+{
+    void setup()
+    {
+    }
+    void teardown()
+    {
+        mock().checkExpectations();
+        mock().clear();
+    }
+};
+
+TEST(TimerDriverTests, TestInitCalls)
+{
+    int callOrder = 1;
+
+    mock().expectOneCall("TIM_DeInit"            ).withCallOrder(callOrder++);
+    mock().expectOneCall("RCC_APB1PeriphClockCmd").withCallOrder(callOrder++);
+    mock().expectOneCall("TIM_TimeBaseInit"      ).withCallOrder(callOrder++);
+    mock().expectOneCall("NVIC_Init"             ).withCallOrder(callOrder++);
+    mock().expectOneCall("TIM_ITConfig"          ).withCallOrder(callOrder++);
+    mock().expectOneCall("TIM_Cmd"               ).withCallOrder(callOrder++);
+
+    Init_Timers();
 }
 
 /*
