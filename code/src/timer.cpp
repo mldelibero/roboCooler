@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdint.h>
 
+#include "timerDriver.h"
+
 static int32_t timers[NUM_TIMERS];
 static uint32_t numTimersAllocated = 0;
 
@@ -15,6 +17,7 @@ uint32_t Get_NumTimersAllocated(void)
 
 uint32_t Init_Timers(void)
 {
+    init_TimerDriver();
 	numTimersAllocated = 0;
 	for (int i = 0; i < NUM_TIMERS; i++)
 	{

@@ -1,20 +1,23 @@
 #include <CppUTest/TestHarness.h>
+#include <CppUTestExt/MockSupport.h>
 #include <stdint.h>
 #include <stdio.h>
 #include "timer.h"
+#include "timerDriver.h"
 
 int32_t timer = -1;
 
 TEST_GROUP(TimerTests)
 {
-	void setup()
-	{
-		Init_Timers();
-		timer = -1;
-	}
-	void teardown()
-	{
-	}
+    void setup()
+    {
+        mock().disable();
+        Init_Timers();
+        timer = -1;
+    }
+    void teardown()
+    {
+    }
 };
 
 TEST(TimerTests, NumTimersGreaterThanZero)

@@ -1,6 +1,15 @@
-#ifndef _STM32F4XX__h
-#define _STM32F4XX__h
+#ifndef _STM32F4XX__H
+#define _STM32F4XX__H
 
 #include <stdint.h>
 
-#endif // ifndef _STM32F4XX__h
+typedef struct
+{
+} TIM_TypeDef;
+
+typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;
+
+extern TIM_TypeDef  TIMn;
+extern TIM_TypeDef* TIM4;
+
+#endif /* ifndef _STM32F4XX__H */
