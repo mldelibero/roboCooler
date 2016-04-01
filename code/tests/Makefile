@@ -11,7 +11,10 @@ endif
 
 #--- Inputs ----#
 COMPONENT_NAME = roboCooler
-CPPUTEST_HOME = /usr/local/lib/cpputest
+#Uncomment in Makefile or put the next line in ~/.bashrc
+#CPPUTEST_HOME = /usr/local/lib/cpputest
+#export CPPUTEST_HOME=/usr/local/lib/cpputest
+
 # Uncomment to temporarily allow warnings
 #CPPUTEST_WARNINGFLAGS = -Wall
 
@@ -26,7 +29,8 @@ SRC_DIRS = \
 	../src
 
 TEST_SRC_DIRS = \
-	allTests
+	./allTests\
+	./mockFiles\
 
 INCLUDE_DIRS =\
   .\
