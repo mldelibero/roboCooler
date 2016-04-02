@@ -66,6 +66,7 @@ TEST_GROUP(TimerDriverTests)
 {
     void setup()
     {
+        mock().clear();
     }
     void teardown()
     {
