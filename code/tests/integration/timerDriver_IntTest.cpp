@@ -18,7 +18,7 @@ TEST_GROUP(TimerDriver_IntTests)
     }
 }; // end - TEST_GROUP(TimerDriver_IntTests)
 
-TEST(TimerDriver_IntTests, Fail)
+TEST(TimerDriver_IntTests, Setup)
 {
     int callOrder = 1;
 
