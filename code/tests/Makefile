@@ -10,13 +10,8 @@ ifndef SILENCE
 endif
 
 #--- Inputs ----#
-COMPONENT_NAME = roboCooler
-#Uncomment in Makefile or put the next line in ~/.bashrc
-#CPPUTEST_HOME = /usr/local/lib/cpputest
-#export CPPUTEST_HOME=/usr/local/lib/cpputest
-
-# Uncomment to temporarily allow warnings
-#CPPUTEST_WARNINGFLAGS = -Wall
+COMPONENT_NAME = CppUTestExamples
+CPPUTEST_HOME = /usr/local/lib/cpputest/
 
 CPPUTEST_USE_EXTENSIONS = Y
 CPP_PLATFORM = Gcc
@@ -27,7 +22,7 @@ CPP_PLATFORM = Gcc
 #CPPUTEST_MEMLEAK_DETECTOR_NEW_MACRO_FILE = -include ExamplesNewOverrides.h
 SRC_DIRS = \
 	../src\
-	../integration
+	../integration\
 
 TEST_SRC_DIRS = \
 	./allTests\
