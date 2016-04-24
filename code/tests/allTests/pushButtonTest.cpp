@@ -1,7 +1,7 @@
 #include <CppUTest/TestHarness.h>
 #include <CppUTestExt/MockSupport.h>
 
-//#include "pushButton.h"
+#include "pushButton.h"
 #include "pushButtonDriver.h"
 
 /*  * List of features needed:
@@ -44,8 +44,8 @@ TEST_GROUP(PushButtonFilterTests)
     {}
 }; // end - TEST_GROUP(PushButtonFilterTests)
 
-TEST(PushButtonFilterTests, fail)
+TEST(PushButtonFilterTests, MotorCmdStopInitially)
 {
-    CHECK(false);
+	CHECK(Get_MotorCmd() == MOTOR_STOP);
 }
 
