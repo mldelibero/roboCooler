@@ -16,7 +16,7 @@ void init_TimerDriver(void)
     TIMER_RCC_APBnPeriphClockCmd(TIMER_RCC_APB1Periph_TIMn, ENABLE);
 
     // Timer Setup
-    PrescalerValue = (uint16_t) (SystemCoreClock / TIMER_CLK - 1);
+    PrescalerValue = (uint16_t) ((SystemCoreClock / 2) / TIMER_CLK - 1);
 
     TIM_TimeBaseInitStruct.TIM_Prescaler         = PrescalerValue;
     TIM_TimeBaseInitStruct.TIM_CounterMode       = TIM_CounterMode_Up;
