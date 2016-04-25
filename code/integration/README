@@ -1,0 +1,15 @@
+This document describes the steps needed for integration testing.
+
+All:
+
+Use roboCooler/code/prj/roboCoolerInt.uvprojx to load the integration firmware into the module.
+
+
+1. TimerDriver
+The Code and exp
+
+This test will verify the frequency setting of the timer driver.
+The module under test is responsible for timing all of the other modules in the system.
+Connect an oscilloscope probe to the pin listed in timerDriver_Int.h
+You should measure a square wave with a frequency of TIMER_FREQ / 2
+
