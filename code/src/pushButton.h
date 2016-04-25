@@ -8,5 +8,9 @@ typedef enum my_motorCmd
     MOTOR_NO_CMD
 } motorCmd_t;
 
+void init_PushButton(void);
+void Reset_PushButtonFilters(void);
+void Run_PushButtons(void);
 motorCmd_t Get_MotorCmd(void);
+
 #endif // #ifndef __PUSHBUTTON_H
