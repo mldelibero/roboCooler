@@ -9,8 +9,7 @@
  * brief    Look at the gpio pin with an oscilloscope
  * brief    You should measure a square wave with a frency of TIMER_FREQ / 2
  */
-void init_TimerDriver_Int(void)
-{
+void init_TimerDriver_Int(void) {
     GPIO_InitTypeDef        GPIO_InitStruct;
     TIM_OCInitTypeDef       TIM_OCInitStruct;
 

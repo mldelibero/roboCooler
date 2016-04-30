@@ -5,7 +5,7 @@
 
 #include "timer.h"
 
-TEST_GROUP(TimerDriver_IntTests)
+TEST_GROUP(Timer_IntTests)
 {
     void setup()
     {
@@ -16,9 +16,9 @@ TEST_GROUP(TimerDriver_IntTests)
         mock().checkExpectations();
         mock().clear();
     }
-}; // end - TEST_GROUP(TimerDriver_IntTests)
+}; // end - TEST_GROUP(Timer_IntTests)
 
-TEST(TimerDriver_IntTests, Setup)
+TEST(Timer_IntTests, DriverSetup)
 {
     int callOrder = 1;
 
@@ -31,3 +31,14 @@ TEST(TimerDriver_IntTests, Setup)
     init_TimerDriver_Int();
 }
 
+TEST(Timer_IntTests, TimerSetup)
+{
+    int callOrder = 1;
+
+    mock().expectOneCall("RCC_AHB1PeriphClockCmd").withCallOrder(callOrder++);
+    mock().expectOneCall("GPIO_PinAFConfig"      ).withCallOrder(callOrder++);
+    mock().expectOneCall("GPIO_StructInit"       ).withCallOrder(callOrder++);
+    mock().expectOneCall("GPIO_Init"             ).withCallOrder(callOrder++);
+
+    init_Timer_Int();
+}
