@@ -11,7 +11,7 @@ endif
 
 #--- Inputs ----#
 COMPONENT_NAME = roboCooler_Timer
-CPPUTEST_HOME = /usr/local/lib/cpputest/
+#CPPUTEST_HOME = /usr/local/lib/cpputest/
 
 CPPUTEST_USE_EXTENSIONS = Y
 CPP_PLATFORM = Gcc
@@ -26,12 +26,12 @@ SRC_DIRS = \
 
 TEST_SRC_DIRS = \
 	./allTests\
-	../mockFiles\
 	../integration\
+	../mockFiles/stdlib\
 
 INCLUDE_DIRS =\
   .\
-  ../mockFiles\
+  ../mockFiles/stdlib\
   ../integration\
   ../../src/timer\
   ../../integration\

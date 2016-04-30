@@ -23,11 +23,13 @@ CPP_PLATFORM = Gcc
 SRC_DIRS = \
 	../../integration\
 	../mockFiles\
+	../mockFiles/stdlib\
 
 TEST_SRC_DIRS = \
 	./\
 	./mockFiles\
 	../mockFiles\
+	../mockFiles/stdlib\
 
 INCLUDE_DIRS =\
   .\
@@ -35,6 +37,7 @@ INCLUDE_DIRS =\
   ../../integration\
   ../../src/timer\
   ../mockFiles\
+  ../mockFiles/stdlib\
   $(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
