@@ -22,3 +22,9 @@ void GPIO_StructInit(GPIO_InitTypeDef* GPIO_InitStruct)
     if (GPIO_InitStruct) return;
 }
 
+void GPIO_ToggleBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+{
+    mock().actualCall("GPIO_ToggleBits"       )
+        .withParameter("GPIOx"   , GPIOx)
+        .withParameter("GPIO_Pin", GPIO_Pin);
+}

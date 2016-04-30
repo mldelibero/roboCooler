@@ -59,5 +59,6 @@ typedef struct
 void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct);
 void GPIO_PinAFConfig(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinSource, uint8_t GPIO_AF);
 void GPIO_StructInit(GPIO_InitTypeDef* GPIO_InitStruct);
+void GPIO_ToggleBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 
 #endif /* #ifndef __STM32F4XX_GPIO_MOCK_H */

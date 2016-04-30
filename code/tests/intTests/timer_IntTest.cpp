@@ -2,6 +2,8 @@
 #include <CppUTestExt/MockSupport.h>
 #include "timer_Int.h"
 #include "timer_IntTest.h"
+#include "timer.h"
+#include "timerDriver.h"
 
 int callOrder = -1;
 
@@ -43,9 +45,30 @@ TEST(Timer_IntTests, TimerSetup)
     init_Timer_Int();
 }
 
-TEST(Timer_IntTests, togglePin)
+TEST(Timer_IntTests, Toggle)
 {
+    mock().expectOneCall("Set_TimerValue"        ).withCallOrder(callOrder++)
+        .withParameter("timerValue", 0);
+    Set_TimerValue(0, 0); // Sets all timers to be expired
 
-//    timer_Int();
-    CHECK(true);
-}
+    mock().expectOneCall("IsTimerExpired"        ).withCallOrder(callOrder++);
+    mock().expectOneCall("GPIO_ToggleBits"       ).withCallOrder(callOrder++)
+        .withParameter("GPIOx"   , TIMER_INT_GPIOx)
+        .withParameter("GPIO_Pin", TIMER_INT_GPIO_PIN_X);
+
+    mock().expectOneCall("Set_TimerValue"        ).withCallOrder(callOrder++)
+        .withParameter("timerValue", TIMER_INT_FREQ);
+
+    timer_Int();
+} // end - TEST(Timer_IntTests, Toggle)
+
+TEST(Timer_IntTests, NoToggle)
+{
+    mock().expectOneCall("Set_TimerValue"        ).withCallOrder(callOrder++).withParameter("timerValue", 10);
+    Set_TimerValue(0, 10); // Sets all timers to not be expired
+
+    mock().expectOneCall("IsTimerExpired"        ).withCallOrder(callOrder++);
+
+    timer_Int();
+} // end - TEST(Timer_IntTests, NoToggle)
+

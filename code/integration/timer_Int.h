@@ -1,5 +1,6 @@
 #ifndef __TIMER_INT_H
 #define __TIMER_INT_H
+#include <stm32f4xx_gpio.h>
 #include "timerDriver.h"
 
 // PB7

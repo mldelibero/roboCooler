@@ -77,6 +77,10 @@ void init_Timer_Int(void)
  */
 void timer_Int(void)
 {
-
+    if (IsTimerExpired(timer))
+    {
+        GPIO_ToggleBits(TIMER_INT_GPIOx, TIMER_INT_GPIO_PIN_X);
+        Set_TimerValue(timer, TIMER_INT_FREQ);
+    }
 } // end - void timer_Int(void)
 
