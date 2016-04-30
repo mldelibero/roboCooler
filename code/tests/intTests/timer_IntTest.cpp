@@ -38,11 +38,15 @@ TEST(Timer_IntTests, TimerSetup)
     mock().expectOneCall("GPIO_StructInit"       ).withCallOrder(callOrder++);
     mock().expectOneCall("GPIO_Init"             ).withCallOrder(callOrder++);
 
+    mock().expectOneCall("AllocateTimer"         ).withCallOrder(callOrder++);
+    mock().expectOneCall("Set_TimerValue"        ).withCallOrder(callOrder++).withParameter("timerValue", TIMER_INT_FREQ);
+
     init_Timer_Int();
 }
 
 TEST(Timer_IntTests, togglePin)
 {
+
 //    timer_Int();
     CHECK(true);
 }

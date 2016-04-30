@@ -1,8 +1,11 @@
 #include <stm32f4xx_gpio.h>
 #include <stm32f4xx_rcc.h>
 #include <stm32f4xx_tim.h>
+#include "timer.h"
 #include "timerDriver.h"
 #include "timer_Int.h"
+
+int32_t timer = -1;
 
 /*
  * brief    This test verifies the frequency of the system timer.
@@ -62,6 +65,9 @@ void init_Timer_Int(void)
     GPIO_InitStruct.GPIO_Mode  = GPIO_Mode_OUT;
     GPIO_InitStruct.GPIO_Pin   = TIMER_INT_GPIO_PIN_X;
     GPIO_Init(TIMER_INT_GPIOx, &GPIO_InitStruct);
+
+    timer = AllocateTimer();
+    Set_TimerValue(timer, TIMER_INT_FREQ);
 } // end - void init_Timer_Int(void)
 
 /*

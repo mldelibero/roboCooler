@@ -7,6 +7,8 @@
 #define TIMER_TIMx_IRQn               TIM4_IRQn
 #define TIMER_IRQHandler              TIM4_IRQ_Handler
 
+#define TIMER_1MS                     1
+
 #define TIMER_TIMx                    TIM4
 #define TIMER_RCC_APBnPeriphClockCmd  RCC_APB1PeriphClockCmd
 #define TIMER_RCC_APB1Periph_TIMn     RCC_APB1Periph_TIM4

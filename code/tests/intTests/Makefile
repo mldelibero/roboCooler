@@ -27,6 +27,7 @@ SRC_DIRS = \
 TEST_SRC_DIRS = \
 	./\
 	./mockFiles\
+	../mockFiles\
 
 INCLUDE_DIRS =\
   .\
