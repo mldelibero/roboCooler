@@ -7,4 +7,5 @@ TIM_TypeDef* TIM4 = &TIMx; // pointer for timer4
 
 GPIO_TypeDef GPIOx; // Actual memory location for GPIO
 GPIO_TypeDef* GPIOB = &GPIOx;
+GPIO_TypeDef* GPIOE = &GPIOx;
 

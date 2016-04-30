@@ -3,9 +3,11 @@
 #include "stm32f4xx.h"
 
 #define GPIO_PinSource7            ((uint8_t )0x07  )
+#define GPIO_PinSource15           ((uint8_t )0x0F  )
 #define GPIO_AF_TIM4               ((uint8_t )0x02  )  /* TIM4 Alternate Function mapping */
-#define GPIO_Pin_7                 ((uint16_t)0x0080)  /* Pin 7 selected */
-#define GPIO_Pin_8                 ((uint16_t)0x0080)  /* Pin 8 selected */
+#define GPIO_Pin_7                 ((uint16_t)0x0080)  /* Pin 7  selected */
+#define GPIO_Pin_8                 ((uint16_t)0x0080)  /* Pin 8  selected */
+#define GPIO_Pin_15                ((uint16_t)0x0080)  /* Pin 15 selected */
 
 typedef enum
 { 

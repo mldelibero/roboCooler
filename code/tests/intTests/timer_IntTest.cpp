@@ -1,9 +1,7 @@
 #include <CppUTest/TestHarness.h>
 #include <CppUTestExt/MockSupport.h>
-#include "timerDriver_Int.h"
-#include "timerDriver_IntTest.h"
-
-#include "timer.h"
+#include "timer_Int.h"
+#include "timer_IntTest.h"
 
 TEST_GROUP(Timer_IntTests)
 {
@@ -41,4 +39,10 @@ TEST(Timer_IntTests, TimerSetup)
     mock().expectOneCall("GPIO_Init"             ).withCallOrder(callOrder++);
 
     init_Timer_Int();
+}
+
+TEST(Timer_IntTests, togglePin)
+{
+//    timer_Int();
+    CHECK(true);
 }
