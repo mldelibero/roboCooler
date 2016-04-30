@@ -3,10 +3,13 @@
 #include "timer_Int.h"
 #include "timer_IntTest.h"
 
+int callOrder = -1;
+
 TEST_GROUP(Timer_IntTests)
 {
     void setup()
     {
+        callOrder = 1;
         mock().clear();
     }
     void teardown()
@@ -18,8 +21,6 @@ TEST_GROUP(Timer_IntTests)
 
 TEST(Timer_IntTests, DriverSetup)
 {
-    int callOrder = 1;
-
     mock().expectOneCall("RCC_AHB1PeriphClockCmd").withCallOrder(callOrder++);
     mock().expectOneCall("GPIO_PinAFConfig"      ).withCallOrder(callOrder++);
     mock().expectOneCall("GPIO_StructInit"       ).withCallOrder(callOrder++);
@@ -31,8 +32,6 @@ TEST(Timer_IntTests, DriverSetup)
 
 TEST(Timer_IntTests, TimerSetup)
 {
-    int callOrder = 1;
-
     mock().expectOneCall("RCC_AHB1PeriphClockCmd").withCallOrder(callOrder++);
     mock().expectOneCall("GPIO_PinAFConfig"      ).withCallOrder(callOrder++);
     mock().expectOneCall("GPIO_StructInit"       ).withCallOrder(callOrder++);
