@@ -51,8 +51,8 @@ TEST(TimerTests, CannotAllocateTimerIfNotAvailable)
 
 TEST(TimerTests, AllocatedTimerInitializedtoZero)
 {
-	timer = AllocateTimer();
-	CHECK(IsTimerExpired(timer) == true);
+    timer = AllocateTimer();
+    CHECK(IsTimerExpired(timer) == true);
 }
 
 TEST(TimerTests, CanSetTimerToValue)
@@ -60,6 +60,73 @@ TEST(TimerTests, CanSetTimerToValue)
     timer = AllocateTimer();
     Set_TimerValue(timer, 100);
     CHECK(Get_TimerValue(timer) == 100);
+}
+
+TEST(TimerTests, TimerNotExpiredIfTimeIsLeft)
+{
+    timer = AllocateTimer();
+    Set_TimerValue(timer, 100);
+    CHECK(IsTimerExpired(timer) == false);
+}
+
+TEST(TimerTests, TimerExpiredIfNoTimeLeft)
+{
+    timer = AllocateTimer();
+    Set_TimerValue(timer, 0);
+    CHECK(IsTimerExpired(timer) == true);
+}
+
+TEST(TimerTests, SecondTimerExpiredIfNoTimeLeft)
+{
+    int timer1, timer2;
+    timer1 = AllocateTimer();
+    timer2 = AllocateTimer();
+
+    Set_TimerValue(timer1, 100);
+    Set_TimerValue(timer2,   0);
+    CHECK(IsTimerExpired(timer1) == false);
+    CHECK(IsTimerExpired(timer2) == true);
+}
+
+TEST(TimerTests, OutOfBoundsTimerIsExpired)
+{
+    CHECK(IsTimerExpired(timer) == false);
+}
+
+
+TEST(TimerTests, InterruptDecrementsTimer)
+{
+    timer = AllocateTimer();
+
+    Set_TimerValue(timer, 1);
+    CHECK_EQUAL(Get_TimerValue(timer), 1);
+
+    TIMER_IRQHandler();
+    CHECK_EQUAL(Get_TimerValue(timer), 0);
+
+    TIMER_IRQHandler();
+    CHECK_EQUAL(Get_TimerValue(timer), 0);
+}
+
+TEST(TimerTests, InterruptDecrementsAllTimers)
+{
+    int timer1, timer2;
+
+    timer1 = AllocateTimer();
+    timer2 = AllocateTimer();
+
+    Set_TimerValue(timer1, 1);
+    Set_TimerValue(timer2, 1);
+    CHECK_EQUAL(Get_TimerValue(timer1), 1);
+    CHECK_EQUAL(Get_TimerValue(timer2), 1);
+
+    TIMER_IRQHandler();
+    CHECK_EQUAL(Get_TimerValue(timer1), 0);
+    CHECK_EQUAL(Get_TimerValue(timer2), 0);
+
+    TIMER_IRQHandler();
+    CHECK_EQUAL(Get_TimerValue(timer1), 0);
+    CHECK_EQUAL(Get_TimerValue(timer2), 0);
 }
 
 TEST_GROUP(TimerDriverTests)

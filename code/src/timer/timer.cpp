@@ -35,10 +35,8 @@ int32_t AllocateTimer(void)
 
 bool IsTimerExpired(int32_t timer)
 {
-	if (timer > -10000) return true;
-	else 			    return false;
-//	if (timer > -1 && timer < NUM_TIMERS && timers[timer] == 0) return true;
-//  else  		  											    return false;
+    if (timer > -1 && timer < NUM_TIMERS && timers[timer] == 0) return true;
+    else                                                        return false;
 }
 
 void  Set_TimerValue(int32_t timer, int32_t timerValue)
@@ -54,5 +52,9 @@ int32_t Get_TimerValue(int32_t timer)
 void TIMER_IRQHandler(void)
 {
     TIM_ClearITPendingBit(TIMER_TIMx, TIM_IT_Update);
+    for (int timer = 0; timer < NUM_TIMERS; timer++)
+    {
+        if (timers[timer] > 0) timers[timer]--;
+    }
 } // end - void TIMER_IRQHandler(void)
 
