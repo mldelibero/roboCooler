@@ -8,8 +8,8 @@ void init_PushButtonDriver(void)
     GPIO_InitTypeDef        GPIO_InitStruct;
 
     // Init Peripheral clocks
-    RCC_AHB1PeriphClockCmd(PB1_INT_AHB1Periph_GPIOx,  ENABLE);
-    RCC_AHB1PeriphClockCmd(PB2_INT_AHB1Periph_GPIOx,  ENABLE);
+    RCC_AHB1PeriphClockCmd(PBUP_AHB1Periph_GPIOx,  ENABLE);
+    RCC_AHB1PeriphClockCmd(PBDN_AHB1Periph_GPIOx,  ENABLE);
 
     // Init GPIO
     GPIO_StructInit(&GPIO_InitStruct);
@@ -19,9 +19,9 @@ void init_PushButtonDriver(void)
     GPIO_InitStruct.GPIO_Speed = GPIO_Low_Speed;
     GPIO_InitStruct.GPIO_Mode  = GPIO_Mode_IN;
 
-    GPIO_InitStruct.GPIO_Pin   = PB1_INT_GPIO_PIN_X;
-    GPIO_Init(PB1_INT_GPIOx, &GPIO_InitStruct);
+    GPIO_InitStruct.GPIO_Pin   = PBUP_GPIO_PIN_X;
+    GPIO_Init(PBUP_GPIOx, &GPIO_InitStruct);
 
-    GPIO_InitStruct.GPIO_Pin   = PB2_INT_GPIO_PIN_X;
-    GPIO_Init(PB2_INT_GPIOx, &GPIO_InitStruct);
+    GPIO_InitStruct.GPIO_Pin   = PBDN_GPIO_PIN_X;
+    GPIO_Init(PBDN_GPIOx, &GPIO_InitStruct);
 } // end - void init_PushButtonDriver(void)

@@ -7,6 +7,7 @@
 #define GPIO_AF_TIM4               ((uint8_t )0x02  )  /* TIM4 Alternate Function mapping */
 #define GPIO_Pin_7                 ((uint16_t)0x0080)  /* Pin 7  selected */
 #define GPIO_Pin_8                 ((uint16_t)0x0080)  /* Pin 8  selected */
+#define GPIO_Pin_11                ((uint16_t)0x0080)  /* Pin 15 selected */
 #define GPIO_Pin_15                ((uint16_t)0x0080)  /* Pin 15 selected */
 
 typedef enum
@@ -56,9 +57,11 @@ typedef struct
                                        This parameter can be a value of @ref GPIOPuPd_TypeDef */
 }GPIO_InitTypeDef;
 
-void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct);
-void GPIO_PinAFConfig(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinSource, uint8_t GPIO_AF);
-void GPIO_StructInit(GPIO_InitTypeDef* GPIO_InitStruct);
-void GPIO_ToggleBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
+void    GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct);
+void    GPIO_PinAFConfig(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinSource, uint8_t GPIO_AF);
+uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
+void    GPIO_StructInit(GPIO_InitTypeDef* GPIO_InitStruct);
+void    GPIO_ToggleBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
+void    GPIO_SetPinInputValue(uint8_t val);
 
 #endif /* #ifndef __STM32F4XX_GPIO_MOCK_H */

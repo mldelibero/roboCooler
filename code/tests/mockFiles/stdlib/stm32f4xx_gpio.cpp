@@ -2,6 +2,8 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_gpio.h"
 
+uint8_t pinStates = 0; // Internally keeps track of pin states
+
 void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
 {
     mock().actualCall("GPIO_Init");
@@ -27,4 +29,17 @@ void GPIO_ToggleBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
     mock().actualCall("GPIO_ToggleBits"       )
         .withParameter("GPIOx"   , GPIOx)
         .withParameter("GPIO_Pin", GPIO_Pin);
+}
+
+uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+{
+    mock().actualCall("GPIO_ReadInputDataBit" )
+        .withParameter("GPIOx"   , GPIOx)
+        .withParameter("GPIO_Pin", GPIO_Pin);
+
+    return pinStates;
+}
+void    GPIO_SetPinInputValue(uint8_t val)
+{
+    pinStates = val;
 }
