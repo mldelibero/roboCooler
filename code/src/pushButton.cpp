@@ -2,7 +2,7 @@
 #include "pushButtonDriver.h"
 #include "timer.h"
 
-int32_t timer = 0;
+static int32_t timer = 0;
 uint8_t pbUpStatus = 0;
 uint8_t pbDnStatus = 0;
 
