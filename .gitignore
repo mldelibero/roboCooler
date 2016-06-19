@@ -3,3 +3,4 @@
 *.o
 tmp
 *bak
+~$*.xlsx
