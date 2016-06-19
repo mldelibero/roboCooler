@@ -328,9 +328,9 @@ Text GLabel 1700 1600 2    60   Input ~ 0
 FAN
 Text GLabel 7500 2650 0    60   Input ~ 0
 FAN
-Text GLabel 1900 5350 0    60   Input ~ 0
+Text GLabel 950  5350 0    60   Input ~ 0
 CS_SDA
-Text GLabel 1900 5250 0    60   Input ~ 0
+Text GLabel 950  5250 0    60   Input ~ 0
 CS_SCL
 $Comp
 L GND #PWR013
@@ -913,6 +913,131 @@ F 3 "http://www.ck-components.com/media/1341/d6.pdf" H 2000 3950 50  0001 C CNN
 	1    2000 3950
 	1    0    0    -1  
 $EndComp
+$Comp
+L GND #PWR037
+U 1 1 5766CE63
+P 3700 4025
+F 0 "#PWR037" H 3700 3775 50  0001 C CNN
+F 1 "GND" H 3700 3875 50  0000 C CNN
+F 2 "" H 3700 4025 60  0000 C CNN
+F 3 "" H 3700 4025 60  0000 C CNN
+	1    3700 4025
+	1    0    0    -1  
+$EndComp
+Text GLabel 3050 3950 0    60   Input ~ 0
+PUSH_DB
+$Comp
+L R R13
+U 1 1 5766CE6A
+P 3100 3800
+F 0 "R13" V 3180 3800 50  0000 C CNN
+F 1 "10k" V 3100 3800 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 3030 3800 30  0001 C CNN
+F 3 "" H 3100 3800 30  0000 C CNN
+	1    3100 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L SPST_4PIN SW2
+U 1 1 5766CE76
+P 3400 3950
+F 0 "SW2" H 3550 4060 50  0000 C CNN
+F 1 "SPST_4PIN" H 3395 3815 50  0000 C CNN
+F 2 "roboCooler:D6C90" H 3400 3950 50  0001 C CNN
+F 3 "http://www.ck-components.com/media/1341/d6.pdf" H 3400 3950 50  0001 C CNN
+	1    3400 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L VDD #PWR038
+U 1 1 576728BB
+P 1700 3650
+F 0 "#PWR038" H 1700 3500 50  0001 C CNN
+F 1 "VDD" V 1700 3850 50  0000 C CNN
+F 2 "" H 1700 3650 60  0000 C CNN
+F 3 "" H 1700 3650 60  0000 C CNN
+	1    1700 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L VDD #PWR039
+U 1 1 5767346E
+P 3100 3650
+F 0 "#PWR039" H 3100 3500 50  0001 C CNN
+F 1 "VDD" V 3100 3850 50  0000 C CNN
+F 2 "" H 3100 3650 60  0000 C CNN
+F 3 "" H 3100 3650 60  0000 C CNN
+	1    3100 3650
+	1    0    0    -1  
+$EndComp
+Text GLabel 3700 4850 0    60   Input ~ 0
+CS_11
+Text GLabel 3700 4950 0    60   Input ~ 0
+CS_10
+Text GLabel 3700 5050 0    60   Input ~ 0
+CS_9
+Text GLabel 3700 5150 0    60   Input ~ 0
+CS_8
+Text GLabel 3700 5250 0    60   Input ~ 0
+CS_7
+Text GLabel 3700 5350 0    60   Input ~ 0
+CS_6
+Text GLabel 3700 5450 0    60   Input ~ 0
+CS_5
+Text GLabel 3700 5550 0    60   Input ~ 0
+CS_4
+Text GLabel 3700 5650 0    60   Input ~ 0
+CS_3
+Text GLabel 3700 5750 0    60   Input ~ 0
+CS_2
+Text GLabel 3700 5850 0    60   Input ~ 0
+CS_1
+Text GLabel 3700 5950 0    60   Input ~ 0
+CS_0
+$Comp
+L R R14
+U 1 1 5766F109
+P 950 4900
+F 0 "R14" V 1030 4900 50  0000 C CNN
+F 1 "10k" V 950 4900 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 880 4900 30  0001 C CNN
+F 3 "" H 950 4900 30  0000 C CNN
+	1    950  4900
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R15
+U 1 1 5766F2F6
+P 1175 4900
+F 0 "R15" V 1255 4900 50  0000 C CNN
+F 1 "10k" V 1175 4900 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 1105 4900 30  0001 C CNN
+F 3 "" H 1175 4900 30  0000 C CNN
+	1    1175 4900
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3.3V #PWR040
+U 1 1 5766F440
+P 1175 4750
+F 0 "#PWR040" H 1175 4600 50  0001 C CNN
+F 1 "+3.3V" H 1175 4890 50  0000 C CNN
+F 2 "" H 1175 4750 60  0000 C CNN
+F 3 "" H 1175 4750 60  0000 C CNN
+	1    1175 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3.3V #PWR041
+U 1 1 5766F4F6
+P 950 4750
+F 0 "#PWR041" H 950 4600 50  0001 C CNN
+F 1 "+3.3V" H 950 4890 50  0000 C CNN
+F 2 "" H 950 4750 60  0000 C CNN
+F 3 "" H 950 4750 60  0000 C CNN
+	1    950  4750
+	1    0    0    -1  
+$EndComp
 Wire Wire Line
 	7800 3550 7800 3650
 Wire Wire Line
@@ -969,95 +1094,23 @@ Wire Wire Line
 	4050 7450 3900 7450
 Wire Wire Line
 	2300 3950 2300 4025
-$Comp
-L GND #PWR037
-U 1 1 5766CE63
-P 3700 4025
-F 0 "#PWR037" H 3700 3775 50  0001 C CNN
-F 1 "GND" H 3700 3875 50  0000 C CNN
-F 2 "" H 3700 4025 60  0000 C CNN
-F 3 "" H 3700 4025 60  0000 C CNN
-	1    3700 4025
-	1    0    0    -1  
-$EndComp
-Text GLabel 3050 3950 0    60   Input ~ 0
-PUSH_DB
-$Comp
-L R R13
-U 1 1 5766CE6A
-P 3100 3800
-F 0 "R13" V 3180 3800 50  0000 C CNN
-F 1 "10k" V 3100 3800 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 3030 3800 30  0001 C CNN
-F 3 "" H 3100 3800 30  0000 C CNN
-	1    3100 3800
-	1    0    0    -1  
-$EndComp
-$Comp
-L SPST_4PIN SW2
-U 1 1 5766CE76
-P 3400 3950
-F 0 "SW2" H 3550 4060 50  0000 C CNN
-F 1 "SPST_4PIN" H 3395 3815 50  0000 C CNN
-F 2 "roboCooler:D6C90" H 3400 3950 50  0001 C CNN
-F 3 "http://www.ck-components.com/media/1341/d6.pdf" H 3400 3950 50  0001 C CNN
-	1    3400 3950
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	3050 3950 3100 3950
 Wire Wire Line
 	3100 3950 3100 4025
 Wire Wire Line
 	3700 3950 3700 4025
-$Comp
-L VDD #PWR038
-U 1 1 576728BB
-P 1700 3650
-F 0 "#PWR038" H 1700 3500 50  0001 C CNN
-F 1 "VDD" V 1700 3850 50  0000 C CNN
-F 2 "" H 1700 3650 60  0000 C CNN
-F 3 "" H 1700 3650 60  0000 C CNN
-	1    1700 3650
-	1    0    0    -1  
-$EndComp
-$Comp
-L VDD #PWR039
-U 1 1 5767346E
-P 3100 3650
-F 0 "#PWR039" H 3100 3500 50  0001 C CNN
-F 1 "VDD" V 3100 3850 50  0000 C CNN
-F 2 "" H 3100 3650 60  0000 C CNN
-F 3 "" H 3100 3650 60  0000 C CNN
-	1    3100 3650
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	1650 3950 1700 3950
 Wire Wire Line
 	1700 3950 1700 4025
-Text GLabel 3700 4850 0    60   Input ~ 0
-CS_11
-Text GLabel 3700 4950 0    60   Input ~ 0
-CS_10
-Text GLabel 3700 5050 0    60   Input ~ 0
-CS_9
-Text GLabel 3700 5150 0    60   Input ~ 0
-CS_8
-Text GLabel 3700 5250 0    60   Input ~ 0
-CS_7
-Text GLabel 3700 5350 0    60   Input ~ 0
-CS_6
-Text GLabel 3700 5450 0    60   Input ~ 0
-CS_5
-Text GLabel 3700 5550 0    60   Input ~ 0
-CS_4
-Text GLabel 3700 5650 0    60   Input ~ 0
-CS_3
-Text GLabel 3700 5750 0    60   Input ~ 0
-CS_2
-Text GLabel 3700 5850 0    60   Input ~ 0
-CS_1
-Text GLabel 3700 5950 0    60   Input ~ 0
-CS_0
+Wire Wire Line
+	950  5050 950  5250
+Wire Wire Line
+	950  5250 1900 5250
+Wire Wire Line
+	950  5350 1900 5350
+Wire Wire Line
+	1175 5050 1175 5350
+Connection ~ 1175 5350
 $EndSCHEMATC
