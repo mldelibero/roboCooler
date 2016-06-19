@@ -29,6 +29,7 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:roboCooler
+LIBS:roboCooler-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -71,7 +72,7 @@ U 1 1 5664F3ED
 P 2100 5300
 F 0 "J9" H 2100 5650 50  0000 C CNN
 F 1 "CONN_01X06" V 2200 5300 50  0000 C CNN
-F 2 "" H 2100 5300 60  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x06" H 2100 5300 60  0001 C CNN
 F 3 "" H 2100 5300 60  0000 C CNN
 	1    2100 5300
 	1    0    0    -1  
@@ -344,7 +345,7 @@ F 3 "" H 1900 5550 60  0000 C CNN
 $EndComp
 Text GLabel 1900 5150 0    60   Input ~ 0
 CS_IRQ
-Text GLabel 3650 3000 2    60   Input ~ 0
+Text GLabel 3150 1500 0    60   Input ~ 0
 CS_IRQ
 $Comp
 L +3.3V #PWR014
@@ -880,12 +881,12 @@ POWER_GND
 $Comp
 L CONN_01X12 J11
 U 1 1 569F9129
-P 3750 5400
-F 0 "J11" H 3750 6050 50  0000 C CNN
-F 1 "CONN_01X12" V 3850 5400 50  0000 C CNN
-F 2 "Socket_Strips:Socket_Strip_Angled_1x12" H 3750 5400 60  0001 C CNN
-F 3 "" H 3750 5400 60  0000 C CNN
-	1    3750 5400
+P 3900 5400
+F 0 "J11" H 3900 6050 50  0000 C CNN
+F 1 "CONN_01X12" V 4000 5400 50  0000 C CNN
+F 2 "Socket_Strips:Socket_Strip_Angled_1x12" H 3900 5400 60  0001 C CNN
+F 3 "" H 3900 5400 60  0000 C CNN
+	1    3900 5400
 	1    0    0    -1  
 $EndComp
 Text Notes 2250 4650 0    60   ~ 0
@@ -1035,4 +1036,28 @@ Wire Wire Line
 	1650 3950 1700 3950
 Wire Wire Line
 	1700 3950 1700 4025
+Text GLabel 3700 4850 0    60   Input ~ 0
+CS_11
+Text GLabel 3700 4950 0    60   Input ~ 0
+CS_10
+Text GLabel 3700 5050 0    60   Input ~ 0
+CS_9
+Text GLabel 3700 5150 0    60   Input ~ 0
+CS_8
+Text GLabel 3700 5250 0    60   Input ~ 0
+CS_7
+Text GLabel 3700 5350 0    60   Input ~ 0
+CS_6
+Text GLabel 3700 5450 0    60   Input ~ 0
+CS_5
+Text GLabel 3700 5550 0    60   Input ~ 0
+CS_4
+Text GLabel 3700 5650 0    60   Input ~ 0
+CS_3
+Text GLabel 3700 5750 0    60   Input ~ 0
+CS_2
+Text GLabel 3700 5850 0    60   Input ~ 0
+CS_1
+Text GLabel 3700 5950 0    60   Input ~ 0
+CS_0
 $EndSCHEMATC
