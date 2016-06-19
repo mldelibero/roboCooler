@@ -290,7 +290,7 @@ F 3 "" H 2300 4025 60  0000 C CNN
 	1    2300 4025
 	1    0    0    -1  
 $EndComp
-Text GLabel 3150 1900 0    60   Input ~ 0
+Text GLabel 3150 1800 0    60   Input ~ 0
 LED_UART
 Text GLabel 6450 1400 0    60   Input ~ 0
 LED_UART
@@ -324,7 +324,7 @@ Text GLabel 3150 2000 0    60   Input ~ 0
 PUMP
 Text GLabel 7500 3850 0    60   Input ~ 0
 PUMP
-Text GLabel 1700 1600 2    60   Input ~ 0
+Text GLabel 1950 1600 2    60   Input ~ 0
 FAN
 Text GLabel 7500 2650 0    60   Input ~ 0
 FAN
@@ -1113,4 +1113,20 @@ Wire Wire Line
 Wire Wire Line
 	1175 5050 1175 5350
 Connection ~ 1175 5350
+NoConn ~ 1700 1300
+NoConn ~ 1700 1500
+NoConn ~ 1700 1600
+NoConn ~ 1700 1700
+NoConn ~ 1700 2400
+NoConn ~ 1700 2900
+NoConn ~ 1700 3000
+NoConn ~ 1200 3000
+NoConn ~ 1200 3100
+NoConn ~ 1200 1500
+NoConn ~ 3150 1900
+NoConn ~ 3150 2800
+NoConn ~ 3150 2900
+NoConn ~ 3650 1700
+NoConn ~ 3150 1600
+NoConn ~ 3150 1200
 $EndSCHEMATC
