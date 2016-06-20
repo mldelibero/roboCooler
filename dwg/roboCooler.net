@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source C:\cygwin64\home\delibero.michael\personal\roboCooler\dwg\roboCooler.sch)
-    (date "6/19/2016 9:41:42 PM")
+    (date "6/19/2016 9:56:06 PM")
     (tool "Eeschema 4.0.2-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -40,7 +40,7 @@
       (tstamp 5664C828))
     (comp (ref J9)
       (value CONN_01X06)
-      (footprint Pin_Headers:Pin_Header_Straight_1x06)
+      (footprint Socket_Strips:Socket_Strip_Straight_1x06)
       (libsource (lib conn) (part CONN_01X06))
       (sheetpath (names /) (tstamps /))
       (tstamp 5664F3ED))
