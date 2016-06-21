@@ -1,7 +1,7 @@
 (export (version D)
   (design
-    (source C:\cygwin64\home\delibero.michael\personal\roboCooler\dwg\roboCooler.sch)
-    (date "6/19/2016 10:24:57 PM")
+    (source C:/cygwin64/home/delibero.michael/personal/roboCooler/dwg/roboCooler.sch)
+    (date "6/20/2016 9:40:07 PM")
     (tool "Eeschema 4.0.2-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -28,13 +28,13 @@
   (components
     (comp (ref J1)
       (value CONN_02X25)
-      (footprint Socket_Strips:Socket_Strip_Straight_2x25)
+      (footprint roboCooler:Socket_Strip_Straight_2x25_Inverted)
       (libsource (lib conn) (part CONN_02X25))
       (sheetpath (names /) (tstamps /))
       (tstamp 5664C6E0))
     (comp (ref J2)
       (value CONN_02X25)
-      (footprint Socket_Strips:Socket_Strip_Straight_2x25)
+      (footprint roboCooler:Socket_Strip_Straight_2x25_Inverted)
       (libsource (lib conn) (part CONN_02X25))
       (sheetpath (names /) (tstamps /))
       (tstamp 5664C828))

@@ -50,7 +50,7 @@ U 1 1 5664C6E0
 P 1450 2000
 F 0 "J1" H 1450 3300 50  0000 C CNN
 F 1 "CONN_02X25" V 1450 2000 50  0000 C CNN
-F 2 "Socket_Strips:Socket_Strip_Straight_2x25" H 1450 1250 60  0001 C CNN
+F 2 "roboCooler:Socket_Strip_Straight_2x25_Inverted" H 1450 1250 60  0001 C CNN
 F 3 "" H 1450 1250 60  0000 C CNN
 	1    1450 2000
 	1    0    0    -1  
@@ -61,7 +61,7 @@ U 1 1 5664C828
 P 3400 2000
 F 0 "J2" H 3400 3300 50  0000 C CNN
 F 1 "CONN_02X25" V 3400 2000 50  0000 C CNN
-F 2 "Socket_Strips:Socket_Strip_Straight_2x25" H 3400 1250 60  0001 C CNN
+F 2 "roboCooler:Socket_Strip_Straight_2x25_Inverted" H 3400 1250 60  0001 C CNN
 F 3 "" H 3400 1250 60  0000 C CNN
 	1    3400 2000
 	1    0    0    -1  
