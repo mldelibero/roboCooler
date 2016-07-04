@@ -557,7 +557,7 @@ F 3 "" H 3725 5675 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Text GLabel 3075 5600 0    60   Input ~ 0
-PUSH_DB
+PUSH_DN
 $Comp
 L R R13
 U 1 1 5766CE6A
