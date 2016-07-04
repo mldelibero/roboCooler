@@ -45,28 +45,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L CONN_02X25 J1
-U 1 1 5664C6E0
-P 1475 3650
-F 0 "J1" H 1475 4950 50  0000 C CNN
-F 1 "CONN_02X25" V 1475 3650 50  0000 C CNN
-F 2 "roboCooler:Socket_Strip_Straight_2x25_Inverted" H 1475 2900 60  0001 C CNN
-F 3 "" H 1475 2900 60  0000 C CNN
-	1    1475 3650
-	1    0    0    -1  
-$EndComp
-$Comp
-L CONN_02X25 J2
-U 1 1 5664C828
-P 3425 3650
-F 0 "J2" H 3425 4950 50  0000 C CNN
-F 1 "CONN_02X25" V 3425 3650 50  0000 C CNN
-F 2 "roboCooler:Socket_Strip_Straight_2x25_Inverted" H 3425 2900 60  0001 C CNN
-F 3 "" H 3425 2900 60  0000 C CNN
-	1    3425 3650
-	1    0    0    -1  
-$EndComp
-$Comp
 L CONN_01X06 J9
 U 1 1 5664F3ED
 P 2125 6950
@@ -1196,126 +1174,50 @@ F 3 "" H 10575 675 50  0000 C CNN
 	1    10575 675 
 	1    0    0    1   
 $EndComp
-Wire Wire Line
-	5575 2300 5575 2400
-Wire Wire Line
-	5425 2150 5575 2150
-Wire Wire Line
-	5575 2350 5425 2350
-Connection ~ 5575 2350
-Wire Wire Line
-	6075 1375 6525 1375
-Wire Wire Line
-	5575 2150 5575 2200
-Wire Wire Line
-	2325 5600 2325 5675
-Wire Wire Line
-	3075 5600 3125 5600
-Wire Wire Line
-	3125 5600 3125 5675
-Wire Wire Line
-	3725 5600 3725 5675
-Wire Wire Line
-	1675 5600 1725 5600
-Wire Wire Line
-	1725 5600 1725 5675
-Wire Wire Line
-	975  6700 975  6900
-Wire Wire Line
-	975  6900 1925 6900
-Wire Wire Line
-	975  7000 1925 7000
-Wire Wire Line
-	1200 6700 1200 7000
-Connection ~ 1200 7000
-Wire Wire Line
-	5575 3425 5575 3525
-Wire Wire Line
-	5425 3275 5575 3275
-Wire Wire Line
-	5575 3475 5425 3475
-Connection ~ 5575 3475
-Wire Wire Line
-	5575 3275 5575 3325
-Wire Wire Line
-	10350 1750 10350 1900
-Wire Wire Line
-	9400 1525 9200 1525
-Wire Wire Line
-	9400 1600 8900 1600
-Wire Wire Line
-	8900 1600 8900 1525
-Wire Wire Line
-	9400 1450 9400 1200
-Wire Wire Line
-	9400 1200 9200 1200
-Wire Wire Line
-	10350 525  10350 1450
-Wire Wire Line
-	10575 825  11025 825 
-Wire Wire Line
-	10775 1000 10775 825 
-Connection ~ 10775 825 
-Wire Wire Line
-	10650 1450 10825 1450
 $Comp
 L R R5
 U 1 1 57748645
 P 9400 2100
-F 0 "R5" V 9375 2275 50  0000 C CNN
+F 0 "R5" V 9450 1950 50  0000 C CNN
 F 1 "10k" V 9400 2100 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 9330 2100 30  0001 C CNN
 F 3 "" H 9400 2100 30  0000 C CNN
 	1    9400 2100
 	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	8700 1675 9400 1675
 $Comp
 L R R4
 U 1 1 5774AB5E
 P 9300 2100
-F 0 "R4" V 9275 2275 50  0000 C CNN
+F 0 "R4" V 9350 1950 50  0000 C CNN
 F 1 "10k" V 9300 2100 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 9230 2100 30  0001 C CNN
 F 3 "" H 9300 2100 30  0000 C CNN
 	1    9300 2100
 	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	8700 1825 9400 1825
-Wire Wire Line
-	9300 1825 9300 1950
 $Comp
 L R R3
 U 1 1 5774ADCD
 P 9200 2100
-F 0 "R3" V 9175 2275 50  0000 C CNN
+F 0 "R3" V 9250 1950 50  0000 C CNN
 F 1 "10k" V 9200 2100 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 9130 2100 30  0001 C CNN
 F 3 "" H 9200 2100 30  0000 C CNN
 	1    9200 2100
 	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	8700 1750 9400 1750
-Wire Wire Line
-	9200 1750 9200 1950
 $Comp
 L R R2
 U 1 1 5774AF3C
 P 9100 2100
-F 0 "R2" V 9075 2275 50  0000 C CNN
+F 0 "R2" V 9150 1950 50  0000 C CNN
 F 1 "10k" V 9100 2100 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 9030 2100 30  0001 C CNN
 F 3 "" H 9100 2100 30  0000 C CNN
 	1    9100 2100
 	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	9100 1675 9100 1950
-Wire Wire Line
-	9400 1900 9400 1950
 Text GLabel 8700 1600 0    60   Input ~ 0
 MOTOR_IN1
 Text GLabel 8700 1725 0    60   Input ~ 0
@@ -1324,23 +1226,6 @@ Text GLabel 8700 1850 0    60   Input ~ 0
 MOTOR_PWM
 Text GLabel 8700 1975 0    60   Input ~ 0
 MOTOR_SB
-Wire Wire Line
-	10350 525  11025 525 
-Connection ~ 10775 525 
-Connection ~ 10575 525 
-Wire Wire Line
-	8700 1675 8700 1600
-Connection ~ 9100 1675
-Wire Wire Line
-	8700 1750 8700 1725
-Connection ~ 9200 1750
-Wire Wire Line
-	8700 1825 8700 1850
-Connection ~ 9300 1825
-Wire Wire Line
-	9400 1900 8700 1900
-Wire Wire Line
-	8700 1900 8700 1975
 Text GLabel 3675 4150 2    60   Input ~ 0
 MOTOR_IN1
 Text GLabel 3675 4250 2    60   Input ~ 0
@@ -1357,25 +1242,10 @@ Text GLabel 10550 2375 2    60   Input ~ 0
 MOTOR_OUT1
 Text GLabel 10550 2250 2    60   Input ~ 0
 MOTOR_OUT2
-Wire Wire Line
-	10550 1600 10550 2250
-Wire Wire Line
-	10550 1600 10350 1600
-Wire Wire Line
-	10350 1675 10450 1675
-Wire Wire Line
-	10450 1675 10450 2375
-Wire Wire Line
-	10450 2375 10550 2375
 Text GLabel 9950 2725 0    60   Input ~ 0
 MOTOR_OUT1
 Text GLabel 9950 2925 0    60   Input ~ 0
 MOTOR_OUT2
-Wire Wire Line
-	10350 1525 10950 1525
-Wire Wire Line
-	10950 1525 10950 1600
-Connection ~ 10350 1825
 $Comp
 L +12V #PWR056
 U 1 1 5779A24C
@@ -1398,8 +1268,6 @@ F 3 "" H 5325 4500 30  0000 C CNN
 	1    5325 4500
 	0    1    -1   0   
 $EndComp
-Wire Wire Line
-	5600 4500 5475 4500
 $Comp
 L R R7
 U 1 1 577B5B85
@@ -1411,8 +1279,6 @@ F 3 "" H 5375 5300 30  0000 C CNN
 	1    5375 5300
 	0    1    -1   0   
 $EndComp
-Wire Wire Line
-	5525 5300 5600 5300
 $Comp
 L +5P #PWR057
 U 1 1 577BAD0E
@@ -1485,7 +1351,7 @@ U 1 1 577CC9CB
 P 750 700
 F 0 "J6" H 750 850 50  0000 C CNN
 F 1 "CONN_01X02" V 850 700 50  0001 C CNN
-F 2 "" H 750 700 50  0000 C CNN
+F 2 "" H 750 700 50  0001 C CNN
 F 3 "" H 750 700 50  0000 C CNN
 	1    750  700 
 	-1   0    0    -1  
@@ -1529,7 +1395,7 @@ U 1 1 577D26FA
 P 750 1150
 F 0 "J7" H 750 1300 50  0000 C CNN
 F 1 "CONN_01X02" V 850 1150 50  0001 C CNN
-F 2 "" H 750 1150 50  0000 C CNN
+F 2 "" H 750 1150 50  0001 C CNN
 F 3 "" H 750 1150 50  0000 C CNN
 	1    750  1150
 	-1   0    0    -1  
@@ -1573,7 +1439,7 @@ U 1 1 577E3B91
 P 1550 750
 F 0 "C16" H 1585 805 50  0000 L CNN
 F 1 "100uF" H 1560 670 50  0000 L CNN
-F 2 "" H 1550 750 50  0000 C CNN
+F 2 "" H 1550 750 50  0001 C CNN
 F 3 "" H 1550 750 50  0000 C CNN
 	1    1550 750 
 	-1   0    0    -1  
@@ -1589,15 +1455,13 @@ F 3 "" H 1550 850 60  0000 C CNN
 	1    1550 850 
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1450 650  1925 650 
 $Comp
 L C_Small C18
 U 1 1 577E4B08
 P 1700 750
 F 0 "C18" H 1735 805 50  0000 L CNN
 F 1 "100uF" H 1710 670 50  0000 L CNN
-F 2 "" H 1700 750 50  0000 C CNN
+F 2 "" H 1700 750 50  0001 C CNN
 F 3 "" H 1700 750 50  0000 C CNN
 	1    1700 750 
 	1    0    0    -1  
@@ -1613,15 +1477,13 @@ F 3 "" H 1700 850 60  0000 C CNN
 	1    1700 850 
 	-1   0    0    -1  
 $EndComp
-Connection ~ 1550 650 
-Connection ~ 1700 650 
 $Comp
 L C_Small C17
 U 1 1 577E6398
 P 1550 1200
 F 0 "C17" H 1585 1255 50  0000 L CNN
 F 1 "100uF" H 1560 1120 50  0000 L CNN
-F 2 "" H 1550 1200 50  0000 C CNN
+F 2 "" H 1550 1200 50  0001 C CNN
 F 3 "" H 1550 1200 50  0000 C CNN
 	1    1550 1200
 	-1   0    0    -1  
@@ -1637,15 +1499,13 @@ F 3 "" H 1550 1300 60  0000 C CNN
 	1    1550 1300
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1450 1100 1925 1100
 $Comp
 L C_Small C19
 U 1 1 577E63A5
 P 1700 1200
 F 0 "C19" H 1735 1255 50  0000 L CNN
 F 1 "100uF" H 1710 1120 50  0000 L CNN
-F 2 "" H 1700 1200 50  0000 C CNN
+F 2 "" H 1700 1200 50  0001 C CNN
 F 3 "" H 1700 1200 50  0000 C CNN
 	1    1700 1200
 	1    0    0    -1  
@@ -1661,15 +1521,13 @@ F 3 "" H 1700 1300 60  0000 C CNN
 	1    1700 1300
 	-1   0    0    -1  
 $EndComp
-Connection ~ 1550 1100
-Connection ~ 1700 1100
 $Comp
 L USB_A P3
 U 1 1 577EB3A0
 P 850 1800
 F 0 "P3" V 550 1900 50  0000 C CNN
 F 1 "USB_A" H 800 2000 50  0000 C CNN
-F 2 "" V 800 1700 50  0000 C CNN
+F 2 "Connect:USB_A" V 800 1700 50  0001 C CNN
 F 3 "" V 800 1700 50  0000 C CNN
 	1    850  1800
 	0    -1   1    0   
@@ -1709,7 +1567,6 @@ F 3 "" H 750 2100 60  0000 C CNN
 $EndComp
 Text Notes 1185 1790 0    60   ~ 0
 Alt Power for Disc Board
-NoConn ~ 1725 2650
 NoConn ~ 1725 2750
 NoConn ~ 1225 2850
 NoConn ~ 3175 2750
@@ -1722,4 +1579,165 @@ NoConn ~ 3675 3950
 NoConn ~ 3175 4150
 NoConn ~ 3175 4250
 NoConn ~ 3175 4350
+$Comp
+L GND #PWR074
+U 1 1 578466F9
+P 9250 2250
+F 0 "#PWR074" H 9250 2000 50  0001 C CNN
+F 1 "GND" H 9250 2100 50  0000 C CNN
+F 2 "" H 9250 2250 60  0000 C CNN
+F 3 "" H 9250 2250 60  0000 C CNN
+	1    9250 2250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5575 2300 5575 2400
+Wire Wire Line
+	5425 2150 5575 2150
+Wire Wire Line
+	5575 2350 5425 2350
+Connection ~ 5575 2350
+Wire Wire Line
+	6075 1375 6525 1375
+Wire Wire Line
+	5575 2150 5575 2200
+Wire Wire Line
+	2325 5600 2325 5675
+Wire Wire Line
+	3075 5600 3125 5600
+Wire Wire Line
+	3125 5600 3125 5675
+Wire Wire Line
+	3725 5600 3725 5675
+Wire Wire Line
+	1675 5600 1725 5600
+Wire Wire Line
+	1725 5600 1725 5675
+Wire Wire Line
+	975  6700 975  6900
+Wire Wire Line
+	975  6900 1925 6900
+Wire Wire Line
+	975  7000 1925 7000
+Wire Wire Line
+	1200 6700 1200 7000
+Connection ~ 1200 7000
+Wire Wire Line
+	5575 3425 5575 3525
+Wire Wire Line
+	5425 3275 5575 3275
+Wire Wire Line
+	5575 3475 5425 3475
+Connection ~ 5575 3475
+Wire Wire Line
+	5575 3275 5575 3325
+Wire Wire Line
+	10350 1750 10350 1900
+Wire Wire Line
+	9400 1525 9200 1525
+Wire Wire Line
+	9400 1600 8900 1600
+Wire Wire Line
+	8900 1600 8900 1525
+Wire Wire Line
+	9400 1450 9400 1200
+Wire Wire Line
+	9400 1200 9200 1200
+Wire Wire Line
+	10350 525  10350 1450
+Wire Wire Line
+	10575 825  11025 825 
+Wire Wire Line
+	10775 1000 10775 825 
+Connection ~ 10775 825 
+Wire Wire Line
+	10650 1450 10825 1450
+Wire Wire Line
+	8700 1675 9400 1675
+Wire Wire Line
+	8700 1825 9400 1825
+Wire Wire Line
+	9300 1825 9300 1950
+Wire Wire Line
+	8700 1750 9400 1750
+Wire Wire Line
+	9200 1750 9200 1950
+Wire Wire Line
+	9100 1675 9100 1950
+Wire Wire Line
+	9400 1900 9400 1950
+Wire Wire Line
+	10350 525  11025 525 
+Connection ~ 10775 525 
+Connection ~ 10575 525 
+Wire Wire Line
+	8700 1675 8700 1600
+Connection ~ 9100 1675
+Wire Wire Line
+	8700 1750 8700 1725
+Connection ~ 9200 1750
+Wire Wire Line
+	8700 1825 8700 1850
+Connection ~ 9300 1825
+Wire Wire Line
+	9400 1900 8700 1900
+Wire Wire Line
+	8700 1900 8700 1975
+Wire Wire Line
+	10550 1600 10550 2250
+Wire Wire Line
+	10550 1600 10350 1600
+Wire Wire Line
+	10350 1675 10450 1675
+Wire Wire Line
+	10450 1675 10450 2375
+Wire Wire Line
+	10450 2375 10550 2375
+Wire Wire Line
+	10350 1525 10950 1525
+Wire Wire Line
+	10950 1525 10950 1600
+Connection ~ 10350 1825
+Wire Wire Line
+	5600 4500 5475 4500
+Wire Wire Line
+	5525 5300 5600 5300
+Wire Wire Line
+	1450 650  1925 650 
+Connection ~ 1550 650 
+Connection ~ 1700 650 
+Wire Wire Line
+	1450 1100 1925 1100
+Connection ~ 1550 1100
+Connection ~ 1700 1100
+Wire Wire Line
+	9100 2250 9400 2250
+Wire Wire Line
+	9200 2250 9300 2250
+Connection ~ 9300 2250
+Connection ~ 9200 2250
+Connection ~ 9250 2250
+$Comp
+L Discovery_F407_P1 J1
+U 1 1 5784F5D3
+P 1475 3650
+F 0 "J1" H 1475 4950 50  0000 C CNN
+F 1 "Discovery_F407_P1" V 1475 3650 50  0000 C CNN
+F 2 "roboCooler:Socket_Strip_Straight_2x25_Inverted" H 1475 2900 50  0001 C CNN
+F 3 "" H 1475 2900 50  0000 C CNN
+	1    1475 3650
+	1    0    0    -1  
+$EndComp
+NoConn ~ 1725 2650
+$Comp
+L Discovery_F407_P2 J2
+U 1 1 57856C7E
+P 3425 3650
+F 0 "J2" H 3425 4950 50  0000 C CNN
+F 1 "Discovery_F407_P2" V 3425 3650 50  0000 C CNN
+F 2 "" H 3425 2900 50  0000 C CNN
+F 3 "" H 3425 2900 50  0000 C CNN
+	1    3425 3650
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

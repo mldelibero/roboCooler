@@ -1,5 +1,13 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP Discovery_F407_P1
+D Connector 02x25
+$ENDCMP
+#
+$CMP Discovery_F407_P2
+D Connector 02x25
+$ENDCMP
+#
 $CMP SPST_4PIN
 D Button
 K Switch
