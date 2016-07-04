@@ -673,7 +673,6 @@ $EndComp
 NoConn ~ 1725 2950
 NoConn ~ 1725 3150
 NoConn ~ 1725 3250
-NoConn ~ 1725 3350
 NoConn ~ 1725 4050
 NoConn ~ 1725 4550
 NoConn ~ 1725 4650
@@ -1154,17 +1153,6 @@ F 3 "" H 10825 1450 60  0000 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L FUSE F1
-U 1 1 5773EC86
-P 10350 950
-F 0 "F1" H 10450 1000 50  0000 C CNN
-F 1 "3568" H 10325 825 50  0000 C CNN
-F 2 "roboCooler:3568" H 10350 950 50  0001 C CNN
-F 3 "" H 10350 950 50  0000 C CNN
-	1    10350 950 
-	0    -1   -1   0   
-$EndComp
-$Comp
 L C C13
 U 1 1 5774022B
 P 10775 675
@@ -1262,14 +1250,12 @@ Wire Wire Line
 Wire Wire Line
 	9400 1200 9200 1200
 Wire Wire Line
-	10350 1200 10350 1450
+	10350 525  10350 1450
 Wire Wire Line
 	10575 825  11025 825 
 Wire Wire Line
 	10775 1000 10775 825 
 Connection ~ 10775 825 
-Wire Wire Line
-	10350 700  10350 525 
 Wire Wire Line
 	10650 1450 10825 1450
 $Comp
@@ -1723,4 +1709,17 @@ F 3 "" H 750 2100 60  0000 C CNN
 $EndComp
 Text Notes 1185 1790 0    60   ~ 0
 Alt Power for Disc Board
+NoConn ~ 1725 2650
+NoConn ~ 1725 2750
+NoConn ~ 1225 2850
+NoConn ~ 3175 2750
+NoConn ~ 3675 2750
+NoConn ~ 3675 2850
+NoConn ~ 3675 3150
+NoConn ~ 3675 3250
+NoConn ~ 3175 3450
+NoConn ~ 3675 3950
+NoConn ~ 3175 4150
+NoConn ~ 3175 4250
+NoConn ~ 3175 4350
 $EndSCHEMATC
