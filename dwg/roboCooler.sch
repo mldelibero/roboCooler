@@ -1552,4 +1552,236 @@ $EndComp
 NoConn ~ 6875 2575
 NoConn ~ 6875 2475
 NoConn ~ 6875 2375
+$Comp
+L R_Small R3
+U 1 1 57846A87
+P 5025 1200
+F 0 "R3" H 5055 1220 50  0000 L CNN
+F 1 "200" V 4950 1125 50  0000 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" H 5025 1200 50  0001 C CNN
+F 3 "" H 5025 1200 50  0000 C CNN
+	1    5025 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Led_Small D3
+U 1 1 57846B2C
+P 5025 1400
+F 0 "D3" V 5100 1450 50  0000 L CNN
+F 1 "Led_Small" H 4850 1300 50  0001 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 5025 1400 50  0001 C CNN
+F 3 "" V 5025 1400 50  0000 C CNN
+	1    5025 1400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R_Small R4
+U 1 1 578498BB
+P 5275 1200
+F 0 "R4" H 5305 1220 50  0000 L CNN
+F 1 "200" V 5200 1125 50  0000 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" H 5275 1200 50  0001 C CNN
+F 3 "" H 5275 1200 50  0000 C CNN
+	1    5275 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Led_Small D4
+U 1 1 578498C1
+P 5275 1400
+F 0 "D4" V 5350 1450 50  0000 L CNN
+F 1 "Led_Small" H 5100 1300 50  0001 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 5275 1400 50  0001 C CNN
+F 3 "" V 5275 1400 50  0000 C CNN
+	1    5275 1400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR068
+U 1 1 578498C7
+P 5275 1525
+F 0 "#PWR068" H 5275 1275 50  0001 C CNN
+F 1 "GND" V 5275 1325 50  0000 C CNN
+F 2 "" H 5275 1525 60  0000 C CNN
+F 3 "" H 5275 1525 60  0000 C CNN
+	1    5275 1525
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	5025 1500 6775 1500
+Wire Wire Line
+	5275 1500 5275 1525
+$Comp
+L R_Small R12
+U 1 1 5784AFD6
+P 5525 1200
+F 0 "R12" H 5555 1220 50  0000 L CNN
+F 1 "200" V 5450 1125 50  0000 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" H 5525 1200 50  0001 C CNN
+F 3 "" H 5525 1200 50  0000 C CNN
+	1    5525 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Led_Small D5
+U 1 1 5784AFDC
+P 5525 1400
+F 0 "D5" V 5600 1450 50  0000 L CNN
+F 1 "Led_Small" H 5350 1300 50  0001 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 5525 1400 50  0001 C CNN
+F 3 "" V 5525 1400 50  0000 C CNN
+	1    5525 1400
+	0    -1   -1   0   
+$EndComp
+Connection ~ 5525 1500
+Connection ~ 5275 1500
+$Comp
+L R_Small R13
+U 1 1 5784B579
+P 5775 1200
+F 0 "R13" H 5805 1220 50  0000 L CNN
+F 1 "200" V 5700 1125 50  0000 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" H 5775 1200 50  0001 C CNN
+F 3 "" H 5775 1200 50  0000 C CNN
+	1    5775 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Led_Small D6
+U 1 1 5784B57F
+P 5775 1400
+F 0 "D6" V 5850 1450 50  0000 L CNN
+F 1 "Led_Small" H 5600 1300 50  0001 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 5775 1400 50  0001 C CNN
+F 3 "" V 5775 1400 50  0000 C CNN
+	1    5775 1400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R_Small R14
+U 1 1 5784B585
+P 6025 1200
+F 0 "R14" H 6055 1220 50  0000 L CNN
+F 1 "200" V 5950 1125 50  0000 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" H 6025 1200 50  0001 C CNN
+F 3 "" H 6025 1200 50  0000 C CNN
+	1    6025 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Led_Small D7
+U 1 1 5784B58B
+P 6025 1400
+F 0 "D7" V 6100 1450 50  0000 L CNN
+F 1 "Led_Small" H 5850 1300 50  0001 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 6025 1400 50  0001 C CNN
+F 3 "" V 6025 1400 50  0000 C CNN
+	1    6025 1400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R_Small R15
+U 1 1 5784B599
+P 6275 1200
+F 0 "R15" H 6305 1220 50  0000 L CNN
+F 1 "200" V 6200 1125 50  0000 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" H 6275 1200 50  0001 C CNN
+F 3 "" H 6275 1200 50  0000 C CNN
+	1    6275 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Led_Small D8
+U 1 1 5784B59F
+P 6275 1400
+F 0 "D8" V 6350 1450 50  0000 L CNN
+F 1 "Led_Small" H 6100 1300 50  0001 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 6275 1400 50  0001 C CNN
+F 3 "" V 6275 1400 50  0000 C CNN
+	1    6275 1400
+	0    -1   -1   0   
+$EndComp
+Connection ~ 6275 1500
+Connection ~ 6025 1500
+$Comp
+L R_Small R16
+U 1 1 5784B8D6
+P 6525 1200
+F 0 "R16" H 6555 1220 50  0000 L CNN
+F 1 "200" V 6450 1125 50  0000 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" H 6525 1200 50  0001 C CNN
+F 3 "" H 6525 1200 50  0000 C CNN
+	1    6525 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Led_Small D9
+U 1 1 5784B8DC
+P 6525 1400
+F 0 "D9" V 6600 1450 50  0000 L CNN
+F 1 "Led_Small" H 6350 1300 50  0001 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 6525 1400 50  0001 C CNN
+F 3 "" V 6525 1400 50  0000 C CNN
+	1    6525 1400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R_Small R17
+U 1 1 5784B8E2
+P 6775 1200
+F 0 "R17" H 6805 1220 50  0000 L CNN
+F 1 "200" V 6700 1125 50  0000 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" H 6775 1200 50  0001 C CNN
+F 3 "" H 6775 1200 50  0000 C CNN
+	1    6775 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Led_Small D10
+U 1 1 5784B8E8
+P 6775 1400
+F 0 "D10" V 6850 1450 50  0000 L CNN
+F 1 "Led_Small" H 6600 1300 50  0001 L CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 6775 1400 50  0001 C CNN
+F 3 "" V 6775 1400 50  0000 C CNN
+	1    6775 1400
+	0    -1   -1   0   
+$EndComp
+Connection ~ 6525 1500
+Wire Wire Line
+	5525 1500 5775 1500
+Connection ~ 5775 1500
+Connection ~ 6775 1500
+Text GLabel 5275 1100 1    60   Input ~ 0
+LED_1
+Text GLabel 5525 1100 1    60   Input ~ 0
+LED_2
+Text GLabel 5775 1100 1    60   Input ~ 0
+LED_3
+Text GLabel 6025 1100 1    60   Input ~ 0
+LED_4
+Text GLabel 6275 1100 1    60   Input ~ 0
+LED_5
+Text GLabel 6525 1100 1    60   Input ~ 0
+LED_6
+Text GLabel 6775 1100 1    60   Input ~ 0
+LED_7
+Text GLabel 5025 1100 1    60   Input ~ 0
+LED_0
+Text GLabel 1225 2950 0    60   Input ~ 0
+LED_1
+Text GLabel 1225 3050 0    60   Input ~ 0
+LED_2
+Text GLabel 1225 3250 0    60   Input ~ 0
+LED_3
+Text GLabel 1225 3350 0    60   Input ~ 0
+LED_4
+Text GLabel 1225 3450 0    60   Input ~ 0
+LED_5
+Text GLabel 1225 3650 0    60   Input ~ 0
+LED_6
+Text GLabel 1225 3750 0    60   Input ~ 0
+LED_7
+Text GLabel 1225 2750 0    60   Input ~ 0
+LED_0
 $EndSCHEMATC
