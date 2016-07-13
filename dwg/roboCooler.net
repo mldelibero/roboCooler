@@ -1,7 +1,7 @@
 (export (version D)
   (design
-    (source C:\cygwin64\home\delibero.michael\personal\roboCooler\dwg\roboCooler.sch)
-    (date "7/11/2016 11:13:45 PM")
+    (source C:/cygwin64/home/delibero.michael/personal/roboCooler/dwg/roboCooler.sch)
+    (date "7/12/2016 11:01:37 PM")
     (tool "Eeschema 4.0.2-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -740,7 +740,7 @@
     (library (logical device)
       (uri "C:\\Program Files\\KiCad\\share\\kicad\\library\\device.lib"))
     (library (logical roboCooler)
-      (uri roboCooler.lib)))
+      (uri C:\cygwin64\home\delibero.michael\personal\roboCooler\dwg\roboCooler.lib)))
   (nets
     (net (code 1) (name "Net-(J6-Pad26)")
       (node (ref J6) (pin 26)))
