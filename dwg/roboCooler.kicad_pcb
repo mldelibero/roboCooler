@@ -5,7 +5,7 @@
     (no_connects 0)
     (area 21.539999 16.459999 82.600001 95.300001)
     (thickness 1.6)
-    (drawings 4)
+    (drawings 6)
     (tracks 468)
     (zones 0)
     (modules 66)
@@ -15,7 +15,7 @@
   (page A4)
   (layers
     (0 F.Cu signal)
-    (31 B.Cu signal)
+    (31 B.Cu signal hide)
     (33 F.Adhes user)
     (35 F.Paste user)
     (36 B.SilkS user)
@@ -2703,6 +2703,12 @@
     )
   )
 
+  (gr_text "S/N: " (at 67.818 41.656) (layer F.SilkS) (tstamp 579B571D)
+    (effects (font (size 1.5 1.5) (thickness 0.3)))
+  )
+  (gr_text "ROBOCOOLER\nREV 0" (at 40.64 43.942) (layer F.SilkS)
+    (effects (font (size 1.5 1.5) (thickness 0.3)) (justify left))
+  )
   (gr_line (start 21.59 95.25) (end 21.59 16.51) (layer Edge.Cuts) (width 0.1))
   (gr_line (start 82.55 95.25) (end 21.59 95.25) (layer Edge.Cuts) (width 0.1))
   (gr_line (start 82.55 16.51) (end 82.55 95.25) (layer Edge.Cuts) (width 0.1))
@@ -3759,6 +3765,21 @@
         (xy 28.067 53.213) (xy 28.087 53.213) (xy 28.087 53.467) (xy 28.067 53.467) (xy 28.067 53.487)
         (xy 27.813 53.487) (xy 27.813 53.467) (xy 27.793 53.467) (xy 27.793 53.213) (xy 27.813 53.213)
         (xy 27.813 53.193) (xy 28.067 53.193)
+      )
+    )
+  )
+  (zone (net 0) (net_name "") (layer F.SilkS) (tstamp 0) (hatch full 0.508)
+    (connect_pads (clearance 0.508))
+    (min_thickness 0.254)
+    (fill yes (arc_segments 16) (thermal_gap 0.508) (thermal_bridge_width 0.508))
+    (polygon
+      (pts
+        (xy 62.629941 43.434) (xy 72.789941 43.434) (xy 72.789941 53.594) (xy 62.629941 53.594)
+      )
+    )
+    (filled_polygon
+      (pts
+        (xy 72.662941 53.467) (xy 62.756941 53.467) (xy 62.756941 43.561) (xy 72.662941 43.561)
       )
     )
   )
