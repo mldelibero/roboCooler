@@ -10,6 +10,14 @@ void RCC_AHB1PeriphClockCmd(uint32_t RCC_AHB1Periph, FunctionalState NewState)
     if (RCC_AHB1Periph) return;
     if (NewState      ) return;
 }
+
+void RCC_AHB2PeriphClockCmd(uint32_t RCC_AHB2Periph, FunctionalState NewState)
+{
+    mock().actualCall("RCC_AHB2PeriphClockCmd");
+    if (RCC_AHB2Periph) return;
+    if (NewState      ) return;
+}
+
 void RCC_APB1PeriphClockCmd(uint32_t RCC_APB1Periph, FunctionalState NewState)
 {
     mock().actualCall("RCC_APB1PeriphClockCmd");

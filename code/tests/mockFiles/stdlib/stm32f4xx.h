@@ -31,7 +31,10 @@ typedef struct
 
 extern uint32_t     SystemCoreClock;
 extern TIM_TypeDef* TIM4;
+extern GPIO_TypeDef* GPIOA;
 extern GPIO_TypeDef* GPIOB;
+extern GPIO_TypeDef* GPIOC;
+extern GPIO_TypeDef* GPIOD;
 extern GPIO_TypeDef* GPIOE;
 
 #endif /* ifndef _STM32F4XX__H */

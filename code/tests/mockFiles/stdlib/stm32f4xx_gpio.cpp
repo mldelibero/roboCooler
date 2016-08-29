@@ -10,6 +10,7 @@ void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
     if (GPIOx          ) return;
     if (GPIO_InitStruct) return;
 }
+
 void GPIO_PinAFConfig(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinSource, uint8_t GPIO_AF)
 {
     mock().actualCall("GPIO_PinAFConfig");
@@ -39,6 +40,14 @@ uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 
     return pinStates;
 }
+
+void GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+{
+    mock().actualCall("GPIO_ResetBits" )
+        .withParameter("GPIOx"   , GPIOx)
+        .withParameter("GPIO_Pin", GPIO_Pin);
+}
+
 void    GPIO_SetPinInputValue(uint8_t val)
 {
     pinStates = val;

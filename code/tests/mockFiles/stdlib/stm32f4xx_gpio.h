@@ -5,9 +5,21 @@
 #define GPIO_PinSource7            ((uint8_t )0x07  )
 #define GPIO_PinSource15           ((uint8_t )0x0F  )
 #define GPIO_AF_TIM4               ((uint8_t )0x02  )  /* TIM4 Alternate Function mapping */
+#define GPIO_Pin_0                 ((uint16_t)0x0080)  /* Pin 0  selected */
+#define GPIO_Pin_1                 ((uint16_t)0x0080)  /* Pin 1  selected */
+#define GPIO_Pin_2                 ((uint16_t)0x0080)  /* Pin 2  selected */
+#define GPIO_Pin_3                 ((uint16_t)0x0080)  /* Pin 3  selected */
+#define GPIO_Pin_4                 ((uint16_t)0x0080)  /* Pin 4  selected */
+#define GPIO_Pin_5                 ((uint16_t)0x0080)  /* Pin 5  selected */
+#define GPIO_Pin_6                 ((uint16_t)0x0080)  /* Pin 6  selected */
 #define GPIO_Pin_7                 ((uint16_t)0x0080)  /* Pin 7  selected */
 #define GPIO_Pin_8                 ((uint16_t)0x0080)  /* Pin 8  selected */
-#define GPIO_Pin_11                ((uint16_t)0x0080)  /* Pin 15 selected */
+#define GPIO_Pin_9                 ((uint16_t)0x0080)  /* Pin 9  selected */
+#define GPIO_Pin_10                ((uint16_t)0x0080)  /* Pin 10 selected */
+#define GPIO_Pin_11                ((uint16_t)0x0080)  /* Pin 11 selected */
+#define GPIO_Pin_12                ((uint16_t)0x0080)  /* Pin 12 selected */
+#define GPIO_Pin_13                ((uint16_t)0x0080)  /* Pin 13 selected */
+#define GPIO_Pin_14                ((uint16_t)0x0080)  /* Pin 14 selected */
 #define GPIO_Pin_15                ((uint16_t)0x0080)  /* Pin 15 selected */
 
 typedef enum
@@ -60,6 +72,7 @@ typedef struct
 void    GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct);
 void    GPIO_PinAFConfig(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinSource, uint8_t GPIO_AF);
 uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
+void    GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 void    GPIO_StructInit(GPIO_InitTypeDef* GPIO_InitStruct);
 void    GPIO_ToggleBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 void    GPIO_SetPinInputValue(uint8_t val);
