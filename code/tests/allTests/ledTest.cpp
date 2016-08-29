@@ -7,8 +7,10 @@
 #include "timer.h"
 
 /*  * List of features needed:
+ *  *Test that correct timer is set at init
+ *  *init calls init_leds
+ *  *Does timer driver run out of timers while init is executing?
  *  *LEDs off on startup
- *  *LED timer is allocated after init
  */
 
 static int callOrder = -1;
@@ -30,5 +32,7 @@ TEST_GROUP(LedTests)
 TEST(LedTests, TestInitCalls)
 {
     mock().expectOneCall("AllocateTimer"          );
+    mock().expectOneCall("Set_TimerValue"        )
+        .withParameter("timerValue", LED_TIMER_RESET);
 } // end - TEST(PushButtonInitTests, TestInitCalls)
 

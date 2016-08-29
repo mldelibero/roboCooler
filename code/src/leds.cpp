@@ -8,5 +8,6 @@
 void init_leds(void)
 {
     AllocateTimer();
+    Set_TimerValue(0,LED_TIMER_RESET);
 }
 
