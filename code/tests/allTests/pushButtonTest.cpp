@@ -17,7 +17,7 @@
  * Create user for system
  */
 
-int callOrder = -1;
+static int callOrder = -1;
 
 TEST_GROUP(PushButtonInitTests)
 {
