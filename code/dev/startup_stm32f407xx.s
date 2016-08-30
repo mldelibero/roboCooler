@@ -237,13 +237,6 @@ SysTick_Handler PROC
                 B       .
                 ENDP
 
-TIM4_IRQHandler PROC
-                EXPORT  TIM4_IRQHandler   [WEAK]
-                IMPORT  TIM4_IRQ_Handler
-                B       TIM4_IRQ_Handler
-                ENDP
-
-
 Default_Handler PROC
 
                 EXPORT  WWDG_IRQHandler                   [WEAK]                                        
@@ -358,7 +351,7 @@ TIM1_TRG_COM_TIM11_IRQHandler
 TIM1_CC_IRQHandler                                               
 TIM2_IRQHandler                                                           
 TIM3_IRQHandler                                                           
-;TIM4_IRQHandler                                                           
+TIM4_IRQHandler                                                           
 I2C1_EV_IRQHandler                                                         
 I2C1_ER_IRQHandler                                                         
 I2C2_EV_IRQHandler                                                        
