@@ -334,7 +334,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\dev;..\inc;..\lib\stdPeriph\inc;..\src;..\src\timer</IncludePath>
+              <IncludePath>..\dev;..\inc;..\lib\stdPeriph\inc;..\src;..\src\drivers</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -388,16 +388,6 @@
               <FilePath>..\src\init.h</FilePath>
             </File>
             <File>
-              <FileName>ledDriver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\ledDriver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ledDriver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\ledDriver.h</FilePath>
-            </File>
-            <File>
               <FileName>leds.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\leds.cpp</FilePath>
@@ -413,24 +403,14 @@
               <FilePath>..\src\main.cpp</FilePath>
             </File>
             <File>
-              <FileName>timerDriver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\timer\timerDriver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>timerDriver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\timer\timerDriver.h</FilePath>
-            </File>
-            <File>
               <FileName>timer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\src\timer\timer.cpp</FilePath>
+              <FilePath>..\src\timer.cpp</FilePath>
             </File>
             <File>
               <FileName>timer.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\src\timer\timer.h</FilePath>
+              <FilePath>..\src\timer.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -632,6 +612,31 @@
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\dev\system_stm32f4xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>ledDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\ledDriver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ledDriver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\drivers\ledDriver.h</FilePath>
+            </File>
+            <File>
+              <FileName>timerDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\timerDriver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>timerDriver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\drivers\timerDriver.h</FilePath>
             </File>
           </Files>
         </Group>

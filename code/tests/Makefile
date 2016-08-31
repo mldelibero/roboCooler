@@ -22,7 +22,7 @@ CPP_PLATFORM = Gcc
 #CPPUTEST_MEMLEAK_DETECTOR_NEW_MACRO_FILE = -include ExamplesNewOverrides.h
 SRC_DIRS = \
 	../src\
-	../src/timer\
+	../src/drivers\
 
 TEST_SRC_DIRS = \
 	./allTests\
@@ -34,7 +34,7 @@ INCLUDE_DIRS =\
   ./mockFiles\
   ./mockFiles/stdlib\
   ../src\
-  ../src/timer\
+  ../src/drivers\
   $(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
