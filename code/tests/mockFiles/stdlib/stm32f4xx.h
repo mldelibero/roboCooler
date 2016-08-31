@@ -27,6 +27,7 @@ typedef struct
    uint16_t BSRRH;    /*!< GPIO port bit set/reset high register, Address offset: 0x1A      */
    uint32_t LCKR;     /*!< GPIO port configuration lock register, Address offset: 0x1C      */
    uint32_t AFR[2];   /*!< GPIO alternate function registers,     Address offset: 0x20-0x24 */
+   uint16_t pinStates; // used to mock setting and getting pin values
 } GPIO_TypeDef;
 
 extern uint32_t     SystemCoreClock;

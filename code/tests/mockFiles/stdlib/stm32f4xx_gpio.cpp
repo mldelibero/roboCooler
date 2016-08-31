@@ -2,8 +2,6 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_gpio.h"
 
-uint8_t pinStates = 0; // Internally keeps track of pin states
-
 void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
 {
     mock().actualCall("GPIO_Init");
@@ -38,7 +36,8 @@ uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
         .withParameter("GPIOx"   , GPIOx)
         .withParameter("GPIO_Pin", GPIO_Pin);
 
-    return pinStates;
+    //return uint8_t((GPIOx->pinStates & GPIO_Pin) >> GPIO_Pin);
+    return uint8_t((GPIOx->pinStates & GPIO_Pin) > 0);
 }
 
 void GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
@@ -48,7 +47,9 @@ void GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
         .withParameter("GPIO_Pin", GPIO_Pin);
 }
 
-void    GPIO_SetPinInputValue(uint8_t val)
+void    GPIO_SetPinInputValue(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, uint8_t val)
 {
-    pinStates = val;
+    if (val == 1) GPIOx->pinStates |=  GPIO_Pin;
+    else          GPIOx->pinStates &= uint16_t(~GPIO_Pin);
 }
+

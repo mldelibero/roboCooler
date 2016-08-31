@@ -58,7 +58,6 @@ TEST_GROUP(PushButtonFilterTests)
         mock().clear();
     }
 }; // end - TEST_GROUP(PushButtonFilterTests)
-
 TEST(PushButtonFilterTests, CanSetMockIOInput)
 {
     uint8_t pinValue = 3;
@@ -66,11 +65,10 @@ TEST(PushButtonFilterTests, CanSetMockIOInput)
     mock().expectOneCall("GPIO_ReadInputDataBit"  ).withCallOrder(callOrder++).withParameter("GPIOx"   , PBUP_GPIOx).withParameter("GPIO_Pin", PBUP_GPIO_PIN_X);
     mock().expectOneCall("GPIO_ReadInputDataBit"  ).withCallOrder(callOrder++).withParameter("GPIOx"   , PBUP_GPIOx).withParameter("GPIO_Pin", PBUP_GPIO_PIN_X);
 
-    GPIO_SetPinInputValue(0);
+    GPIO_SetPinInputValue(PBUP_GPIOx, PBUP_GPIO_PIN_X, 0);
     pinValue = GPIO_ReadInputDataBit(PBUP_GPIOx, PBUP_GPIO_PIN_X);
     CHECK_EQUAL(pinValue, 0);
-
-    GPIO_SetPinInputValue(1);
+    GPIO_SetPinInputValue(PBUP_GPIOx, PBUP_GPIO_PIN_X, 1);
     pinValue = GPIO_ReadInputDataBit(PBUP_GPIOx, PBUP_GPIO_PIN_X);
     CHECK_EQUAL(pinValue, 1);
 }
@@ -79,7 +77,8 @@ TEST(PushButtonFilterTests, SampleButtonsOnTimeout)
 {
     int32_t timer = 3;
     Set_TimerToAllocate(timer);
-    GPIO_SetPinInputValue(0);
+    GPIO_SetPinInputValue(PBUP_GPIOx, PBUP_GPIO_PIN_X, 0);
+    GPIO_SetPinInputValue(PBDN_GPIOx, PBDN_GPIO_PIN_X, 0);
 
     mock().expectOneCall("Set_TimerValue"        ).withCallOrder(callOrder++)
         .withParameter("timer", timer)
@@ -105,13 +104,15 @@ TEST(PushButtonFilterTests, CanGetSampledInputs)
     Set_TimerValue(0, 0); // Sets all timers to be expired
 
 
-    GPIO_SetPinInputValue(0);
+    GPIO_SetPinInputValue(PBUP_GPIOx, PBUP_GPIO_PIN_X, 0);
+    GPIO_SetPinInputValue(PBDN_GPIOx, PBDN_GPIO_PIN_X, 0);
     Run_PushButtons();
     mock().enable();
     CHECK_EQUAL(0, Get_PbUpStatus());
     CHECK_EQUAL(0, Get_PbDnStatus());
 
-    GPIO_SetPinInputValue(1);
+    GPIO_SetPinInputValue(PBUP_GPIOx, PBUP_GPIO_PIN_X, 1);
+    GPIO_SetPinInputValue(PBDN_GPIOx, PBDN_GPIO_PIN_X, 1);
     mock().disable();
     Run_PushButtons();
     mock().enable();

@@ -95,7 +95,7 @@ uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 void    GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 void    GPIO_StructInit(GPIO_InitTypeDef* GPIO_InitStruct);
 void    GPIO_ToggleBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-void    GPIO_SetPinInputValue(uint8_t val);
+void    GPIO_SetPinInputValue(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, uint8_t val);
 void    GPIO_WriteBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BitAction BitVal);
 
 #endif /* #ifndef __STM32F4XX_GPIO_MOCK_H */
