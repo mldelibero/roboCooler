@@ -8,6 +8,7 @@
 #include "pushButton.h"
 #include "pushButtonDriver.h"
 #include "timer.h"
+#include "timer_mock.h"
 
 /*  * List of features needed:
 
@@ -76,11 +77,14 @@ TEST(PushButtonFilterTests, CanSetMockIOInput)
 
 TEST(PushButtonFilterTests, SampleButtonsOnTimeout)
 {
+    int32_t timer = 3;
+    Set_TimerToAllocate(timer);
     GPIO_SetPinInputValue(0);
 
     mock().expectOneCall("Set_TimerValue"        ).withCallOrder(callOrder++)
+        .withParameter("timer", timer)
         .withParameter("timerValue", 0);
-    Set_TimerValue(0, 0); // Sets all timers to be expired
+    Set_TimerValue(timer, 0);
 
     mock().expectOneCall("IsTimerExpired"        ).withCallOrder(callOrder++);
 
