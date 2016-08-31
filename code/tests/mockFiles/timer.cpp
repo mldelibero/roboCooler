@@ -1,11 +1,13 @@
 #include <CppUTestExt/MockSupport.h>
+#include "timer_mock.h"
 
-int32_t mock_timerValue = 0;
+static int32_t mock_timerValue = 0;
+static int32_t mock_TimerToAllocate = 1;
 
 int32_t AllocateTimer(void)
 {
     mock().actualCall("AllocateTimer");
-    return 1;
+    return mock_TimerToAllocate;
 } // end - int32_t AllocateTimer(void)
 
 bool IsTimerExpired(int32_t timer)
@@ -20,9 +22,19 @@ bool IsTimerExpired(int32_t timer)
 
 void  Set_TimerValue(int32_t timer, int32_t timerValue)
 {
-    mock().actualCall("Set_TimerValue").withParameter("timerValue", timerValue);
+    mock().actualCall("Set_TimerValue")
+        .withParameter("timer", timer)
+        .withParameter("timerValue", timerValue);
     mock_timerValue = timerValue;
+}
 
-    if (timer)      return;
+void Reset_timerMock(void)
+{
+    mock_timerValue = 0;
+}
+
+void Set_TimerToAllocate(int32_t timer)
+{
+    mock_TimerToAllocate = timer;
 }
 
