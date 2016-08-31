@@ -5,6 +5,7 @@
 #include "leds.h"
 #include "ledDriver.h"
 #include "timer.h"
+#include "timer_mock.h"
 
 /*  * List of features needed:
  *  *Test that correct timer is set at init
@@ -19,6 +20,7 @@ TEST_GROUP(LedTests)
 {
     void setup()
     {
+        Reset_timerMock();
         callOrder = 1;
     }
     void teardown()
@@ -31,8 +33,12 @@ TEST_GROUP(LedTests)
 
 TEST(LedTests, TestInitCalls)
 {
+    int32_t timer = 4;
+    Set_TimerToAllocate(timer);
+
     mock().expectOneCall("AllocateTimer"          );
     mock().expectOneCall("Set_TimerValue"        )
+        .withParameter("timer", timer)
         .withParameter("timerValue", LED_TIMER_RESET);
 } // end - TEST(PushButtonInitTests, TestInitCalls)
 

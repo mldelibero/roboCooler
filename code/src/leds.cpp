@@ -7,7 +7,8 @@
 
 void init_leds(void)
 {
-    AllocateTimer();
-    Set_TimerValue(0,LED_TIMER_RESET);
+    static int32_t led_timer = -1;
+    led_timer = AllocateTimer();
+    Set_TimerValue(led_timer, LED_TIMER_RESET);
 }
 
