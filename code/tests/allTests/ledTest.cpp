@@ -25,7 +25,6 @@ TEST_GROUP(LedTests)
     }
     void teardown()
     {
-        init_leds();
         mock().checkExpectations();
         mock().clear();
     }
@@ -36,9 +35,12 @@ TEST(LedTests, TestInitCalls)
     int32_t timer = 4;
     Set_TimerToAllocate(timer);
 
-    mock().expectOneCall("AllocateTimer"          );
+    mock().expectOneCall("init_ledDriver"        );
+    mock().expectOneCall("AllocateTimer"         );
     mock().expectOneCall("Set_TimerValue"        )
-        .withParameter("timer", timer)
+        .withParameter("timer"     , timer)
         .withParameter("timerValue", LED_TIMER_RESET);
+
+    init_leds();
 } // end - TEST(PushButtonInitTests, TestInitCalls)
 
