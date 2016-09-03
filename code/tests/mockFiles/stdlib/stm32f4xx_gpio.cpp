@@ -53,3 +53,9 @@ void    GPIO_SetPinInputValue(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, uint8_t va
     else          GPIOx->pinStates &= uint16_t(~GPIO_Pin);
 }
 
+void    GPIO_WriteBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BitAction BitVal)
+{
+    if (BitVal == 1) GPIOx->pinStates |=  GPIO_Pin;
+    else             GPIOx->pinStates &= uint16_t(~GPIO_Pin);
+}
+

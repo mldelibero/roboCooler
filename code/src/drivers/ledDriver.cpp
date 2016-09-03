@@ -59,3 +59,29 @@ void init_ledDriver(void)
     GPIO_ResetBits(LED7_GPIOx, LED7_GPIO_PIN_X);
 } // end - void init_ledDriver(void)
 
+void SetLeds(uint8_t ledValues)
+{
+    GPIO_WriteBit(LED0_GPIOx, LED0_GPIO_PIN_X, (BitAction((ledValues & 1<<0) > 0)));
+    GPIO_WriteBit(LED1_GPIOx, LED1_GPIO_PIN_X, (BitAction((ledValues & 1<<1) > 0)));
+    GPIO_WriteBit(LED2_GPIOx, LED2_GPIO_PIN_X, (BitAction((ledValues & 1<<2) > 0)));
+    GPIO_WriteBit(LED3_GPIOx, LED3_GPIO_PIN_X, (BitAction((ledValues & 1<<3) > 0)));
+    GPIO_WriteBit(LED4_GPIOx, LED4_GPIO_PIN_X, (BitAction((ledValues & 1<<4) > 0)));
+    GPIO_WriteBit(LED5_GPIOx, LED5_GPIO_PIN_X, (BitAction((ledValues & 1<<5) > 0)));
+    GPIO_WriteBit(LED6_GPIOx, LED6_GPIO_PIN_X, (BitAction((ledValues & 1<<6) > 0)));
+    GPIO_WriteBit(LED7_GPIOx, LED7_GPIO_PIN_X, (BitAction((ledValues & 1<<7) > 0)));
+}
+
+uint8_t Get_LedStates(void)
+{
+    uint8_t ledState = 0;
+    if (GPIO_ReadInputDataBit(LED0_GPIOx, LED0_GPIO_PIN_X)) ledState |= 1 << 0;
+    if (GPIO_ReadInputDataBit(LED1_GPIOx, LED1_GPIO_PIN_X)) ledState |= 1 << 1;
+    if (GPIO_ReadInputDataBit(LED2_GPIOx, LED2_GPIO_PIN_X)) ledState |= 1 << 2;
+    if (GPIO_ReadInputDataBit(LED3_GPIOx, LED3_GPIO_PIN_X)) ledState |= 1 << 3;
+    if (GPIO_ReadInputDataBit(LED4_GPIOx, LED4_GPIO_PIN_X)) ledState |= 1 << 4;
+    if (GPIO_ReadInputDataBit(LED5_GPIOx, LED5_GPIO_PIN_X)) ledState |= 1 << 5;
+    if (GPIO_ReadInputDataBit(LED6_GPIOx, LED6_GPIO_PIN_X)) ledState |= 1 << 6;
+    if (GPIO_ReadInputDataBit(LED7_GPIOx, LED7_GPIO_PIN_X)) ledState |= 1 << 7;
+
+    return ledState;
+}

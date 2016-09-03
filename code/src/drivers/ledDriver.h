@@ -2,6 +2,8 @@
 #define __LEDDRIVER_H
 #include <stm32f4xx.h>
 
+#define NUM_LEDS        8
+
 // PC1
 #define LED0_AHB1Periph_GPIOx          RCC_AHB1Periph_GPIOC
 #define LED0_GPIOx                     GPIOC
@@ -43,6 +45,7 @@
 #define LED7_GPIO_PIN_X                GPIO_Pin_9
 
 void init_ledDriver(void);
-
+void SetLeds(uint8_t ledValues);
+uint8_t Get_LedStates(void);
 #endif // #ifndef __LEDDRIVER_H
 
