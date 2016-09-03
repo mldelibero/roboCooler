@@ -3,15 +3,13 @@
 #include "leds.h"
 #include "ledDriver.h"
 
-#include "timer.h"
+CLedComp leds;
 
+CLedComp::CLedComp()
+{}
 
-void init_leds(void)
+void CLedComp::Initialize(void)
 {
-    static int32_t led_timer = -1;
-
     init_ledDriver();
-    led_timer = AllocateTimer();
-    Set_TimerValue(led_timer, LED_TIMER_RESET);
 }
 
