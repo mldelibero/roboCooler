@@ -33,3 +33,21 @@ TEST(LedTests, TestInitCalls)
     leds.Initialize();
 }
 
+TEST(LedTests, CanSaveLedStates)
+{
+    CLedComp leds;
+    uint8_t ledStates = 0xAA;
+
+    leds.WriteAllLedStates(ledStates);
+    CHECK_EQUAL(ledStates, leds.Get_LedStates());
+}
+
+TEST(LedTests, RunUpdatesLedStates)
+{
+    CLedComp leds;
+    uint8_t ledStates = 0xAA;
+    leds.WriteAllLedStates(ledStates);
+    mock().expectOneCall("SetLeds").withParameter("ledValues", ledStates);
+    leds.Run();
+}
+
