@@ -69,61 +69,52 @@ TEST(ComponentTests, CanSetTimerResetValue)
     CHECK_EQUAL(10, comp.Get_TimerResetValue());
 }
 
-// Execute function will be overwritten by children
-TEST(ComponentTests, BaseExecuteFunRunInBaseClass)
-{
-    CComponent comp;
-
-    CHECK_EQUAL(false, comp.Has_BaseExFunRun());
-    comp.Run();
-    CHECK_EQUAL(true, comp.Has_BaseExFunRun());
-
-}
-
-TEST(ComponentTests, InheritedExecuteFunSameAsBaseIfNotUpdated)
-{
-    class CInheritedComp: public CComponent
-    {
-        public:
-            CInheritedComp() {}
-    };
-
-    CInheritedComp comp;
-
-    CHECK_EQUAL(false, comp.Has_BaseExFunRun());
-    comp.Run();
-    CHECK_EQUAL(true, comp.Has_BaseExFunRun());
-}
-
-class CInheritedComp2: public CComponent
+class CInheritedComp: public CComponent
 {
     public:
-        CInheritedComp2();
+        CInheritedComp();
+
+        bool m_ExecuteRun;
+        bool m_Initalized;
 
     private:
         virtual void Execute(void);
+        virtual void Initialize(void);
 };
 
-CInheritedComp2::CInheritedComp2()
+CInheritedComp::CInheritedComp()
 {
+    m_ExecuteRun = false;
 }
 
-void CInheritedComp2::Execute(void)
-{}
-
-TEST(ComponentTests, InheritedExecuteDiffThanAsBaseIfUpdated)
+void CInheritedComp::Execute(void)
 {
+    m_ExecuteRun = true;
+}
 
-    CInheritedComp2 comp;
-
-    CHECK_EQUAL(false, comp.Has_BaseExFunRun());
-    comp.Run();
-    CHECK_EQUAL(false, comp.Has_BaseExFunRun());
+void CInheritedComp::Initialize(void)
+{
+    m_Initalized = true;
 }
 
 TEST(ComponentTests, BaseConstructorRunsInInheritedClass)
 {
-    CInheritedComp2 comp;
+    CInheritedComp comp;
     CHECK_EQUAL(100, comp.Get_TimerResetValue());
+}
+
+TEST(ComponentTests, RunCallsExecuteFun)
+{
+    CInheritedComp comp;
+    comp.Run();
+    CHECK(comp.m_ExecuteRun);
+}
+
+TEST(ComponentTests, InializeFunCalledByConstructor)
+{
+    CInheritedComp comp;
+    comp.m_Initalized = false;
+    comp.ResetComponent();
+    CHECK(comp.m_Initalized);
 }
 

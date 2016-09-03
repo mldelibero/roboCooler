@@ -18,18 +18,16 @@ void CComponent::ResetComponent(void)
 {
     m_TimerIndex      = AllocateTimer();
     m_TimerResetValue = 100;
-    m_BaseExFunRan    = false;
+
+    Initialize();
 }
 
-
-bool CComponent::Has_BaseExFunRun(void)
+void CComponent::Initialize(void)
 {
-    return m_BaseExFunRan;
 }
 
 void CComponent::Execute(void)
 {
-    m_BaseExFunRan = true;
 }
 
 int32_t CComponent::Get_TimerIndex(void)

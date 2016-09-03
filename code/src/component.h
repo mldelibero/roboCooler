@@ -9,17 +9,15 @@ class CComponent
 
         int32_t Get_TimerIndex(void);
         int32_t Get_TimerResetValue(void);
-        bool    Has_BaseExFunRun(void);
+        void    ResetComponent(void);
         bool    Run(void);
 
         virtual void Execute(void);
+        virtual void Initialize(void);
 
     private:
-        int32_t m_BaseExFunRan; // Use to determine if a child has overwritten Execute funtion
         int32_t m_TimerIndex;
         int32_t m_TimerResetValue;
-
-        void ResetComponent(void);
 };
 #endif //#ifndef __COMPONENT_H
 
