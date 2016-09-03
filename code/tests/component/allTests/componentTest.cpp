@@ -85,6 +85,7 @@ class CInheritedComp: public CComponent
 CInheritedComp::CInheritedComp()
 {
     m_ExecuteRun = false;
+    Initialize();
 }
 
 void CInheritedComp::Execute(void)
@@ -108,13 +109,5 @@ TEST(ComponentTests, RunCallsExecuteFun)
     CInheritedComp comp;
     comp.Run();
     CHECK(comp.m_ExecuteRun);
-}
-
-TEST(ComponentTests, InializeFunCalledByConstructor)
-{
-    CInheritedComp comp;
-    comp.m_Initalized = false;
-    comp.ResetComponent();
-    CHECK(comp.m_Initalized);
 }
 
