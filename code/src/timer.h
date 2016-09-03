@@ -1,5 +1,5 @@
-#ifndef _TIMER__H
-#define _TIMER__H
+#ifndef __TIMER_H
+#define __TIMER_H
 
 #include <stm32f4xx.h>
 
@@ -12,4 +12,4 @@ bool     IsTimerExpired(int32_t timer);
 void     Set_TimerValue(int32_t timer, int32_t timerValue);
 int32_t  Get_TimerValue(int32_t timer);
 
-#endif //#define _TIMER__H
+#endif //#define __TIMER_H
