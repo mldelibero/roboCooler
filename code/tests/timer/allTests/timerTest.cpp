@@ -22,31 +22,31 @@ TEST_GROUP(TimerTests)
 
 TEST(TimerTests, NumTimersGreaterThanZero)
 {
-	CHECK(NUM_TIMERS > 0);
+    CHECK(NUM_TIMERS > 0);
 }
 
 TEST(TimerTests, NoTimersAllocatedAfterInit)
 {
-	CHECK(Get_NumTimersAllocated() == 0);	
+    CHECK(Get_NumTimersAllocated() == 0);
 }
 
 TEST(TimerTests, CanAllocateTimerIfAvailable)
 {
-	CHECK(AllocateTimer() == 0);
+    CHECK(AllocateTimer() == 0);
 }
 
 TEST(TimerTests, CannotAllocateTimerIfNotAvailable)
 {
-	for (int t = 0; t < NUM_TIMERS; t++)
-	{
-		timer = AllocateTimer();
-	}
-	CHECK(timer != -1);
+    for (int t = 0; t < NUM_TIMERS; t++)
+    {
+        timer = AllocateTimer();
+    }
+    CHECK(timer != -1);
 
-	// No more timers
-	timer = AllocateTimer();
-	CHECK(timer == -1);
-	CHECK(timer != NUM_TIMERS);
+    // No more timers
+    timer = AllocateTimer();
+    CHECK(timer == -1);
+    CHECK(timer != NUM_TIMERS);
 }
 
 TEST(TimerTests, AllocatedTimerInitializedtoZero)
@@ -92,7 +92,6 @@ TEST(TimerTests, OutOfBoundsTimerIsExpired)
 {
     CHECK(IsTimerExpired(timer) == false);
 }
-
 
 TEST(TimerTests, InterruptDecrementsTimer)
 {
@@ -157,14 +156,14 @@ TEST(TimerDriverTests, TestInitCalls)
 }
 
 /*
-This is a list of the time functionality that has yet to be tested here.
+   This is a list of the time functionality that has yet to be tested here.
 
--Driver Functions
-* Timer is enabled
-* ARR is non-zero
-* Interrput is enabled
+   -Driver Functions
+ * Timer is enabled
+ * ARR is non-zero
+ * Interrput is enabled
 
--Use
-* Can reset a timer
-*/
+ -Use
+ * Can reset a timer
+ */
 
