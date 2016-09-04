@@ -11,13 +11,13 @@
  *  *LEDs off on startup
  */
 
-static int callOrder = -1;
-
 TEST_GROUP(LedTests)
 {
     void setup()
     {
-        callOrder = 1;
+        mock().disable();
+        Init_Timers();
+        mock().enable();
     }
     void teardown()
     {
@@ -49,5 +49,41 @@ TEST(LedTests, RunUpdatesLedStates)
     leds.WriteAllLedStates(ledStates);
     mock().expectOneCall("SetLeds").withParameter("ledValues", ledStates);
     leds.Run();
+}
+
+TEST(LedTests, ResetFreqGreater10Hz)
+{
+    CLedComp leds;
+    CHECK(leds.Get_TimerResetValue() < 100); // < 100ms
+}
+
+TEST_GROUP(LedBootTests)
+{
+    void setup()
+    {
+        mock().disable();
+        Init_Timers();
+        mock().enable();
+    }
+    void teardown()
+    {
+        mock().checkExpectations();
+        mock().clear();
+    }
+}; // end - TEST_GROUP(LedBootTests)
+
+TEST(LedBootTests, BootModeEnabledAfterInit)
+{
+    CLedComp leds;
+    CHECK(leds.Is_InBootMode());
+}
+TEST(LedBootTests, BootTimeGreaterThanZero)
+{
+    CLedComp leds;
+}
+
+TEST(LedBootTests, BootModeDisabledAfterElapsedRuns)
+{
+    CLedComp leds;
 }
 

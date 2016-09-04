@@ -6,7 +6,9 @@
 CLedComp leds;
 
 CLedComp::CLedComp()
-{}
+{
+    Set_TimerResetValue(25); // 40Hz
+}
 
 void CLedComp::Execute(void)
 {
@@ -16,6 +18,11 @@ void CLedComp::Execute(void)
 void CLedComp::Initialize(void)
 {
     init_ledDriver();
+}
+
+bool CLedComp::Is_InBootMode(void)
+{
+    return true;
 }
 
 uint8_t CLedComp::Get_LedStates(void)

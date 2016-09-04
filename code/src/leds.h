@@ -11,6 +11,7 @@ class CLedComp: public CComponent
         CLedComp();
 
         uint8_t Get_LedStates    (void);
+        bool    Is_InBootMode    (void);
         void    SetAllStates     (uint8_t ledStates);
         void    WriteAllLedStates(uint8_t ledStates);
 
