@@ -52,3 +52,8 @@ bool CComponent::Run(void)
     return false;
 }
 
+void CComponent::Set_TimerResetValue(int32_t val)
+{
+    m_TimerResetValue = val;
+}
+

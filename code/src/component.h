@@ -18,6 +18,9 @@ class CComponent
     private:
         int32_t m_TimerIndex;
         int32_t m_TimerResetValue;
+
+    protected:
+        void Set_TimerResetValue(int32_t val);
 };
 #endif //#ifndef __COMPONENT_H
 
