@@ -2,8 +2,6 @@
 #define __LEDDRIVER_H
 #include <stm32f4xx.h>
 
-#define NUM_LEDS        8
-
 // PC1
 #define LED0_AHB1Periph_GPIOx          RCC_AHB1Periph_GPIOC
 #define LED0_GPIOx                     GPIOC
