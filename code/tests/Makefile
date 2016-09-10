@@ -12,6 +12,7 @@ endif
 #--- Inputs ----#
 COMPONENT_NAME = roboCooler
 #CPPUTEST_HOME = /usr/local/lib/cpputest/
+CPPUTEST_CXXFLAGS = -g
 
 CPPUTEST_USE_EXTENSIONS = Y
 CPP_PLATFORM = Gcc
