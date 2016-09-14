@@ -378,6 +378,16 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
+              <FileName>component.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\component.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>component.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\component.h</FilePath>
+            </File>
+            <File>
               <FileName>init.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\init.cpp</FilePath>
@@ -398,6 +408,16 @@
               <FilePath>..\src\leds.h</FilePath>
             </File>
             <File>
+              <FileName>lidMotor.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\lidMotor.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lidMotor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\lidMotor.h</FilePath>
+            </File>
+            <File>
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\main.cpp</FilePath>
@@ -411,16 +431,6 @@
               <FileName>timer.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\src\timer.h</FilePath>
-            </File>
-            <File>
-              <FileName>component.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\component.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>component.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\component.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -637,6 +647,16 @@
               <FileName>ledDriver.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\src\drivers\ledDriver.h</FilePath>
+            </File>
+            <File>
+              <FileName>lidMotorDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\lidMotorDriver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lidMotorDriver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\drivers\lidMotorDriver.h</FilePath>
             </File>
             <File>
               <FileName>timerDriver.cpp</FileName>
