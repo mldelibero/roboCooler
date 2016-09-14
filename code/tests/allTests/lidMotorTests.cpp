@@ -1,6 +1,7 @@
 #include <CppUTest/TestHarness.h>
-//#include <CppUTestExt/MockSupport.h>
-//#include "CppUTestExt/MockSupport_c.h"
+#include <CppUTestExt/MockSupport.h>
+#include "CppUTestExt/MockSupport_c.h"
+#include "lidMotor.h"
 
 /* List of driver features needed:
  *  *timer off at startup
@@ -23,16 +24,19 @@ TEST_GROUP(LidMotorTests)
     {
 //        mock().disable();
 //        Init_Timers();
-//        mock().enable();
+        mock().enable();
     }
     void teardown()
     {
-//        mock().checkExpectations();
-//        mock().clear();
+        mock().checkExpectations();
+        mock().clear();
     }
 }; // end - TEST_GROUP(LidMotorTests)
 
 TEST(LidMotorTests, TestInitCalls)
 {
+    CLidMotorComp lidMotor;
+    mock().expectOneCall("init_lidMotorDriver");
+    lidMotor.Initialize();
 }
 
