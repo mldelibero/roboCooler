@@ -412,6 +412,16 @@
               <FileType>5</FileType>
               <FilePath>..\src\timer.h</FilePath>
             </File>
+            <File>
+              <FileName>component.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\component.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>component.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\component.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
