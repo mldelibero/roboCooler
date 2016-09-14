@@ -1,14 +1,17 @@
 all:
 	make
 	make -C ./init/
+	make -C ./drivers/
 	make -C ./timer/
 
 clean:
 	make clean
 	make -C ./init/ clean
+	make -C ./drivers/ clean
 	make -C ./timer/ clean
 
 ac:
 	make clean all
 	make -C ./init/ clean all
+	make -C ./drivers/ clean all
 	make -C ./timer/ clean all
