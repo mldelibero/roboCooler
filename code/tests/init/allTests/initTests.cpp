@@ -20,6 +20,7 @@ TEST_GROUP(InitTests)
 TEST(InitTests, ModulesInitialized)
 {
     mock().expectOneCall("CLedComp::Initialize");
+    mock().expectOneCall("CLidMotorComp::Initialize");
     mock().expectOneCall("Init_Timers");
     init();
 }
