@@ -8,6 +8,10 @@ CComponent::CComponent()
     ResetComponent();
 }
 
+CComponent::~CComponent()
+{
+}
+
 CComponent::CComponent(int32_t resetValue)
 {
     ResetComponent();

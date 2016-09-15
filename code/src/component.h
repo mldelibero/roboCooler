@@ -8,6 +8,8 @@ class CComponent
         CComponent();
         CComponent(int32_t resetValue);
 
+        virtual ~CComponent();
+
         int32_t Get_TimerIndex(void);
         int32_t Get_TimerResetValue(void);
         void    ResetComponent(void);
