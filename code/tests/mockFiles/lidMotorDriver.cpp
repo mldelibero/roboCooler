@@ -11,3 +11,12 @@ void motorStop(void)
     mock().actualCall("motorStop");
 }
 
+void lidMotor_Open(void)
+{
+    mock().actualCall("lidMotor_Open");
+}
+
+void lidMotor_Close(void)
+{
+    mock().actualCall("lidMotor_Close");
+}
