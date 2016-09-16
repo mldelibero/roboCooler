@@ -13,8 +13,8 @@
 
  * List of features needed:
  *  *Initialize module
- *  *Motor stops if either limit switch is tripped
  *  *Motor opens lid if down LS is active and cap sense is tripped
+ *  *Motor responds to push buttons
  *  *Motor opens and then closes the whole way at initialization
  *  *Error if both limit switches are set at the same time
  *  *Add test for mock limit switch input value is initialized in that test group
@@ -59,11 +59,11 @@ TEST(LidMotorTests, TestInitCalls)
 
 TEST(LidMotorTests, InitializesModule) {}
 
-
 TEST(LidMotorTests, RunPollsLimitSwitches)
 {
     mock().expectOneCall("CLimSwComp::At_Limit");
     mock().expectOneCall("CLimSwComp::At_Limit");
+    mock().expectOneCall("motorStop");
 
     Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
     lidMotorPtr->Run();
@@ -90,3 +90,43 @@ TEST(LidMotorTests, LimitSwitchesControlLidState)
     CHECK_EQUAL(LID_ATFULLCLOSE, lidMotorPtr->Get_State());
 }
 
+/**
+ * @bug mock().ignoreOtherCalls() does not work how I expect.
+ * It should allow me to not call the At_Limit check.
+ */
+TEST(LidMotorTests, MotorStopIssuedWhenAtLimitSwitch)
+{
+    Opened_Limit.ForceAtLimit();
+    Closed_Limit.ForceNotAtLimit();
+
+    mock().expectOneCall("CLimSwComp::At_Limit");
+    mock().expectOneCall("CLimSwComp::At_Limit");
+    mock().expectOneCall("motorStop");
+
+    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
+    lidMotorPtr->Run();
+
+    Opened_Limit.ForceNotAtLimit();
+    Closed_Limit.ForceAtLimit();
+
+    mock().expectOneCall("CLimSwComp::At_Limit");
+    mock().expectOneCall("CLimSwComp::At_Limit");
+    mock().expectOneCall("motorStop");
+
+    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
+    lidMotorPtr->Run();
+}
+
+TEST(LidMotorTests, MotorStopNotIssuedWhenNotAtLimitSwitch)
+{
+    Opened_Limit.ForceNotAtLimit();
+    Closed_Limit.ForceNotAtLimit();
+
+    mock().expectNCalls(4, "CLimSwComp::At_Limit");
+
+    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
+    lidMotorPtr->Run();
+
+    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
+    lidMotorPtr->Run();
+}

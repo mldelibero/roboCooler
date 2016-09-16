@@ -7,7 +7,8 @@
 typedef enum
 {
     LID_ATFULLOPEN,
-    LID_ATFULLCLOSE
+    LID_ATFULLCLOSE,
+    LID_MOVING
 } lidMotorState_t;
 
 class CLidMotorComp: public CComponent

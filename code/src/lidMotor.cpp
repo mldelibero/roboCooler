@@ -10,8 +10,12 @@ CLidMotorComp::CLidMotorComp(CLimSwComp* OpenedLimSw_p, CLimSwComp* ClosedLimSw_
 
 void CLidMotorComp::Execute(void)
 {
+    m_LidState = LID_MOVING;
+
     if (m_OpenedLimSw_p->At_Limit() == true) m_LidState = LID_ATFULLOPEN;
     if (m_ClosedLimSw_p->At_Limit() == true) m_LidState = LID_ATFULLCLOSE;
+
+    if (m_LidState != LID_MOVING) motorStop();
 }
 
 void CLidMotorComp::Initialize(void)
