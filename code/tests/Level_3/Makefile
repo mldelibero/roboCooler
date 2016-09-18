@@ -10,8 +10,7 @@ ifndef SILENCE
 endif
 
 #--- Inputs ----#
-COMPONENT_NAME = roboCooler_Timer
-#CPPUTEST_HOME = /usr/local/lib/cpputest/
+COMPONENT_NAME = roboCooler_Level_3
 
 CPPUTEST_USE_EXTENSIONS = Y
 CPP_PLATFORM = Gcc
@@ -20,23 +19,20 @@ CPP_PLATFORM = Gcc
 # when using std library includes like <list> and other containers
 # so that memory leak detection does not conflict with stl.
 #CPPUTEST_MEMLEAK_DETECTOR_NEW_MACRO_FILE = -include ExamplesNewOverrides.h
-SRC_DIRS = \
-	../../src\
-	../../src/drivers\
-	../../integration\
+SRC_FILES = \
+	../../src/init.cpp\
 
 TEST_SRC_DIRS = \
 	./allTests\
-	../integration\
-	../mockFiles/stdlib\
+	./mockFiles\
+	../Level_2/mockFiles\
 
 INCLUDE_DIRS =\
   .\
-  ../mockFiles/stdlib\
-  ../integration\
   ../../src\
   ../../src/drivers\
-  ../../integration\
+  ../Level_2/mockFiles\
+  ../mockFiles/stdLib\
   $(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk

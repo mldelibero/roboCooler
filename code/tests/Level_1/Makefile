@@ -10,7 +10,7 @@ ifndef SILENCE
 endif
 
 #--- Inputs ----#
-COMPONENT_NAME = roboCooler_Drivers
+COMPONENT_NAME = roboCooler_Level_1
 
 CPPUTEST_USE_EXTENSIONS = Y
 CPP_PLATFORM = Gcc

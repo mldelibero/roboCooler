@@ -10,7 +10,8 @@ ifndef SILENCE
 endif
 
 #--- Inputs ----#
-COMPONENT_NAME = roboCooler_Component
+COMPONENT_NAME = roboCooler_Level_2
+CPPUTEST_CXXFLAGS = -g
 
 CPPUTEST_USE_EXTENSIONS = Y
 CPP_PLATFORM = Gcc
@@ -22,18 +23,20 @@ CPP_PLATFORM = Gcc
 SRC_DIRS = \
 	../../src\
 	../../src/drivers\
-	../mockFiles/stdlib\
 
 TEST_SRC_DIRS = \
 	./allTests\
+	./mockFiles\
+	../mockFiles/stdlib\
 
 INCLUDE_DIRS =\
   .\
-  ./allTests\
+  ./mockFiles\
   ../mockFiles/stdlib\
   ../../src\
   ../../src/drivers\
   $(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
+
 

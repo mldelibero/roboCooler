@@ -5,6 +5,8 @@ CComponent::CComponent()
 {
 }
 
+CComponent::~CComponent()
+{}
 
 void CComponent::Execute(void)
 {
