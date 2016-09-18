@@ -3,16 +3,6 @@
 #include <stm32f4xx_gpio.h>
 #include "limitSwitchDriver.h"
 
-/**
- * * List of tests needed:
- * *
- * * Integration test makes sure that correct input has been sampled.
- *  * Obj samples input on run
- *  * Obj filters input on run
- *  * obj returns filtered output when querried
- *  * init resets filter
- */
-
 TEST_GROUP(LimSwDriverTests)
 {
     void setup()
