@@ -4,7 +4,7 @@
 #include "limitSwitchMock.h"
 
 
-CLimSwComp::CLimSwComp()
+CLimSwComp::CLimSwComp(uint8_t *(sampleIn_fpt)(void))
 {
 }
 
