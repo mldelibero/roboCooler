@@ -7,9 +7,6 @@
  * * List of tests needed:
  * *
  * * Init sets up peripheral
- * * Can mock set/clear the switch input
- * * Returns mocked setting
- * * return 0 by default (before run)
  * * Integration test makes sure that correct input has been sampled.
  *  * Obj samples input on run
  *  * Obj filters input on run
@@ -41,5 +38,20 @@ TEST(LimSwDriverTests, SampleCallsGpioReadFunction)
     mock().expectNCalls(2, "GPIO_ReadInputDataBit").ignoreOtherParameters();
     OpenedLimSwitch_SampleInput();
     ClosedLimSwitch_SampleInput();
+}
+
+TEST(LimSwDriverTests, CanWriteMockInput)
+{
+    mock().disable();
+
+    GPIO_WriteBit(OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X, Bit_RESET);
+    GPIO_WriteBit(CLOSE_LIMSW_GPIOx, CLOSE_LIMSW_GPIO_PIN_X, Bit_RESET);
+    CHECK_EQUAL(0, OpenedLimSwitch_SampleInput());
+    CHECK_EQUAL(0, ClosedLimSwitch_SampleInput());
+
+    GPIO_WriteBit(OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X, Bit_SET);
+    GPIO_WriteBit(CLOSE_LIMSW_GPIOx, CLOSE_LIMSW_GPIO_PIN_X, Bit_SET);
+    CHECK_EQUAL(1, OpenedLimSwitch_SampleInput());
+    CHECK_EQUAL(1, ClosedLimSwitch_SampleInput());
 }
 
