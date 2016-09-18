@@ -25,10 +25,12 @@ SRC_DIRS = \
 
 TEST_SRC_DIRS = \
 	./allTests\
+	./mockFiles\
 	../mockFiles/stdlib\
 
 INCLUDE_DIRS =\
   .\
+  ./mockFiles\
   ../mockFiles/stdlib\
   ../integration\
   ../../src\
