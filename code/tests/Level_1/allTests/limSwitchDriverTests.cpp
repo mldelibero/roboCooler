@@ -6,7 +6,6 @@
 /**
  * * List of tests needed:
  * *
- * * Init sets up peripheral
  * * Integration test makes sure that correct input has been sampled.
  *  * Obj samples input on run
  *  * Obj filters input on run

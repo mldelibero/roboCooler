@@ -3,6 +3,7 @@
 #include "timer.h"
 #include "lidMotor.h"
 #include "limitSwitch.h"
+#include "limitSwitchDriver.h"
 
 extern CLedComp leds;
 extern CLidMotorComp lidMotor;
@@ -17,5 +18,6 @@ void init(void)
     lidMotor.Initialize();
     Opened_Limit.Initialize();
     Closed_Limit.Initialize();
+    init_LimSwDriver();
 }
 

@@ -23,6 +23,7 @@ TEST(InitTests, ModulesInitialized)
     mock().expectOneCall("CLidMotorComp::Initialize");
     mock().expectOneCall("Init_Timers");
     mock().expectNCalls(2, "CLimSwComp::Initialize");
+    mock().expectOneCall("init_LimSwDriver");
 
     init();
 }
