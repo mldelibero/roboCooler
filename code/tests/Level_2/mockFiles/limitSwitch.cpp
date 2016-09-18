@@ -14,6 +14,7 @@ void CLimSwComp::Execute(void)
 
 void CLimSwComp::Initialize(void)
 {
+    mock().actualCall("CLimSwComp::Initialize");
 }
 
 bool CLimSwComp::At_Limit(void)
