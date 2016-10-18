@@ -3,7 +3,6 @@
 #include "CppUTestExt/MockSupport_c.h"
 
 #include "leds.h"
-#include "timer.h"
 
 /*  * List of features needed:
  *  *init calls init_leds
@@ -16,7 +15,6 @@ TEST_GROUP(LedTests)
     void setup()
     {
         mock().disable();
-        Init_Timers();
         mock().enable();
     }
     void teardown()
@@ -63,7 +61,6 @@ TEST_GROUP(LedBootTests)
     void setup()
     {
         mock().disable();
-        Init_Timers();
     }
     void teardown()
     {
@@ -89,14 +86,12 @@ TEST(LedBootTests, BootModeDisabledOnlyAfterElapsedRuns)
     CLedComp leds;
     for (int32_t run = 0; run < leds.Get_TotalRunsInBoot()-1; run++)
     {
-        Set_TimerValue(leds.Get_TimerIndex(), 0);
         leds.Run();
     }
     // Should be true right before the last run
     CHECK_EQUAL(true, leds.Is_InBootMode());
 
     // Will be false after last run
-    Set_TimerValue(leds.Get_TimerIndex(), 0);
     leds.Run();
     CHECK_EQUAL(false, leds.Is_InBootMode());
 }
@@ -120,19 +115,16 @@ TEST(LedBootTests, SetsLedBootStates)
 
     // Check first call is to boot sequence
     mock().expectOneCall("SetLeds").withParameter("ledValues", 0x1);
-    Set_TimerValue(leds.Get_TimerIndex(), 0);
     leds.Run();
 
     // Ignore for rest of boot sequence calls
     mock().expectNCalls(leds.Get_TotalRunsInBoot(), "SetLeds").ignoreOtherParameters();
     for(int32_t run = 0; run < leds.Get_TotalRunsInBoot(); run++)
     {
-        Set_TimerValue(leds.Get_TimerIndex(), 0);
         leds.Run();
     }
 
     // Check that the next call is the normal sequence call value
-    Set_TimerValue(leds.Get_TimerIndex(), 0);
     mock().expectOneCall("SetLeds").withParameter("ledValues", normalLedsState);
     leds.Run();
 }
@@ -150,7 +142,6 @@ TEST(LedBootTests, UpdatesLedsCorrectlyInBootMode)
 
     for(int32_t run = 1; run < leds.Get_TotalRunsInBoot(); run++)
     {
-        Set_TimerValue(leds.Get_TimerIndex(), 0);
         leds.Run();
         actual_bootLeds = leds.Get_BootLedStates();
         if (actual_bootLeds != expected_bootLeds)
