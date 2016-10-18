@@ -4,10 +4,7 @@
 #include "lidMotor.h"
 #include "capTouch.h"
 #include "capTouchMock.h"
-#include "limitSwitch.h"
-#include "limitSwitchDriver.h"
 #include "limitSwitchMock.h"
-#include "timer.h"
 
 /* List of driver features needed:
  *  *timer off at startup
@@ -29,14 +26,14 @@ CLimSwMock Opened_Limit, Closed_Limit;
 CCapTouchMock capTouch;
 CLidMotorComp* lidMotorPtr;
 
+/**
+ * @note We are assuming that the timer has expired for all tests
+ */
 TEST_GROUP(LidMotorTests)
 {
     void setup()
     {
         lidMotorPtr = new CLidMotorComp(&Opened_Limit, &Closed_Limit, &capTouch);
-
-        mock().disable();
-        Init_Timers();
         mock().enable();
     }
     void teardown()
@@ -59,7 +56,6 @@ TEST(LidMotorTests, TestInitCalls)
     mock().expectOneCall("init_lidMotorDriver");
     lidMotorPtr->Initialize();
 }
-
 TEST(LidMotorTests, InitializesModule) {}
 
 TEST(LidMotorTests, RunPollsLimitSwitches)
@@ -69,7 +65,6 @@ TEST(LidMotorTests, RunPollsLimitSwitches)
     mock().expectOneCall("motorStop");
     mock().ignoreOtherCalls();
 
-    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
     lidMotorPtr->Run();
 }
 
@@ -80,7 +75,6 @@ TEST(LidMotorTests, LimitSwitchesControlLidState)
     Opened_Limit.ForceAtLimit();
     Closed_Limit.ForceNotAtLimit();
 
-    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
     lidMotorPtr->Run();
 
     CHECK_EQUAL(LID_ATFULLOPEN, lidMotorPtr->Get_State());
@@ -88,7 +82,6 @@ TEST(LidMotorTests, LimitSwitchesControlLidState)
     Opened_Limit.ForceNotAtLimit();
     Closed_Limit.ForceAtLimit();
 
-    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
     lidMotorPtr->Run();
 
     CHECK_EQUAL(LID_ATFULLCLOSE, lidMotorPtr->Get_State());
@@ -102,7 +95,6 @@ TEST(LidMotorTests, MotorStopIssuedWhenAtLimitSwitch)
     mock().expectOneCall("motorStop");
     mock().ignoreOtherCalls();
 
-    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
     lidMotorPtr->Run();
 
     Opened_Limit.ForceNotAtLimit();
@@ -110,7 +102,6 @@ TEST(LidMotorTests, MotorStopIssuedWhenAtLimitSwitch)
 
     mock().expectOneCall("motorStop");
 
-    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
     lidMotorPtr->Run();
 }
 
@@ -122,10 +113,8 @@ TEST(LidMotorTests, MotorStopNotIssuedWhenNotAtLimitSwitch)
     mock().expectNCalls(4, "CLimSwComp::At_Limit");
     mock().ignoreOtherCalls();
 
-    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
     lidMotorPtr->Run();
 
-    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
     lidMotorPtr->Run();
 }
 
@@ -134,7 +123,6 @@ TEST(LidMotorTests, RunPollsCapSense)
     mock().expectOneCall("CCapSenseComp::Get_TouchDetected");
     mock().ignoreOtherCalls();
 
-    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
     lidMotorPtr->Run();
 }
 
@@ -145,7 +133,6 @@ TEST(LidMotorTests, LidOpenIssuedOnCapTouchAndLidClosed)
     mock().expectOneCall("lidMotor_Open");
     mock().ignoreOtherCalls();
 
-    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
     lidMotorPtr->Run();
 }
 
@@ -157,7 +144,6 @@ TEST(LidMotorTests, LidCloseIssuedOnCapTouchAndLidOpened)
     mock().expectOneCall("lidMotor_Close");
     mock().ignoreOtherCalls();
 
-    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
     lidMotorPtr->Run();
 }
 
@@ -172,13 +158,11 @@ TEST(LidMotorTests, NoMotorCommandsIssuedWhenNoTouchDetected)
     Opened_Limit.ForceAtLimit();
     Closed_Limit.ForceNotAtLimit();
 
-    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
     lidMotorPtr->Run();
 
     Opened_Limit.ForceNotAtLimit();
     Closed_Limit.ForceAtLimit();
 
-    Set_TimerValue(lidMotorPtr->Get_TimerIndex(), 0);
     lidMotorPtr->Run();
 }
 
