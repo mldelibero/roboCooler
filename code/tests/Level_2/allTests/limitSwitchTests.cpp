@@ -3,7 +3,6 @@
 #include "CppUTestExt/MockSupport_c.h"
 
 #include "limitSwitch.h"
-#include "timer.h"
 
 
 /**
@@ -16,21 +15,13 @@
 
 CLimSwComp* limitSwitch;
 
-uint8_t SampleLimitSwitchInput(void);
-uint8_t SampleLimitSwitchInput(void)
-{
-    mock().actualCall("SampleLimitSwitchInput");
-    return 0;
-}
-
 TEST_GROUP(LimitSwitchTests)
 {
     void setup()
     {
         mock().disable();
-        Init_Timers();
         mock().enable();
-        limitSwitch = new CLimSwComp(&SampleLimitSwitchInput);
+        limitSwitch = new CLimSwComp();
     }
     void teardown()
     {
@@ -42,17 +33,11 @@ TEST_GROUP(LimitSwitchTests)
 
 TEST(LimitSwitchTests, SamplesInputOnRun)
 {
-    mock().expectOneCall("SampleLimitSwitchInput");
-
-    Set_TimerValue(limitSwitch->Get_TimerIndex(), 0);
-    limitSwitch->Run();
+//    mock().expectOneCall("GPIO_ReadInputDataBit");
+//    limitSwitch->Run();
 }
 
 TEST(LimitSwitchTests, FiltersInputOnRun)
 {
-    mock().expectOneCall("SampleLimitSwitchInput");
-
-    Set_TimerValue(limitSwitch->Get_TimerIndex(), 0);
-    limitSwitch->Run();
 }
 

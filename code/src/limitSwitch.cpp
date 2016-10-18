@@ -1,13 +1,11 @@
 #include "limitSwitch.h"
 
-CLimSwComp::CLimSwComp(sampInFun_t sampleIn_fpt)
+CLimSwComp::CLimSwComp(void)
 {
-    SampleInput_fpt = sampleIn_fpt;
 }
 
 void CLimSwComp::Execute(void)
 {
-    SampleInput_fpt();
 }
 
 void CLimSwComp::Initialize(void)
