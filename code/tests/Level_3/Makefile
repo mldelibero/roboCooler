@@ -19,19 +19,28 @@ CPP_PLATFORM = Gcc
 # when using std library includes like <list> and other containers
 # so that memory leak detection does not conflict with stl.
 #CPPUTEST_MEMLEAK_DETECTOR_NEW_MACRO_FILE = -include ExamplesNewOverrides.h
+SRC_DIRS = \
+	./mockFiles\
+	../Level_2/mockFiles\
+	../Level_1/mockFiles\
+
 SRC_FILES = \
 	../../src/init.cpp\
+	../../src/lidMotor.cpp\
 
 TEST_SRC_DIRS = \
 	./allTests\
 	./mockFiles\
 	../Level_2/mockFiles\
+	../Level_1/mockFiles\
 
 INCLUDE_DIRS =\
   .\
+  ./mockFiles\
   ../../src\
   ../../src/drivers\
   ../Level_2/mockFiles\
+  ../Level_1/mockFiles\
   ../mockFiles/stdLib\
   $(CPPUTEST_HOME)/include\
 
