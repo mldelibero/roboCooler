@@ -11,6 +11,7 @@ endif
 
 #--- Inputs ----#
 COMPONENT_NAME = roboCooler_Level_1
+CPPUTEST_CXXFLAGS = -Wno-c++14-compat
 
 CPPUTEST_USE_EXTENSIONS = Y
 CPP_PLATFORM = Gcc
