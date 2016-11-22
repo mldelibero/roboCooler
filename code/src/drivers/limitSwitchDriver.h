@@ -1,6 +1,7 @@
 #ifndef __LIMIT_SWITCH_DRIVER_H
 #define __LIMIT_SWITCH_DRIVER_H
 #include <stm32f4xx_gpio.h>
+#include <stm32f4xx_rcc.h>
 #include "CDriver.h"
 
 // PE6
@@ -21,17 +22,15 @@ class CLimSwDriver : CDriver
                 GPIO_TypeDef* GPIOx,
                 uint16_t      GPIO_Pin_x);
         ~CLimSwDriver(void);
+
         void Initialize_Hardware(void);
+        BitAction SampleInput(void);
 
     protected:
         uint32_t      m_RCC_AHB1Periph_GPIOx;
         uint16_t      m_GPIO_Pin_x;
         GPIO_TypeDef* m_GPIOx;
 }; // end -- class CLimSwDriver
-
-void init_LimSwDriver(void);
-uint8_t OpenedLimSwitch_SampleInput(void);
-uint8_t ClosedLimSwitch_SampleInput(void);
 
 #endif //#ifndef __LIMIT_SWITCH_DRIVER_H
 

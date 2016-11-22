@@ -27,6 +27,8 @@ SRC_DIRS = \
 
 SRC_FILES = \
 	../../src/init.cpp\
+	../../src/drivers/CDriver.cpp\
+	../../tests/mockFiles/stdlib/stm32f4xx.cpp\
 
 TEST_SRC_DIRS = \
 	./allTests\

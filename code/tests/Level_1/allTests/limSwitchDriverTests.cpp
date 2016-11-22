@@ -36,23 +36,18 @@ TEST(LimSwDriverTests, InitResetsPeripheral)
 
 TEST(LimSwDriverTests, SampleCallsGpioReadFunction)
 {
-    mock().expectNCalls(2, "GPIO_ReadInputDataBit").ignoreOtherParameters();
-    OpenedLimSwitch_SampleInput();
-    ClosedLimSwitch_SampleInput();
+    mock().expectOneCall("GPIO_ReadInputDataBit").ignoreOtherParameters();
+    limSwitch->SampleInput();
 }
 
-TEST(LimSwDriverTests, CanWriteMockInput)
+TEST(LimSwDriverTests, SampleCallsReturnsCorrectValue)
 {
     mock().disable();
 
-    GPIO_WriteBit(OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X, Bit_RESET);
-    GPIO_WriteBit(CLOSE_LIMSW_GPIOx, CLOSE_LIMSW_GPIO_PIN_X, Bit_RESET);
-    CHECK_EQUAL(0, OpenedLimSwitch_SampleInput());
-    CHECK_EQUAL(0, ClosedLimSwitch_SampleInput());
+    GPIO_SetPinInputValue(TEST_LIMSW_GPIOx, TEST_LIMSW_GPIO_PIN_X, uint8_t(Bit_SET));
+    CHECK_EQUAL(Bit_SET, limSwitch->SampleInput());
 
-    GPIO_WriteBit(OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X, Bit_SET);
-    GPIO_WriteBit(CLOSE_LIMSW_GPIOx, CLOSE_LIMSW_GPIO_PIN_X, Bit_SET);
-    CHECK_EQUAL(1, OpenedLimSwitch_SampleInput());
-    CHECK_EQUAL(1, ClosedLimSwitch_SampleInput());
+    GPIO_SetPinInputValue(TEST_LIMSW_GPIOx, TEST_LIMSW_GPIO_PIN_X, uint8_t(Bit_RESET));
+    CHECK_EQUAL(Bit_RESET, limSwitch->SampleInput());
 }
 

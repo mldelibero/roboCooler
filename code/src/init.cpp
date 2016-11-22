@@ -7,8 +7,10 @@
 
 extern CLedComp leds;
 extern CLidMotorComp lidMotor;
-extern CLimSwComp Opened_Limit;
-extern CLimSwComp Closed_Limit;
+CLimSwDriver* Opened_LimSwDriver = NULL;
+CLimSwDriver* Closed_LimSwDriver = NULL;
+CLimSwComp Opened_Limit;
+CLimSwComp Closed_Limit;
 
 void init(void)
 {
@@ -16,8 +18,17 @@ void init(void)
 
     leds.Initialize();
     lidMotor.Initialize();
+
+    if (Opened_LimSwDriver != NULL) delete Opened_LimSwDriver;
+    Opened_LimSwDriver = new CLimSwDriver(OPEN_LIMSW_AHB1Periph_GPIOx, OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
+
+    if (Closed_LimSwDriver != NULL) delete Closed_LimSwDriver;
+    Closed_LimSwDriver = new CLimSwDriver(OPEN_LIMSW_AHB1Periph_GPIOx, OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
+
+    Closed_LimSwDriver->Initialize_Hardware();
+    Closed_LimSwDriver->Initialize_Hardware();
+
     Opened_Limit.Initialize();
     Closed_Limit.Initialize();
-    init_LimSwDriver();
 }
 
