@@ -16,9 +16,17 @@
 class CLimSwDriver : CDriver
 {
     public:
-        CLimSwDriver(void);
+        CLimSwDriver(
+                uint32_t      RCC_AHB1Periph_GPIOx,
+                uint16_t      GPIO_Pin_x,
+                GPIO_TypeDef* GPIOx);
         ~CLimSwDriver(void);
         void Initialize_Hardware(void);
+
+    protected:
+        uint32_t      m_RCC_AHB1Periph_GPIOx;
+        uint16_t      m_GPIO_Pin_x;
+        GPIO_TypeDef* m_GPIOx;
 }; // end -- class CLimSwDriver
 
 void init_LimSwDriver(void);

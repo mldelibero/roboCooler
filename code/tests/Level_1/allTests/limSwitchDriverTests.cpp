@@ -1,16 +1,21 @@
 #include <CppUTest/TestHarness.h>
 #include <CppUTestExt/MockSupport.h>
 #include <stm32f4xx_gpio.h>
+#include <stm32f4xx_rcc.h>
 #include "limitSwitchDriver.h"
 
 CLimSwDriver* limSwitch;
+
+#define TEST_LIMSW_AHB1Periph_GPIOx          RCC_AHB1Periph_GPIOA
+#define TEST_LIMSW_GPIOx                     GPIOA
+#define TEST_LIMSW_GPIO_PIN_X                GPIO_Pin_0
 
 TEST_GROUP(LimSwDriverTests)
 {
     void setup()
     {
         mock().enable();
-        limSwitch = new CLimSwDriver;
+        limSwitch = new CLimSwDriver(TEST_LIMSW_AHB1Periph_GPIOx, TEST_LIMSW_GPIO_PIN_X, TEST_LIMSW_GPIOx);
     }
     void teardown()
     {
@@ -22,8 +27,11 @@ TEST_GROUP(LimSwDriverTests)
 
 TEST(LimSwDriverTests, InitResetsPeripheral)
 {
-    mock().disable();
-    init_LimSwDriver();
+    mock().expectOneCall("RCC_AHB1PeriphClockCmd");
+    mock().expectOneCall("GPIO_StructInit");
+    mock().expectOneCall("GPIO_Init");
+
+    limSwitch->Initialize_Hardware();
 }
 
 TEST(LimSwDriverTests, SampleCallsGpioReadFunction)
