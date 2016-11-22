@@ -7,12 +7,12 @@
 
 CLimSwDriver::CLimSwDriver(
         uint32_t      RCC_AHB1Periph_GPIOx,
-        uint16_t      GPIO_Pin_x,
-        GPIO_TypeDef* GPIOx)
+        GPIO_TypeDef* GPIOx,
+        uint16_t      GPIO_Pin_x)
 {
     m_RCC_AHB1Periph_GPIOx = RCC_AHB1Periph_GPIOx;
-    m_GPIO_Pin_x           = GPIO_Pin_x;
     m_GPIOx                = GPIOx;
+    m_GPIO_Pin_x           = GPIO_Pin_x;
 }
 
 CLimSwDriver::~CLimSwDriver(void)

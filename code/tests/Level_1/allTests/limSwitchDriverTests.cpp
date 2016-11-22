@@ -15,7 +15,7 @@ TEST_GROUP(LimSwDriverTests)
     void setup()
     {
         mock().enable();
-        limSwitch = new CLimSwDriver(TEST_LIMSW_AHB1Periph_GPIOx, TEST_LIMSW_GPIO_PIN_X, TEST_LIMSW_GPIOx);
+        limSwitch = new CLimSwDriver(TEST_LIMSW_AHB1Periph_GPIOx, TEST_LIMSW_GPIOx, TEST_LIMSW_GPIO_PIN_X);
     }
     void teardown()
     {
