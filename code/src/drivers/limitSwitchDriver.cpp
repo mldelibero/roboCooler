@@ -4,6 +4,19 @@
 #include <stm32f4xx_rcc.h>
 #include "limitSwitchDriver.h"
 
+
+CLimSwDriver::CLimSwDriver(void)
+{
+}
+
+CLimSwDriver::~CLimSwDriver(void)
+{
+}
+
+void CLimSwDriver::Initialize_Hardware(void)
+{
+}
+
 void init_LimSwDriver(void)
 {
     GPIO_InitTypeDef        GPIO_InitStruct;

@@ -3,14 +3,18 @@
 #include <stm32f4xx_gpio.h>
 #include "limitSwitchDriver.h"
 
+CLimSwDriver* limSwitch;
+
 TEST_GROUP(LimSwDriverTests)
 {
     void setup()
     {
         mock().enable();
+        limSwitch = new CLimSwDriver;
     }
     void teardown()
     {
+        delete limSwitch;
         mock().checkExpectations();
         mock().clear();
     }
