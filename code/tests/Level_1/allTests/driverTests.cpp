@@ -16,10 +16,10 @@ class childDriver
 {
     public:
         childDriver(void);
-        void init_hardware(void);
+        void Initialize_Hardware(void);
 };
 
-void init_hardware(void)
+void Initialize_Hardware(void)
 {
 }
 

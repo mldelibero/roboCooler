@@ -5,7 +5,7 @@ CDriver::CDriver(void)
 {
 }
 
-void CDriver::init_hardware(void)
+void CDriver::Initialize_Hardware(void)
 {
 }
 

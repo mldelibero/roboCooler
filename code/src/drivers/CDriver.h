@@ -4,7 +4,7 @@ class CDriver
 {
     public:
         CDriver(void);
-        virtual void init_hardware(void);
+        virtual void Initialize_Hardware(void);
 }; // end - class CDriver
 #endif //#ifndef __CDRIVER_H
 
