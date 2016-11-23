@@ -3,8 +3,9 @@
 #include "limitSwitchDriver.h"
 #include "limitSwitchMock.h"
 
-CLimSwMock::CLimSwMock()
+CLimSwMock::CLimSwMock(CLimSwDriver* limSwDriver) : CLimSwComp(limSwDriver)
 {
+    m_LimSwDriver = limSwDriver;
 }
 
 void CLimSwMock::Execute(void)

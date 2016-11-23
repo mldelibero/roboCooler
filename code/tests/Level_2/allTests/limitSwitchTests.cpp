@@ -13,7 +13,12 @@
  *  * init resets filter
  */
 
-CLimSwComp* limitSwitch;
+#define TEST_LIMSW_AHB1Periph_GPIOx          RCC_AHB1Periph_GPIOA
+#define TEST_LIMSW_GPIOx                     GPIOA
+#define TEST_LIMSW_GPIO_PIN_X                GPIO_Pin_0
+
+CLimSwDriver* limSwDriver;
+CLimSwComp*   limSw;
 
 TEST_GROUP(LimitSwitchTests)
 {
@@ -21,11 +26,13 @@ TEST_GROUP(LimitSwitchTests)
     {
         mock().disable();
         mock().enable();
-        limitSwitch = new CLimSwComp();
+        limSwDriver = new CLimSwDriver(TEST_LIMSW_AHB1Periph_GPIOx, TEST_LIMSW_GPIOx, TEST_LIMSW_GPIO_PIN_X);
+        limSw       = new CLimSwComp(limSwDriver);
     }
     void teardown()
     {
-        delete limitSwitch;
+        delete limSw;
+        delete limSwDriver;
         mock().checkExpectations();
         mock().clear();
     }
@@ -38,6 +45,10 @@ TEST(LimitSwitchTests, SamplesInputOnRun)
 }
 
 TEST(LimitSwitchTests, FiltersInputOnRun)
+{
+}
+
+TEST(LimitSwitchTests, ReturnsFilteredInput)
 {
 }
 

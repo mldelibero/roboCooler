@@ -2,11 +2,12 @@
 #define __LIMIT_SWITCH_H
 #include <stm32f4xx.h>
 #include "component.h"
+#include "limitSwitchDriver.h"
 
 class CLimSwComp: public CComponent
 {
     public:
-        CLimSwComp();
+        CLimSwComp(CLimSwDriver* limSwDriver);
 
         virtual void Execute(void);
         virtual void Initialize(void);
@@ -14,6 +15,7 @@ class CLimSwComp: public CComponent
         virtual bool At_Limit(void);
 
     private:
+        CLimSwDriver* m_LimSwDriver;
 };
 
 #endif // #ifndef __LIMIT_SWITCH_H

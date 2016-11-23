@@ -1,7 +1,8 @@
 #include "limitSwitch.h"
 
-CLimSwComp::CLimSwComp(void)
+CLimSwComp::CLimSwComp(CLimSwDriver* limSwDriver)
 {
+    m_LimSwDriver = limSwDriver;
 }
 
 void CLimSwComp::Execute(void)

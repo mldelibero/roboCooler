@@ -22,7 +22,13 @@
  *
  */
 
-CLimSwMock Opened_Limit, Closed_Limit;
+#define TEST_LIMSW_AHB1Periph_GPIOx          RCC_AHB1Periph_GPIOA
+#define TEST_LIMSW_GPIOx                     GPIOA
+#define TEST_LIMSW_GPIO_PIN_X                GPIO_Pin_0
+
+CLimSwDriver* limSwDriver;
+
+CLimSwMock Opened_Limit(limSwDriver), Closed_Limit(limSwDriver);
 CCapTouchMock capTouch;
 CLidMotorComp* lidMotorPtr;
 
@@ -33,12 +39,14 @@ TEST_GROUP(LidMotorTests)
 {
     void setup()
     {
+        limSwDriver = new CLimSwDriver(TEST_LIMSW_AHB1Periph_GPIOx, TEST_LIMSW_GPIOx, TEST_LIMSW_GPIO_PIN_X);
         lidMotorPtr = new CLidMotorComp(&Opened_Limit, &Closed_Limit, &capTouch);
         mock().enable();
     }
     void teardown()
     {
         delete lidMotorPtr;
+        delete limSwDriver;
         mock().checkExpectations();
         mock().clear();
     }

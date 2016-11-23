@@ -24,16 +24,18 @@ SRC_DIRS = \
 	./mockFiles\
 	../Level_2/mockFiles\
 	../Level_1/mockFiles\
+	../mockFiles/stdlib\
 
 SRC_FILES = \
-	../../src/init.cpp\
 	../../src/lidMotor.cpp\
+	../../src/drivers/CDriver.cpp\
 
 TEST_SRC_DIRS = \
 	./allTests\
 	./mockFiles\
 	../Level_2/mockFiles\
 	../Level_1/mockFiles\
+	../mockFiles/stdlib\
 
 INCLUDE_DIRS =\
   .\
