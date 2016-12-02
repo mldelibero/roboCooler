@@ -28,7 +28,7 @@
 
 CLimSwDriver* limSwDriver;
 
-CLimSwMock Opened_Limit(limSwDriver), Closed_Limit(limSwDriver);
+CLimSwMock Opened_Limit(limSwDriver,10,7), Closed_Limit(limSwDriver,10,7);
 CCapTouchMock capTouch;
 CLidMotorComp* lidMotorPtr;
 

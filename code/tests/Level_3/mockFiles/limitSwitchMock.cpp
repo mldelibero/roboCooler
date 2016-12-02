@@ -3,7 +3,7 @@
 #include "limitSwitchDriver.h"
 #include "limitSwitchMock.h"
 
-CLimSwMock::CLimSwMock(CLimSwDriver* limSwDriver) : CLimSwComp(limSwDriver)
+CLimSwMock::CLimSwMock(CLimSwDriver* limSwDriver, uint8_t bufferSize, uint8_t filterCutoff) : CLimSwComp(limSwDriver, bufferSize, filterCutoff)
 {
     m_LimSwDriver = limSwDriver;
 }

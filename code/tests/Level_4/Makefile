@@ -36,6 +36,7 @@ TEST_SRC_DIRS = \
 	../Level_3/mockFiles\
 	../Level_2/mockFiles\
 	../Level_1/mockFiles\
+	../mockFiles/stdlib\
 
 INCLUDE_DIRS =\
   .\

@@ -8,8 +8,8 @@
 
 CLimSwDriver limSwDriver(TEST_LIMSW_AHB1Periph_GPIOx, TEST_LIMSW_GPIOx, TEST_LIMSW_GPIO_PIN_X);
 
-CLimSwComp    OpenedLimSw(&limSwDriver);
-CLimSwComp    ClosedLimSw(&limSwDriver);
+CLimSwComp    OpenedLimSw(&limSwDriver,10,7);
+CLimSwComp    ClosedLimSw(&limSwDriver,10,7);
 CCapTouchComp CapTouch;
 
 CLidMotorComp lidMotor(&OpenedLimSw, &ClosedLimSw, &CapTouch);

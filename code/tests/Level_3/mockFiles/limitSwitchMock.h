@@ -6,7 +6,7 @@
 class CLimSwMock: public CLimSwComp
 {
     public:
-        CLimSwMock(CLimSwDriver* limSwDriver);
+        CLimSwMock(CLimSwDriver* limSwDriver, uint8_t bufferSize, uint8_t filterCutoff);
         //CLimSwMock(CLimSwDriver* limSwDriver) : CLimSwComp(limSwDriver);
 
         virtual void Execute(void);

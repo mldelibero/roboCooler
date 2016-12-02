@@ -9,8 +9,8 @@ extern CLedComp leds;
 extern CLidMotorComp lidMotor;
 CLimSwDriver* Opened_LimSwDriver = NULL;
 CLimSwDriver* Closed_LimSwDriver = NULL;
-CLimSwComp Opened_Limit(Opened_LimSwDriver);
-CLimSwComp Closed_Limit(Closed_LimSwDriver);
+CLimSwComp Opened_Limit(Opened_LimSwDriver, LIM_SW_BUFFER_SIZE, LIM_SW_BUFFER_CUTOFF);
+CLimSwComp Closed_Limit(Closed_LimSwDriver, LIM_SW_BUFFER_SIZE, LIM_SW_BUFFER_CUTOFF);
 
 void init(void)
 {

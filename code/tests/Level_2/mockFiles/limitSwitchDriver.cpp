@@ -24,6 +24,7 @@ void CLimSwDriver::Initialize_Hardware(void)
 BitAction CLimSwDriver::SampleInput(void)
 {
     mock().actualCall("CLimSwDriver::SampleInput");
-    return Bit_SET;
+    return (BitAction)GPIO_ReadInputDataBit(m_GPIOx, m_GPIO_Pin_x);
+    //return Bit_SET;
 }
 
