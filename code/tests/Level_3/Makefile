@@ -28,7 +28,9 @@ SRC_DIRS = \
 
 SRC_FILES = \
 	../../src/lidMotor.cpp\
+	../../src/limitSwitch.cpp\
 	../../src/drivers/CDriver.cpp\
+	../../src/drivers/limitSwitchDriver.cpp\
 
 TEST_SRC_DIRS = \
 	./allTests\
@@ -36,6 +38,8 @@ TEST_SRC_DIRS = \
 	../Level_2/mockFiles\
 	../Level_1/mockFiles\
 	../mockFiles/stdlib\
+
+TEST_SRC_FILES = \
 
 INCLUDE_DIRS =\
   .\

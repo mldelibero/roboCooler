@@ -28,6 +28,8 @@ SRC_DIRS = \
 SRC_FILES = \
 	../../src/init.cpp\
 	../../src/drivers/CDriver.cpp\
+	../../src/drivers/limitSwitchDriver.cpp\
+	../../src/limitSwitch.cpp\
 	../../tests/mockFiles/stdlib/stm32f4xx.cpp\
 
 TEST_SRC_DIRS = \
@@ -37,6 +39,10 @@ TEST_SRC_DIRS = \
 	../Level_2/mockFiles\
 	../Level_1/mockFiles\
 	../mockFiles/stdlib\
+
+TEST_SRC_FILES =\
+	../../src/limitSwitch.cpp\
+	../../src/drivers/limitSwitchDriver.cpp\
 
 INCLUDE_DIRS =\
   .\

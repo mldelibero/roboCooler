@@ -21,10 +21,10 @@ class CLimSwDriver : CDriver
                 uint32_t      RCC_AHB1Periph_GPIOx,
                 GPIO_TypeDef* GPIOx,
                 uint16_t      GPIO_Pin_x);
-        ~CLimSwDriver(void);
+        virtual ~CLimSwDriver(void);
 
         void Initialize_Hardware(void);
-        BitAction SampleInput(void);
+        virtual BitAction SampleInput(void);
 
     protected:
         uint32_t      m_RCC_AHB1Periph_GPIOx;

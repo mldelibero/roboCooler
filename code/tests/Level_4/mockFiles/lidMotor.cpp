@@ -1,15 +1,12 @@
 #include <CppUTestExt/MockSupport.h>
 #include "lidMotor.h"
-#include "limitSwitchDriver.h"
+#include "limitSwitchDriverMock.h"
+#include "limitSwitchMock.h"
 
-#define TEST_LIMSW_AHB1Periph_GPIOx          RCC_AHB1Periph_GPIOA
-#define TEST_LIMSW_GPIOx                     GPIOA
-#define TEST_LIMSW_GPIO_PIN_X                GPIO_Pin_0
+CLimSwDriverMock limSwDriver();
 
-CLimSwDriver limSwDriver(TEST_LIMSW_AHB1Periph_GPIOx, TEST_LIMSW_GPIOx, TEST_LIMSW_GPIO_PIN_X);
-
-CLimSwComp    OpenedLimSw(&limSwDriver,10,7);
-CLimSwComp    ClosedLimSw(&limSwDriver,10,7);
+CLimSwMock    OpenedLimSw;
+CLimSwMock    ClosedLimSw;
 CCapTouchComp CapTouch;
 
 CLidMotorComp lidMotor(&OpenedLimSw, &ClosedLimSw, &CapTouch);

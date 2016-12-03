@@ -5,6 +5,7 @@
 #include "capTouch.h"
 #include "capTouchMock.h"
 #include "limitSwitchMock.h"
+#include "limitSwitchDriverMock.h"
 
 /* List of driver features needed:
  *  *timer off at startup
@@ -22,14 +23,11 @@
  *
  */
 
-#define TEST_LIMSW_AHB1Periph_GPIOx          RCC_AHB1Periph_GPIOA
-#define TEST_LIMSW_GPIOx                     GPIOA
-#define TEST_LIMSW_GPIO_PIN_X                GPIO_Pin_0
+CLimSwDriverMock* limSwDriver;
 
-CLimSwDriver* limSwDriver;
-
-CLimSwMock Opened_Limit(limSwDriver,10,7), Closed_Limit(limSwDriver,10,7);
-CCapTouchMock capTouch;
+CLimSwMock     Opened_Limit;
+CLimSwMock     Closed_Limit;
+CCapTouchMock  capTouch;
 CLidMotorComp* lidMotorPtr;
 
 /**
@@ -39,7 +37,7 @@ TEST_GROUP(LidMotorTests)
 {
     void setup()
     {
-        limSwDriver = new CLimSwDriver(TEST_LIMSW_AHB1Periph_GPIOx, TEST_LIMSW_GPIOx, TEST_LIMSW_GPIO_PIN_X);
+        limSwDriver = new CLimSwDriverMock();
         lidMotorPtr = new CLidMotorComp(&Opened_Limit, &Closed_Limit, &capTouch);
         mock().enable();
     }

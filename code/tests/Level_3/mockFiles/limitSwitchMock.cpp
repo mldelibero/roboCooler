@@ -1,11 +1,14 @@
 #include <CppUTestExt/MockSupport.h>
 #include "limitSwitch.h"
-#include "limitSwitchDriver.h"
+#include "limitSwitchDriverMock.h"
 #include "limitSwitchMock.h"
 
-CLimSwMock::CLimSwMock(CLimSwDriver* limSwDriver, uint8_t bufferSize, uint8_t filterCutoff) : CLimSwComp(limSwDriver, bufferSize, filterCutoff)
+CLimSwDriverMock* Mock_limSwDriver;
+uint8_t           Mock_bufferSize;
+uint8_t           Mock_filterCutoff;
+
+CLimSwMock::CLimSwMock() : CLimSwComp(Mock_limSwDriver, Mock_bufferSize, Mock_filterCutoff)
 {
-    m_LimSwDriver = limSwDriver;
 }
 
 void CLimSwMock::Execute(void)

@@ -1,13 +1,12 @@
 #ifndef __LIMITSWITCHMOCK_H
 #define __LIMITSWITCHMOCK_H
 #include "limitSwitch.h"
-#include "LimitSwitchDriver.h"
+#include "LimitSwitchDriverMock.h"
 
 class CLimSwMock: public CLimSwComp
 {
     public:
-        CLimSwMock(CLimSwDriver* limSwDriver, uint8_t bufferSize, uint8_t filterCutoff);
-        //CLimSwMock(CLimSwDriver* limSwDriver) : CLimSwComp(limSwDriver);
+        CLimSwMock(void);
 
         virtual void Execute(void);
         virtual void Initialize(void);
@@ -19,7 +18,5 @@ class CLimSwMock: public CLimSwComp
 
     private:
         bool m_MockLimitInput;
-        CLimSwDriver* m_LimSwDriver;
-
 };
 #endif // #ifndef __LIMITSWITCHMOCK_H
