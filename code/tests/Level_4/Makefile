@@ -21,28 +21,24 @@ CPP_PLATFORM = Gcc
 # so that memory leak detection does not conflict with stl.
 #CPPUTEST_MEMLEAK_DETECTOR_NEW_MACRO_FILE = -include ExamplesNewOverrides.h
 SRC_DIRS = \
-	../Level_3/mockFiles\
-	../Level_2/mockFiles\
-	../Level_1/mockFiles\
 
 SRC_FILES = \
 	../../src/init.cpp\
 	../../src/drivers/CDriver.cpp\
-	../../src/drivers/limitSwitchDriver.cpp\
 	../../src/limitSwitch.cpp\
+	../../tests/Level_2/mockFiles/capTouch.cpp\
+	../../tests/Level_2/mockFiles/component.cpp\
+	../../tests/Level_2/mockFiles/limitSwitchDriverMock.cpp\
+	../../tests/Level_3/mockFiles/limitSwitchMock.cpp\
 	../../tests/mockFiles/stdlib/stm32f4xx.cpp\
 
 TEST_SRC_DIRS = \
 	./allTests\
 	./mockFiles\
-	../Level_3/mockFiles\
-	../Level_2/mockFiles\
-	../Level_1/mockFiles\
 	../mockFiles/stdlib\
 
 TEST_SRC_FILES =\
-	../../src/limitSwitch.cpp\
-	../../src/drivers/limitSwitchDriver.cpp\
+	../../tests/Level_3/mockFiles/limitSwitchMock.cpp\
 
 INCLUDE_DIRS =\
   .\

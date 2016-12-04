@@ -7,6 +7,27 @@ CLimSwDriverMock* Mock_limSwDriver;
 uint8_t           Mock_bufferSize;
 uint8_t           Mock_filterCutoff;
 
+//--- Compile mock version
+CLimSwComp::CLimSwComp(CLimSwDriver* limSwDriver, uint8_t bufferSize, uint8_t filterCutoff)
+{
+    if (limSwDriver)  return;
+    if (bufferSize)   return;
+    if (filterCutoff) return;
+}
+
+void CLimSwComp::Execute(void)
+{}
+
+void CLimSwComp::Initialize(void)
+{}
+
+bool CLimSwComp::At_Limit(void)
+{
+    return true;
+}
+
+//--- Compile abstract mock version with output control
+
 CLimSwMock::CLimSwMock() : CLimSwComp(Mock_limSwDriver, Mock_bufferSize, Mock_filterCutoff)
 {
 }
