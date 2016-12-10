@@ -26,6 +26,7 @@ SRC_DIRS = \
 SRC_FILES = \
 	../Level_2/mockFiles/capTouch.cpp\
 	../Level_2/mockFiles/component.cpp\
+	../mockFiles/leds.cpp\
 	../mockFiles/limitSwitchDriverMock.cpp\
 	../mockFiles/limitSwitchMock.cpp\
 	../mockFiles/stdlib/stm32f4xx.cpp\

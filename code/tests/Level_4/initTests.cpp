@@ -27,14 +27,14 @@ TEST_GROUP(InitTests)
 
 TEST(InitTests, ModulesInitialized)
 {
-    mock().disable();
-    /*
+    mock().enable();
+
     mock().expectOneCall("Init_Timers");
     mock().expectOneCall("CLedComp::Initialize");
     mock().expectOneCall("CLidMotorComp::Initialize");
     mock().expectNCalls(2, "CLimSwDriver::Initialize_Hardware");
     mock().expectNCalls(2, "CLimSwComp::Initialize");
-    */
+
     init();
 }
 

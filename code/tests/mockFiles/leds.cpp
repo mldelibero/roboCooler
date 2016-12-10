@@ -9,12 +9,12 @@ CLedComp::CLedComp()
 
 void CLedComp::Execute(void)
 {
-    mock().actualCall("CLedComp:Execute");
+    mock().actualCall("CLedComp::Execute");
 }
 
 void CLedComp::Initialize(void)
 {
-    mock().actualCall("CLedComp:Initialize");
+    mock().actualCall("CLedComp::Initialize");
 }
 
 void CLedComp::BypassBootSequence(void)

@@ -1,19 +1,9 @@
 #include <CppUTestExt/MockSupport.h>
-#include "leds.h"
+#include "timer.h"
 
-void Init_Timers(void)
+uint32_t Init_Timers(void)
 {
+    mock().actualCall("Init_Timers");
+    return 0;
 }
 
-CLedComp::CLedComp()
-{
-}
-
-void CLedComp::Initialize(void)
-{
-    mock().actualCall("CLedComp::Initialize");
-}
-
-void CLedComp::Execute(void)
-{
-}

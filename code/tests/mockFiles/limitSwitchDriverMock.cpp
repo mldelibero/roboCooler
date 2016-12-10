@@ -21,6 +21,7 @@ CLimSwDriver::~CLimSwDriver(void)
 
 void CLimSwDriver::Initialize_Hardware(void)
 {
+    mock().actualCall("CLimSwDriver::Initialize_Hardware");
 }
 
 BitAction CLimSwDriver::SampleInput(void)
