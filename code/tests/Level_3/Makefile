@@ -9,12 +9,13 @@ ifndef SILENCE
 	SILENCE = @
 endif
 
-#--- Inputs ----#
-COMPONENT_NAME = roboCooler_Level_3
-CPPUTEST_CXXFLAGS = -Wno-c++14-compat
-
-CPPUTEST_USE_EXTENSIONS = Y
+#--- Outputs ---#
 CPP_PLATFORM = Gcc
+CPPUTEST_CXXFLAGS = -Wno-c++14-compat
+CPPUTEST_USE_EXTENSIONS = Y
+
+COMPONENT_NAME = roboCooler_Level_3
+CPPUTEST_OBJS_DIR = ./objs/tests/Level_3
 
 # This line is overriding the default new macros.  This is helpful
 # when using std library includes like <list> and other containers
@@ -32,13 +33,14 @@ SRC_FILES = \
 	./mockFiles/limitSwitchMock.cpp\
 
 TEST_SRC_DIRS = \
-	./allTests\
+	./\
 	./mockFiles\
 	../Level_2/mockFiles\
 	../Level_1/mockFiles\
 	../mockFiles/stdlib\
 
 TEST_SRC_FILES = \
+	../AllTests.cpp\
 	./mockFiles/limitSwitchMock.cpp\
 
 INCLUDE_DIRS =\
