@@ -9,11 +9,6 @@
 /**
  * * List of tests needed:
  *  * Integration test makes sure that correct input has been sampled.
- *  * Obj filters input on run
- *  * obj returns filtered output when querried
- *  * init resets filter
- *
- *  * Add hysteresis on the filter
  */
 
 #define TEST_BUFFER_SIZE      10
@@ -27,7 +22,6 @@ TEST_GROUP(LimitSwitchTests)
 {
     void setup()
     {
-        mock().disable();
         mock().enable();
         limSwDriver = new CLimSwDriverMock();
         limSw       = new CLimSwComp(limSwDriver, TEST_BUFFER_LO_CUTOFF, TEST_BUFFER_HI_CUTOFF, TEST_BUFFER_SIZE);
@@ -81,6 +75,28 @@ TEST(LimitSwitchTests, BufferSizeIsRespected)
 
     CHECK_EQUAL(true, limSw->At_Limit());
     limSw->Run();
+    CHECK_EQUAL(false, limSw->At_Limit());
+}
+
+TEST(LimitSwitchTests, InitResetsObject)
+{
+    mock().disable();
+
+    limSwDriver->Set_MockInput();
+    for(int cnt = 1; cnt <= TEST_BUFFER_HI_CUTOFF; cnt++)
+    {
+        limSw->Run();
+    }
+
+    CHECK_EQUAL(true, limSw->At_Limit());
+
+    limSw->Initialize();
+
+    for(int cnt = 1; cnt <= TEST_BUFFER_LO_CUTOFF; cnt++)
+    { // Puts the buffer inbetween cutoffs to test hysteresis reset
+        limSw->Run();
+    }
+
     CHECK_EQUAL(false, limSw->At_Limit());
 }
 
