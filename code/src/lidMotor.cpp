@@ -51,3 +51,4 @@ CCapTouchComp* CLidMotorComp::Get_CapSensePtr(void)
 {
     return m_CapTouch_p;
 }
+

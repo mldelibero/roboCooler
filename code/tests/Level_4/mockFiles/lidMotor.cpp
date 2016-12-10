@@ -7,7 +7,6 @@ CLimSwDriverMock limSwDriver();
 
 CLimSwMock    OpenedLimSw;
 CLimSwMock    ClosedLimSw;
-CCapTouchComp CapTouch;
 
 CLidMotorComp::CLidMotorComp(CLimSwComp* OpenedLimSw_p, CLimSwComp* ClosedLimSw_p, CCapTouchComp* CapTouch_p)
 {

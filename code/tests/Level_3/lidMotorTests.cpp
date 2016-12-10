@@ -126,8 +126,12 @@ TEST(LidMotorTests, MotorStopNotIssuedWhenNotAtLimitSwitch)
 
 TEST(LidMotorTests, RunPollsCapSense)
 {
-    mock().expectOneCall("CCapSenseComp::Get_TouchDetected");
-    mock().ignoreOtherCalls();
+    mock().expectNCalls(2,"CLimSwComp::At_Limit");
+    mock().expectNCalls(1,"motorStop");
+    mock().expectNCalls(1,"lidMotor_Open");
+
+    //The call we actually care about
+    mock().expectNCalls(1,"CCapTouchComp::Get_TouchDetected");
 
     lidMotorPtr->Run();
 }

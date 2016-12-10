@@ -18,6 +18,7 @@ TEST_GROUP(LoopTests)
 TEST(LoopTests, ModulesInitialized)
 {
     mock().expectNCalls(2,"CLimSwComp::Execute");
+    mock().expectNCalls(1,"CCapTouchComp::Execute");
     loop();
 }
 

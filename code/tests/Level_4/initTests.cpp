@@ -3,6 +3,7 @@
 #include "init.h"
 
 #include "limitSwitchDriver.h"
+#include "capTouchDriver.h"
 
 int32_t timer = -1;
 
@@ -17,8 +18,9 @@ TEST_GROUP(InitTests)
     }
     void teardown()
     {
-        delete Opened_LimSwDriver; // Never will get deleted for good in program
-        delete Closed_LimSwDriver; // Never will get deleted for good in program
+        // Never will get deleted for good in program
+        delete Opened_LimSwDriver;
+        delete Closed_LimSwDriver;
 
         mock().checkExpectations();
         mock().clear();
@@ -29,9 +31,11 @@ TEST(InitTests, ModulesInitialized)
 {
     mock().enable();
 
-    mock().expectOneCall("Init_Timers");
-    mock().expectOneCall("CLedComp::Initialize");
-    mock().expectOneCall("CLidMotorComp::Initialize");
+    mock().expectNCalls(1, "Init_Timers");
+    mock().expectNCalls(1, "CLedComp::Initialize");
+    mock().expectNCalls(1, "CCapTouchDriver::Initialize_Hardware");
+    mock().expectNCalls(1, "CCapTouchComp::Initialize");
+    mock().expectNCalls(1, "CLidMotorComp::Initialize");
     mock().expectNCalls(2, "CLimSwDriver::Initialize_Hardware");
     mock().expectNCalls(2, "CLimSwComp::Initialize");
 

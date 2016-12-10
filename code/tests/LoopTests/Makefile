@@ -24,10 +24,11 @@ CPPUTEST_OBJS_DIR = ./objs/tests/LoopTests
 SRC_DIRS = \
 
 SRC_FILES = \
-	../Level_2/mockFiles/capTouch.cpp\
 	../Level_2/mockFiles/component.cpp\
 	../Level_4/mockFiles/lidMotor.cpp\
 	../Level_4/mockFiles/timer.cpp\
+	../mockFiles/capTouchMock.cpp\
+	../mockFiles/capTouchDriverMock.cpp\
 	../mockFiles/leds.cpp\
 	../mockFiles/limitSwitchDriverMock.cpp\
 	../mockFiles/limitSwitchMock.cpp\
