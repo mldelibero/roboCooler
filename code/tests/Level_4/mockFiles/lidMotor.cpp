@@ -9,8 +9,6 @@ CLimSwMock    OpenedLimSw;
 CLimSwMock    ClosedLimSw;
 CCapTouchComp CapTouch;
 
-CLidMotorComp lidMotor(&OpenedLimSw, &ClosedLimSw, &CapTouch);
-
 CLidMotorComp::CLidMotorComp(CLimSwComp* OpenedLimSw_p, CLimSwComp* ClosedLimSw_p, CCapTouchComp* CapTouch_p)
 {
     m_OpenedLimSw_p = OpenedLimSw_p;

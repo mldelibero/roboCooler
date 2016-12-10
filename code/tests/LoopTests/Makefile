@@ -11,7 +11,7 @@ endif
 
 #--- Outputs ---#
 CPP_PLATFORM = Gcc
-CPPUTEST_CXXFLAGS = -Wno-c++14-compat
+CPPUTEST_CXXFLAGS = -Wno-c++14-compat -DIN_TEST_MODE
 CPPUTEST_USE_EXTENSIONS = Y
 
 COMPONENT_NAME = roboCooler_LoopTests
@@ -24,6 +24,16 @@ CPPUTEST_OBJS_DIR = ./objs/tests/LoopTests
 SRC_DIRS = \
 
 SRC_FILES = \
+	../Level_2/mockFiles/capTouch.cpp\
+	../Level_2/mockFiles/component.cpp\
+	../Level_4/mockFiles/lidMotor.cpp\
+	../Level_4/mockFiles/timer.cpp\
+	../mockFiles/leds.cpp\
+	../mockFiles/limitSwitchDriverMock.cpp\
+	../mockFiles/limitSwitchMock.cpp\
+	../mockFiles/stdlib/stm32f4xx.cpp\
+	../../src/drivers/CDriver.cpp\
+	../../src/init.cpp\
 	../../src/loop.cpp\
 
 TEST_SRC_DIRS = \
@@ -34,7 +44,10 @@ TEST_SRC_FILES =\
 
 INCLUDE_DIRS =\
   .\
+  ../mockfiles\
+  ../mockFiles/stdlib\
   ../../src\
+  ../../src/drivers\
   $(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk

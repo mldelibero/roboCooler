@@ -3,8 +3,6 @@
 #include "leds.h"
 #include "ledDriver.h"
 
-CLedComp leds;
-
 CLedComp::CLedComp()
 {
     m_LedTimerReset = 25;

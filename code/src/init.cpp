@@ -5,12 +5,17 @@
 #include "limitSwitch.h"
 #include "limitSwitchDriver.h"
 
-extern CLedComp leds;
-extern CLidMotorComp lidMotor;
+CLedComp leds;
+
+CCapTouchComp* CapTouch_p;
+
 CLimSwDriver* Opened_LimSwDriver = NULL;
 CLimSwDriver* Closed_LimSwDriver = NULL;
 CLimSwComp Opened_Limit(Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
 CLimSwComp Closed_Limit(Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
+
+CLidMotorComp lidMotor(&Opened_Limit, &Closed_Limit, CapTouch_p);
+
 
 void init(void)
 {

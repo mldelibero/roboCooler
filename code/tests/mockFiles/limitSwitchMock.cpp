@@ -18,7 +18,9 @@ CLimSwComp::CLimSwComp(CLimSwDriver* limSwDriver, uint8_t Lo_CutOff, uint8_t Hi_
 }
 
 void CLimSwComp::Execute(void)
-{}
+{
+    mock().actualCall("CLimSwComp::Execute");
+}
 
 void CLimSwComp::Initialize(void)
 {}
@@ -36,6 +38,7 @@ CLimSwMock::CLimSwMock() : CLimSwComp(Mock_limSwDriver, Mock_Lo_CutOff, Mock_Hi_
 
 void CLimSwMock::Execute(void)
 {
+    mock().actualCall("CLimSwComp::Execute");
 }
 
 void CLimSwMock::Initialize(void)

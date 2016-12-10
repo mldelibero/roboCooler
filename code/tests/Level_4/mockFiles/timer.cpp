@@ -1,7 +1,9 @@
 #include <CppUTestExt/MockSupport.h>
 #include "leds.h"
 
-volatile CLedComp leds;
+void Init_Timers(void)
+{
+}
 
 CLedComp::CLedComp()
 {
