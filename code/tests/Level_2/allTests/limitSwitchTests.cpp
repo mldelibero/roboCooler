@@ -16,8 +16,9 @@
  *  * Add hysteresis on the filter
  */
 
-#define TEST_BUFFER_SIZE        5
-#define TEST_BUFFER_CUTOFF      3
+#define TEST_BUFFER_SIZE      10
+#define TEST_BUFFER_HI_CUTOFF 7
+#define TEST_BUFFER_LO_CUTOFF 3
 
 CLimSwDriverMock* limSwDriver;
 CLimSwComp*       limSw;
@@ -29,7 +30,7 @@ TEST_GROUP(LimitSwitchTests)
         mock().disable();
         mock().enable();
         limSwDriver = new CLimSwDriverMock();
-        limSw       = new CLimSwComp(limSwDriver, TEST_BUFFER_SIZE, TEST_BUFFER_CUTOFF);
+        limSw       = new CLimSwComp(limSwDriver, TEST_BUFFER_LO_CUTOFF, TEST_BUFFER_HI_CUTOFF, TEST_BUFFER_SIZE);
     }
     void teardown()
     {
@@ -53,7 +54,7 @@ TEST(LimitSwitchTests, FiltersInputOnRun)
     CHECK_EQUAL(false, limSw->At_Limit());
     limSwDriver->Set_MockInput();
 
-    for (int cnt = 1; cnt < TEST_BUFFER_CUTOFF; cnt++)
+    for (int cnt = 1; cnt < TEST_BUFFER_HI_CUTOFF; cnt++)
     { // Run 1 less than cutoff
         limSw->Run();
     }
@@ -73,8 +74,7 @@ TEST(LimitSwitchTests, BufferSizeIsRespected)
     }
 
     limSwDriver->Clear_MockInput();
-    //for(int cnt = 10; cnt > 7; cnt--)
-    for(int cnt = TEST_BUFFER_SIZE; cnt > TEST_BUFFER_CUTOFF; cnt--)
+    for(int cnt = TEST_BUFFER_SIZE; cnt >= TEST_BUFFER_LO_CUTOFF + 2; cnt--)
     { // Dip to just above the cutoff
         limSw->Run();
     }

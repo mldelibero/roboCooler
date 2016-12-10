@@ -4,13 +4,14 @@
 #include "component.h"
 #include "limitSwitchDriver.h"
 
+#define LIM_SW_LO_CUTOFF        3
+#define LIM_SW_Hi_CUTOFF        7
 #define LIM_SW_BUFFER_SIZE      10
-#define LIM_SW_BUFFER_CUTOFF    7
 
 class CLimSwComp: public CComponent
 {
     public:
-        CLimSwComp(CLimSwDriver* limSwDriver, uint8_t bufferSize, uint8_t filterCutoff);
+        CLimSwComp(CLimSwDriver* limSwDriver, uint8_t Lo_CutOff, uint8_t Hi_Cutoff, uint8_t bufferSize);
 
         virtual void Execute(void);
         virtual void Initialize(void);
@@ -21,9 +22,12 @@ class CLimSwComp: public CComponent
         CLimSwDriver* m_LimSwDriver;
         void Filter_Input(uint8_t input);
 
-        int8_t m_FilteredInput;
+        int8_t  m_FilteredInput;
+        uint8_t m_Lo_Cutoff;
+        uint8_t m_Hi_Cutoff;
         uint8_t m_BufferSize;
-        uint8_t m_FilterCutoff;
+
+        bool m_LastOutput;
 };
 
 #endif // #ifndef __LIMIT_SWITCH_H

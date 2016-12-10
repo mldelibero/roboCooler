@@ -3,16 +3,18 @@
 #include "limitSwitchDriverMock.h"
 #include "limitSwitchMock.h"
 
-CLimSwDriverMock* Mock_limSwDriver;
-uint8_t           Mock_bufferSize;
-uint8_t           Mock_filterCutoff;
+CLimSwDriver* Mock_limSwDriver;
+uint8_t       Mock_Lo_CutOff;
+uint8_t       Mock_Hi_Cutoff;
+uint8_t       Mock_bufferSize;
 
 //--- Compile mock version
-CLimSwComp::CLimSwComp(CLimSwDriver* limSwDriver, uint8_t bufferSize, uint8_t filterCutoff)
+CLimSwComp::CLimSwComp(CLimSwDriver* limSwDriver, uint8_t Lo_CutOff, uint8_t Hi_Cutoff, uint8_t bufferSize)
 {
-    if (limSwDriver)  return;
-    if (bufferSize)   return;
-    if (filterCutoff) return;
+    if (limSwDriver) return;
+    if (Lo_CutOff)   return;
+    if (Hi_Cutoff)   return;
+    if (bufferSize)  return;
 }
 
 void CLimSwComp::Execute(void)
@@ -28,7 +30,7 @@ bool CLimSwComp::At_Limit(void)
 
 //--- Compile abstract mock version with output control
 
-CLimSwMock::CLimSwMock() : CLimSwComp(Mock_limSwDriver, Mock_bufferSize, Mock_filterCutoff)
+CLimSwMock::CLimSwMock() : CLimSwComp(Mock_limSwDriver, Mock_Lo_CutOff, Mock_Hi_Cutoff, Mock_bufferSize)
 {
 }
 
