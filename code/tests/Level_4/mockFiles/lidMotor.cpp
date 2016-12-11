@@ -22,4 +22,5 @@ void CLidMotorComp::Initialize(void)
 
 void CLidMotorComp::Execute(void)
 {
+    mock().actualCall("CLidMotorComp::Execute");
 }

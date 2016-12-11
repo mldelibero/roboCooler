@@ -22,7 +22,7 @@ CLimSwDriver* Closed_LimSwDriver = NULL;
 CLimSwComp Opened_Limit(Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
 CLimSwComp Closed_Limit(Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
 
-CLidMotorComp lidMotor(&Opened_Limit, &Closed_Limit, &CapTouch);
+CLidMotorComp LidMotor(&Opened_Limit, &Closed_Limit, &CapTouch);
 
 
 void init(void)
@@ -30,7 +30,7 @@ void init(void)
     Init_Timers();
 
     leds.Initialize();
-    lidMotor.Initialize();
+    LidMotor.Initialize();
 
     CapTouchDriver.Initialize_Hardware();
     CapTouch.Initialize();
