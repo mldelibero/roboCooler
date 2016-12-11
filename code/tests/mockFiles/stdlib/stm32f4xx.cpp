@@ -16,3 +16,6 @@ GPIO_TypeDef* GPIOC = &GPIOC_real;
 GPIO_TypeDef* GPIOD = &GPIOD_real;
 GPIO_TypeDef* GPIOE = &GPIOE_real;
 
+I2C_TypeDef I2C1_real; // Actual memory location for I2C
+I2C_TypeDef* I2C1 = &I2C1_real;
+

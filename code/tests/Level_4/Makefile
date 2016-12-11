@@ -33,6 +33,7 @@ SRC_FILES = \
 	../../src/init.cpp\
 	../../src/drivers/CDriver.cpp\
 	../../src/limitSwitch.cpp\
+	../mockFiles/stdlib/stm32f4xx.cpp\
 
 TEST_SRC_DIRS = \
 	./\

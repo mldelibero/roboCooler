@@ -30,12 +30,41 @@ typedef struct
    uint16_t pinStates; // used to mock setting and getting pin values
 } GPIO_TypeDef;
 
-extern uint32_t     SystemCoreClock;
-extern TIM_TypeDef* TIM4;
+typedef struct
+{
+  uint16_t CR1;        /*!< I2C Control register 1,     Address offset: 0x00 */
+  uint16_t      RESERVED0;  /*!< Reserved, 0x02                                   */
+  uint16_t CR2;        /*!< I2C Control register 2,     Address offset: 0x04 */
+  uint16_t      RESERVED1;  /*!< Reserved, 0x06                                   */
+  uint16_t OAR1;       /*!< I2C Own address register 1, Address offset: 0x08 */
+  uint16_t      RESERVED2;  /*!< Reserved, 0x0A                                   */
+  uint16_t OAR2;       /*!< I2C Own address register 2, Address offset: 0x0C */
+  uint16_t      RESERVED3;  /*!< Reserved, 0x0E                                   */
+  uint16_t DR;         /*!< I2C Data register,          Address offset: 0x10 */
+  uint16_t      RESERVED4;  /*!< Reserved, 0x12                                   */
+  uint16_t SR1;        /*!< I2C Status register 1,      Address offset: 0x14 */
+  uint16_t      RESERVED5;  /*!< Reserved, 0x16                                   */
+  uint16_t SR2;        /*!< I2C Status register 2,      Address offset: 0x18 */
+  uint16_t      RESERVED6;  /*!< Reserved, 0x1A                                   */
+  uint16_t CCR;        /*!< I2C Clock control register, Address offset: 0x1C */
+  uint16_t      RESERVED7;  /*!< Reserved, 0x1E                                   */
+  uint16_t TRISE;      /*!< I2C TRISE register,         Address offset: 0x20 */
+  uint16_t      RESERVED8;  /*!< Reserved, 0x22                                   */
+  uint16_t FLTR;       /*!< I2C FLTR register,          Address offset: 0x24 */
+  uint16_t      RESERVED9;  /*!< Reserved, 0x26                                   */
+} I2C_TypeDef;
+
 extern GPIO_TypeDef* GPIOA;
 extern GPIO_TypeDef* GPIOB;
 extern GPIO_TypeDef* GPIOC;
 extern GPIO_TypeDef* GPIOD;
 extern GPIO_TypeDef* GPIOE;
 
+extern I2C_TypeDef*  I2C1;
+
+extern uint32_t     SystemCoreClock;
+
+extern TIM_TypeDef* TIM4;
+
 #endif /* ifndef _STM32F4XX__H */
+
