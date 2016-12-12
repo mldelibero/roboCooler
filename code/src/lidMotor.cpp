@@ -20,7 +20,7 @@ void CLidMotorComp::Execute(void)
     if (m_LidState != LID_MOVING) motorStop();
 
     // Update from Capacitive touch sensor
-    if (m_CapTouch_p->Get_TouchDetected() == true)
+    if (m_CapTouch_p->Is_TouchDetected() == true)
     {
         if      (m_LidState == LID_ATFULLCLOSE) lidMotor_Open();
         else if (m_LidState == LID_ATFULLOPEN ) lidMotor_Close();

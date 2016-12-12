@@ -131,7 +131,7 @@ TEST(LidMotorTests, RunPollsCapSense)
     mock().expectNCalls(1,"lidMotor_Open");
 
     //The call we actually care about
-    mock().expectNCalls(1,"CCapTouchComp::Get_TouchDetected");
+    mock().expectNCalls(1,"CCapTouchComp::Is_TouchDetected");
 
     lidMotorPtr->Run();
 }

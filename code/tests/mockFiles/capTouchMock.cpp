@@ -23,10 +23,10 @@ void CCapTouchComp::Initialize(void)
     mock().actualCall("CCapTouchComp::Initialize");
 }
 
-bool CCapTouchComp::Get_TouchDetected(void)
+bool CCapTouchComp::Is_TouchDetected(void)
 {
-    mock().actualCall("CCapTouchComp::Get_TouchDetected");
-    return true;
+    mock().actualCall("CCapTouchComp::Is_TouchDetected");
+    return false;
 }
 
 
@@ -46,19 +46,19 @@ void CCapTouchMock::Initialize(void)
     mock().actualCall("CCapTouchComp::Initialize");
 }
 
-bool CCapTouchMock::Get_TouchDetected(void)
+bool CCapTouchMock::Is_TouchDetected(void)
 {
-    mock().actualCall("CCapTouchComp::Get_TouchDetected");
-    return m_MockTouchDetected;
+    mock().actualCall("CCapTouchComp::Is_TouchDetected");
+    return m_Mock_TouchDetected;
 }
 
 void CCapTouchMock::ForceTouchDetected(void)
 {
-    m_MockTouchDetected = true;
+    m_Mock_TouchDetected = true;
 }
 
 void CCapTouchMock::ForceTouchNotDetected(void)
 {
-    m_MockTouchDetected = false;
+    m_Mock_TouchDetected = false;
 }
 

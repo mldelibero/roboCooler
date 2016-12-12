@@ -9,13 +9,13 @@ class CCapTouchMock: public CCapTouchComp
         virtual void Execute(void);
         virtual void Initialize(void);
 
-        virtual bool Get_TouchDetected(void);
+        virtual bool Is_TouchDetected(void);
 
         void ForceTouchDetected(void);
         void ForceTouchNotDetected(void);
 
     private:
-        bool m_MockTouchDetected;
+        bool m_Mock_TouchDetected;
 
 };
 #endif // #ifndef __CAPTOUCHMOCK_H

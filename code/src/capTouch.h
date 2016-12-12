@@ -12,10 +12,11 @@ class CCapTouchComp: public CComponent
         virtual void Execute(void);
         virtual void Initialize(void);
 
-        virtual bool Get_TouchDetected(void);
+        virtual bool Is_TouchDetected(void);
 
     private:
         CCapTouchDriver* m_CapTouchDriver;
+        bool m_TouchDetected;
 };
 
 #endif // #ifndef __CAP_TOUCH_H
