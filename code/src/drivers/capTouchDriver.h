@@ -52,7 +52,7 @@ class CCapTouchDriver : CDriver
         virtual ~CCapTouchDriver(void);
 
         void Initialize_Hardware(void);
-        //        virtual BitAction SampleInput(void);
+        bool Is_DataReady(void);
 
     protected:
         // GPIO

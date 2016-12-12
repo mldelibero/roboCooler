@@ -15,7 +15,7 @@ CCapTouchDriver CapTouchDriver(
         CAP_IRQ_RCC_AHB1Periph_GPIOx, CAP_IRQ_GPIOx, CAP_IRQ_GPIO_Pin_x, CAP_SCL_GPIO_PinSourcex,
         CAP_GPIO_AF, CAP_APBxPeriph_I2Cx, CAP_I2Cx);
 
-CCapTouchComp CapTouch;
+CCapTouchComp CapTouch(&CapTouchDriver);
 
 CLimSwDriver* Opened_LimSwDriver = NULL;
 CLimSwDriver* Closed_LimSwDriver = NULL;

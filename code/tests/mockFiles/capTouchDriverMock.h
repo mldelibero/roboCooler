@@ -1,5 +1,7 @@
 #ifndef __CAP_TOUCH_DRIVER_MOCK_H
 #define __CAP_TOUCH_DRIVER_MOCK_H
+
+#include "capTouchDriver.h"
 class CCapTouchDriverMock : public CCapTouchDriver
 {
     public:

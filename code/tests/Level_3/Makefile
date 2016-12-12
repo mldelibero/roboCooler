@@ -31,6 +31,7 @@ SRC_FILES = \
 	../../src/lidMotor.cpp\
 	../../src/drivers/CDriver.cpp\
 	../mockFiles/limitSwitchMock.cpp\
+	../mockFiles/capTouchDriverMock.cpp\
 
 TEST_SRC_DIRS = \
 	./\

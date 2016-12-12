@@ -1,11 +1,16 @@
 #include <CppUTestExt/MockSupport.h>
 #include "capTouch.h"
 #include "capTouchMock.h"
+#include "capTouchDriverMock.h"
+
+CCapTouchDriverMock MOCK_CapTouchDriver;
 
 //--- Compile mock version
 
-CCapTouchComp::CCapTouchComp(void)
+
+CCapTouchComp::CCapTouchComp(CCapTouchDriver* capTouchDriver)
 {
+    if (capTouchDriver) return;
 }
 
 void CCapTouchComp::Execute(void)
@@ -27,7 +32,7 @@ bool CCapTouchComp::Get_TouchDetected(void)
 
 //--- Compile abstract mock version with output control
 
-CCapTouchMock::CCapTouchMock()
+CCapTouchMock::CCapTouchMock() : CCapTouchComp((CCapTouchDriver*)&MOCK_CapTouchDriver)
 {
 }
 

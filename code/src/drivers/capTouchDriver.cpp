@@ -62,8 +62,23 @@ void CCapTouchDriver::Initialize_Hardware(void)
     // Init GPIO
     GPIO_StructInit(&GPIO_InitStruct);
 
-    GPIO_InitStruct.GPIO_Speed = GPIO_High_Speed;
+    GPIO_InitStruct.GPIO_OType = GPIO_OType_OD;
     GPIO_InitStruct.GPIO_PuPd  = GPIO_PuPd_UP;
+    GPIO_InitStruct.GPIO_Speed = GPIO_High_Speed;
+
+
+    // Force the bus to release
+    GPIO_InitStruct.GPIO_Mode  = GPIO_Mode_OUT;
+    GPIO_InitStruct.GPIO_Pin   = m_SCL_GPIO_Pin_x;
+    GPIO_Init(m_SCL_GPIOx, &GPIO_InitStruct);
+
+    for (int cycles = 0; cycles < 10; cycles++)
+    {
+        GPIO_ToggleBits(m_SCL_GPIOx, m_SCL_GPIO_Pin_x);
+        for (int dly = 0x1A9; dly > 0; dly--);
+    }
+
+
     GPIO_InitStruct.GPIO_Mode  = GPIO_Mode_AF;
 
     GPIO_InitStruct.GPIO_Pin   = m_SCL_GPIO_Pin_x;
@@ -79,7 +94,6 @@ void CCapTouchDriver::Initialize_Hardware(void)
 
     GPIO_PinAFConfig(m_SCL_GPIOx, m_SCL_GPIO_PinSourcex, m_GPIO_AF);
     GPIO_PinAFConfig(m_SDA_GPIOx, m_SDA_GPIO_PinSourcex, m_GPIO_AF);
-    GPIO_PinAFConfig(m_IRQ_GPIOx, m_IRQ_GPIO_PinSourcex, m_GPIO_AF);
 
     // Init I2C
     RCC_APB1PeriphClockCmd(m_APBxPeriph_I2Cx, ENABLE);
@@ -99,10 +113,9 @@ void CCapTouchDriver::Initialize_Hardware(void)
     I2C_Cmd(m_I2Cx, ENABLE);
 } // end - void CCapTouchDriver::Initialize_Hardware(void)
 
-/*
-   BitAction CCapTouchDriver::SampleInput(void)
-   {
-   return (BitAction)GPIO_ReadInputDataBit(m_GPIOx, m_GPIO_Pin_x);
-   }
-   */
+bool CCapTouchDriver::Is_DataReady(void)
+{
+    if (GPIO_ReadInputDataBit(CAP_IRQ_GPIOx, CAP_IRQ_GPIO_Pin_x) == 1) return false;
+    else                                                               return true;
+} // end - bool CCapTouchDriver::Is_DataReady(void)
 
