@@ -73,7 +73,20 @@ TEST(CapTouchTests, TouchNotDetectedByDefault)
     CHECK_EQUAL(false, CapTouch->Is_TouchDetected());
 }
 
-// Does not clear touch detected variable unless it is read by customer
+TEST(CapTouchTests, TouchNotClearedUntilReadByCustomers)
+{
+    CapTouchDriver->Set_MockDataReady();
+
+    CapTouchDriver->Set_MockTouchDetected();
+    CapTouch->Run();
+
+    CapTouchDriver->Clear_MockTouchDetected();
+    CapTouch->Run();
+
+    CHECK_EQUAL(true , CapTouch->Is_TouchDetected());
+    CHECK_EQUAL(false, CapTouch->Is_TouchDetected());
+}
+
 // capTouch -- set register 5E = 3
 // * Combines all 12 electrodes into a single sensor
 // ** ECR->ELEPROX_EN = 0X3

@@ -11,12 +11,8 @@ void CCapTouchComp::Execute(void)
     if (m_CapTouchDriver->Is_DataReady())
     {
         if ((m_CapTouchDriver->ReadFromDevice() & PROX_STATUS_BIT) != 0)
-        {
+        { // This variable is cleared only after it has been polled
             m_TouchDetected = true;
-        }
-        else
-        {
-            m_TouchDetected = false;
         }
     }
 }
@@ -27,6 +23,14 @@ void CCapTouchComp::Initialize(void)
 
 bool CCapTouchComp::Is_TouchDetected(void)
 {
-    return m_TouchDetected;
+    if (m_TouchDetected == true)
+    {
+        m_TouchDetected = false;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
