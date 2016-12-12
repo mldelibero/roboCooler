@@ -38,7 +38,9 @@ TEST_SRC_DIRS = \
 
 TEST_SRC_FILES = \
 	../AllTests.cpp\
-	../mockFiles\limitSwitchDriverMock.cpp\
+	../mockFiles/capTouchDriverMock.cpp\
+	../mockFiles/limitSwitchDriverMock.cpp\
+	../../src/capTouch.cpp\
 	../../src/leds.cpp\
 	../../src/limitSwitch.cpp\
 

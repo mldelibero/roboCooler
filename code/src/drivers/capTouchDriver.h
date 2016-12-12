@@ -26,6 +26,8 @@
 #define CAP_APBxPeriph_I2Cx                RCC_APB1Periph_I2C1
 #define CAP_I2Cx                           I2C1
 
+#define PROX_STATUS_BIT                    0X1000 // in ELE Touch Status Register -- 1 indicates a touch is detected
+
 class CCapTouchDriver : CDriver
 {
     public:
@@ -51,8 +53,9 @@ class CCapTouchDriver : CDriver
 
         virtual ~CCapTouchDriver(void);
 
-        void Initialize_Hardware(void);
-        bool Is_DataReady(void);
+        void             Initialize_Hardware(void);
+        virtual bool     Is_DataReady(void);
+        virtual uint16_t ReadFromDevice(void);
 
     protected:
         // GPIO

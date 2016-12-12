@@ -74,13 +74,20 @@ void CCapTouchDriver::Initialize_Hardware(void)
 {
     mock().actualCall("CCapTouchDriver::Initialize_Hardware");
 }
-/*
 
-BitAction CCapTouchDriver::SampleInput(void)
+bool CCapTouchDriver::Is_DataReady(void)
 {
-    return Bit_SET;
+    mock().actualCall("CCapTouchDriver::Is_DataReady");
+    return 0;
 }
-*/
+
+uint16_t CCapTouchDriver::ReadFromDevice(void)
+{
+    mock().actualCall("CCapTouchDriver::ReadFromDevice");
+    return 0;
+}
+
+
 // -- Mock that abstracts capTouchDriver and allows input control
 CCapTouchDriverMock::CCapTouchDriverMock() : CCapTouchDriver(
     MOCK_SCL_RCC_AHB1Periph_GPIOx, MOCK_SCL_GPIOx, MOCK_SCL_GPIO_Pin_x, MOCK_SCL_GPIO_PinSourcex,
@@ -101,21 +108,38 @@ void CCapTouchDriverMock::Initialize_Hardware(void)
     mock().actualCall("CCapTouchDriver::Initialize_Hardware");
 }
 
-/*
 
-BitAction CCapTouchDriverMock::SampleInput(void)
+void CCapTouchDriverMock::Clear_MockDataReady(void)
 {
-    mock().actualCall("CCapTouchDriver::SampleInput");
-    return m_MockInputValue;
+    m_Mock_DataReady = false;
 }
 
-void CCapTouchDriverMock::Set_MockInput(void)
+void CCapTouchDriverMock::Set_MockDataReady(void)
 {
-    m_MockInputValue = Bit_SET;
+    m_Mock_DataReady = true;
 }
 
-void CCapTouchDriverMock::Clear_MockInput(void)
+bool CCapTouchDriverMock::Is_DataReady(void)
 {
-    m_MockInputValue = Bit_RESET;
+    mock().actualCall("CCapTouchDriver::Is_DataReady");
+    return m_Mock_DataReady;
 }
-*/
+
+
+void CCapTouchDriverMock::Clear_MockTouchDetected(void)
+{
+    m_Mock_TouchDetected = false;
+}
+
+void CCapTouchDriverMock::Set_MockTouchDetected(void)
+{
+    m_Mock_TouchDetected = true;
+}
+
+uint16_t CCapTouchDriverMock::ReadFromDevice(void)
+{
+    mock().actualCall("CCapTouchDriver::ReadFromDevice");
+    if (m_Mock_TouchDetected) return PROX_STATUS_BIT;
+    else                      return 0;
+}
+
