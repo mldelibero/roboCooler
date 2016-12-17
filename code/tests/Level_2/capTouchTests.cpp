@@ -37,7 +37,7 @@ TEST(CapTouchTests, PollSensorWhenDataIsReady)
     mock().enable();
     CapTouchDriver->Set_MockDataReady();
     mock().expectOneCall("CCapTouchDriver::Is_DataReady");
-    mock().expectOneCall("CCapTouchDriver::ReadFromDevice");
+    mock().expectOneCall("CCapTouchDriver::Read");
 
     CapTouch->Run();
 }

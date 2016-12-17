@@ -5,6 +5,8 @@
 #include <stm32f4xx_rcc.h>
 #include "capTouchDriver.h"
 
+#define CS_I2C_ADDR_RE     0xB5
+
 CCapTouchDriver::CCapTouchDriver(
                 uint32_t      SCL_RCC_AHB1Periph_GPIOx,
                 GPIO_TypeDef* SCL_GPIOx,
@@ -118,4 +120,50 @@ bool CCapTouchDriver::Is_DataReady(void)
     if (GPIO_ReadInputDataBit(CAP_IRQ_GPIOx, CAP_IRQ_GPIO_Pin_x) == 1) return false;
     else                                                               return true;
 } // end - bool CCapTouchDriver::Is_DataReady(void)
+
+void CCapTouchDriver::Write(unsigned char address, unsigned char data)
+{
+    I2C_GenerateSTART(m_I2Cx, ENABLE);
+    while (I2C_CheckEvent(m_I2Cx, I2C_EVENT_MASTER_MODE_SELECT) == ERROR);
+
+    I2C_Send7bitAddress(m_I2Cx, CS_I2C_ADDR_RE, I2C_Direction_Transmitter);
+    while (I2C_CheckEvent(m_I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED) == ERROR);
+
+    I2C_SendData(m_I2Cx, address);
+    while (I2C_CheckEvent(m_I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING) == ERROR);
+
+    I2C_SendData(m_I2Cx, data);
+    while (I2C_CheckEvent(m_I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTED) == ERROR);
+
+    I2C_GenerateSTOP(m_I2Cx, ENABLE);
+} // end - void CCapTouchDriver::Write(unsigned char address, unsigned char data)
+
+uint16_t CCapTouchDriver::Read(unsigned char address)
+{
+    uint16_t data;
+
+    // Restart
+    m_I2Cx->CR1 |= I2C_Ack_Enable; // Set ACK for single byte reception
+    I2C_GenerateSTART(m_I2Cx, ENABLE);
+    while (I2C_CheckEvent(m_I2Cx, I2C_EVENT_MASTER_MODE_SELECT) == ERROR);
+
+    // Address Write
+    I2C_Send7bitAddress(m_I2Cx, CS_I2C_ADDR_RE, I2C_Direction_Receiver);
+    while (I2C_CheckEvent(m_I2Cx, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED) == ERROR);
+
+    while (I2C_CheckEvent(m_I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED) == ERROR);
+    data = I2C_ReceiveData(m_I2Cx);
+    m_I2Cx->CR1 &= uint16_t(~I2C_Ack_Enable); // Set NACK for single byte reception
+
+    while (I2C_CheckEvent(m_I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED) == ERROR);
+
+    uint16_t temp = uint16_t(I2C_ReceiveData(m_I2Cx) << 8);
+    data |= temp;
+
+    // Stop Condition
+    I2C_GenerateSTOP(m_I2Cx, ENABLE);
+
+    if (address) return data; // Need to expand function to read from any address
+    return data;
+} // end - uint16_t CCapTouchDriver::Read(unsigned char address)
 

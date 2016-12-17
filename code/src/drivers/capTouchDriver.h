@@ -55,7 +55,8 @@ class CCapTouchDriver : CDriver
 
         void             Initialize_Hardware(void);
         virtual bool     Is_DataReady(void);
-        virtual uint16_t ReadFromDevice(void);
+        virtual uint16_t Read(unsigned char address);
+        void             Write(unsigned char address, unsigned char data);
 
     protected:
         // GPIO

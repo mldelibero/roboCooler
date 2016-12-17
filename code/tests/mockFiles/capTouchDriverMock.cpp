@@ -81,12 +81,20 @@ bool CCapTouchDriver::Is_DataReady(void)
     return 0;
 }
 
-uint16_t CCapTouchDriver::ReadFromDevice(void)
+
+uint16_t CCapTouchDriver::Read(unsigned char address)
 {
-    mock().actualCall("CCapTouchDriver::ReadFromDevice");
+    mock().actualCall("CCapTouchDriver::Read");
+    if (address) return 0;
     return 0;
 }
 
+void CCapTouchDriver::Write(unsigned char address, unsigned char data)
+{
+    mock().actualCall("CCapTouchDriver::Write");
+    if (address) return;
+    if (data)    return;
+}
 
 // -- Mock that abstracts capTouchDriver and allows input control
 CCapTouchDriverMock::CCapTouchDriverMock() : CCapTouchDriver(
@@ -136,10 +144,11 @@ void CCapTouchDriverMock::Set_MockTouchDetected(void)
     m_Mock_TouchDetected = true;
 }
 
-uint16_t CCapTouchDriverMock::ReadFromDevice(void)
+uint16_t CCapTouchDriverMock::Read(unsigned char address)
 {
-    mock().actualCall("CCapTouchDriver::ReadFromDevice");
+    mock().actualCall("CCapTouchDriver::Read");
     if (m_Mock_TouchDetected) return PROX_STATUS_BIT;
+    if (address)              return 0;
     else                      return 0;
 }
 

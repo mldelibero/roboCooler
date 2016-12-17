@@ -5,6 +5,8 @@
 
 #define TIM_OutputState_Enable             ((uint16_t)0x0001)
 
+typedef enum {ERROR = 0, SUCCESS = !ERROR} ErrorStatus;
+
 typedef struct
 {
 } TIM_TypeDef;

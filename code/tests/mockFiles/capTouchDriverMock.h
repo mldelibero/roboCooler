@@ -16,7 +16,7 @@ class CCapTouchDriverMock : public CCapTouchDriver
 
         void Clear_MockTouchDetected(void);
         void Set_MockTouchDetected(void);
-        uint16_t ReadFromDevice(void);
+        uint16_t Read(unsigned char address);
 
     private:
         BitAction m_MockInputValue;
