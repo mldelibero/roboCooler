@@ -38,6 +38,7 @@ TEST(InitTests, ModulesInitialized)
     mock().expectNCalls(1, "CLidMotorComp::Initialize");
     mock().expectNCalls(2, "CLimSwDriver::Initialize_Hardware");
     mock().expectNCalls(2, "CLimSwComp::Initialize");
+    mock().expectNCalls(1, "CLedStripComp::Initialize");
 
     init();
 }

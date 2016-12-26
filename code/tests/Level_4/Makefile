@@ -25,7 +25,7 @@ SRC_DIRS = \
 	./mockFiles\
 
 SRC_FILES = \
-../../src/ledStrip.cpp\
+../../src/leds/ledStrip.cpp\
 
 TEST_SRC_DIRS = \
 	./\
@@ -33,7 +33,7 @@ TEST_SRC_DIRS = \
 TEST_SRC_FILES = \
 	../AllTests.cpp\
 	../mockFiles/component.cpp\
-	../../src/ledStrip.cpp\
+	../../src/leds/ledStrip.cpp\
 
 INCLUDE_DIRS =\
   .\
@@ -42,6 +42,7 @@ INCLUDE_DIRS =\
   ../mockFiles/stdLib\
   ../../src\
   ../../src/drivers\
+  ../../src/leds\
   $(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk

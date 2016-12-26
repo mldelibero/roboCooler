@@ -50,6 +50,7 @@ INCLUDE_DIRS =\
   ../mockFiles/stdlib\
   ../../src\
   ../../src/drivers\
+  ../../src/leds\
   $(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk

@@ -6,6 +6,7 @@
 #include "limitSwitch.h"
 #include "limitSwitchDriver.h"
 #include "timer.h"
+#include "ledStrip.h"
 
 CLedComp leds;
 
@@ -24,6 +25,7 @@ CLimSwComp Closed_Limit(Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, 
 
 CLidMotorComp LidMotor(&Opened_Limit, &Closed_Limit, &CapTouch);
 
+CLedStripComp ledStrip;
 
 void init(void)
 {
@@ -46,5 +48,7 @@ void init(void)
 
     Opened_Limit.Initialize();
     Closed_Limit.Initialize();
+
+    ledStrip.Initialize();
 }
 

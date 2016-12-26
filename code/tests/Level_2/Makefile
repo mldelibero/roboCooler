@@ -26,7 +26,7 @@ SRC_DIRS = \
 	../Level_1/mockFiles\
 
 SRC_FILES = \
-	../../src/leds.cpp\
+	../../src/leds/leds.cpp\
 	../../src/limitSwitch.cpp\
 	../../src/drivers/CDriver.cpp\
 	../mockFiles/component.cpp\
@@ -42,7 +42,7 @@ TEST_SRC_FILES = \
 	../mockFiles/capTouchDriverMock.cpp\
 	../mockFiles/limitSwitchDriverMock.cpp\
 	../../src/capTouch.cpp\
-	../../src/leds.cpp\
+	../../src/leds/leds.cpp\
 	../../src/limitSwitch.cpp\
 
 INCLUDE_DIRS =\
@@ -53,6 +53,7 @@ INCLUDE_DIRS =\
   ../mockFiles/stdlib\
   ../../src\
   ../../src/drivers\
+  ../../src/leds\
   $(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
