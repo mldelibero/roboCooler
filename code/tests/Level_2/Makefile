@@ -29,6 +29,7 @@ SRC_FILES = \
 	../../src/leds.cpp\
 	../../src/limitSwitch.cpp\
 	../../src/drivers/CDriver.cpp\
+	../mockFiles/component.cpp\
 
 TEST_SRC_DIRS = \
 	./\

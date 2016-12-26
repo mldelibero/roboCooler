@@ -3,6 +3,7 @@ all:
 	make -C ./Level_2/
 	make -C ./Level_3/
 	make -C ./Level_4/
+	make -C ./InitTests/
 	make -C ./LoopTests/
 
 clean:
@@ -10,6 +11,7 @@ clean:
 	make -C ./Level_2/ clean
 	make -C ./Level_3/ clean
 	make -C ./Level_4/ clean
+	make -C ./InitTests/
 	make -C ./LoopTests/
 
 ac:
@@ -17,4 +19,5 @@ ac:
 	make -C ./Level_2/ clean all
 	make -C ./Level_3/ clean all
 	make -C ./Level_4/ clean all
+	make -C ./InitTests/
 	make -C ./LoopTests/

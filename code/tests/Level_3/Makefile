@@ -28,10 +28,11 @@ SRC_DIRS = \
 	../mockFiles/stdlib\
 
 SRC_FILES = \
-	../../src/lidMotor.cpp\
-	../../src/drivers/CDriver.cpp\
-	../mockFiles/limitSwitchMock.cpp\
 	../mockFiles/capTouchDriverMock.cpp\
+	../mockFiles/component.cpp\
+	../mockFiles/limitSwitchMock.cpp\
+	../../src/drivers/CDriver.cpp\
+	../../src/lidMotor.cpp\
 
 TEST_SRC_DIRS = \
 	./\
