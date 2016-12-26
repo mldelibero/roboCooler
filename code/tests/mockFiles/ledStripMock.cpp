@@ -3,13 +3,15 @@
 
 #include "capTouchMock.h"
 #include "limitSwitchMock.h"
+#include "ledStripDriverMock.h"
 
 
-CLedStripComp::CLedStripComp(CCapTouchComp* CapTouch, CLimSwComp* Closed_LimSw, CLimSwComp* Opened_LimSw)
+CLedStripComp::CLedStripComp(CLedStripDriver* LedStripDriver,  CCapTouchComp* CapTouch, CLimSwComp* Closed_LimSw, CLimSwComp* Opened_LimSw)
 {
-    m_CapTouch     = CapTouch;
-    m_Closed_LimSw = Closed_LimSw;
-    m_Opened_LimSw = Opened_LimSw;
+    m_LedStripDriver = LedStripDriver;
+    m_CapTouch       = CapTouch;
+    m_Closed_LimSw   = Closed_LimSw;
+    m_Opened_LimSw   = Opened_LimSw;
 }
 
 void CLedStripComp::Execute(void)

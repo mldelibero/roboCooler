@@ -29,6 +29,7 @@ SRC_FILES = \
 	../mockFiles/component.cpp\
 	../mockFiles/leds.cpp\
 	../mockFiles/ledStripMock.cpp\
+	../mockFiles/ledStripDriverMock.cpp\
 	../mockFiles/lidMotorMock.cpp\
 	../mockFiles/limitSwitchDriverMock.cpp\
 	../mockFiles/limitSwitchMock.cpp\
