@@ -1,8 +1,9 @@
 #include <CppUTest/TestHarness.h>
 #include <CppUTestExt/MockSupport.h>
 
-//#include "lidMotorMock.h"
 #include "ledStrip.h"
+#include "capTouchMock.h"
+#include "limitSwitchMock.h"
 
 /* List of driver features needed:
 
@@ -12,8 +13,10 @@
  *
  */
 
-//CLidMotorMock* lidMotorPtr;
-CLedStripComp* ledStrip;
+CCapTouchMock* CapTouch;
+CLimSwMock*    Closed_LimSw;
+CLimSwMock*    Opened_LimSw;
+CLedStripComp* LedStrip;
 
 /**
  * @note We are assuming that the timer has expired for all tests
@@ -22,14 +25,20 @@ TEST_GROUP(LedStripTests)
 {
     void setup()
     {
-        //lidMotorPtr = new CLidMotorMock();
-        ledStrip    = new CLedStripComp();
+        CapTouch     = new CCapTouchMock;
+        Closed_LimSw = new CLimSwMock;
+        Opened_LimSw = new CLimSwMock;
+        LedStrip     = new CLedStripComp((CCapTouchComp*)CapTouch, (CLimSwComp*)Closed_LimSw, (CLimSwComp*)Opened_LimSw);
+
         mock().enable();
     }
     void teardown()
     {
-//        delete lidMotorPtr;
-        delete ledStrip;
+        delete LedStrip;
+        delete CapTouch;
+        delete Closed_LimSw;
+        delete Opened_LimSw;
+
         mock().checkExpectations();
         mock().clear();
     }

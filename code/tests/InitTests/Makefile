@@ -53,6 +53,7 @@ INCLUDE_DIRS =\
   ../mockFiles\
   ../../src\
   ../../src/drivers\
+  ../../src/leds\
   ../mockFiles/stdLib\
   $(CPPUTEST_HOME)/include\
 

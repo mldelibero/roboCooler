@@ -15,7 +15,7 @@ typedef enum
 class CLidMotorComp: public CComponent
 {
     public:
-        CLidMotorComp(CLimSwComp* OpenedLimSw_p, CLimSwComp* ClosedLimSw_p, CCapTouchComp* m_CapTouch_p);
+        CLidMotorComp(CCapTouchComp* CapTouch_p, CLimSwComp* ClosedLimSw_p, CLimSwComp* OpenedLimSw_p);
 
         virtual void Execute(void);
         virtual void Initialize(void);

@@ -2,11 +2,11 @@
 #include "lidMotor.h"
 #include "limitSwitch.h"
 
-CLidMotorComp::CLidMotorComp(CLimSwComp* OpenedLimSw_p, CLimSwComp* ClosedLimSw_p, CCapTouchComp* CapTouch_p)
+CLidMotorComp::CLidMotorComp(CCapTouchComp* CapTouch_p, CLimSwComp* ClosedLimSw_p, CLimSwComp* OpenedLimSw_p)
 {
-    m_OpenedLimSw_p = OpenedLimSw_p;
-    m_ClosedLimSw_p = ClosedLimSw_p;
     m_CapTouch_p    = CapTouch_p;
+    m_ClosedLimSw_p = ClosedLimSw_p;
+    m_OpenedLimSw_p = OpenedLimSw_p;
 }
 
 void CLidMotorComp::Execute(void)

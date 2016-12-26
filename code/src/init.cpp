@@ -23,9 +23,9 @@ CLimSwDriver* Closed_LimSwDriver = NULL;
 CLimSwComp Opened_Limit(Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
 CLimSwComp Closed_Limit(Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
 
-CLidMotorComp LidMotor(&Opened_Limit, &Closed_Limit, &CapTouch);
+CLidMotorComp LidMotor(&CapTouch, &Closed_Limit, &Opened_Limit);
 
-CLedStripComp ledStrip;
+CLedStripComp ledStrip(&CapTouch, &Closed_Limit, &Opened_Limit);
 
 void init(void)
 {

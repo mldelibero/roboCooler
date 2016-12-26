@@ -38,7 +38,7 @@ TEST_GROUP(LidMotorTests)
     void setup()
     {
         limSwDriver = new CLimSwDriverMock();
-        lidMotorPtr = new CLidMotorComp(&Opened_Limit, &Closed_Limit, &capTouch);
+        lidMotorPtr = new CLidMotorComp(&capTouch, &Closed_Limit, &Opened_Limit);
         mock().enable();
     }
     void teardown()
@@ -52,9 +52,9 @@ TEST_GROUP(LidMotorTests)
 
 TEST(LidMotorTests, TestSetupSetsObjectPointers)
 {
-    POINTERS_EQUAL(&Opened_Limit , lidMotorPtr->Get_OpenLimSwPtr());
-    POINTERS_EQUAL(&Closed_Limit , lidMotorPtr->Get_CloseLimSwPtr());
     POINTERS_EQUAL(&capTouch     , lidMotorPtr->Get_CapSensePtr());
+    POINTERS_EQUAL(&Closed_Limit , lidMotorPtr->Get_CloseLimSwPtr());
+    POINTERS_EQUAL(&Opened_Limit , lidMotorPtr->Get_OpenLimSwPtr());
 }
 
 TEST(LidMotorTests, TestInitCalls)

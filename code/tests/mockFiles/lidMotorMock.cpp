@@ -8,11 +8,11 @@ CLimSwMock    Mock_ClosedLimSw;
 CCapTouchMock Mock_CapTouch;
 
 //--- Compile mock version
-CLidMotorComp::CLidMotorComp(CLimSwComp* OpenedLimSw_p, CLimSwComp* ClosedLimSw_p, CCapTouchComp* CapTouch_p)
+CLidMotorComp::CLidMotorComp(CCapTouchComp* CapTouch_p, CLimSwComp* ClosedLimSw_p, CLimSwComp* OpenedLimSw_p)
 {
-    m_OpenedLimSw_p = OpenedLimSw_p;
-    m_ClosedLimSw_p = ClosedLimSw_p;
     m_CapTouch_p    = CapTouch_p;
+    m_ClosedLimSw_p = ClosedLimSw_p;
+    m_OpenedLimSw_p = OpenedLimSw_p;
 }
 
 void CLidMotorComp::Initialize(void)
@@ -26,7 +26,7 @@ void CLidMotorComp::Execute(void)
 }
 
 //--- Compile abstract mock version with output control
-CLidMotorMock::CLidMotorMock() : CLidMotorComp(&Mock_OpenedLimSw, &Mock_ClosedLimSw, &Mock_CapTouch)
+CLidMotorMock::CLidMotorMock() : CLidMotorComp(&Mock_CapTouch, &Mock_ClosedLimSw, &Mock_OpenedLimSw)
 {
 }
 

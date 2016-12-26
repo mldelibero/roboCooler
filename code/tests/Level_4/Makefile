@@ -32,7 +32,13 @@ TEST_SRC_DIRS = \
 
 TEST_SRC_FILES = \
 	../AllTests.cpp\
+	../mockFiles/capTouchMock.cpp\
+	../mockFiles/capTouchDriverMock.cpp\
 	../mockFiles/component.cpp\
+	../mockFiles/limitSwitchMock.cpp\
+	../mockFiles/limitSwitchDriverMock.cpp\
+	../mockFiles/stdlib/stm32f4xx.cpp\
+	../../src/drivers/CDriver.cpp\
 	../../src/leds/ledStrip.cpp\
 
 INCLUDE_DIRS =\
