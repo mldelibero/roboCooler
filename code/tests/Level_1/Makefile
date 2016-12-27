@@ -35,6 +35,7 @@ TEST_SRC_DIRS = \
 TEST_SRC_FILES = \
 	../AllTests.cpp\
 	../../src/component.cpp\
+	../../src/leds/ledObj.cpp\
 
 INCLUDE_DIRS =\
   .\
