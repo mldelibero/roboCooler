@@ -36,6 +36,7 @@ TEST_SRC_FILES = \
 	../mockFiles/capTouchDriverMock.cpp\
 	../mockFiles/component.cpp\
 	../mockFiles/ledStripDriverMock.cpp\
+	../mockFiles/ledObjMock.cpp\
 	../mockFiles/limitSwitchMock.cpp\
 	../mockFiles/limitSwitchDriverMock.cpp\
 	../mockFiles/sceneMock.cpp\

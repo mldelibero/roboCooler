@@ -5,13 +5,11 @@
 #include "ledStripDriverMock.h"
 #include "ledobj.h"
 
-CLedObj*  Mock_LedObjArray;
-static uint16_t  Mock_NumLeds;
+static uint16_t  Mock_NumLeds = 10;
 
 // --- Mock to compile ledDriverDriver
-CLedStripDriver::CLedStripDriver(CLedObj* LedObjArray, uint16_t NumLeds)
+CLedStripDriver::CLedStripDriver(uint16_t NumLeds)
 {
-    m_LedObjArray = LedObjArray;
     m_NumLeds     = NumLeds;
 }
 
@@ -30,7 +28,7 @@ void CLedStripDriver::Update(void)
 }
 
 // -- Mock that abstracts ledDriverDriver and allows input control
-CLedStripDriverMock::CLedStripDriverMock() : CLedStripDriver(Mock_LedObjArray, Mock_NumLeds)
+CLedStripDriverMock::CLedStripDriverMock() : CLedStripDriver(Mock_NumLeds)
 {
 }
 

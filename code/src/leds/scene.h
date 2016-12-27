@@ -7,9 +7,9 @@
 class CScene
 {
     public:
-        CScene(CLedObj* LedArray, uint16_t NumLeds);
+        CScene(void);
 
-        void Play(void);
+        void Play(CLedObj* LedArray, uint16_t NumLeds);
         virtual bool Is_StartCriteriaMet(void);
 
     private:

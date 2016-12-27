@@ -1,6 +1,7 @@
 #ifndef __LEDSTRIP_H
 #define __LEDSTRIP_H
 #include "component.h"
+#include "ledObj.h"
 #include "ledStripDriver.h"
 #include "scene.h"
 
@@ -21,6 +22,7 @@ class CLedStripComp : public CComponent
         CLedStripDriver* m_LedStripDriver;
         uint8_t          m_NumScenes;
         CScene*          m_Scenes[10];
+        CLedObj          m_LedArray[NUM_LEDS];
 }; // end - class CLedStripComp : public CComponent
 #endif // #ifndef __LEDSTRIP_H
 

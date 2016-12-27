@@ -2,9 +2,8 @@
 #include <CppUTestExt/MockSupport.h>
 #include "ledStripDriver.h"
 
-CLedStripDriver::CLedStripDriver(CLedObj* LedObjArray, uint16_t NumLeds)
+CLedStripDriver::CLedStripDriver(uint16_t NumLeds)
 {
-    m_LedObjArray = LedObjArray;
     m_NumLeds     = NumLeds;
 }
 

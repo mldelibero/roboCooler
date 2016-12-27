@@ -6,7 +6,7 @@
 class CLedStripDriver : CDriver
 {
     public:
-        CLedStripDriver(CLedObj* LedObjArray, uint16_t NumLeds);
+        CLedStripDriver(uint16_t NumLeds);
         virtual ~CLedStripDriver(void);
 
         void Initialize_Hardware(void);

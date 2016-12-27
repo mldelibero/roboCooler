@@ -16,7 +16,7 @@ void CLedStripComp::Execute(void)
 {
     for (int scene = 0; scene < m_NumScenes; scene++)
     {
-        m_Scenes[scene]->Play();
+        m_Scenes[scene]->Play(&m_LedArray[0], NUM_LEDS);
     }
 
     m_LedStripDriver->Update();

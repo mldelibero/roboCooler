@@ -6,16 +6,14 @@
 #include "limitSwitch.h"
 #include "limitSwitchDriver.h"
 #include "timer.h"
-#include "ledObj.h"
 #include "ledStrip.h"
 #include "ledStripDriver.h"
 #include "scene.h"
 
 CLedComp leds;
 
-CLedObj         LedArray[NUM_LEDS];
-CLedStripDriver LedStripDriver(&LedArray[0], NUM_LEDS);
-CScene          FirstScene(&LedArray[0], NUM_LEDS);
+CLedStripDriver LedStripDriver(NUM_LEDS);
+CScene          FirstScene;
 CLedStripComp   LedStrip(&LedStripDriver, &FirstScene);
 
 CCapTouchDriver CapTouchDriver(

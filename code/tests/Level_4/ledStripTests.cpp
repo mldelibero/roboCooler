@@ -87,7 +87,7 @@ TEST(LedStripTests, RunExecutesFirstSceneAndLedStripDriver)
 {
     mock().enable();
 
-    mock().expectOneCall("CScene::Play"           ).withCallOrder(1);
+    mock().expectOneCall("CScene::Play"           ).withCallOrder(1).onObject(FirstScene);
     mock().expectOneCall("CLedStripDriver::Update").withCallOrder(2);
     LedStrip->Run();
 }
@@ -108,11 +108,14 @@ TEST(LedStripTests, CanAddScene)
 TEST(LedStripTests, MultipleTestsRunIfAdded)
 {
     CSceneMock SecondScene;
+
+    mock().enable();
+    mock().expectOneCall("CScene::Play").onObject(FirstScene);
+    mock().expectOneCall("CScene::Play").onObject(&SecondScene);
+    mock().ignoreOtherCalls();
+
     LedStrip->Add_Scene(&SecondScene);
     LedStrip->Run();
-
-    //CHECK_EQUAL(true, FirstScene->HasBeenPlayed());
-    CHECK_EQUAL(true, SecondScene.HasBeenPlayed());
 }
 
 TEST(LedStripTests, BasicOverRunProtection)
