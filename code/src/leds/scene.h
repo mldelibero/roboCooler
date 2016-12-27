@@ -10,8 +10,10 @@ class CScene
         CScene(void);
         virtual ~CScene(void);
 
-        void Play(CLedObj* LedArray, uint16_t NumLeds);
+        void         Play(CLedObj* LedArray, uint16_t NumLeds);
         virtual bool Is_StartCriteriaMet(void);
+        bool         Is_Running(void);
+        bool         Is_StartTriggerMet(void);
 
     private:
         CLedObj* m_LedArray;

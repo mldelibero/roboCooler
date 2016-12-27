@@ -11,3 +11,13 @@ bool CScene::Is_StartCriteriaMet(void)
     return false;
 }
 
+bool CScene::Is_Running(void)
+{
+    return false;
+}
+
+bool CScene::Is_StartTriggerMet(void)
+{
+    return false;
+}
+
