@@ -9,7 +9,10 @@ class CSceneMock : public CSceneComp
         virtual void Execute(void);
         virtual void Initialize(void);
 
+        bool HasBeenRun(void);
+
     private:
+        bool m_HasBeenRun;
 };
 #endif // #ifndef __SCENEMOCK_H
 

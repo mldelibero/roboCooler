@@ -4,6 +4,8 @@
 #include "ledStripDriver.h"
 #include "scene.h"
 
+#define NUM_LEDS    100
+
 class CLedStripComp : public CComponent
 {
     public:
@@ -12,9 +14,13 @@ class CLedStripComp : public CComponent
         virtual void Execute(void);
         virtual void Initialize(void);
 
+        virtual uint32_t Get_NumberOfScenes(void);
+        virtual void     Add_Scene(CSceneComp* NextScene);
+
     private:
         CLedStripDriver* m_LedStripDriver;
-        CSceneComp*      m_FirstScene;
+        uint8_t          m_NumScenes;
+        CSceneComp*      m_Scenes[10];
 }; // end - class CLedStripComp : public CComponent
 #endif // #ifndef __LEDSTRIP_H
 

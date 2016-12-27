@@ -43,6 +43,7 @@ INCLUDE_DIRS =\
   ../integration\
   ../../src\
   ../../src/drivers\
+  ../../src/leds\
   $(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk

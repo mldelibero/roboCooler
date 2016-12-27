@@ -6,6 +6,7 @@
 #include "limitSwitch.h"
 #include "limitSwitchDriver.h"
 #include "timer.h"
+#include "ledObj.h"
 #include "ledStrip.h"
 #include "ledStripDriver.h"
 #include "scene.h"
@@ -27,9 +28,10 @@ CLimSwComp Closed_Limit(Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, 
 
 CLidMotorComp LidMotor(&CapTouch, &Closed_Limit, &Opened_Limit);
 
-CSceneComp      FirstScene;
-CLedStripDriver LedStripDriver;
-CLedStripComp LedStrip(&LedStripDriver, &FirstScene);
+CLedObj         LedArray[NUM_LEDS];
+CLedStripDriver LedStripDriver(&LedArray[0], NUM_LEDS);
+CSceneComp      FirstScene(&LedArray[0], NUM_LEDS);
+CLedStripComp   LedStrip(&LedStripDriver, &FirstScene);
 
 void init(void)
 {

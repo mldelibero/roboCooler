@@ -6,10 +6,10 @@
 #include "ledStripDriverMock.h"
 
 
-CLedStripComp::CLedStripComp(CLedStripDriver* LedStripDriver, CSceneComp* FirstScene)
+CLedStripComp::CLedStripComp::CLedStripComp(CLedStripDriver* LedStripDriver, CSceneComp* FirstScene)
 {
-    m_LedStripDriver = LedStripDriver;
-    m_FirstScene     = FirstScene;
+    if (LedStripDriver) return;
+    m_Scenes[0] = FirstScene;
 }
 
 void CLedStripComp::Execute(void)
@@ -20,5 +20,17 @@ void CLedStripComp::Execute(void)
 void CLedStripComp::Initialize(void)
 {
     mock().actualCall("CLedStripComp::Initialize");
+}
+
+uint32_t CLedStripComp::Get_NumberOfScenes(void)
+{
+    mock().actualCall("CLedStripComp::Get_NumberOfScenes");
+    return 0;
+}
+
+void CLedStripComp::Add_Scene(CSceneComp* NextScene)
+{
+    m_Scenes[0] = NextScene;
+    mock().actualCall("CLedStripComp::Add_Scene");
 }
 

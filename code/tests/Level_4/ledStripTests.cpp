@@ -18,9 +18,41 @@ CSceneMock*          FirstScene;
 
 CLedStripComp*       LedStrip;
 
-/**
- * @note We are assuming that the timer has expired for all tests
- */
+//-----------------------------------------------------------------------------
+TEST_GROUP(SceneMockTests)
+{
+    void setup()
+    {
+        FirstScene     = new CSceneMock;
+        mock().disable();
+    }
+    void teardown()
+    {
+        delete FirstScene;
+    }
+}; // end - TEST_GROUP(SceneMockTests)
+
+TEST(SceneMockTests, SceneNotRunAfterConstructor)
+{
+    CHECK_EQUAL(false, FirstScene->HasBeenRun());
+}
+
+TEST(SceneMockTests, SceneIndicatesRunAfterBeingRun)
+{
+    FirstScene->Run();
+    CHECK_EQUAL(true, FirstScene->HasBeenRun());
+}
+
+TEST(SceneMockTests, SceneIndicatesNotRunAfterSecondAsk)
+{
+    FirstScene->Run();
+    FirstScene->HasBeenRun();
+
+    CHECK_EQUAL(false, FirstScene->HasBeenRun());
+}
+
+
+//-----------------------------------------------------------------------------
 TEST_GROUP(LedStripTests)
 {
     void setup()
@@ -29,7 +61,7 @@ TEST_GROUP(LedStripTests)
         FirstScene     = new CSceneMock;
         LedStrip       = new CLedStripComp((CLedStripDriver*)LedStripDriver, (CSceneComp*)FirstScene);
 
-        mock().enable();
+        mock().disable();
     }
     void teardown()
     {
@@ -43,8 +75,46 @@ TEST_GROUP(LedStripTests)
     }
 }; // end - TEST_GROUP(LedStripTests)
 
-TEST(LedStripTests, fail)
+TEST(LedStripTests, RunExecutesFirstSceneAndLedStripDriver)
 {
-    CHECK(true);
+    mock().enable();
+
+    mock().expectOneCall("CSceneComp::Execute"    ).withCallOrder(1);
+    mock().expectOneCall("CLedStripDriver::Update").withCallOrder(2);
+    LedStrip->Run();
+}
+
+TEST(LedStripTests, ReturnsCorrectNumberOfScenesAfterConstructor)
+{
+    CHECK_EQUAL(1, LedStrip->Get_NumberOfScenes());
+}
+
+TEST(LedStripTests, CanAddScene)
+{
+    CSceneMock SecondScene;
+
+    LedStrip->Add_Scene(&SecondScene);
+    CHECK_EQUAL(2, LedStrip->Get_NumberOfScenes());
+}
+
+TEST(LedStripTests, MultipleTestsRunIfAdded)
+{
+    CSceneMock SecondScene;
+    LedStrip->Add_Scene(&SecondScene);
+    LedStrip->Run();
+
+    CHECK_EQUAL(true, FirstScene->HasBeenRun());
+    CHECK_EQUAL(true, SecondScene.HasBeenRun());
+}
+
+TEST(LedStripTests, BasicOverRunProtection)
+{
+    CSceneMock AddtionalScene;
+    for (int scene = 1; scene <= 10; scene++)
+    {
+        LedStrip->Add_Scene(&AddtionalScene);
+    }
+
+    CHECK_EQUAL(10, LedStrip->Get_NumberOfScenes());
 }
 

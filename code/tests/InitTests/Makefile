@@ -28,6 +28,7 @@ SRC_FILES = \
 	../mockFiles/capTouchMock.cpp\
 	../mockFiles/component.cpp\
 	../mockFiles/leds.cpp\
+	../mockFiles/ledObjMock.cpp\
 	../mockFiles/ledStripMock.cpp\
 	../mockFiles/ledStripDriverMock.cpp\
 	../mockFiles/lidMotorMock.cpp\

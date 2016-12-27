@@ -3,8 +3,6 @@
 #include <stm32f4xx.h>
 #include "component.h"
 
-#define NUM_LEDS            8
-
 class CLedComp: public CComponent
 {
     public:
