@@ -15,7 +15,7 @@ CLedComp leds;
 
 CLedObj         LedArray[NUM_LEDS];
 CLedStripDriver LedStripDriver(&LedArray[0], NUM_LEDS);
-CSceneComp      FirstScene(&LedArray[0], NUM_LEDS);
+CScene          FirstScene(&LedArray[0], NUM_LEDS);
 CLedStripComp   LedStrip(&LedStripDriver, &FirstScene);
 
 CCapTouchDriver CapTouchDriver(

@@ -9,18 +9,18 @@
 class CLedStripComp : public CComponent
 {
     public:
-        CLedStripComp(CLedStripDriver* LedStripDriver, CSceneComp* FirstScene);
+        CLedStripComp(CLedStripDriver* LedStripDriver, CScene* FirstScene);
 
         virtual void Execute(void);
         virtual void Initialize(void);
 
         virtual uint32_t Get_NumberOfScenes(void);
-        virtual void     Add_Scene(CSceneComp* NextScene);
+        virtual void     Add_Scene(CScene* NextScene);
 
     private:
         CLedStripDriver* m_LedStripDriver;
         uint8_t          m_NumScenes;
-        CSceneComp*      m_Scenes[10];
+        CScene*          m_Scenes[10];
 }; // end - class CLedStripComp : public CComponent
 #endif // #ifndef __LEDSTRIP_H
 

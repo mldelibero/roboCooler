@@ -4,7 +4,7 @@
 
 #include "scene.h"
 
-CLedStripComp::CLedStripComp(CLedStripDriver* LedStripDriver, CSceneComp* FirstScene) : CComponent(0)
+CLedStripComp::CLedStripComp(CLedStripDriver* LedStripDriver, CScene* FirstScene) : CComponent(0)
 {
     m_LedStripDriver = LedStripDriver;
     m_NumScenes      = 0; // Gets increased in the Add_Scene function
@@ -16,7 +16,7 @@ void CLedStripComp::Execute(void)
 {
     for (int scene = 0; scene < m_NumScenes; scene++)
     {
-        m_Scenes[scene]->Run();
+        m_Scenes[scene]->Play();
     }
 
     m_LedStripDriver->Update();
@@ -31,7 +31,7 @@ uint32_t CLedStripComp::Get_NumberOfScenes(void)
     return m_NumScenes;
 }
 
-void CLedStripComp::Add_Scene(CSceneComp* NextScene)
+void CLedStripComp::Add_Scene(CScene* NextScene)
 {
     if (m_NumScenes < 10)
     {

@@ -4,13 +4,13 @@
 #include "component.h"
 #include "ledObj.h"
 
-class CSceneComp: public CComponent
+class CScene
 {
     public:
-        CSceneComp(CLedObj* LedArray, uint16_t NumLeds);
+        CScene(CLedObj* LedArray, uint16_t NumLeds);
 
-        virtual void Execute(void);
-        virtual void Initialize(void);
+        void Play(void);
+        virtual bool Is_StartCriteriaMet(void);
 
     private:
         CLedObj* m_LedArray;

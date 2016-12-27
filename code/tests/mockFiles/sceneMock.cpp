@@ -6,46 +6,48 @@
 
 CLedObj* Mock_LedArray;
 static uint16_t Mock_NumLeds = 10;
+static bool SceneHasBeenPlayed = false;
 
 //--- Compile mock version
 
-CSceneComp::CSceneComp(CLedObj* LedArray, uint16_t NumLeds)
+CScene::CScene(CLedObj* LedArray, uint16_t NumLeds)
 {
+    SceneHasBeenPlayed = false;
     m_LedArray = LedArray;
     if (NumLeds) return;
 }
 
-void CSceneComp::Execute(void)
+void CScene::Play(void)
 {
-    mock().actualCall("CSceneComp::Execute");
+    mock().actualCall("CScene::Play");
+    SceneHasBeenPlayed = true;
 }
 
-void CSceneComp::Initialize(void)
+bool CScene::Is_StartCriteriaMet(void)
 {
-    mock().actualCall("CSceneComp::Initialize");
+    return false;
 }
 
 //--- Compile abstract mock version with output control
 
-CSceneMock::CSceneMock() : CSceneComp(Mock_LedArray, Mock_NumLeds)
+CSceneMock::CSceneMock() : CScene(Mock_LedArray, Mock_NumLeds)
 {
-    m_HasBeenRun = false;
+    SceneHasBeenPlayed = false;
 }
 
-void CSceneMock::Execute(void)
+CSceneMock::~CSceneMock()
+{}
+
+void CSceneMock::Play(void)
 {
-    mock().actualCall("CSceneComp::Execute");
-    m_HasBeenRun = true;
+    mock().actualCall("CScene::Play");
+    SceneHasBeenPlayed = true;
 }
 
-void CSceneMock::Initialize(void)
+bool CSceneMock::HasBeenPlayed(void)
 {
-    mock().actualCall("CSceneComp::Initialize");
-}
-
-bool CSceneMock::HasBeenRun(void)
-{
-    bool tmp = m_HasBeenRun;
-    m_HasBeenRun = false;
+    bool tmp = SceneHasBeenPlayed;
+    SceneHasBeenPlayed = false;
     return tmp;
 }
+

@@ -34,21 +34,21 @@ TEST_GROUP(SceneMockTests)
 
 TEST(SceneMockTests, SceneNotRunAfterConstructor)
 {
-    CHECK_EQUAL(false, FirstScene->HasBeenRun());
+    CHECK_EQUAL(false, FirstScene->HasBeenPlayed());
 }
 
 TEST(SceneMockTests, SceneIndicatesRunAfterBeingRun)
 {
-    FirstScene->Run();
-    CHECK_EQUAL(true, FirstScene->HasBeenRun());
+    FirstScene->Play();
+    CHECK_EQUAL(true, FirstScene->HasBeenPlayed());
 }
 
 TEST(SceneMockTests, SceneIndicatesNotRunAfterSecondAsk)
 {
-    FirstScene->Run();
-    FirstScene->HasBeenRun();
+    FirstScene->Play();
+    FirstScene->HasBeenPlayed();
 
-    CHECK_EQUAL(false, FirstScene->HasBeenRun());
+    CHECK_EQUAL(false, FirstScene->HasBeenPlayed());
 }
 
 
@@ -60,7 +60,7 @@ TEST_GROUP(LedStripTests)
         mock().disable();
         LedStripDriver = new CLedStripDriverMock;
         FirstScene     = new CSceneMock;
-        LedStrip       = new CLedStripComp((CLedStripDriver*)LedStripDriver, (CSceneComp*)FirstScene);
+        LedStrip       = new CLedStripComp((CLedStripDriver*)LedStripDriver, (CScene*)FirstScene);
     }
 
     void teardown()
@@ -80,14 +80,14 @@ TEST(LedStripTests, ConstructorSetsTimeoutToZero)
     mock().enable();
     mock().expectOneCall("CComponent::Constructor").withParameter("resetValue", 0);
 
-    CLedStripComp LedStripComp((CLedStripDriver*)LedStripDriver, (CSceneComp*)FirstScene);
+    CLedStripComp LedStripComp((CLedStripDriver*)LedStripDriver, (CScene*)FirstScene);
 }
 
 TEST(LedStripTests, RunExecutesFirstSceneAndLedStripDriver)
 {
     mock().enable();
 
-    mock().expectOneCall("CSceneComp::Execute"    ).withCallOrder(1);
+    mock().expectOneCall("CScene::Play"           ).withCallOrder(1);
     mock().expectOneCall("CLedStripDriver::Update").withCallOrder(2);
     LedStrip->Run();
 }
@@ -111,8 +111,8 @@ TEST(LedStripTests, MultipleTestsRunIfAdded)
     LedStrip->Add_Scene(&SecondScene);
     LedStrip->Run();
 
-    CHECK_EQUAL(true, FirstScene->HasBeenRun());
-    CHECK_EQUAL(true, SecondScene.HasBeenRun());
+    //CHECK_EQUAL(true, FirstScene->HasBeenPlayed());
+    CHECK_EQUAL(true, SecondScene.HasBeenPlayed());
 }
 
 TEST(LedStripTests, BasicOverRunProtection)
