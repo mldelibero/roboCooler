@@ -1,13 +1,10 @@
 #include "ledStrip.h"
 #include "ledStripDriver.h"
 
-CLedStripComp::CLedStripComp(CLedStripDriver* LedStripDriver,  CCapTouchComp* CapTouch, CLimSwComp* Closed_LimSw, CLimSwComp* Opened_LimSw)
+CLedStripComp::CLedStripComp(CLedStripDriver* LedStripDriver, CSceneComp* FirstScene)
 {
-
     m_LedStripDriver = LedStripDriver;
-    m_CapTouch       = CapTouch;
-    m_Closed_LimSw   = Closed_LimSw;
-    m_Opened_LimSw   = Opened_LimSw;
+    m_FirstScene     = FirstScene;
 }
 
 void CLedStripComp::Execute(void)

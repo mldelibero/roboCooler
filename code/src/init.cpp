@@ -8,6 +8,7 @@
 #include "timer.h"
 #include "ledStrip.h"
 #include "ledStripDriver.h"
+#include "scene.h"
 
 CLedComp leds;
 
@@ -26,8 +27,9 @@ CLimSwComp Closed_Limit(Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, 
 
 CLidMotorComp LidMotor(&CapTouch, &Closed_Limit, &Opened_Limit);
 
+CSceneComp      FirstScene;
 CLedStripDriver LedStripDriver;
-CLedStripComp LedStrip(&LedStripDriver, &CapTouch, &Closed_Limit, &Opened_Limit);
+CLedStripComp LedStrip(&LedStripDriver, &FirstScene);
 
 void init(void)
 {

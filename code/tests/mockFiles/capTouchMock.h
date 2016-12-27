@@ -1,6 +1,6 @@
 #ifndef __CAPTOUCHMOCK_H
 #define __CAPTOUCHMOCK_H
-#include "limitSwitch.h"
+#include "capTouch.h"
 class CCapTouchMock: public CCapTouchComp
 {
     public:

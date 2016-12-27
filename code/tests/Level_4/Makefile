@@ -25,7 +25,7 @@ SRC_DIRS = \
 	./mockFiles\
 
 SRC_FILES = \
-../../src/leds/ledStrip.cpp\
+	../../src/leds/ledStrip.cpp\
 
 TEST_SRC_DIRS = \
 	./\
@@ -38,6 +38,7 @@ TEST_SRC_FILES = \
 	../mockFiles/ledStripDriverMock.cpp\
 	../mockFiles/limitSwitchMock.cpp\
 	../mockFiles/limitSwitchDriverMock.cpp\
+	../mockFiles/sceneMock.cpp\
 	../mockFiles/stdlib/stm32f4xx.cpp\
 	../../src/drivers/CDriver.cpp\
 	../../src/leds/ledStrip.cpp\

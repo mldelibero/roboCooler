@@ -3,8 +3,7 @@
 
 #include "ledStrip.h"
 #include "ledStripDriverMock.h"
-#include "capTouchMock.h"
-#include "limitSwitchMock.h"
+#include "sceneMock.h"
 
 /* List of driver features needed:
 
@@ -15,9 +14,8 @@
  */
 
 CLedStripDriverMock* LedStripDriver;
-CCapTouchMock*       CapTouch;
-CLimSwMock*          Closed_LimSw;
-CLimSwMock*          Opened_LimSw;
+CSceneMock*          FirstScene;
+
 CLedStripComp*       LedStrip;
 
 /**
@@ -28,21 +26,17 @@ TEST_GROUP(LedStripTests)
     void setup()
     {
         LedStripDriver = new CLedStripDriverMock;
-        CapTouch       = new CCapTouchMock;
-        Closed_LimSw   = new CLimSwMock;
-        Opened_LimSw   = new CLimSwMock;
-        LedStrip       = new CLedStripComp((CLedStripDriver*)LedStripDriver, (CCapTouchComp*)CapTouch, (CLimSwComp*)Closed_LimSw, (CLimSwComp*)Opened_LimSw);
+        FirstScene     = new CSceneMock;
+        LedStrip       = new CLedStripComp((CLedStripDriver*)LedStripDriver, (CSceneComp*)FirstScene);
 
         mock().enable();
     }
     void teardown()
     {
         delete LedStrip;
+        delete FirstScene;
 
         delete LedStripDriver;
-        delete CapTouch;
-        delete Closed_LimSw;
-        delete Opened_LimSw;
 
         mock().checkExpectations();
         mock().clear();

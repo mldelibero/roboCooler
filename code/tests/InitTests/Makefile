@@ -33,6 +33,7 @@ SRC_FILES = \
 	../mockFiles/lidMotorMock.cpp\
 	../mockFiles/limitSwitchDriverMock.cpp\
 	../mockFiles/limitSwitchMock.cpp\
+	../mockFiles/sceneMock.cpp\
 	../mockFiles/timer.cpp\
 	../../src/init.cpp\
 	../../src/drivers/CDriver.cpp\
