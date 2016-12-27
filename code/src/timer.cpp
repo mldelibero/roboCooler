@@ -1,6 +1,9 @@
-/* brief
-   The timer module will subtract one from an array of timers at a fixed interval inside of an interrupt. It will not lower a timer below zero. It will have no knowlede of the meaning of any of the timers. Resetting the timers will be the responsibility of the client.
-   */
+/**
+ * @brief
+ * @bug     Update timer module to automatically reset timers and to set a flag (update and overrun) when the timers expire
+ * @note    The timer module will subtract one from an array of timers at a fixed interval inside of an interrupt. It will not lower a timer below zero. It will have no knowlede of the meaning of any of the timers. Resetting the timers will be the responsibility of the client.
+ */
+
 #include <stm32f4xx_tim.h>
 #include "timer.h"
 #include "timerDriver.h"
