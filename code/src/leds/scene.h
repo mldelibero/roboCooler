@@ -8,6 +8,7 @@ class CScene
 {
     public:
         CScene(void);
+        virtual ~CScene(void);
 
         void Play(CLedObj* LedArray, uint16_t NumLeds);
         virtual bool Is_StartCriteriaMet(void);

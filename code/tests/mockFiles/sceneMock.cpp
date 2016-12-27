@@ -12,6 +12,9 @@ CScene::CScene(void)
     SceneHasBeenPlayed = false;
 }
 
+CScene::~CScene(void)
+{}
+
 void CScene::Play(CLedObj* LedArray, uint16_t NumLeds)
 {
     mock().actualCall("CScene::Play").onObject(this);
