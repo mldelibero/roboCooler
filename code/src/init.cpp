@@ -13,6 +13,11 @@
 
 CLedComp leds;
 
+CLedObj         LedArray[NUM_LEDS];
+CLedStripDriver LedStripDriver(&LedArray[0], NUM_LEDS);
+CSceneComp      FirstScene(&LedArray[0], NUM_LEDS);
+CLedStripComp   LedStrip(&LedStripDriver, &FirstScene);
+
 CCapTouchDriver CapTouchDriver(
         CAP_SCL_RCC_AHB1Periph_GPIOx, CAP_SCL_GPIOx, CAP_SCL_GPIO_Pin_x, CAP_SCL_GPIO_PinSourcex,
         CAP_SDA_RCC_AHB1Periph_GPIOx, CAP_SDA_GPIOx, CAP_SDA_GPIO_Pin_x, CAP_SCL_GPIO_PinSourcex,
@@ -21,40 +26,30 @@ CCapTouchDriver CapTouchDriver(
 
 CCapTouchComp CapTouch(&CapTouchDriver);
 
-CLimSwDriver* Opened_LimSwDriver = NULL;
-CLimSwDriver* Closed_LimSwDriver = NULL;
-CLimSwComp Opened_Limit(Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
-CLimSwComp Closed_Limit(Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
+CLimSwDriver Opened_LimSwDriver(OPEN_LIMSW_AHB1Periph_GPIOx, OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
+CLimSwDriver Closed_LimSwDriver(OPEN_LIMSW_AHB1Periph_GPIOx, OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
+
+CLimSwComp Opened_Limit(&Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
+CLimSwComp Closed_Limit(&Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
 
 CLidMotorComp LidMotor(&CapTouch, &Closed_Limit, &Opened_Limit);
-
-CLedObj         LedArray[NUM_LEDS];
-CLedStripDriver LedStripDriver(&LedArray[0], NUM_LEDS);
-CSceneComp      FirstScene(&LedArray[0], NUM_LEDS);
-CLedStripComp   LedStrip(&LedStripDriver, &FirstScene);
 
 void init(void)
 {
     Init_Timers();
 
     leds.Initialize();
+    LedStrip.Initialize();
+
     LidMotor.Initialize();
 
     CapTouchDriver.Initialize_Hardware();
     CapTouch.Initialize();
 
-    if (Opened_LimSwDriver != NULL) delete Opened_LimSwDriver;
-    Opened_LimSwDriver = new CLimSwDriver(OPEN_LIMSW_AHB1Periph_GPIOx, OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
-
-    if (Closed_LimSwDriver != NULL) delete Closed_LimSwDriver;
-    Closed_LimSwDriver = new CLimSwDriver(OPEN_LIMSW_AHB1Periph_GPIOx, OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
-
-    Closed_LimSwDriver->Initialize_Hardware();
-    Closed_LimSwDriver->Initialize_Hardware();
+    Closed_LimSwDriver.Initialize_Hardware();
+    Closed_LimSwDriver.Initialize_Hardware();
 
     Opened_Limit.Initialize();
     Closed_Limit.Initialize();
-
-    LedStrip.Initialize();
 }
 

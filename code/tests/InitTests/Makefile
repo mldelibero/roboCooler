@@ -35,11 +35,12 @@ SRC_FILES = \
 	../mockFiles/limitSwitchDriverMock.cpp\
 	../mockFiles/limitSwitchMock.cpp\
 	../mockFiles/sceneMock.cpp\
+	../mockFiles/stdlib/stm32f4xx.cpp\
 	../mockFiles/timer.cpp\
+	../mockFiles/timerDriverMock.cpp\
 	../../src/init.cpp\
 	../../src/drivers/CDriver.cpp\
 	../../src/limitSwitch.cpp\
-	../mockFiles/stdlib/stm32f4xx.cpp\
 
 TEST_SRC_DIRS = \
 	./\

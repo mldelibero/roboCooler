@@ -4,6 +4,7 @@
 
 #include "limitSwitchDriver.h"
 #include "capTouchDriver.h"
+#include "timer.h"
 
 int32_t timer = -1;
 
@@ -14,14 +15,10 @@ TEST_GROUP(InitTests)
 {
     void setup()
     {
-        mock().enable();
+        mock().disable();
     }
     void teardown()
     {
-        // Never will get deleted for good in program
-        delete Opened_LimSwDriver;
-        delete Closed_LimSwDriver;
-
         mock().checkExpectations();
         mock().clear();
     }
@@ -41,5 +38,11 @@ TEST(InitTests, ModulesInitialized)
     mock().expectNCalls(1, "CLedStripComp::Initialize");
 
     init();
+}
+
+TEST(InitTests, DidNotUseMoreThanNumAvailableTimers)
+{
+    init();
+    CHECK(Get_NumTimersAllocated() <= NUM_TIMERS);
 }
 

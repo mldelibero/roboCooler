@@ -36,3 +36,4 @@ void init_TimerDriver(void)
     // Enable Timer
     TIM_Cmd(TIMER_TIMx, ENABLE);
 } // end - void init_TimerDriver(void)
+
