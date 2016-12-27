@@ -2,19 +2,21 @@
 #include "component.h"
 
 CComponent::CComponent()
+{}
+
+CComponent::CComponent(int32_t resetValue)
 {
+    mock().actualCall("CComponent::Constructor").withParameter("resetValue",resetValue);
 }
 
 CComponent::~CComponent()
 {}
 
 void CComponent::Execute(void)
-{
-}
+{}
 
 void CComponent::Initialize(void)
-{
-}
+{}
 
 int32_t CComponent::Get_TimerIndex(void)
 {

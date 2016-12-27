@@ -1,9 +1,10 @@
 #include "ledStrip.h"
 #include "ledStripDriver.h"
+#include "component.h"
 
 #include "scene.h"
 
-CLedStripComp::CLedStripComp(CLedStripDriver* LedStripDriver, CSceneComp* FirstScene)
+CLedStripComp::CLedStripComp(CLedStripDriver* LedStripDriver, CSceneComp* FirstScene) : CComponent(0)
 {
     m_LedStripDriver = LedStripDriver;
     m_NumScenes      = 0; // Gets increased in the Add_Scene function

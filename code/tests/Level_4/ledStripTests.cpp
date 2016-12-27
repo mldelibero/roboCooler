@@ -57,12 +57,12 @@ TEST_GROUP(LedStripTests)
 {
     void setup()
     {
+        mock().disable();
         LedStripDriver = new CLedStripDriverMock;
         FirstScene     = new CSceneMock;
         LedStrip       = new CLedStripComp((CLedStripDriver*)LedStripDriver, (CSceneComp*)FirstScene);
-
-        mock().disable();
     }
+
     void teardown()
     {
         delete LedStrip;
@@ -74,6 +74,14 @@ TEST_GROUP(LedStripTests)
         mock().clear();
     }
 }; // end - TEST_GROUP(LedStripTests)
+
+TEST(LedStripTests, ConstructorSetsTimeoutToZero)
+{
+    mock().enable();
+    mock().expectOneCall("CComponent::Constructor").withParameter("resetValue", 0);
+
+    CLedStripComp LedStripComp((CLedStripDriver*)LedStripDriver, (CSceneComp*)FirstScene);
+}
 
 TEST(LedStripTests, RunExecutesFirstSceneAndLedStripDriver)
 {
