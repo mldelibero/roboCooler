@@ -3,6 +3,12 @@
 #include "component.h"
 #include "ledBehavior.h"
 
+typedef enum
+{
+    BEHAVIOR_ACTIVE = 0,
+    BEHAVIOR_DONE
+} Led_Behavior_t;
+
 class CLedBehaviorComp : public CComponent
 {
     public:
@@ -11,7 +17,10 @@ class CLedBehaviorComp : public CComponent
         virtual void Execute(void);
         virtual void Initialize(void);
 
-    private:
+        Led_Behavior_t Get_Status(void);
+
+    protected:
+        Led_Behavior_t m_Status;
 }; // end - class CLedBehaviorComp : public CComponent
 #endif // #ifndef __LEDBEHAVIOR_H
 
