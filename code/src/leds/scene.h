@@ -7,6 +7,12 @@
 
 #define MAX_BEHAVIORS   10
 
+typedef enum
+{
+    SCENE_INIT,
+    SCENE_RUNNING
+} Scene_t;
+
 class CScene
 {
     public:
@@ -14,16 +20,18 @@ class CScene
         virtual ~CScene(void);
 
         void         Play(CLedObj* LedArray, uint16_t NumLeds);
-        virtual bool Is_StartCriteriaMet(void);
         bool         Is_Running(void);
-        bool         Is_StartTriggerMet(void);
+        virtual bool Is_StartTriggerMet(void);
         bool         Add_Behavior(CLedBehaviorComp* behavior);
 
     private:
+        void Update_State(void);
+
         CLedBehaviorComp* m_Behaviors[MAX_BEHAVIORS];
         CLedObj*          m_LedArray;
         uint16_t          m_NumLeds;
         uint8_t           m_NumBehaviors; //< Number of behaviors stored in this scene
+        Scene_t           m_State;
 };
 #endif // #ifndef __SCENE_H
 

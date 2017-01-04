@@ -6,21 +6,43 @@
 #include "ledBehaviorMock.h"
 #include "ledObj.h"
 
+// Support Classes ------------------------------------------------------------
+
+class CChildScene : public CScene
+{
+    public:
+        CChildScene()
+        {
+        }
+
+    private:
+        virtual bool Is_StartTriggerMet(void)
+        { // Should cause the class to always run
+            return true;
+        }
+}; // end - class CSceneChild : public CScene
+// ----------------------------------------------------------------------------
 const int numLeds = 3;
 CLedObj* ledArray[numLeds];
 CScene* Scene;
+CChildScene* ChildScene;
+CLedBehaviorMock* behavior[2];
 
 TEST_GROUP(SceneTests)
 {
     void setup()
     {
         mock().disable();
+
         for(int led = 0; led < numLeds; led++)
         {
             ledArray[led] = new CLedObj;
         }
-        Scene = new CScene;
+        Scene      = new CScene;
+        behavior[0] = new CLedBehaviorMock;
+        behavior[1] = new CLedBehaviorMock;
     }
+
     void teardown()
     {
         for(int led = 0; led < numLeds; led++)
@@ -29,16 +51,101 @@ TEST_GROUP(SceneTests)
         }
 
         delete Scene;
+        delete behavior[0];
+        delete behavior[1];
 
         mock().checkExpectations();
         mock().clear();
     }
 }; // end - TEST_GROUP(SceneTests)
 
+TEST(SceneTests, CanAddBehavior)
+{
+    CHECK_EQUAL(true, Scene->Add_Behavior(behavior[0]));
+}
+
+TEST(SceneTests, SceneLimitsNumberOfBehaviorsThatCanBeAdded)
+{
+    for (int beh = 1; beh < MAX_BEHAVIORS; beh++)
+    {
+        Scene->Add_Behavior(behavior[0]);
+    }
+    CHECK_EQUAL(true , Scene->Add_Behavior(behavior[0]));
+    CHECK_EQUAL(false, Scene->Add_Behavior(behavior[0]));
+}
+
+TEST(SceneTests, BaseClassDoesNotCallBehaviors)
+{ // This will call CLedBehaviorComp::Execute when failing
+    Scene->Add_Behavior(behavior[0]);
+
+    mock().enable();
+    Scene->Play(ledArray[0], numLeds);
+}
+
+
+TEST_GROUP(ChildSceneTests)
+{
+    void setup()
+    {
+        mock().disable();
+
+        for(int led = 0; led < numLeds; led++)
+        {
+            ledArray[led] = new CLedObj;
+        }
+
+        behavior[0] = new CLedBehaviorMock;
+        behavior[1] = new CLedBehaviorMock;
+
+        ChildScene = new CChildScene;
+        ChildScene->Add_Behavior(behavior[0]);
+        ChildScene->Add_Behavior(behavior[1]);
+    }
+
+    void teardown()
+    {
+        for(int led = 0; led < numLeds; led++)
+        {
+            delete ledArray[led];
+        }
+
+        delete ChildScene;
+        delete behavior[0];
+        delete behavior[1];
+
+        mock().checkExpectations();
+        mock().clear();
+    }
+}; // end - TEST_GROUP(ChildSceneTests)
+
+TEST(ChildSceneTests, SceneOnlyCallsActiveBehavior)
+{
+    mock().enable();
+    mock().expectOneCall("CLedBehaviorComp::Execute").onObject(behavior[0]);
+
+    ChildScene->Play(ledArray[0], numLeds);
+}
+
+TEST(ChildSceneTests, ScenePlaysNextBehaviorWhenCurrentOneFinished)
+{
+    behavior[0]->Force_State(BEHAVIOR_DONE);
+
+    mock().enable();
+    mock().expectOneCall("CLedBehaviorComp::Execute").onObject(behavior[1]);
+    ChildScene->Play(ledArray[0], numLeds);
+}
+
+TEST(ChildSceneTests, NoBehaviorsRunIfTheyAreAllFinished)
+{
+    behavior[0]->Force_State(BEHAVIOR_DONE);
+    behavior[1]->Force_State(BEHAVIOR_DONE);
+
+    mock().enable();
+    ChildScene->Play(ledArray[0], numLeds);
+}
+
 /*
  * Functionality:
- * Can Add behaviors
- * Can't add too many behaviors
  * Starting should reset all behavior states
  * Should not reinitalize on a repeated start condition
  *
@@ -51,69 +158,4 @@ TEST_GROUP(SceneTests)
  * Should have a watchdog timeout in case a behavior never ends. -- Will need an override for other projects
  *
  */
-
-TEST(SceneTests, NotRunningAfterConstructor)
-{
-    CHECK_EQUAL(false, Scene->Is_Running());
-}
-
-TEST(SceneTests, DefaultStartTriggerImplementationReturnsFalse)
-{
-    CHECK_EQUAL(false, Scene->Is_StartTriggerMet());
-}
-
-TEST(SceneTests, CanAddBehavior)
-{
-    CLedBehaviorComp behavior;
-    CHECK_EQUAL(true, Scene->Add_Behavior(&behavior));
-}
-
-TEST(SceneTests, SceneLimitsNumberOfBehaviorsThatCanBeAdded)
-{
-    CLedBehaviorComp behavior;
-
-    for (int beh = 1; beh < MAX_BEHAVIORS; beh++)
-    {
-        Scene->Add_Behavior(&behavior);
-    }
-    CHECK_EQUAL(true , Scene->Add_Behavior(&behavior));
-    CHECK_EQUAL(false, Scene->Add_Behavior(&behavior));
-}
-
-TEST(SceneTests, SceneOnlyCallsActiveBehavior)
-{
-    CLedBehaviorMock b[2];
-
-    Scene->Add_Behavior(&b[0]);
-    Scene->Add_Behavior(&b[1]);
-
-    mock().enable();
-    mock().expectOneCall("CLedBehaviorComp::Execute").onObject(&b[0]);
-
-    Scene->Play(ledArray[0], numLeds);
-}
-
-TEST(SceneTests, ScenePlaysNextBehaviorWhenCurrentOneFinished)
-{
-    CLedBehaviorMock b[2];
-
-    Scene->Add_Behavior(&b[0]);
-    Scene->Add_Behavior(&b[1]);
-
-    b[0].Force_State(BEHAVIOR_DONE);
-
-    mock().enable();
-    mock().expectOneCall("CLedBehaviorComp::Execute").onObject(&b[1]);
-    Scene->Play(ledArray[0], numLeds);
-}
-
-class CSceneChild : public CScene
-{
-    public:
-        CSceneChild();
-}; // end - class CSceneChild : public CScene
-
-CSceneChild::CSceneChild(void)
-{
-}
 

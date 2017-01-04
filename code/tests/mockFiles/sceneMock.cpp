@@ -15,17 +15,17 @@ CScene::CScene(void)
 CScene::~CScene(void)
 {}
 
+bool CScene::Is_StartTriggerMet(void)
+{
+    return false;
+}
+
 void CScene::Play(CLedObj* LedArray, uint16_t NumLeds)
 {
     mock().actualCall("CScene::Play").onObject(this);
     SceneHasBeenPlayed = true;
     if (LedArray == NULL) return;
     if (NumLeds)          return;
-}
-
-bool CScene::Is_StartCriteriaMet(void)
-{
-    return false;
 }
 
 //--- Compile abstract mock version with output control
