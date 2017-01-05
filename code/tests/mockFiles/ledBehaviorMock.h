@@ -10,6 +10,7 @@ class CLedBehaviorMock : public CLedBehaviorComp
         virtual void Execute(void);
         virtual void Initialize(void);
 
+        void Force_Blended(bool isBlended);
         void Force_State(Led_Behavior_t state);
 };
 #endif // #ifndef __LEDBEHAVIORMOCK_H

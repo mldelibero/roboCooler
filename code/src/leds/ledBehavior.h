@@ -18,9 +18,11 @@ class CLedBehaviorComp : public CComponent
         virtual void Initialize(void);
 
         Led_Behavior_t Get_Status(void);
+        virtual bool Is_Blended(void);
 
     protected:
         Led_Behavior_t m_Status;
+        bool m_Blended;
 }; // end - class CLedBehaviorComp : public CComponent
 #endif // #ifndef __LEDBEHAVIOR_H
 
