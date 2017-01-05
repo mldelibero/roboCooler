@@ -33,10 +33,6 @@ class CLedBehaviorChild : public CLedBehaviorComp
         {
         }
 
-        void Initialize(void)
-        {
-        }
-
         void Force_DoneConditionMet(void)
         {
             m_Status = BEHAVIOR_DONE;
@@ -50,4 +46,19 @@ TEST(LedBehaviorTests, CompliesWithChildsEndConditionFun)
 
     CHECK_EQUAL(BEHAVIOR_DONE, BehChild.Get_Status());
 }
+
+TEST(LedBehaviorTests, InitResetsState)
+{
+    CLedBehaviorChild BehChild;
+    BehChild.Force_DoneConditionMet();
+    BehChild.Initialize();
+
+    CHECK_EQUAL(BEHAVIOR_ACTIVE, BehChild.Get_Status());
+}
+
+/*
+ * Necessary Tests:
+ *
+ * Is_blended fun
+ */
 
