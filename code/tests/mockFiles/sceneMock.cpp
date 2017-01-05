@@ -20,6 +20,11 @@ bool CScene::Is_StartTriggerMet(void)
     return false;
 }
 
+bool CScene::Is_StopTriggerMet(void)
+{
+    return false;
+}
+
 void CScene::Play(CLedObj* LedArray, uint16_t NumLeds)
 {
     mock().actualCall("CScene::Play").onObject(this);

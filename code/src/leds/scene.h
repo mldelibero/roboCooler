@@ -10,7 +10,8 @@
 typedef enum
 {
     SCENE_INIT,
-    SCENE_RUNNING
+    SCENE_RUNNING,
+    SCENE_FINISHED
 } Scene_t;
 
 class CScene
@@ -21,11 +22,12 @@ class CScene
 
         void         Play(CLedObj* LedArray, uint16_t NumLeds);
         bool         Is_Running(void);
-        virtual bool Is_StartTriggerMet(void);
         bool         Add_Behavior(CLedBehaviorComp* behavior);
 
     private:
         void Update_State(void);
+        virtual bool Is_StartTriggerMet(void);
+        virtual bool Is_StopTriggerMet(void);
 
         CLedBehaviorComp* m_Behaviors[MAX_BEHAVIORS];
         CLedObj*          m_LedArray;
