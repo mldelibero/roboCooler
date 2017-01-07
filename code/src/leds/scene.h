@@ -23,7 +23,7 @@ class CScene
         void         Play(CLedObj* LedArray);
         bool         Is_Running(void);
         bool         Add_Behavior(CLedBehaviorComp* behavior);
-        void         Set_NumLeds(uint32_t numLeds);
+        void         Set_NumLeds(uint16_t numLeds);
 
     private:
         void Update_State(void);

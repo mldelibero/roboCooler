@@ -31,7 +31,7 @@ void CScene::Play(CLedObj* LedArray)
     SceneHasBeenPlayed = true;
 }
 
-void CScene::Set_NumLeds(uint32_t numLeds)
+void CScene::Set_NumLeds(uint16_t numLeds)
 {
     mock().actualCall("CScene::Set_NumLeds").onObject(this);;
     if (numLeds) return;

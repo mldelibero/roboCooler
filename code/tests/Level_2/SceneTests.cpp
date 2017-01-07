@@ -102,6 +102,37 @@ TEST(SceneTests, BaseClassDoesNotCallBehaviors)
     Scene->Play(ledArray[0]);
 }
 
+TEST(SceneTests, SetsNumLedsToNominalWhenAddingBehavior)
+{
+    mock().enable();
+    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",0).onObject(behavior[0]);
+    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",0).onObject(behavior[1]);
+    Scene->Add_Behavior(behavior[0]);
+    Scene->Add_Behavior(behavior[1]);
+}
+
+TEST(SceneTests, SetsNumLedsToUpdatedWhenAddingBehavior)
+{
+    Scene->Set_NumLeds(50);
+    mock().enable();
+    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",50).onObject(behavior[0]);
+    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",50).onObject(behavior[1]);
+    Scene->Add_Behavior(behavior[0]);
+    Scene->Add_Behavior(behavior[1]);
+}
+
+TEST(SceneTests, SetsAllBehaviorsWhenOwnsNumLedsUpdated)
+{
+    Scene->Add_Behavior(behavior[0]);
+    Scene->Add_Behavior(behavior[1]);
+
+    mock().enable();
+    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",51).onObject(behavior[0]);
+    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",51).onObject(behavior[1]);
+
+    Scene->Set_NumLeds(51);
+}
+
 
 TEST_GROUP(ChildSceneTests)
 {

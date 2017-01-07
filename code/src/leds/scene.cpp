@@ -3,6 +3,7 @@
 CScene::CScene(void)
 {
     m_NumBehaviors = 0;
+    m_NumLeds      = 0;
     m_State        = SCENE_INIT;
     for (int b = 0; b < MAX_BEHAVIORS; b++)
     {
@@ -32,11 +33,21 @@ bool CScene::Add_Behavior(CLedBehaviorComp* behavior)
 {
     if (m_NumBehaviors < MAX_BEHAVIORS)
     {
-        m_Behaviors[m_NumBehaviors++] = behavior;
+        m_Behaviors[m_NumBehaviors] = behavior;
+        m_Behaviors[m_NumBehaviors++]->Set_NumLeds(m_NumLeds);
         return true;
     }
 
     return false;
+}
+
+void CScene::Set_NumLeds(uint16_t numLeds)
+{
+    m_NumLeds = numLeds;
+    for (int b = 0; b < m_NumBehaviors; b++)
+    {
+        m_Behaviors[b]->Set_NumLeds(m_NumLeds);
+    }
 }
 
 void CScene::Update_State(void)

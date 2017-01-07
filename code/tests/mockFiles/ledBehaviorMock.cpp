@@ -30,6 +30,11 @@ bool CLedBehaviorComp::Is_Blended(void)
     return m_Blended;
 }
 
+void CLedBehaviorComp::Set_NumLeds(uint16_t numLeds)
+{
+    mock().actualCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",numLeds).onObject(this);
+}
+
 //--- Compile abstract mock version with output control
 CLedBehaviorMock::CLedBehaviorMock() : CLedBehaviorComp()
 {

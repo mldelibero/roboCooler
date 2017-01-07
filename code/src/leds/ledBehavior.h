@@ -19,6 +19,7 @@ class CLedBehaviorComp : public CComponent
 
         Led_Behavior_t Get_Status(void);
         virtual bool Is_Blended(void);
+        void         Set_NumLeds(uint16_t numLeds);
 
     protected:
         Led_Behavior_t m_Status;
