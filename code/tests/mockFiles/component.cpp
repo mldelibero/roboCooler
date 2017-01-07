@@ -29,6 +29,13 @@ bool CComponent::Run(void)
     return true;
 }
 
+bool CComponent::Run(void* target_p)
+{
+    m_Target_p = target_p;
+    Execute();
+    return true;
+}
+
 int32_t CComponent::Get_TimerResetValue(void)
 {
     return m_TimerResetValue;

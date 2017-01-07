@@ -25,9 +25,9 @@ bool CScene::Is_StopTriggerMet(void)
     return false;
 }
 
-void CScene::Play(CLedObj* LedArray)
+void CScene::Play(CLedObj* LedObjArray)
 {
-    mock().actualCall("CScene::Play").withParameter("LedArray", LedArray).onObject(this);
+    mock().actualCall("CScene::Play").withParameter("LedObjArray", LedObjArray).onObject(this);
     SceneHasBeenPlayed = true;
 }
 

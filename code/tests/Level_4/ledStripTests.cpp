@@ -67,7 +67,7 @@ TEST(LedStripTests, RunExecutesFirstSceneAndLedStripDriver)
 {
     mock().enable();
 
-    mock().expectOneCall("CScene::Play"           ).withCallOrder(1).withParameter("LedArray", LedObjArray).onObject(FirstScene);
+    mock().expectOneCall("CScene::Play"           ).withCallOrder(1).withParameter("LedObjArray", LedObjArray).onObject(FirstScene);
     mock().expectOneCall("CLedStripDriver::Update").withCallOrder(2);
     LedStrip->Run();
 }

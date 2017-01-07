@@ -2,6 +2,7 @@
 #define __LEDBEHAVIOR_H
 #include "component.h"
 #include "ledBehavior.h"
+#include "ledObj.h"
 
 typedef enum
 {
@@ -22,8 +23,10 @@ class CLedBehaviorComp : public CComponent
         void         Set_NumLeds(uint16_t numLeds);
 
     protected:
+        bool           m_Blended;
+        CLedObj*       m_LedArray;
         Led_Behavior_t m_Status;
-        bool m_Blended;
+
 }; // end - class CLedBehaviorComp : public CComponent
 #endif // #ifndef __LEDBEHAVIOR_H
 

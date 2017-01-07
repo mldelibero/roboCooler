@@ -42,7 +42,7 @@ CLedBehaviorMock::CLedBehaviorMock() : CLedBehaviorComp()
 
 void CLedBehaviorMock::Execute(void)
 {
-    mock().actualCall("CLedBehaviorComp::Execute").onObject(this);
+    mock().actualCall("CLedBehaviorComp::Execute").withParameter("LedObjArray", m_Target_p).onObject(this);
 }
 
 void CLedBehaviorMock::Initialize(void)

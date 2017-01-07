@@ -1,4 +1,6 @@
 #include "scene.h"
+        CLedObj*       m_LedArray;
+        Led_Behavior_t m_Status;
 
 CScene::CScene(void)
 {
@@ -69,7 +71,7 @@ void CScene::Update_State(void)
     }
 }
 
-void CScene::Play(CLedObj* LedArray)
+void CScene::Play(CLedObj* LedObjArray)
 {
     this->Update_State();
 
@@ -81,7 +83,7 @@ void CScene::Play(CLedObj* LedArray)
             if (m_Behaviors[behavior] == NULL) break;
             if (m_Behaviors[behavior]->Get_Status() == BEHAVIOR_ACTIVE)
             {
-                m_Behaviors[behavior]->Run();
+                m_Behaviors[behavior]->Run(LedObjArray);
                 break;
             }
         }
@@ -99,11 +101,11 @@ void CScene::Play(CLedObj* LedArray)
 
                 if (m_Behaviors[behavior]->Get_Status() == BEHAVIOR_ACTIVE)
                 {
-                    m_Behaviors[behavior]->Run();
+                    m_Behaviors[behavior]->Run(LedObjArray);
                 }
        }
 
-        if (LedArray == NULL) return;
+        if (LedObjArray == NULL) return;
     } // end - if (m_State != SCENE_RUNNING)
-} // end - void CScene::Play(CLedObj* LedArray, uint16_t NumLeds)
+} // end - void CScene::Play(CLedObj* LedObjArray, uint16_t NumLeds)
 
