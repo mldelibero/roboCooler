@@ -25,14 +25,17 @@ bool CScene::Is_StopTriggerMet(void)
     return false;
 }
 
-void CScene::Play(CLedObj* LedArray, uint16_t NumLeds)
+void CScene::Play(CLedObj* LedArray)
 {
-    mock().actualCall("CScene::Play").onObject(this);
+    mock().actualCall("CScene::Play").withParameter("LedArray", LedArray).onObject(this);
     SceneHasBeenPlayed = true;
-    if (LedArray == NULL) return;
-    if (NumLeds)          return;
 }
 
+void CScene::Set_NumLeds(uint32_t numLeds)
+{
+    mock().actualCall("CScene::Set_NumLeds").onObject(this);;
+    if (numLeds) return;
+}
 //--- Compile abstract mock version with output control
 
 CSceneMock::CSceneMock() : CScene()
@@ -45,7 +48,6 @@ CSceneMock::~CSceneMock()
 
 void CSceneMock::Play(void)
 {
-    mock().actualCall("CScene::Play").onObject(this);
     SceneHasBeenPlayed = true;
 }
 
@@ -54,5 +56,10 @@ bool CSceneMock::HasBeenPlayed(void)
     bool tmp = SceneHasBeenPlayed;
     SceneHasBeenPlayed = false;
     return tmp;
+}
+
+uint32_t CSceneMock::Get_NumLeds(void)
+{
+    return 0;
 }
 

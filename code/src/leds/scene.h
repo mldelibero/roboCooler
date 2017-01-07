@@ -20,9 +20,10 @@ class CScene
         CScene(void);
         virtual ~CScene(void);
 
-        void         Play(CLedObj* LedArray, uint16_t NumLeds);
+        void         Play(CLedObj* LedArray);
         bool         Is_Running(void);
         bool         Add_Behavior(CLedBehaviorComp* behavior);
+        void         Set_NumLeds(uint32_t numLeds);
 
     private:
         void Update_State(void);

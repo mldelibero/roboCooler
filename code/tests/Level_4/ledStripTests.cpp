@@ -5,53 +5,11 @@
 #include "ledStripDriverMock.h"
 #include "sceneMock.h"
 
-/* List of driver features needed:
-
- * List of features needed:
- *
- * Nice to have features:
- *
- */
-
 CLedStripDriverMock* LedStripDriver;
 CSceneMock*          FirstScene;
 
 CLedStripComp*       LedStrip;
-
-//-----------------------------------------------------------------------------
-TEST_GROUP(SceneMockTests)
-{
-    void setup()
-    {
-        FirstScene     = new CSceneMock;
-        mock().disable();
-    }
-    void teardown()
-    {
-        delete FirstScene;
-    }
-}; // end - TEST_GROUP(SceneMockTests)
-
-TEST(SceneMockTests, SceneNotRunAfterConstructor)
-{
-    CHECK_EQUAL(false, FirstScene->HasBeenPlayed());
-}
-
-TEST(SceneMockTests, SceneIndicatesRunAfterBeingRun)
-{
-    FirstScene->Play();
-    CHECK_EQUAL(true, FirstScene->HasBeenPlayed());
-}
-
-TEST(SceneMockTests, SceneIndicatesNotRunAfterSecondAsk)
-{
-    FirstScene->Play();
-    FirstScene->HasBeenPlayed();
-
-    CHECK_EQUAL(false, FirstScene->HasBeenPlayed());
-}
-
-
+CLedObj              LedObjArray[NUM_LEDS];
 //-----------------------------------------------------------------------------
 TEST_GROUP(LedStripTests)
 {
@@ -60,7 +18,7 @@ TEST_GROUP(LedStripTests)
         mock().disable();
         LedStripDriver = new CLedStripDriverMock;
         FirstScene     = new CSceneMock;
-        LedStrip       = new CLedStripComp((CLedStripDriver*)LedStripDriver, (CScene*)FirstScene);
+        LedStrip       = new CLedStripComp((CLedStripDriver*)LedStripDriver, (CScene*)FirstScene, LedObjArray);
     }
 
     void teardown()
@@ -75,19 +33,41 @@ TEST_GROUP(LedStripTests)
     }
 }; // end - TEST_GROUP(LedStripTests)
 
+// Testing SceneMock class
+TEST(LedStripTests, SceneNotRunAfterConstructor)
+{
+    CHECK_EQUAL(false, FirstScene->HasBeenPlayed());
+}
+
+TEST(LedStripTests, SceneIndicatesRunAfterBeingRun)
+{
+    FirstScene->Play();
+    CHECK_EQUAL(true, FirstScene->HasBeenPlayed());
+}
+
+TEST(LedStripTests, SceneIndicatesNotRunAfterSecondAsk)
+{
+    FirstScene->Play();
+    FirstScene->HasBeenPlayed();
+
+    CHECK_EQUAL(false, FirstScene->HasBeenPlayed());
+}
+
+//-----------------------------------------------------------------------------
 TEST(LedStripTests, ConstructorSetsTimeoutToZero)
 {
     mock().enable();
     mock().expectOneCall("CComponent::Constructor").withParameter("resetValue", 0);
+    mock().ignoreOtherCalls();
 
-    CLedStripComp LedStripComp((CLedStripDriver*)LedStripDriver, (CScene*)FirstScene);
+    CLedStripComp LedStripComp((CLedStripDriver*)LedStripDriver, (CScene*)FirstScene, LedObjArray);
 }
 
 TEST(LedStripTests, RunExecutesFirstSceneAndLedStripDriver)
 {
     mock().enable();
 
-    mock().expectOneCall("CScene::Play"           ).withCallOrder(1).onObject(FirstScene);
+    mock().expectOneCall("CScene::Play"           ).withCallOrder(1).withParameter("LedArray", LedObjArray).onObject(FirstScene);
     mock().expectOneCall("CLedStripDriver::Update").withCallOrder(2);
     LedStrip->Run();
 }
@@ -105,13 +85,26 @@ TEST(LedStripTests, CanAddScene)
     CHECK_EQUAL(2, LedStrip->Get_NumberOfScenes());
 }
 
+TEST(LedStripTests, GivesScenesNumLedsWhenAdding)
+{
+    CSceneMock Scene1, Scene2;
+
+    mock().enable();
+    mock().expectOneCall("CScene::Set_NumLeds").onObject(&Scene1).withCallOrder(1);
+    mock().expectOneCall("CScene::Set_NumLeds").onObject(&Scene2).withCallOrder(2);
+    mock().ignoreOtherCalls();
+
+    CLedStripComp myLedStrip((CLedStripDriver*)LedStripDriver, (CScene*)&Scene1, LedObjArray);
+    LedStrip->Add_Scene(&Scene2);
+}
+
 TEST(LedStripTests, MultipleTestsRunIfAdded)
 {
     CSceneMock SecondScene;
 
     mock().enable();
-    mock().expectOneCall("CScene::Play").onObject(FirstScene);
-    mock().expectOneCall("CScene::Play").onObject(&SecondScene);
+    mock().expectOneCall("CScene::Play").onObject(FirstScene).ignoreOtherParameters();
+    mock().expectOneCall("CScene::Play").onObject(&SecondScene).ignoreOtherParameters();
     mock().ignoreOtherCalls();
 
     LedStrip->Add_Scene(&SecondScene);

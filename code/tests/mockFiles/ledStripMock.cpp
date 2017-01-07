@@ -6,10 +6,11 @@
 #include "ledStripDriverMock.h"
 
 
-CLedStripComp::CLedStripComp::CLedStripComp(CLedStripDriver* LedStripDriver, CScene* FirstScene)
+CLedStripComp::CLedStripComp(CLedStripDriver* LedStripDriver, CScene* FirstScene, CLedObj* LedObjArray)
 {
-    if (LedStripDriver) return;
     m_Scenes[0] = FirstScene;
+    if (LedStripDriver) return;
+    if (LedObjArray == NULL) return;
 }
 
 void CLedStripComp::Execute(void)

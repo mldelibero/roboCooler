@@ -58,7 +58,7 @@ void CScene::Update_State(void)
     }
 }
 
-void CScene::Play(CLedObj* LedArray, uint16_t NumLeds)
+void CScene::Play(CLedObj* LedArray)
 {
     this->Update_State();
 
@@ -93,8 +93,6 @@ void CScene::Play(CLedObj* LedArray, uint16_t NumLeds)
        }
 
         if (LedArray == NULL) return;
-        if (NumLeds)          return;
-
     } // end - if (m_State != SCENE_RUNNING)
 } // end - void CScene::Play(CLedObj* LedArray, uint16_t NumLeds)
 

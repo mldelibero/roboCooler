@@ -11,10 +11,11 @@
 #include "scene.h"
 
 CLedComp leds;
+CLedObj  LedObjArray[NUM_LEDS];
 
 CLedStripDriver LedStripDriver(NUM_LEDS);
 CScene          FirstScene;
-CLedStripComp   LedStrip(&LedStripDriver, &FirstScene);
+CLedStripComp   LedStrip(&LedStripDriver, &FirstScene, LedObjArray);
 
 CCapTouchDriver CapTouchDriver(
         CAP_SCL_RCC_AHB1Periph_GPIOx, CAP_SCL_GPIOx, CAP_SCL_GPIO_Pin_x, CAP_SCL_GPIO_PinSourcex,

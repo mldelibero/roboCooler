@@ -11,6 +11,7 @@ class CSceneMock : public CScene
 
         void Play(void);
         bool HasBeenPlayed(void);
+        uint32_t Get_NumLeds(void);
 };
 #endif // #ifndef __SCENEMOCK_H
 
