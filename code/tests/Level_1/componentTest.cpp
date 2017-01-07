@@ -12,6 +12,8 @@ TEST_GROUP(ComponentTests)
     }
     void teardown()
     {
+        mock().checkExpectations();
+        mock().clear();
     }
 };
 
@@ -72,31 +74,32 @@ TEST(ComponentTests, CanSetTimerResetValue)
 class CInheritedComp: public CComponent
 {
     public:
-        CInheritedComp();
+        CInheritedComp()
+        {
+            m_ExecuteRun = false;
+            Initialize();
+        }
+
+        void* Get_Target_p(void)
+        {
+            return m_Target_p;
+        }
 
         bool m_ExecuteRun;
         bool m_Initalized;
 
     private:
-        virtual void Execute(void);
-        virtual void Initialize(void);
+        virtual void Execute(void)
+        {
+            m_ExecuteRun = true;
+            mock().actualCall("CInheritedComp::Execute").withParameter("m_Target_p", m_Target_p);
+        }
+
+        virtual void Initialize(void)
+        {
+            m_Initalized = true;
+        }
 };
-
-CInheritedComp::CInheritedComp()
-{
-    m_ExecuteRun = false;
-    Initialize();
-}
-
-void CInheritedComp::Execute(void)
-{
-    m_ExecuteRun = true;
-}
-
-void CInheritedComp::Initialize(void)
-{
-    m_Initalized = true;
-}
 
 TEST(ComponentTests, BaseConstructorRunsInInheritedClass)
 {
@@ -109,5 +112,50 @@ TEST(ComponentTests, RunCallsExecuteFun)
     CInheritedComp comp;
     comp.Run();
     CHECK(comp.m_ExecuteRun);
+}
+
+TEST(ComponentTests, RunWithPointerPassesItToExecute)
+{
+    CInheritedComp comp;
+    uint32_t var = 0;
+
+    mock().enable();
+    mock().expectOneCall("CInheritedComp::Execute").withParameter("m_Target_p", &var);
+    comp.Run((void*)(&var));
+}
+
+TEST(ComponentTests, RunWithPointerNullsPointerAfterRunning)
+{
+    CInheritedComp comp;
+    uint32_t var = 0;
+    comp.Run((void*)(&var));
+
+    POINTERS_EQUAL(NULL, comp.Get_Target_p());
+}
+
+TEST(ComponentTests, RunWithPointerOnlyExecutesWhenTimerExpired)
+{
+    CComponent comp;
+    uint32_t var = 0;
+
+    Set_TimerValue(comp.Get_TimerIndex(), 1);
+    CHECK_EQUAL(false, comp.Run((void*)&var));
+
+    Set_TimerValue(comp.Get_TimerIndex(), 0);
+    CHECK_EQUAL(true, comp.Run((void*)&var));
+}
+
+TEST(ComponentTests, RunWithPointerResetsTimerOnlyIfExpired)
+{
+    CComponent comp;
+    uint32_t var = 0;
+
+    Set_TimerValue(comp.Get_TimerIndex(), 1);
+    comp.Run((void*)&var);
+    CHECK_EQUAL(1, Get_TimerValue(comp.Get_TimerIndex()));
+
+    Set_TimerValue(comp.Get_TimerIndex(), 0);
+    comp.Run((void*)&var);
+    CHECK_EQUAL(comp.Get_TimerResetValue(), Get_TimerValue(comp.Get_TimerIndex()));
 }
 

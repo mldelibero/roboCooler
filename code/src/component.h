@@ -14,6 +14,7 @@ class CComponent
         int32_t Get_TimerResetValue(void);
         void    ResetComponent(void);
         bool    Run(void);
+        bool    Run(void* target_p);
 
         virtual void Execute(void);
         virtual void Initialize(void);
@@ -23,7 +24,9 @@ class CComponent
         int32_t m_TimerResetValue;
 
     protected:
-        void Set_TimerResetValue(int32_t val);
+        void  Set_TimerResetValue(int32_t val);
+
+        void* m_Target_p;
 };
 #endif //#ifndef __COMPONENT_H
 

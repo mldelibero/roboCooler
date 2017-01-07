@@ -56,6 +56,14 @@ bool CComponent::Run(void)
     return false;
 }
 
+bool CComponent::Run(void* target_p)
+{
+    m_Target_p = target_p;
+    bool tmp = Run();
+    m_Target_p = NULL;
+    return tmp;
+}
+
 void CComponent::Set_TimerResetValue(int32_t val)
 {
     m_TimerResetValue = val;
