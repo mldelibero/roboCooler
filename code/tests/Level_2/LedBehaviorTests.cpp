@@ -2,6 +2,8 @@
 #include <CppUTestExt/MockSupport.h>
 #include "ledBehavior.h"
 
+// -- Defines -------------------------------------------------------------
+#define NUM_LEDS             10
 // -- Class definition ----------------------------------------------------
 class CLedBehaviorChild : public CLedBehaviorComp
 {
@@ -127,4 +129,16 @@ TEST(LedBehaviorTests, SettingRunTimeToZeroRunsForASingleIteration)
     CHECK_EQUAL(BEHAVIOR_ACTIVE, behavior.Get_Status());
     behavior.Run();
     CHECK_EQUAL(BEHAVIOR_DONE, behavior.Get_Status());
+}
+
+TEST(LedBehaviorTests, NumLedsDefaultsToZero)
+{
+    CHECK_EQUAL(0, LedBehavior->Get_NumLeds());
+}
+
+TEST(LedBehaviorTests, CanSetNumLeds)
+{
+    uint16_t numLeds = NUM_LEDS*2;
+    LedBehavior->Set_NumLeds(numLeds);
+    CHECK_EQUAL(numLeds, LedBehavior->Get_NumLeds());
 }

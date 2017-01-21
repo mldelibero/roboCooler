@@ -33,6 +33,12 @@ void CLedBehaviorComp::Initialize(void)
     m_Status    = BEHAVIOR_ACTIVE;
     Set_ComponentPeriod_ms(BEH_DEF_PER_MS);
     m_RunTime_ms = -1;
+    m_NumLeds = 0;
+}
+
+uint16_t CLedBehaviorComp::Get_NumLeds(void)
+{
+    return m_NumLeds;
 }
 
 Led_Behavior_t CLedBehaviorComp::Get_Status(void)
@@ -43,6 +49,11 @@ Led_Behavior_t CLedBehaviorComp::Get_Status(void)
 int32_t CLedBehaviorComp::Get_TimeLeft_ms(void)
 {
     return m_RunTime_ms;
+}
+
+void CLedBehaviorComp::Set_NumLeds(uint16_t numLeds)
+{
+    m_NumLeds = numLeds;
 }
 
 bool CLedBehaviorComp::Is_Blended(void)

@@ -21,6 +21,7 @@ class CLedBehaviorComp : public CComponent
         virtual void Execute(void);
         virtual void Initialize(void);
 
+        uint16_t       Get_NumLeds(void);
         Led_Behavior_t Get_Status(void);
         int32_t        Get_TimeLeft_ms(void);
         void           Set_NumLeds(uint16_t numLeds);
@@ -33,6 +34,7 @@ class CLedBehaviorComp : public CComponent
         bool           m_IsBlended;
         CLedObj*       m_LedArray;
         Led_Behavior_t m_Status;
+        uint16_t       m_NumLeds;
 
     private:
         bool    m_RunForever;
