@@ -59,9 +59,17 @@ TEST(LedBehaviorTests, InitResetsState)
     CHECK_EQUAL(BEHAVIOR_ACTIVE, LedBehaviorChild->Get_Status());
 }
 
-/*
- * Necessary Tests:
- *
- * Is_blended fun
- */
+TEST(LedBehaviorTests, BehaviorsAreNotBlendedByDefault)
+{
+    CHECK_EQUAL(false, LedBehavior->Is_Blended());
+}
+
+TEST(LedBehaviorTests, CanControlBehaviorBlending)
+{
+    LedBehavior->Set_IsBlended();
+    CHECK_EQUAL(true, LedBehavior->Is_Blended());
+
+    LedBehavior->Clear_IsBlended();
+    CHECK_EQUAL(false, LedBehavior->Is_Blended());
+}
 

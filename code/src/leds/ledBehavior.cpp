@@ -2,7 +2,8 @@
 
 CLedBehaviorComp::CLedBehaviorComp()
 {
-    m_Status = BEHAVIOR_ACTIVE;
+    m_IsBlended = false;
+    m_Status    = BEHAVIOR_ACTIVE;
 }
 
 void CLedBehaviorComp::Execute(void)
@@ -19,6 +20,17 @@ Led_Behavior_t CLedBehaviorComp::Get_Status(void)
 }
 
 bool CLedBehaviorComp::Is_Blended(void)
-{ // Will blend with the previous behavior
-    return false;
+{ // If true -- will blend with the previous behavior
+    return m_IsBlended;
 }
+
+void CLedBehaviorComp::Set_IsBlended(void)
+{
+    m_IsBlended = true;
+}
+
+void CLedBehaviorComp::Clear_IsBlended(void)
+{
+    m_IsBlended = false;
+}
+

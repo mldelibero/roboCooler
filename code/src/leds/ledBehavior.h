@@ -19,11 +19,14 @@ class CLedBehaviorComp : public CComponent
         virtual void Initialize(void);
 
         Led_Behavior_t Get_Status(void);
-        virtual bool Is_Blended(void);
         void         Set_NumLeds(uint16_t numLeds);
 
+        virtual bool Is_Blended(void);
+        void         Set_IsBlended(void);
+        void         Clear_IsBlended(void);
+
     protected:
-        bool           m_Blended;
+        bool           m_IsBlended;
         CLedObj*       m_LedArray;
         Led_Behavior_t m_Status;
 
