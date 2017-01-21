@@ -4,6 +4,8 @@
 #include "ledBehavior.h"
 #include "ledObj.h"
 
+#define BEH_DEF_PER_MS  50 // 20Hz
+
 typedef enum
 {
     BEHAVIOR_ACTIVE = 0,
@@ -14,12 +16,14 @@ class CLedBehaviorComp : public CComponent
 {
     public:
         CLedBehaviorComp(void);
+        CLedBehaviorComp(uint32_t runTime_ms);
 
         virtual void Execute(void);
         virtual void Initialize(void);
 
         Led_Behavior_t Get_Status(void);
-        void         Set_NumLeds(uint16_t numLeds);
+        int32_t        Get_TimeLeft_ms(void);
+        void           Set_NumLeds(uint16_t numLeds);
 
         virtual bool Is_Blended(void);
         void         Set_IsBlended(void);
@@ -30,6 +34,9 @@ class CLedBehaviorComp : public CComponent
         CLedObj*       m_LedArray;
         Led_Behavior_t m_Status;
 
+    private:
+        bool    m_RunForever;
+        int32_t m_RunTime_ms;
 }; // end - class CLedBehaviorComp : public CComponent
 #endif // #ifndef __LEDBEHAVIOR_H
 

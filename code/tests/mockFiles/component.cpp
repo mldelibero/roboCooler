@@ -43,6 +43,8 @@ int32_t CComponent::Get_ComponentPeriod_ms(void)
 
 void CComponent::Set_ComponentPeriod_ms(int32_t period)
 {
-    if (val) return;
+
+    mock().actualCall("CComponent::Set_ComponentPeriod_ms").withParameter("period",period);
+    m_ComponentPeriod_ms = period;
 }
 

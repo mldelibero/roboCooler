@@ -73,3 +73,58 @@ TEST(LedBehaviorTests, CanControlBehaviorBlending)
     CHECK_EQUAL(false, LedBehavior->Is_Blended());
 }
 
+TEST(LedBehaviorTests, BothConstructorsActTheSame)
+{ /// @bug How do I test this?
+}
+
+TEST(LedBehaviorTests, DefaultConstructorRunsForever)
+{
+    CLedBehaviorComp behavior;
+    CHECK_EQUAL(-1, behavior.Get_TimeLeft_ms());
+    CHECK_EQUAL(BEHAVIOR_ACTIVE, behavior.Get_Status());
+    behavior.Run();
+    CHECK_EQUAL(BEHAVIOR_ACTIVE, behavior.Get_Status());
+}
+
+TEST(LedBehaviorTests, BaseClassSetsComponentRunPeriod)
+{ // All children will adhere to the same rate. May change later
+    mock().expectOneCall("CComponent::Set_ComponentPeriod_ms").withParameter("period", BEH_DEF_PER_MS);
+}
+
+TEST(LedBehaviorTests, MocksActuallySetComponentRunPeriod)
+{
+    CHECK_EQUAL(BEH_DEF_PER_MS, LedBehavior->Get_ComponentPeriod_ms());
+}
+
+TEST(LedBehaviorTests, TimeLeftDecreasesAfterEachIteration)
+{
+    int32_t runTime = BEH_DEF_PER_MS * 10;
+
+    CLedBehaviorComp behavior(runTime);
+    behavior.Run();
+
+    CHECK_EQUAL(runTime - BEH_DEF_PER_MS, behavior.Get_TimeLeft_ms());
+}
+
+TEST(LedBehaviorTests, BehaviorTurnsOffAfterTimeIsExpired)
+{
+    CLedBehaviorComp behavior(BEH_DEF_PER_MS);
+    behavior.Run();
+    CHECK_EQUAL(BEHAVIOR_DONE, behavior.Get_Status());
+}
+
+TEST(LedBehaviorTests, ReturnsZeroAfterTimeIsExpired)
+{
+    CLedBehaviorComp behavior(BEH_DEF_PER_MS);
+    behavior.Run();
+    behavior.Run();
+    CHECK_EQUAL(0, behavior.Get_TimeLeft_ms());
+}
+
+TEST(LedBehaviorTests, SettingRunTimeToZeroRunsForASingleIteration)
+{
+    CLedBehaviorComp behavior(0);
+    CHECK_EQUAL(BEHAVIOR_ACTIVE, behavior.Get_Status());
+    behavior.Run();
+    CHECK_EQUAL(BEHAVIOR_DONE, behavior.Get_Status());
+}

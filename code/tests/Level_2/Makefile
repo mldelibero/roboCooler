@@ -39,14 +39,14 @@ TEST_SRC_DIRS = \
 
 TEST_SRC_FILES = \
 	../AllTests.cpp\
-	../../src/leds/ledBehavior.cpp\
 	../mockFiles/capTouchDriverMock.cpp\
 	../mockFiles/ledObjMock.cpp\
 	../mockFiles/ledStripDriverMock.cpp\
 	../mockFiles/limitSwitchDriverMock.cpp\
 	../../src/capTouch.cpp\
-	../../src/leds/leds.cpp\
 	../../src/limitSwitch.cpp\
+	../../src/leds/ledBehavior.cpp\
+	../../src/leds/leds.cpp\
 
 INCLUDE_DIRS =\
   .\

@@ -14,8 +14,8 @@ TEST_GROUP(LedTests)
 {
     void setup()
     {
-        mock().disable();
         mock().enable();
+        mock().expectOneCall("CComponent::Set_ComponentPeriod_ms").withParameter("period",25);
     }
     void teardown()
     {
@@ -99,6 +99,7 @@ TEST(LedBootTests, BootModeDisabledOnlyAfterElapsedRuns)
 TEST(LedBootTests, DoesNotSetNormalLedsStatesInBootMode)
 {
     mock().enable();
+    mock().expectOneCall("CComponent::Set_ComponentPeriod_ms").withParameter("period",25);
     mock().expectOneCall("SetLeds").withParameter("ledValues", 1);
 
     CLedComp leds;
