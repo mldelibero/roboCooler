@@ -1,6 +1,4 @@
 #include "scene.h"
-        CLedObj*       m_LedArray;
-        Led_Behavior_t m_Status;
 
 CScene::CScene(void)
 {
@@ -16,14 +14,55 @@ CScene::CScene(void)
 CScene::~CScene(void)
 {}
 
-bool CScene::Is_Running(void)
+
+bool CScene::Add_Behavior(CLedBehaviorComp* behavior)
 {
+    if (m_NumBehaviors < MAX_BEHAVIORS)
+    {
+        behavior->Set_NumLeds(m_NumLeds);
+        m_Behaviors[m_NumBehaviors++] = behavior;
+        return true;
+    }
     return false;
 }
 
-bool CScene::Is_StopTriggerMet(void)
+void CScene::Play(CLedObj* LedObjArray)
 {
-    return true;
+    Update_State();
+
+    if (m_State == SCENE_RUNNING)
+    {
+        bool firstBehRun = false;
+
+        for (int behavior = 0; behavior < m_NumBehaviors; behavior++)
+        {
+            if (m_Behaviors[behavior] == NULL) break;
+
+            else if (firstBehRun == true)
+            {
+                if (m_Behaviors[behavior]->Is_Blended() == true && m_Behaviors[behavior]->Get_Status() == BEHAVIOR_ACTIVE)
+                {
+                    m_Behaviors[behavior]->Run(LedObjArray);
+                }
+                else break;
+            } // end - else if (firstBehRun == true)
+
+            else if (m_Behaviors[behavior]->Get_Status() == BEHAVIOR_ACTIVE)
+            {
+                m_Behaviors[behavior]->Run(LedObjArray);
+                firstBehRun = true;
+            }
+        }
+    }
+} // end - void CScene::Play(CLedObj* LedObjArray)
+
+void CScene::Set_NumLeds(uint16_t NumLeds)
+{
+    m_NumLeds = NumLeds;
+    for (int b = 0; b < m_NumBehaviors; b++)
+    {
+        m_Behaviors[b]->Set_NumLeds(m_NumLeds);
+    }
 }
 
 bool CScene::Is_StartTriggerMet(void)
@@ -31,81 +70,38 @@ bool CScene::Is_StartTriggerMet(void)
     return false;
 }
 
-bool CScene::Add_Behavior(CLedBehaviorComp* behavior)
+bool CScene::Is_StopTriggerMet(void)
 {
-    if (m_NumBehaviors < MAX_BEHAVIORS)
-    {
-        m_Behaviors[m_NumBehaviors] = behavior;
-        m_Behaviors[m_NumBehaviors++]->Set_NumLeds(m_NumLeds);
-        return true;
-    }
+  for (int b = 0; b < m_NumBehaviors; b++)
+  {
+      if (m_Behaviors[b]->Get_Status() == BEHAVIOR_ACTIVE)
+      {
+          return false;
+      }
+  }
 
-    return false;
-}
-
-void CScene::Set_NumLeds(uint16_t numLeds)
-{
-    m_NumLeds = numLeds;
-    for (int b = 0; b < m_NumBehaviors; b++)
-    {
-        m_Behaviors[b]->Set_NumLeds(m_NumLeds);
-    }
+  return true; // All behaviors have finished
 }
 
 void CScene::Update_State(void)
 {
-    if (m_State == SCENE_INIT && this->Is_StartTriggerMet() && this->Is_StopTriggerMet() == false)
+    if (Is_StopTriggerMet() == true) m_State = SCENE_INIT;
+    else if (m_State == SCENE_INIT && Is_StartTriggerMet() && Is_StopTriggerMet() == false)
     {
-        for (int b = 0; b < MAX_BEHAVIORS; b++)
-        { // Reset all behaviors when coming out of init state
-            if  (m_Behaviors[b] == NULL) break;
-            else m_Behaviors[b]->Initialize();
+        for (int behavior = 0; behavior < m_NumBehaviors; behavior++)
+        {
+            m_Behaviors[behavior]->Initialize();
         }
 
         m_State = SCENE_RUNNING;
     }
-
-    else if (m_State == SCENE_RUNNING && this->Is_StopTriggerMet())
-    {
-        m_State = SCENE_FINISHED;
-    }
 }
 
-void CScene::Play(CLedObj* LedObjArray)
+/*
+bool CScene::Is_Running(void)
 {
-    this->Update_State();
-
-    if (m_State == SCENE_RUNNING)
-    {
-        int behavior = 0;
-        for (behavior = 0; behavior < m_NumBehaviors; behavior++)
-        {
-            if (m_Behaviors[behavior] == NULL) break;
-            if (m_Behaviors[behavior]->Get_Status() == BEHAVIOR_ACTIVE)
-            {
-                m_Behaviors[behavior]->Run(LedObjArray);
-                break;
-            }
-        }
-
-        behavior++;
-
-        for (;behavior < m_NumBehaviors; behavior++)
-        { // Blend the rest if necessary
-                if (m_Behaviors[behavior]               == NULL  ||
-                    m_Behaviors[behavior]->Is_Blended() == false ||
-                    m_Behaviors[behavior]->Get_Status() != BEHAVIOR_ACTIVE)
-                {
-                    break;
-                }
-
-                if (m_Behaviors[behavior]->Get_Status() == BEHAVIOR_ACTIVE)
-                {
-                    m_Behaviors[behavior]->Run(LedObjArray);
-                }
-       }
-
-        if (LedObjArray == NULL) return;
-    } // end - if (m_State != SCENE_RUNNING)
-} // end - void CScene::Play(CLedObj* LedObjArray, uint16_t NumLeds)
+    return true;
+    //return false;
+}
+*/
 

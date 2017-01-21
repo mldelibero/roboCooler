@@ -1,78 +1,40 @@
 #include <CppUTest/TestHarness.h>
 #include <CppUTestExt/MockSupport.h>
 
-#include "scene.h"
-#include "ledBehavior.h"
 #include "ledBehaviorMock.h"
 #include "ledObj.h"
-
-// Support Classes ------------------------------------------------------------
-
-class CChildScene : public CScene
-{
-    public:
-        CChildScene()
-        {
-            m_StopTrigger = false;
-        }
-
-        virtual bool Is_StopTriggerMet(void)
-        {
-            return m_StopTrigger;
-        }
-
-        void Force_StopCondition(bool forceTo)
-        {
-            m_StopTrigger = forceTo;
-        }
-
-    private:
-        virtual bool Is_StartTriggerMet(void)
-        { // Should cause the class to always run
-            return true;
-        }
-
-        bool m_StopTrigger;
-}; // end - class CSceneChild : public CScene
+#include "scene.h"
 // ----------------------------------------------------------------------------
-const int numLeds = 3;
 #define NUM_BEHAVIORS   3
-CLedObj* ledObjArray[numLeds];
-CScene* Scene;
-CChildScene* ChildScene;
+#define NUM_LEDOBJS     3
 CLedBehaviorMock* behavior[NUM_BEHAVIORS];
 
+CLedObj* LedObjArray[NUM_LEDOBJS];
+CScene*  Scene;
+
+// ----------------------------------------------------------------------------
 TEST_GROUP(SceneTests)
 {
     void setup()
     {
         mock().disable();
 
-        for(int led = 0; led < numLeds; led++)
-        {
-            ledObjArray[led] = new CLedObj;
-        }
-        Scene      = new CScene;
-
         for (int b = 0; b < NUM_BEHAVIORS; b++)
         {
             behavior[b] = new CLedBehaviorMock;
         }
+
+        Scene      = new CScene;
     }
 
     void teardown()
     {
-        for(int led = 0; led < numLeds; led++)
-        {
-            delete ledObjArray[led];
-        }
-
-        delete Scene;
-
         for (int b = 0; b < NUM_BEHAVIORS; b++)
         {
             delete behavior[b];
         }
+
+        delete Scene;
 
         mock().checkExpectations();
         mock().clear();
@@ -99,7 +61,7 @@ TEST(SceneTests, BaseClassDoesNotCallBehaviors)
     Scene->Add_Behavior(behavior[0]);
 
     mock().enable();
-    Scene->Play(ledObjArray[0]);
+    Scene->Play(LedObjArray[0]);
 }
 
 TEST(SceneTests, SetsNumLedsToNominalWhenAddingBehavior)
@@ -113,26 +75,58 @@ TEST(SceneTests, SetsNumLedsToNominalWhenAddingBehavior)
 
 TEST(SceneTests, SetsNumLedsToUpdatedWhenAddingBehavior)
 {
-    Scene->Set_NumLeds(50);
+    int16_t NumLeds = 50;
+    Scene->Set_NumLeds(NumLeds);
     mock().enable();
-    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",50).onObject(behavior[0]);
-    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",50).onObject(behavior[1]);
+    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",NumLeds).onObject(behavior[0]);
+    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",NumLeds).onObject(behavior[1]);
     Scene->Add_Behavior(behavior[0]);
     Scene->Add_Behavior(behavior[1]);
 }
 
 TEST(SceneTests, SetsAllBehaviorsWhenOwnsNumLedsUpdated)
 {
+    int16_t NumLeds = 50;
+
     Scene->Add_Behavior(behavior[0]);
     Scene->Add_Behavior(behavior[1]);
 
     mock().enable();
-    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",51).onObject(behavior[0]);
-    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",51).onObject(behavior[1]);
+    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",NumLeds).onObject(behavior[0]);
+    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",NumLeds).onObject(behavior[1]);
 
-    Scene->Set_NumLeds(51);
+    Scene->Set_NumLeds(NumLeds);
 }
+// ----------------------------------------------------------------------------
+class CChildScene : public CScene
+{
+    public:
+        CChildScene()
+        {
+        }
 
+        void Force_StopCondition(bool forceTo)
+        {
+            Led_Behavior_t beh = (forceTo == true) ? BEHAVIOR_DONE : BEHAVIOR_ACTIVE;
+
+            for (int b = 0; b < m_NumBehaviors; b++)
+            {
+                ((CLedBehaviorMock*)(m_Behaviors[b]))->Force_State(beh);
+            }
+        }
+
+        virtual bool Is_StartTriggerMet(void)
+        {
+            return true;
+        }
+        virtual bool Is_StopTriggerMet(void)
+        {
+            return CScene::Is_StopTriggerMet();
+        }
+};
+
+CChildScene* ChildScene;
+// ----------------------------------------------------------------------------
 
 TEST_GROUP(ChildSceneTests)
 {
@@ -140,29 +134,19 @@ TEST_GROUP(ChildSceneTests)
     {
         mock().disable();
 
-        for(int led = 0; led < numLeds; led++)
-        {
-            ledObjArray[led] = new CLedObj;
-        }
-
-        behavior[0] = new CLedBehaviorMock;
-        behavior[1] = new CLedBehaviorMock;
-        behavior[2] = new CLedBehaviorMock;
-
         ChildScene = new CChildScene;
 
         for (int b = 0; b < NUM_BEHAVIORS; b++)
         {
+            behavior[b] = new CLedBehaviorMock;
             ChildScene->Add_Behavior(behavior[b]);
         }
     }
 
     void teardown()
     {
-        for(int led = 0; led < numLeds; led++)
-        {
-            delete ledObjArray[led];
-        }
+        mock().checkExpectations();
+        mock().clear();
 
         delete ChildScene;
 
@@ -170,83 +154,109 @@ TEST_GROUP(ChildSceneTests)
         {
             delete behavior[b];
         }
-
-        mock().checkExpectations();
-        mock().clear();
     }
 }; // end - TEST_GROUP(ChildSceneTests)
 
-TEST(ChildSceneTests, SceneCallsBehaviorWithLedObjArrayPointer)
+
+TEST(ChildSceneTests, ChildObjStartTriggerIsSetByDefault)
 {
-    ChildScene->Play(ledObjArray[0]); // Call first to reset scene
-
-    mock().enable();
-    mock().expectOneCall("CLedBehaviorComp::Execute").onObject(behavior[0]).withParameter("LedObjArray", ledObjArray[0]);
-
-    ChildScene->Play(ledObjArray[0]);
+    CHECK_EQUAL(true, ChildScene->Is_StartTriggerMet());
 }
 
-TEST(ChildSceneTests, SceneOnlyCallsActiveBehavior)
+TEST(ChildSceneTests, ChildObjStopTriggerIsNotSetByDefault)
 {
-    ChildScene->Play(ledObjArray[0]); // Call first to reset scene
-
-    mock().enable();
-    mock().expectOneCall("CLedBehaviorComp::Execute").onObject(behavior[0]).ignoreOtherParameters();
-
-    ChildScene->Play(ledObjArray[0]);
+    CHECK_EQUAL(false, ChildScene->Is_StopTriggerMet());
 }
 
-TEST(ChildSceneTests, ScenePlaysNextBehaviorWhenCurrentOneFinished)
+TEST(ChildSceneTests, CanForceStopTrigger)
 {
-    ChildScene->Play(ledObjArray[0]); // Call first to reset scene
+    ChildScene->Force_StopCondition(true);
+    CHECK_EQUAL(true, ChildScene->Is_StopTriggerMet());
 
-    behavior[0]->Force_State(BEHAVIOR_DONE);
-
-    mock().enable();
-    mock().expectOneCall("CLedBehaviorComp::Execute").onObject(behavior[1]).ignoreOtherParameters();
-    ChildScene->Play(ledObjArray[0]);
+    ChildScene->Force_StopCondition(false);
+    CHECK_EQUAL(false, ChildScene->Is_StopTriggerMet());
 }
 
 TEST(ChildSceneTests, StartResetsAllBehaviors)
-{
-    for (int b = 0; b < NUM_BEHAVIORS; b++)
-    {
-        behavior[b]->Force_State(BEHAVIOR_DONE);
-    }
-
+{ // This assumes that the stop condition has been cleared
     mock().enable();
     for (int b = 0; b < NUM_BEHAVIORS; b++)
     {
         mock().expectOneCall("CLedBehaviorComp::Initialize").onObject(behavior[b]);
     }
 
-    ChildScene->Play(ledObjArray[0]);
+    mock().ignoreOtherCalls();
+    ChildScene->Play(LedObjArray[0]);
 }
 
-TEST(ChildSceneTests, NoBehaviorsRunIfTheyAreAllFinished)
-{ // Failing will call a behavior mock function
-// This also tests that the scene does not reinitialize on a repeated start condition
-    ChildScene->Play(ledObjArray[0]); // Call first to reset scene
+TEST(ChildSceneTests, RepeatedStartConditionDoesNotReinitialize)
+{
+    ChildScene->Play(LedObjArray[0]);
+    mock().enable();
 
+    mock().expectNCalls(0, "CLedBehaviorComp::Initialize");
+    mock().ignoreOtherCalls();
+    ChildScene->Play(LedObjArray[0]);
+}
+
+TEST(ChildSceneTests, StopTriggerOverridesStartTrigger)
+{ // Failing will call mock function CLedBehaviorComp::Initialize
+    mock().enable();
+    ChildScene->Force_StopCondition(true);
+    ChildScene->Play(LedObjArray[0]);
+}
+
+TEST(ChildSceneTests, StopTriggerOverridesStartTrigger2)
+{ // Failing will call mock function CLedBehaviorComp::Initialize
+    ChildScene->Play(LedObjArray[0]);
+    ChildScene->Play(LedObjArray[0]);
+
+    mock().enable();
+    ChildScene->Force_StopCondition(true);
+    ChildScene->Play(LedObjArray[0]);
+}
+
+TEST(ChildSceneTests, SceneReinitializesAfterStopTriggerClears)
+{
+    ChildScene->Play(LedObjArray[0]);
+
+    mock().enable();
+    ChildScene->Force_StopCondition(true);
+    ChildScene->Play(LedObjArray[0]);
+
+    ChildScene->Force_StopCondition(false);
     for (int b = 0; b < NUM_BEHAVIORS; b++)
     {
-        behavior[b]->Force_State(BEHAVIOR_DONE);
+        mock().expectOneCall("CLedBehaviorComp::Initialize").onObject(behavior[b]);
     }
-
-    mock().enable();
-    ChildScene->Play(ledObjArray[0]);
+    mock().ignoreOtherCalls();
+    ChildScene->Play(LedObjArray[0]);
 }
 
-TEST(ChildSceneTests, MockObjStopStateFunWorks)
-{ // Failing will call a behavior mock function
-    ChildScene->Force_StopCondition(true);
+TEST(ChildSceneTests, SceneCallsBehaviorWithLedObjArrayPointer)
+{ // Only calls the first behavior
+    ChildScene->Play(LedObjArray[0]); // Call first to reset scene
+
     mock().enable();
-    ChildScene->Play(ledObjArray[0]); // Should override start trigger
+    mock().expectOneCall("CLedBehaviorComp::Execute").onObject(behavior[0]).withParameter("LedObjArray", LedObjArray[0]);
+
+    ChildScene->Play(LedObjArray[0]);
+}
+
+TEST(ChildSceneTests, ScenePlaysNextBehaviorWhenCurrentOneFinished)
+{
+    ChildScene->Play(LedObjArray[0]); // Call first to reset scene
+
+    behavior[0]->Force_State(BEHAVIOR_DONE);
+
+    mock().enable();
+    mock().expectOneCall("CLedBehaviorComp::Execute").onObject(behavior[1]).ignoreOtherParameters();
+    ChildScene->Play(LedObjArray[0]);
 }
 
 TEST(ChildSceneTests, SceneCallsconsecutiveBlendedBehaviors)
 {
-    ChildScene->Play(ledObjArray[0]); // Resets all behaviors
+    ChildScene->Play(LedObjArray[0]); // Resets all behaviors
 
     mock().enable();
 
@@ -255,26 +265,32 @@ TEST(ChildSceneTests, SceneCallsconsecutiveBlendedBehaviors)
     mock().expectOneCall("CLedBehaviorComp::Execute").onObject(behavior[0]).ignoreOtherParameters();
     mock().expectOneCall("CLedBehaviorComp::Execute").onObject(behavior[1]).ignoreOtherParameters();
     mock().expectOneCall("CLedBehaviorComp::Execute").onObject(behavior[2]).ignoreOtherParameters();
-    ChildScene->Play(ledObjArray[0]);
+    ChildScene->Play(LedObjArray[0]);
 }
 
 TEST(ChildSceneTests, SceneDoesnotBlendNonConsecutiveBlendedBehaviors)
 {
-    ChildScene->Play(ledObjArray[0]); // Resets all behaviors
+    ChildScene->Play(LedObjArray[0]); // Resets all behaviors
 
     mock().enable();
 
     behavior[1]->Force_Blended(false);
     behavior[2]->Force_Blended(true);
     mock().expectOneCall("CLedBehaviorComp::Execute").onObject(behavior[0]).ignoreOtherParameters();
-    ChildScene->Play(ledObjArray[0]);
+    ChildScene->Play(LedObjArray[0]);
 }
 
+TEST(ChildSceneTests, NoBehaviorsRunIfTheyAreAllFinished)
+{ // Failing will call a behavior mock function
+// This also tests that the scene does not reinitialize on a repeated start condition
+    ChildScene->Play(LedObjArray[0]); // Call first to reset scene
 
-/*
- * Functionality:
- * Should stay in finished state after all behaviors are completed
- * Should have a watchdog timeout in case a behavior never ends. -- Will need an override for other projects
- *
- */
+    for (int b = 0; b < NUM_BEHAVIORS; b++)
+    {
+        behavior[b]->Force_State(BEHAVIOR_DONE);
+    }
+
+    mock().enable();
+    ChildScene->Play(LedObjArray[0]);
+}
 

@@ -10,8 +10,7 @@
 typedef enum
 {
     SCENE_INIT,
-    SCENE_RUNNING,
-    SCENE_FINISHED
+    SCENE_RUNNING
 } Scene_t;
 
 class CScene
@@ -21,20 +20,22 @@ class CScene
         virtual ~CScene(void);
 
         void         Play(CLedObj* LedObjArray);
-        bool         Is_Running(void);
+//        bool         Is_Running(void);
         bool         Add_Behavior(CLedBehaviorComp* behavior);
-        void         Set_NumLeds(uint16_t numLeds);
+        void         Set_NumLeds(uint16_t NumLeds);
 
     private:
         void Update_State(void);
         virtual bool Is_StartTriggerMet(void);
+
+        uint16_t          m_NumLeds;
+        Scene_t           m_State;
+
+    protected:
         virtual bool Is_StopTriggerMet(void);
 
         CLedBehaviorComp* m_Behaviors[MAX_BEHAVIORS];
-        CLedObj*          m_LedArray;
-        uint16_t          m_NumLeds;
         uint8_t           m_NumBehaviors; //< Number of behaviors stored in this scene
-        Scene_t           m_State;
 };
 #endif // #ifndef __SCENE_H
 

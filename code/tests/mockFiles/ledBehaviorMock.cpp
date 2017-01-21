@@ -7,6 +7,7 @@
 CLedBehaviorComp::CLedBehaviorComp()
 {
     m_Status = BEHAVIOR_ACTIVE;
+    m_Blended = false;
 }
 
 void CLedBehaviorComp::Execute(void)
