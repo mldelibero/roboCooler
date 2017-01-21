@@ -6,7 +6,7 @@
 CLedComp::CLedComp()
 {
     m_LedTimerReset = 25;
-    Set_TimerResetValue(25); // 40Hz
+    Set_ComponentPeriod_ms(25); // 40Hz
 
     m_BootLedStates = 0;
     m_BootPeriod = 500 / m_LedTimerReset; // 500ms -- Count every execution

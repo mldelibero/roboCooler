@@ -53,7 +53,7 @@ TEST(LedTests, RunUpdatesLedStates)
 TEST(LedTests, ResetFreqGreater10Hz)
 {
     CLedComp leds;
-    CHECK(leds.Get_TimerResetValue() < 100); // < 100ms
+    CHECK(leds.Get_ComponentPeriod_ms() < 100); // < 100ms
 }
 
 TEST_GROUP(LedBootTests)

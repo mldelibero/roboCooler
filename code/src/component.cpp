@@ -15,13 +15,13 @@ CComponent::~CComponent()
 CComponent::CComponent(int32_t resetValue)
 {
     ResetComponent();
-    m_TimerResetValue = resetValue;
+    m_ComponentPeriod_ms = resetValue;
 }
 
 void CComponent::ResetComponent(void)
 {
     m_TimerIndex      = AllocateTimer();
-    m_TimerResetValue = 100;
+    m_ComponentPeriod_ms = 100;
 
     Initialize();
 }
@@ -39,16 +39,16 @@ int32_t CComponent::Get_TimerIndex(void)
     return m_TimerIndex;
 }
 
-int32_t CComponent::Get_TimerResetValue(void)
+int32_t CComponent::Get_ComponentPeriod_ms(void)
 {
-    return m_TimerResetValue;
+    return m_ComponentPeriod_ms;
 }
 
 bool CComponent::Run(void)
 {
     if (IsTimerExpired(m_TimerIndex))
     {
-        Set_TimerValue(m_TimerIndex, m_TimerResetValue);
+        Set_TimerValue(m_TimerIndex, m_ComponentPeriod_ms);
         Execute(); // Execute's child specific code
         return true;
     }
@@ -64,8 +64,8 @@ bool CComponent::Run(void* target_p)
     return tmp;
 }
 
-void CComponent::Set_TimerResetValue(int32_t val)
+void CComponent::Set_ComponentPeriod_ms(int32_t val)
 {
-    m_TimerResetValue = val;
+    m_ComponentPeriod_ms = val;
 }
 

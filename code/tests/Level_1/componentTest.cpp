@@ -56,19 +56,19 @@ TEST(ComponentTests, RunResetsTimerOnlyIfExpired)
 
     Set_TimerValue(comp.Get_TimerIndex(), 0);
     comp.Run();
-    CHECK_EQUAL(comp.Get_TimerResetValue(), Get_TimerValue(comp.Get_TimerIndex()));
+    CHECK_EQUAL(comp.Get_ComponentPeriod_ms(), Get_TimerValue(comp.Get_TimerIndex()));
 }
 
 TEST(ComponentTests, DefaultTimerResetValue_100ms)
 {
     CComponent comp;
-    CHECK_EQUAL(100, comp.Get_TimerResetValue());
+    CHECK_EQUAL(100, comp.Get_ComponentPeriod_ms());
 }
 
 TEST(ComponentTests, CanSetTimerResetValue)
 {
     CComponent comp(10);
-    CHECK_EQUAL(10, comp.Get_TimerResetValue());
+    CHECK_EQUAL(10, comp.Get_ComponentPeriod_ms());
 }
 
 class CInheritedComp: public CComponent
@@ -104,7 +104,7 @@ class CInheritedComp: public CComponent
 TEST(ComponentTests, BaseConstructorRunsInInheritedClass)
 {
     CInheritedComp comp;
-    CHECK_EQUAL(100, comp.Get_TimerResetValue());
+    CHECK_EQUAL(100, comp.Get_ComponentPeriod_ms());
 }
 
 TEST(ComponentTests, RunCallsExecuteFun)
@@ -156,6 +156,6 @@ TEST(ComponentTests, RunWithPointerResetsTimerOnlyIfExpired)
 
     Set_TimerValue(comp.Get_TimerIndex(), 0);
     comp.Run((void*)&var);
-    CHECK_EQUAL(comp.Get_TimerResetValue(), Get_TimerValue(comp.Get_TimerIndex()));
+    CHECK_EQUAL(comp.Get_ComponentPeriod_ms(), Get_TimerValue(comp.Get_TimerIndex()));
 }
 

@@ -36,12 +36,12 @@ bool CComponent::Run(void* target_p)
     return true;
 }
 
-int32_t CComponent::Get_TimerResetValue(void)
+int32_t CComponent::Get_ComponentPeriod_ms(void)
 {
-    return m_TimerResetValue;
+    return m_ComponentPeriod_ms;
 }
 
-void CComponent::Set_TimerResetValue(int32_t val)
+void CComponent::Set_ComponentPeriod_ms(int32_t val)
 {
     if (val) return;
 }
