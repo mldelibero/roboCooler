@@ -64,8 +64,8 @@ bool CComponent::Run(void* target_p)
     return tmp;
 }
 
-void CComponent::Set_ComponentPeriod_ms(int32_t val)
+void CComponent::Set_ComponentPeriod_ms(int32_t period)
 {
-    m_ComponentPeriod_ms = val;
+    m_ComponentPeriod_ms = period;
 }
 

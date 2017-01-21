@@ -41,7 +41,7 @@ int32_t CComponent::Get_ComponentPeriod_ms(void)
     return m_ComponentPeriod_ms;
 }
 
-void CComponent::Set_ComponentPeriod_ms(int32_t val)
+void CComponent::Set_ComponentPeriod_ms(int32_t period)
 {
     if (val) return;
 }

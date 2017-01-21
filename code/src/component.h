@@ -24,7 +24,7 @@ class CComponent
         int32_t m_TimerIndex;
 
     protected:
-        void  Set_ComponentPeriod_ms(int32_t val);
+        void  Set_ComponentPeriod_ms(int32_t period);
 
         void* m_Target_p;
 };
