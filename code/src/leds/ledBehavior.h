@@ -31,14 +31,16 @@ class CLedBehaviorComp : public CComponent
         void         Clear_IsBlended(void);
 
     protected:
+        virtual void Update_Leds(void);
+        void Set_Led(uint16_t led, CLedObj LedValue);
+
         bool           m_IsBlended;
-        CLedObj*       m_LedArray;
         Led_Behavior_t m_Status;
         uint16_t       m_NumLeds;
 
     private:
-        bool    m_RunForever;
-        int32_t m_RunTime_ms;
+        bool     m_RunForever;
+        int32_t  m_RunTime_ms;
 }; // end - class CLedBehaviorComp : public CComponent
 #endif // #ifndef __LEDBEHAVIOR_H
 

@@ -15,6 +15,8 @@ CLedBehaviorComp::CLedBehaviorComp(uint32_t runTime_ms)
 
 void CLedBehaviorComp::Execute(void)
 {
+    Update_Leds();
+
     if (m_RunForever == true);
     else
     {
@@ -69,5 +71,23 @@ void CLedBehaviorComp::Set_IsBlended(void)
 void CLedBehaviorComp::Clear_IsBlended(void)
 {
     m_IsBlended = false;
+}
+
+void CLedBehaviorComp::Update_Leds(void)
+{ // Shows example of how to use this function
+    CLedObj ledObj;
+
+    for (uint16_t led = 0; led < m_NumLeds; led++)
+    {
+        Set_Led(led, ledObj);
+    }
+}
+
+void CLedBehaviorComp::Set_Led(uint16_t led, CLedObj LedValue)
+{
+    CLedObj* LedArray = (CLedObj*)(m_Target_p);
+    if (LedArray == NULL) return;
+
+    LedArray[led] = LedValue;
 }
 

@@ -1,8 +1,13 @@
 #include <CppUTest/TestHarness.h>
 #include <CppUTestExt/MockSupport.h>
 #include "ledBehavior.h"
+#include "ledObj.h"
 
 // -- Defines -------------------------------------------------------------
+#define RED_LED_PERCENT_ON   40
+#define GREEN_LED_PERCENT_ON 50
+#define BLUE_LED_PERCENT_ON  70
+
 #define NUM_LEDS             10
 // -- Class definition ----------------------------------------------------
 class CLedBehaviorChild : public CLedBehaviorComp
@@ -10,22 +15,31 @@ class CLedBehaviorChild : public CLedBehaviorComp
     public:
         CLedBehaviorChild()
         {
-        }
-
-        void Execute(void)
-        {
+            m_LedObj.Set_Red_PercentOn  (RED_LED_PERCENT_ON);
+            m_LedObj.Set_Green_PercentOn(GREEN_LED_PERCENT_ON);
+            m_LedObj.Set_Blue_PercentOn (BLUE_LED_PERCENT_ON);
         }
 
         void Force_DoneConditionMet(void)
         {
             m_Status = BEHAVIOR_DONE;
         }
+
+        CLedObj m_LedObj;
+
+        void Update_Leds(void)
+        { // Shows example of how to use this function
+            for (uint16_t led = 0; led < m_NumLeds; led++)
+            {
+                Set_Led(led, m_LedObj);
+            }
+        }
 }; // end - class CLedBehaviorChild : public CLedBehaviorComp
 
 // -- Variables -----------------------------------------------------------
 CLedBehaviorComp*  LedBehavior;
 CLedBehaviorChild* LedBehaviorChild;
-
+CLedObj*           LedObjs;
 // -- Tests ---------------------------------------------------------------
 TEST_GROUP(LedBehaviorTests)
 {
@@ -34,12 +48,14 @@ TEST_GROUP(LedBehaviorTests)
         mock().disable();
         LedBehavior      = new CLedBehaviorComp;
         LedBehaviorChild = new CLedBehaviorChild;
-
+        LedObjs          = new CLedObj[NUM_LEDS];
     }
+
     void teardown()
     {
         delete LedBehavior;
         delete LedBehaviorChild;
+        delete [] LedObjs;
     }
 };
 
@@ -141,4 +157,17 @@ TEST(LedBehaviorTests, CanSetNumLeds)
     uint16_t numLeds = NUM_LEDS*2;
     LedBehavior->Set_NumLeds(numLeds);
     CHECK_EQUAL(numLeds, LedBehavior->Get_NumLeds());
+}
+
+TEST(LedBehaviorTests, NoBlendingPassesColorsThrough)
+{
+    LedBehaviorChild->Set_NumLeds(NUM_LEDS);
+    LedBehaviorChild->Run(&LedObjs[0]);
+
+    for (int led = 0; led < NUM_LEDS; led++)
+    {
+        CHECK_EQUAL(RED_LED_PERCENT_ON  , LedObjs[led].Get_Red_PercentOn());
+        CHECK_EQUAL(GREEN_LED_PERCENT_ON, LedObjs[led].Get_Green_PercentOn());
+        CHECK_EQUAL(BLUE_LED_PERCENT_ON , LedObjs[led].Get_Blue_PercentOn());
+    }
 }
