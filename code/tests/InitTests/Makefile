@@ -28,7 +28,6 @@ SRC_FILES = \
 	../mockFiles/capTouchMock.cpp\
 	../mockFiles/component.cpp\
 	../mockFiles/leds.cpp\
-	../mockFiles/ledObjMock.cpp\
 	../mockFiles/ledStripMock.cpp\
 	../mockFiles/ledStripDriverMock.cpp\
 	../mockFiles/lidMotorMock.cpp\
@@ -49,6 +48,7 @@ TEST_SRC_DIRS = \
 
 TEST_SRC_FILES =\
 	../AllTests.cpp\
+	../../src/leds/ledObj.cpp\
 	../mockFiles/limitSwitchMock.cpp\
 
 INCLUDE_DIRS =\

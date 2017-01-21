@@ -36,12 +36,12 @@ TEST_SRC_FILES = \
 	../mockFiles/capTouchDriverMock.cpp\
 	../mockFiles/component.cpp\
 	../mockFiles/ledStripDriverMock.cpp\
-	../mockFiles/ledObjMock.cpp\
 	../mockFiles/limitSwitchMock.cpp\
 	../mockFiles/limitSwitchDriverMock.cpp\
 	../mockFiles/sceneMock.cpp\
 	../mockFiles/stdlib/stm32f4xx.cpp\
 	../../src/drivers/CDriver.cpp\
+	../../src/leds/ledObj.cpp\
 	../../src/leds/ledStrip.cpp\
 
 INCLUDE_DIRS =\
