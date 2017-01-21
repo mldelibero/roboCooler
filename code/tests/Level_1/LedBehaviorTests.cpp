@@ -2,26 +2,7 @@
 #include <CppUTestExt/MockSupport.h>
 #include "ledBehavior.h"
 
-CLedBehaviorComp* LedBehavior;
-
-TEST_GROUP(LedBehaviorTests)
-{
-    void setup()
-    {
-        mock().disable();
-        LedBehavior = new CLedBehaviorComp;
-    }
-    void teardown()
-    {
-        delete LedBehavior;
-    }
-};
-
-TEST(LedBehaviorTests, StatusReturnsActiveAfterConstructor)
-{
-    CHECK_EQUAL(BEHAVIOR_ACTIVE, LedBehavior->Get_Status());
-}
-
+// -- Class definition ----------------------------------------------------
 class CLedBehaviorChild : public CLedBehaviorComp
 {
     public:
@@ -39,21 +20,43 @@ class CLedBehaviorChild : public CLedBehaviorComp
         }
 }; // end - class CLedBehaviorChild : public CLedBehaviorComp
 
-TEST(LedBehaviorTests, CompliesWithChildsEndConditionFun)
-{
-    CLedBehaviorChild BehChild;
-    BehChild.Force_DoneConditionMet();
+// -- Variables -----------------------------------------------------------
+CLedBehaviorComp*  LedBehavior;
+CLedBehaviorChild* LedBehaviorChild;
 
-    CHECK_EQUAL(BEHAVIOR_DONE, BehChild.Get_Status());
+// -- Tests ---------------------------------------------------------------
+TEST_GROUP(LedBehaviorTests)
+{
+    void setup()
+    {
+        mock().disable();
+        LedBehavior      = new CLedBehaviorComp;
+        LedBehaviorChild = new CLedBehaviorChild;
+
+    }
+    void teardown()
+    {
+        delete LedBehavior;
+        delete LedBehaviorChild;
+    }
+};
+
+TEST(LedBehaviorTests, StatusReturnsActiveAfterConstructor)
+{
+    CHECK_EQUAL(BEHAVIOR_ACTIVE, LedBehavior->Get_Status());
+}
+
+TEST(LedBehaviorTests, ChildClassCompliesWithChildsEndConditionFun)
+{
+    LedBehaviorChild->Force_DoneConditionMet();
+    CHECK_EQUAL(BEHAVIOR_DONE, LedBehaviorChild->Get_Status());
 }
 
 TEST(LedBehaviorTests, InitResetsState)
 {
-    CLedBehaviorChild BehChild;
-    BehChild.Force_DoneConditionMet();
-    BehChild.Initialize();
-
-    CHECK_EQUAL(BEHAVIOR_ACTIVE, BehChild.Get_Status());
+    LedBehaviorChild->Force_DoneConditionMet();
+    LedBehaviorChild->Initialize();
+    CHECK_EQUAL(BEHAVIOR_ACTIVE, LedBehaviorChild->Get_Status());
 }
 
 /*
