@@ -43,7 +43,9 @@ TEST_SRC_DIRS = \
 
 TEST_SRC_FILES = \
 	../AllTests.cpp\
+	../../src/leds/scene.cpp\
 	../mockFiles/capTouchMock.cpp\
+	../mockFiles/ledBehaviorMock.cpp\
 	../mockFiles/limitSwitchDriverMock.cpp\
 	../mockFiles/limitSwitchMock.cpp\
 
@@ -53,6 +55,7 @@ INCLUDE_DIRS =\
   ../mockFiles\
   ../../src\
   ../../src/drivers\
+  ../../src/leds\
   ../Level_2/mockFiles\
   ../Level_1/mockFiles\
   ../mockFiles/stdLib\
