@@ -15,7 +15,8 @@ typedef enum
 typedef enum
 {
     BEHAVIOR_BLENDING_NONE    = 0,
-    BEHAVIOR_BLENDING_AVERAGE
+    BEHAVIOR_BLENDING_AVERAGE,
+    BEHAVIOR_BLENDING_ADDITION
 } Led_BehaviorBlending_t;
 
 class CLedBehaviorComp : public CComponent

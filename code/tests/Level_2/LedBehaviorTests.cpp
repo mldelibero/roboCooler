@@ -5,13 +5,15 @@
 
 // -- Defines -------------------------------------------------------------
 #define RED_LED_PERCENT_ON   40
-#define GREEN_LED_PERCENT_ON 50
-#define BLUE_LED_PERCENT_ON  70
+#define GREEN_LED_PERCENT_ON 80
+#define BLUE_LED_PERCENT_ON  100
 
 #define NUM_LEDS             10
 // -- Variables -----------------------------------------------------------
 CLedObj Off;
+CLedObj OneQuarterOn;
 CLedObj HalfOn;
+CLedObj ThreeQuartersOn;
 CLedObj FullOn;
 // -- Class definition ----------------------------------------------------
 class CLedBehaviorChild : public CLedBehaviorComp
@@ -89,14 +91,21 @@ TEST_GROUP(LedBehaviorTests)
         Off.Set_Green_PercentOn(0);
         Off.Set_Blue_PercentOn(0);
 
+        OneQuarterOn.Set_Red_PercentOn(RED_LED_PERCENT_ON/4);
+        OneQuarterOn.Set_Green_PercentOn(GREEN_LED_PERCENT_ON/4);
+        OneQuarterOn.Set_Blue_PercentOn(BLUE_LED_PERCENT_ON/4);
+
         HalfOn.Set_Red_PercentOn(RED_LED_PERCENT_ON/2);
         HalfOn.Set_Green_PercentOn(GREEN_LED_PERCENT_ON/2);
         HalfOn.Set_Blue_PercentOn(BLUE_LED_PERCENT_ON/2);
 
+        ThreeQuartersOn.Set_Red_PercentOn(RED_LED_PERCENT_ON*0.75f);
+        ThreeQuartersOn.Set_Green_PercentOn(GREEN_LED_PERCENT_ON*0.75f);
+        ThreeQuartersOn.Set_Blue_PercentOn(BLUE_LED_PERCENT_ON*0.75f);
+
         FullOn.Set_Red_PercentOn(RED_LED_PERCENT_ON);
         FullOn.Set_Green_PercentOn(GREEN_LED_PERCENT_ON);
         FullOn.Set_Blue_PercentOn(BLUE_LED_PERCENT_ON);
-
     }
 
     void teardown()
@@ -324,7 +333,6 @@ TEST(LedBehaviorTests, OverwriteBlendingWorks)
 
 TEST(LedBehaviorTests, AverageBlendingWorks)
 {
-    // This should overwrite previous
     LedBehaviorChild->Set_NumLeds(NUM_LEDS);
     LedBehaviorChild->Run(&LedObjs[0]);
 
@@ -336,3 +344,52 @@ TEST(LedBehaviorTests, AverageBlendingWorks)
 
     CheckLeds(0, NUM_LEDS-1, Off, HalfOn, Off);
 }
+
+TEST(LedBehaviorTests, AdditionBlendingWorks)
+{
+    CLedBehaviorChild firstBehChild(OneQuarterOn);
+    CLedBehaviorChild secondBehChild(HalfOn);
+
+    firstBehChild. Set_NumLeds(NUM_LEDS);
+    secondBehChild.Set_NumLeds(NUM_LEDS);
+
+    secondBehChild.Set_IsBlended(BEHAVIOR_BLENDING_ADDITION);
+
+    firstBehChild .Run(&LedObjs[0]);
+    secondBehChild.Run(&LedObjs[0]);
+
+    CheckLeds(0, NUM_LEDS-1, Off, ThreeQuartersOn, Off);
+}
+
+TEST(LedBehaviorTests, AdditionBlendingCapsAtFullOn)
+{
+    CLedObj Overflow;
+    CLedObj OverflowOn;
+
+    Overflow.Set_Red_PercentOn  (90);
+    Overflow.Set_Green_PercentOn(90);
+    Overflow.Set_Blue_PercentOn (90);
+
+    OverflowOn.Set_Red_PercentOn  (100);
+    OverflowOn.Set_Green_PercentOn(100);
+    OverflowOn.Set_Blue_PercentOn (100);
+
+    CLedBehaviorChild firstBehChild(Overflow);
+    CLedBehaviorChild secondBehChild(Overflow);
+
+    firstBehChild. Set_NumLeds(NUM_LEDS);
+    secondBehChild.Set_NumLeds(NUM_LEDS);
+
+    secondBehChild.Set_IsBlended(BEHAVIOR_BLENDING_ADDITION);
+
+    firstBehChild .Run(&LedObjs[0]);
+    secondBehChild.Run(&LedObjs[0]);
+
+    CheckLeds(0, NUM_LEDS-1, Off, OverflowOn, Off);
+}
+
+
+TEST(LedBehaviorTests, ChildDoesNotHaveDirectAccessToLeds)
+{ /// @bug Not sure how to test this
+}
+

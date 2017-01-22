@@ -1,4 +1,5 @@
 #include "ledBehavior.h"
+#include "ledObj.h"
 
 CLedBehaviorComp::CLedBehaviorComp()
 {
@@ -101,6 +102,17 @@ void CLedBehaviorComp::Set_Led(uint16_t led, CLedObj LedValue)
         uint8_t RedValue   = uint8_t(float(LedArray[led].Get_Red_PercentOn()   + LedValue.Get_Red_PercentOn  ())/2);
         uint8_t GreenValue = uint8_t(float(LedArray[led].Get_Green_PercentOn() + LedValue.Get_Green_PercentOn())/2);
         uint8_t BlueValue  = uint8_t(float(LedArray[led].Get_Blue_PercentOn()  + LedValue.Get_Blue_PercentOn ())/2);
+
+        LedArray[led].Set_Red_PercentOn(RedValue);
+        LedArray[led].Set_Green_PercentOn(GreenValue);
+        LedArray[led].Set_Blue_PercentOn(BlueValue);
+    }
+
+    else if (m_BlendingType == BEHAVIOR_BLENDING_ADDITION)
+    {
+        uint8_t RedValue   = uint8_t(LedArray[led].Get_Red_PercentOn()   + LedValue.Get_Red_PercentOn());
+        uint8_t GreenValue = uint8_t(LedArray[led].Get_Green_PercentOn() + LedValue.Get_Green_PercentOn());
+        uint8_t BlueValue  = uint8_t(LedArray[led].Get_Blue_PercentOn()  + LedValue.Get_Blue_PercentOn());
 
         LedArray[led].Set_Red_PercentOn(RedValue);
         LedArray[led].Set_Green_PercentOn(GreenValue);
