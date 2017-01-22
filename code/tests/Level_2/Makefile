@@ -45,6 +45,7 @@ TEST_SRC_FILES = \
 	../../src/capTouch.cpp\
 	../../src/limitSwitch.cpp\
 	../../src/leds/ledBehavior.cpp\
+	../../src/leds/ledBehaviorChildren.cpp\
 	../../src/leds/ledObj.cpp\
 	../../src/leds/leds.cpp\
 
