@@ -31,7 +31,7 @@ void CLedBehaviorComp::Execute(void)
 
 void CLedBehaviorComp::Initialize(void)
 {
-    m_IsBlended = false;
+    m_BlendingType = BEHAVIOR_BLENDING_NONE;
     m_Status    = BEHAVIOR_ACTIVE;
     Set_ComponentPeriod_ms(BEH_DEF_PER_MS);
     m_RunTime_ms = -1;
@@ -62,17 +62,17 @@ void CLedBehaviorComp::Set_NumLeds(uint16_t numLeds)
 
 bool CLedBehaviorComp::Is_Blended(void)
 { // If true -- will blend with the previous behavior
-    return m_IsBlended;
+    return (m_BlendingType == BEHAVIOR_BLENDING_NONE) ? false : true;
 }
 
-void CLedBehaviorComp::Set_IsBlended(void)
+void CLedBehaviorComp::Set_IsBlended(Led_BehaviorBlending_t blendingType)
 {
-    m_IsBlended = true;
+    m_BlendingType = blendingType;
 }
 
 void CLedBehaviorComp::Clear_IsBlended(void)
 {
-    m_IsBlended = false;
+    m_BlendingType = BEHAVIOR_BLENDING_NONE;
 }
 
 void CLedBehaviorComp::Update_Leds(void)
@@ -87,12 +87,25 @@ void CLedBehaviorComp::Update_Leds(void)
 
 void CLedBehaviorComp::Set_Led(uint16_t led, CLedObj LedValue)
 {
+    // Don't operate if indexes were set incorrectly
     if (led < Get_FirstLedIndex() || led > Get_LastLedIndex() || Get_FirstLedIndex() > Get_LastLedIndex()) return;
-
     CLedObj* LedArray = (CLedObj*)(m_Target_p);
     if (LedArray == NULL) return;
 
-    LedArray[led] = LedValue;
+    if (m_BlendingType == BEHAVIOR_BLENDING_NONE)
+    {
+        LedArray[led] = LedValue;
+    }
+    else if (m_BlendingType == BEHAVIOR_BLENDING_AVERAGE)
+    {
+        uint8_t RedValue   = uint8_t(float(LedArray[led].Get_Red_PercentOn()   + LedValue.Get_Red_PercentOn  ())/2);
+        uint8_t GreenValue = uint8_t(float(LedArray[led].Get_Green_PercentOn() + LedValue.Get_Green_PercentOn())/2);
+        uint8_t BlueValue  = uint8_t(float(LedArray[led].Get_Blue_PercentOn()  + LedValue.Get_Blue_PercentOn ())/2);
+
+        LedArray[led].Set_Red_PercentOn(RedValue);
+        LedArray[led].Set_Green_PercentOn(GreenValue);
+        LedArray[led].Set_Blue_PercentOn(BlueValue);
+    }
 }
 
 uint16_t CLedBehaviorComp::RoundPercentageToIndex(float percentage)

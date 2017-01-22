@@ -12,6 +12,12 @@ typedef enum
     BEHAVIOR_DONE
 } Led_Behavior_t;
 
+typedef enum
+{
+    BEHAVIOR_BLENDING_NONE    = 0,
+    BEHAVIOR_BLENDING_AVERAGE
+} Led_BehaviorBlending_t;
+
 class CLedBehaviorComp : public CComponent
 {
     public:
@@ -27,7 +33,7 @@ class CLedBehaviorComp : public CComponent
         void           Set_NumLeds(uint16_t numLeds);
 
         virtual bool Is_Blended(void);
-        void         Set_IsBlended(void);
+        void         Set_IsBlended(Led_BehaviorBlending_t blendingType);
         void         Clear_IsBlended(void);
 
         uint16_t     Get_FirstLedIndex(void);
@@ -40,7 +46,7 @@ class CLedBehaviorComp : public CComponent
         void Set_Led(uint16_t led, CLedObj LedValue);
 
         uint8_t        m_EndingPercentage;
-        bool           m_IsBlended;
+        Led_BehaviorBlending_t m_BlendingType;
         Led_Behavior_t m_Status;
         uint16_t       m_NumLeds;
         uint8_t        m_StartingPercentage;

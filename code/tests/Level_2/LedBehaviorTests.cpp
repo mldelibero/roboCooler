@@ -132,7 +132,7 @@ TEST(LedBehaviorTests, BehaviorsAreNotBlendedByDefault)
 
 TEST(LedBehaviorTests, CanControlBehaviorBlending)
 {
-    LedBehavior->Set_IsBlended();
+    LedBehavior->Set_IsBlended(BEHAVIOR_BLENDING_AVERAGE);
     CHECK_EQUAL(true, LedBehavior->Is_Blended());
 
     LedBehavior->Clear_IsBlended();
@@ -313,7 +313,6 @@ TEST(LedBehaviorTests, OverwriteBlendingWorks)
     CLedBehaviorChild secondBehChild(HalfOn);
 
     secondBehChild.Set_NumLeds(NUM_LEDS);
-    secondBehChild.Set_IsBlended();
 
     secondBehChild.Set_StartingPercentage(20);
     secondBehChild.Set_EndingPercentage(80);
@@ -321,4 +320,19 @@ TEST(LedBehaviorTests, OverwriteBlendingWorks)
     secondBehChild.Run(&LedObjs[0]);
 
     CheckLeds(1, 7, FullOn, HalfOn, FullOn);
+}
+
+TEST(LedBehaviorTests, AverageBlendingWorks)
+{
+    // This should overwrite previous
+    LedBehaviorChild->Set_NumLeds(NUM_LEDS);
+    LedBehaviorChild->Run(&LedObjs[0]);
+
+    CLedBehaviorChild secondBehChild(Off);
+    secondBehChild.Set_NumLeds(NUM_LEDS);
+    secondBehChild.Set_IsBlended(BEHAVIOR_BLENDING_AVERAGE);
+
+    secondBehChild.Run(&LedObjs[0]);
+
+    CheckLeds(0, NUM_LEDS-1, Off, HalfOn, Off);
 }
