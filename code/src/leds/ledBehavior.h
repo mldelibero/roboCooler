@@ -30,15 +30,24 @@ class CLedBehaviorComp : public CComponent
         void         Set_IsBlended(void);
         void         Clear_IsBlended(void);
 
+        uint16_t     Get_FirstLedIndex(void);
+        uint16_t     Get_LastLedIndex(void);
+        void         Set_StartingPercentage(uint8_t startingPercentage);
+        void         Set_EndingPercentage(uint8_t endingPercentage);
+
     protected:
         virtual void Update_Leds(void);
         void Set_Led(uint16_t led, CLedObj LedValue);
 
+        uint8_t        m_EndingPercentage;
         bool           m_IsBlended;
         Led_Behavior_t m_Status;
         uint16_t       m_NumLeds;
+        uint8_t        m_StartingPercentage;
 
     private:
+        uint16_t RoundPercentageToIndex(float value);
+
         bool     m_RunForever;
         int32_t  m_RunTime_ms;
 }; // end - class CLedBehaviorComp : public CComponent
