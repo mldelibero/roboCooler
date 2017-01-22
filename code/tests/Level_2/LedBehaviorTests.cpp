@@ -298,16 +298,7 @@ TEST(LedBehaviorTests, BeginningAfterEndDoesNotUpdateLeds)
 
 TEST(LedBehaviorTests, CanControlLedForLocalClass)
 {
-    CLedObj ledObj;
-    uint8_t Red   = RED_LED_PERCENT_ON   / 2;
-    uint8_t Green = GREEN_LED_PERCENT_ON / 2;
-    uint8_t Blue  = BLUE_LED_PERCENT_ON  / 2;
-
-    ledObj.Set_Red_PercentOn  (Red);
-    ledObj.Set_Green_PercentOn(Green);
-    ledObj.Set_Blue_PercentOn (Blue);
-
-    CLedBehaviorChild firstBehChild(ledObj);
+    CLedBehaviorChild firstBehChild(HalfOn);
     firstBehChild.Set_NumLeds(NUM_LEDS);
     firstBehChild.Run(&LedObjs[0]);
 
@@ -319,17 +310,7 @@ TEST(LedBehaviorTests, OverwriteBlendingWorks)
     // This should overwrite previous
     LedBehaviorChild->Set_NumLeds(NUM_LEDS);
     LedBehaviorChild->Run(&LedObjs[0]);
-
-    CLedObj ledObj;
-    uint8_t Red   = RED_LED_PERCENT_ON   / 2;
-    uint8_t Green = GREEN_LED_PERCENT_ON / 2;
-    uint8_t Blue  = BLUE_LED_PERCENT_ON  / 2;
-
-    ledObj.Set_Red_PercentOn  (Red);
-    ledObj.Set_Green_PercentOn(Green);
-    ledObj.Set_Blue_PercentOn (Blue);
-
-    CLedBehaviorChild secondBehChild(ledObj);
+    CLedBehaviorChild secondBehChild(HalfOn);
 
     secondBehChild.Set_NumLeds(NUM_LEDS);
     secondBehChild.Set_IsBlended();
