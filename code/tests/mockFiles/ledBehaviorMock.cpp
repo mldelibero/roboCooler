@@ -3,10 +3,17 @@
 #include "ledBehavior.h"
 #include "ledBehaviorMock.h"
 
+uint16_t Mock_NumLeds       = 10;
+uint16_t Mock_StartingIndex = 0;
+uint16_t Mock_EndingIndex   = 9;
+
 //--- Compile mock version
-CLedBehaviorComp::CLedBehaviorComp()
+CLedBehaviorComp::CLedBehaviorComp(uint16_t NumLeds, uint16_t StartingIndex, uint16_t EndingIndex)
 {
     m_Status = BEHAVIOR_ACTIVE;
+    if (NumLeds)       return;
+    if (StartingIndex) return;
+    if (EndingIndex)   return;
 }
 
 void CLedBehaviorComp::Execute(void)
@@ -30,17 +37,12 @@ bool CLedBehaviorComp::Is_Blended(void)
     return false;
 }
 
-void CLedBehaviorComp::Set_NumLeds(uint16_t numLeds)
-{
-    mock().actualCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",numLeds).onObject(this);
-}
-
 void CLedBehaviorComp::Update_Leds(void)
 {
 }
 
 //--- Compile abstract mock version with output control
-CLedBehaviorMock::CLedBehaviorMock() : CLedBehaviorComp()
+CLedBehaviorMock::CLedBehaviorMock() : CLedBehaviorComp(Mock_NumLeds, Mock_StartingIndex, Mock_EndingIndex)
 {
     m_IsBlended = false;
 }

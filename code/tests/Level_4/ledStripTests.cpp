@@ -85,19 +85,6 @@ TEST(LedStripTests, CanAddScene)
     CHECK_EQUAL(2, LedStrip->Get_NumberOfScenes());
 }
 
-TEST(LedStripTests, GivesScenesNumLedsWhenAdding)
-{
-    CSceneMock Scene1, Scene2;
-
-    mock().enable();
-    mock().expectOneCall("CScene::Set_NumLeds").onObject(&Scene1).withCallOrder(1);
-    mock().expectOneCall("CScene::Set_NumLeds").onObject(&Scene2).withCallOrder(2);
-    mock().ignoreOtherCalls();
-
-    CLedStripComp myLedStrip((CLedStripDriver*)LedStripDriver, (CScene*)&Scene1, LedObjArray);
-    LedStrip->Add_Scene(&Scene2);
-}
-
 TEST(LedStripTests, MultipleTestsRunIfAdded)
 {
     CSceneMock SecondScene;

@@ -16,13 +16,12 @@ typedef enum
 class CScene
 {
     public:
-        CScene(void);
+        CScene(uint16_t NumLeds);
         virtual ~CScene(void);
 
         void         Play(CLedObj* LedObjArray);
 //        bool         Is_Running(void);
         bool         Add_Behavior(CLedBehaviorComp* behavior);
-        void         Set_NumLeds(uint16_t NumLeds);
 
     private:
         void Update_State(void);

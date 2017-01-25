@@ -7,6 +7,7 @@
 // ----------------------------------------------------------------------------
 #define NUM_BEHAVIORS   3
 #define NUM_LEDOBJS     3
+static uint16_t NumLeds = 0;
 CLedBehaviorMock* behavior[NUM_BEHAVIORS];
 
 CLedObj* LedObjArray[NUM_LEDOBJS];
@@ -18,13 +19,14 @@ TEST_GROUP(SceneTests)
     void setup()
     {
         mock().disable();
+        NumLeds = 5;
 
         for (int b = 0; b < NUM_BEHAVIORS; b++)
         {
             behavior[b] = new CLedBehaviorMock;
         }
 
-        Scene      = new CScene;
+        Scene      = new CScene(NumLeds);
     }
 
     void teardown()
@@ -64,44 +66,11 @@ TEST(SceneTests, BaseClassDoesNotCallBehaviors)
     Scene->Play(LedObjArray[0]);
 }
 
-TEST(SceneTests, SetsNumLedsToNominalWhenAddingBehavior)
-{
-    mock().enable();
-    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",0).onObject(behavior[0]);
-    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",0).onObject(behavior[1]);
-    Scene->Add_Behavior(behavior[0]);
-    Scene->Add_Behavior(behavior[1]);
-}
-
-TEST(SceneTests, SetsNumLedsToUpdatedWhenAddingBehavior)
-{
-    int16_t NumLeds = 50;
-    Scene->Set_NumLeds(NumLeds);
-    mock().enable();
-    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",NumLeds).onObject(behavior[0]);
-    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",NumLeds).onObject(behavior[1]);
-    Scene->Add_Behavior(behavior[0]);
-    Scene->Add_Behavior(behavior[1]);
-}
-
-TEST(SceneTests, SetsAllBehaviorsWhenOwnsNumLedsUpdated)
-{
-    int16_t NumLeds = 50;
-
-    Scene->Add_Behavior(behavior[0]);
-    Scene->Add_Behavior(behavior[1]);
-
-    mock().enable();
-    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",NumLeds).onObject(behavior[0]);
-    mock().expectOneCall("CLedBehaviorComp::Set_NumLeds").withParameter("numLeds",NumLeds).onObject(behavior[1]);
-
-    Scene->Set_NumLeds(NumLeds);
-}
 // ----------------------------------------------------------------------------
 class CChildScene : public CScene
 {
     public:
-        CChildScene()
+        CChildScene(uint16_t myNumLeds) : CScene(myNumLeds)
         {
         }
 
@@ -133,8 +102,9 @@ TEST_GROUP(ChildSceneTests)
     void setup()
     {
         mock().disable();
+        NumLeds = 5;
 
-        ChildScene = new CChildScene;
+        ChildScene = new CChildScene(NumLeds);
 
         for (int b = 0; b < NUM_BEHAVIORS; b++)
         {

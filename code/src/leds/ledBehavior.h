@@ -22,41 +22,35 @@ typedef enum
 class CLedBehaviorComp : public CComponent
 {
     public:
-        CLedBehaviorComp(void);
-        CLedBehaviorComp(uint32_t runTime_ms);
+        CLedBehaviorComp(uint16_t NumLeds);
+        CLedBehaviorComp(uint16_t NumLeds, uint16_t FirstIndex, uint16_t LastIndex);
 
         virtual void Execute(void);
         virtual void Initialize(void);
 
+        void           Clear_IsBlended(void);
+        uint16_t       Get_FirstLedIndex(void);
+        uint16_t       Get_LastLedIndex(void);
         uint16_t       Get_NumLeds(void);
         Led_Behavior_t Get_Status(void);
         int32_t        Get_TimeLeft_ms(void);
-        void           Set_NumLeds(uint16_t numLeds);
-
-        virtual bool Is_Blended(void);
-        void         Set_IsBlended(Led_BehaviorBlending_t blendingType);
-        void         Clear_IsBlended(void);
-
-        uint16_t     Get_FirstLedIndex(void);
-        uint16_t     Get_LastLedIndex(void);
-        void         Set_StartingPercentage(uint8_t startingPercentage);
-        void         Set_EndingPercentage(uint8_t endingPercentage);
-
-    protected:
-        virtual void Update_Leds(void);
-        void Set_Led(uint16_t led, CLedObj LedValue);
-
-        uint8_t        m_EndingPercentage;
-        Led_BehaviorBlending_t m_BlendingType;
-        Led_Behavior_t m_Status;
-        uint16_t       m_NumLeds;
-        uint8_t        m_StartingPercentage;
+        virtual bool   Is_Blended(void);
+        void           Set_IsBlended(Led_BehaviorBlending_t BlendingType);
+        void           Set_TimeoutValue(uint32_t RunTime_ms);
 
     private:
-        uint16_t RoundPercentageToIndex(float value);
+        Led_BehaviorBlending_t m_BlendingType;
+        bool                   m_IndicesWrap;
+        bool                   m_RunForever;
+        int32_t                m_TimeLeft_ms;
 
-        bool     m_RunForever;
-        int32_t  m_RunTime_ms;
+    protected:
+        void         Set_Led(uint16_t led, CLedObj LedValue);
+        virtual void Update_Leds(void);
+
+        uint16_t       m_FirstLedIndex;
+        uint16_t       m_LastLedIndex;
+        uint16_t       m_NumLeds;
+        Led_Behavior_t m_Status;
 }; // end - class CLedBehaviorComp : public CComponent
 #endif // #ifndef __LEDBEHAVIOR_H
-

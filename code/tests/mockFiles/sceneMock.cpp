@@ -4,12 +4,14 @@
 #include "ledObj.h"
 
 static bool SceneHasBeenPlayed = false;
+uint16_t Mock_NumLeds = 0;
 
 //--- Compile mock version
 
-CScene::CScene(void)
+CScene::CScene(uint16_t NumLeds)
 {
     SceneHasBeenPlayed = false;
+    if (NumLeds) return;
 }
 
 CScene::~CScene(void)
@@ -31,14 +33,9 @@ void CScene::Play(CLedObj* LedObjArray)
     SceneHasBeenPlayed = true;
 }
 
-void CScene::Set_NumLeds(uint16_t numLeds)
-{
-    mock().actualCall("CScene::Set_NumLeds").onObject(this);;
-    if (numLeds) return;
-}
 //--- Compile abstract mock version with output control
 
-CSceneMock::CSceneMock() : CScene()
+CSceneMock::CSceneMock() : CScene(Mock_NumLeds)
 {
     SceneHasBeenPlayed = false;
 }

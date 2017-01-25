@@ -1,9 +1,9 @@
 #include "scene.h"
 
-CScene::CScene(void)
+CScene::CScene(uint16_t NumLeds)
 {
     m_NumBehaviors = 0;
-    m_NumLeds      = 0;
+    m_NumLeds      = NumLeds;
     m_State        = SCENE_INIT;
     for (int b = 0; b < MAX_BEHAVIORS; b++)
     {
@@ -14,12 +14,10 @@ CScene::CScene(void)
 CScene::~CScene(void)
 {}
 
-
 bool CScene::Add_Behavior(CLedBehaviorComp* behavior)
 {
     if (m_NumBehaviors < MAX_BEHAVIORS)
     {
-        behavior->Set_NumLeds(m_NumLeds);
         m_Behaviors[m_NumBehaviors++] = behavior;
         return true;
     }
@@ -55,15 +53,6 @@ void CScene::Play(CLedObj* LedObjArray)
         }
     }
 } // end - void CScene::Play(CLedObj* LedObjArray)
-
-void CScene::Set_NumLeds(uint16_t NumLeds)
-{
-    m_NumLeds = NumLeds;
-    for (int b = 0; b < m_NumBehaviors; b++)
-    {
-        m_Behaviors[b]->Set_NumLeds(m_NumLeds);
-    }
-}
 
 bool CScene::Is_StartTriggerMet(void)
 {

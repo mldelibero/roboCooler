@@ -6,6 +6,7 @@ class CLedObj
 {
     public:
         CLedObj();
+        CLedObj(uint8_t RedPercentOn, uint8_t GreenPercentOn, uint8_t BluePercentOn);
 
         uint8_t Get_Red_PercentOn  (void);
         uint8_t Get_Green_PercentOn(void);
@@ -14,6 +15,7 @@ class CLedObj
         void Set_Red_PercentOn  (uint8_t level);
         void Set_Green_PercentOn(uint8_t level);
         void Set_Blue_PercentOn (uint8_t level);
+        void Set_All_PercentOn(uint8_t RedPercentOn, uint8_t GreenPercentOn, uint8_t BluePercentOn);
 
         void TurnOff(void);
 

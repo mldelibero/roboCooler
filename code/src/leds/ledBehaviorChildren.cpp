@@ -2,23 +2,34 @@
 #include "ledBehaviorChildren.h"
 #include "ledObj.h"
 
-CLedBeh_Solid::CLedBeh_Solid(CLedObj ledColor) : CLedBehaviorComp()
+CLedBeh_Solid::CLedBeh_Solid(uint16_t NumLeds, uint16_t FirstIndex, uint16_t LastIndex, CLedObj LedObj) : CLedBehaviorComp(NumLeds, FirstIndex, LastIndex)
 {
-    m_LedColor = ledColor;
-}
-
-CLedBeh_Solid::CLedBeh_Solid(uint32_t runTime_ms) : CLedBehaviorComp(runTime_ms)
-{
-    m_LedColor.Set_Red_PercentOn  (0);
-    m_LedColor.Set_Green_PercentOn(0);
-    m_LedColor.Set_Blue_PercentOn (0);
+    m_LedObj = LedObj;
 }
 
 void CLedBeh_Solid::Update_Leds(void)
 {
     for (uint16_t led = 0; led < m_NumLeds; led++)
     {
-        Set_Led(led, m_LedColor);
+        Set_Led(led, m_LedObj);
     }
+}
+
+// -- Moving LED band tests -----------------------------------------------
+CLedBeh_MovingBand::CLedBeh_MovingBand(uint16_t NumLeds, uint16_t FirstIndex, uint16_t LastIndex, CLedObj LedObj) : CLedBehaviorComp(NumLeds, FirstIndex, LastIndex)
+{
+    m_LedObj    = LedObj;
+    m_LedOffset = 0;
+}
+
+void CLedBeh_MovingBand::Update_Leds(void)
+{
+    for (uint16_t led = Get_FirstLedIndex(); led <= Get_LastLedIndex(); led++)
+    {
+        Set_Led(led, m_LedObj);
+    }
+
+    m_FirstLedIndex = uint16_t((m_FirstLedIndex + 1) % m_NumLeds);
+    m_LastLedIndex  = uint16_t((m_LastLedIndex  + 1) % m_NumLeds);
 }
 

@@ -36,8 +36,7 @@ void CLedStripComp::Add_Scene(CScene* NextScene)
 {
     if (m_NumScenes < 10)
     {
-        m_Scenes[m_NumScenes] = NextScene;
-        m_Scenes[m_NumScenes++]->Set_NumLeds(NUM_LEDS);
+        m_Scenes[m_NumScenes++] = NextScene;
     }
 }
 
