@@ -24,12 +24,22 @@ CLedBeh_MovingBand::CLedBeh_MovingBand(uint16_t NumLeds, uint16_t FirstIndex, ui
 
 void CLedBeh_MovingBand::Update_Leds(void)
 {
-    for (uint16_t led = Get_FirstLedIndex(); led <= Get_LastLedIndex(); led++)
+    for (uint16_t led = 0; led < m_NumLeds; led++)
     {
         Set_Led(led, m_LedObj);
     }
 
-    m_FirstLedIndex = uint16_t((m_FirstLedIndex + 1) % m_NumLeds);
-    m_LastLedIndex  = uint16_t((m_LastLedIndex  + 1) % m_NumLeds);
+
+    if (++m_FirstLedIndex == m_NumLeds)
+    {
+        m_FirstLedIndex = 0;
+        m_IndicesWrap = false;
+    }
+
+    if (++m_LastLedIndex == m_NumLeds)
+    {
+        m_LastLedIndex = 0;
+        m_IndicesWrap = true;
+    }
 }
 

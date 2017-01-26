@@ -56,6 +56,7 @@ TEST_GROUP(MovingBandTests)
     {
         mock().disable();
 
+        Off      .Set_All_PercentOn( 0, 0, 0);
         LedColors.Set_All_PercentOn(20,40,60);
 
         // Configure indices
@@ -63,7 +64,7 @@ TEST_GROUP(MovingBandTests)
         FirstIndex = 1;
         LastIndex  = 3;
 
-        TurnOffAllLeds     = new CLedBeh_Solid     (NumLeds, FirstIndex, LastIndex, Off);
+        TurnOffAllLeds     = new CLedBeh_Solid     (NumLeds, 0         ,         4, Off);
         MovingBandBehavior = new CLedBeh_MovingBand(NumLeds, FirstIndex, LastIndex, LedColors);
         LedObjs            = new CLedObj[NUM_LEDS];
     }
@@ -97,6 +98,15 @@ TEST(MovingBandTests, BandMovesEachIterationIfNoSubIterationSet)
 
 TEST(MovingBandTests, BandWrapsAroundEndpoint)
 {
+    MovingBandBehavior->Run(&LedObjs[0]);
+    MovingBandBehavior->Run(&LedObjs[0]);
+    TurnOffAllLeds    ->Run(&LedObjs[0]);
+    MovingBandBehavior->Run(&LedObjs[0]);
+
+    FirstIndex = uint16_t((FirstIndex + 2) % NumLeds);
+    LastIndex  = uint16_t((LastIndex  + 2) % NumLeds);
+
+    CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, LedColors, Off);
 }
 
 TEST(MovingBandTests, BandStaysStillWhenInbetweenSubIterations)

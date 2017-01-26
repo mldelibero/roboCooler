@@ -40,7 +40,6 @@ class CLedBehaviorComp : public CComponent
 
     private:
         Led_BehaviorBlending_t m_BlendingType;
-        bool                   m_IndicesWrap;
         bool                   m_RunForever;
         int32_t                m_TimeLeft_ms;
 
@@ -49,6 +48,7 @@ class CLedBehaviorComp : public CComponent
         virtual void Update_Leds(void);
 
         uint16_t       m_FirstLedIndex;
+        bool           m_IndicesWrap;
         uint16_t       m_LastLedIndex;
         uint16_t       m_NumLeds;
         Led_Behavior_t m_Status;
