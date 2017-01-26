@@ -29,36 +29,26 @@ class CLedBehaviorChild : public CLedBehaviorComp
         CLedObj m_LedObj;
 };
 
-void CheckLeds(uint16_t StartIndex, uint16_t EndIndex, CLedObj* OutLedObj, CLedObj FirstObj, CLedObj SecondObj, CLedObj ThirdObj)
+void CheckLeds(uint16_t StartIndex, uint16_t EndIndex, uint16_t NumLeds, CLedObj* OutputLedObj, CLedObj InObj, CLedObj OutObj)
 {
-    int led = 0;
-
-    for (; led < StartIndex; led++)
+    for (int led = 0; led < NumLeds; led++)
     {
-        CHECK_EQUAL(FirstObj.Get_Red_PercentOn()  , OutLedObj[led].Get_Red_PercentOn());
-        CHECK_EQUAL(FirstObj.Get_Green_PercentOn(), OutLedObj[led].Get_Green_PercentOn());
-        CHECK_EQUAL(FirstObj.Get_Blue_PercentOn() , OutLedObj[led].Get_Blue_PercentOn());
-    }
-
-    for (; led <= EndIndex; led++)
-    {
-        CHECK_EQUAL(SecondObj.Get_Red_PercentOn()  , OutLedObj[led].Get_Red_PercentOn());
-        CHECK_EQUAL(SecondObj.Get_Green_PercentOn(), OutLedObj[led].Get_Green_PercentOn());
-        CHECK_EQUAL(SecondObj.Get_Blue_PercentOn() , OutLedObj[led].Get_Blue_PercentOn());
-    }
-
-    for (; led < NUM_LEDS; led++)
-    {
-        CHECK_EQUAL(ThirdObj.Get_Red_PercentOn()  , OutLedObj[led].Get_Red_PercentOn());
-        CHECK_EQUAL(ThirdObj.Get_Green_PercentOn(), OutLedObj[led].Get_Green_PercentOn());
-        CHECK_EQUAL(ThirdObj.Get_Blue_PercentOn() , OutLedObj[led].Get_Blue_PercentOn());
+        if (((StartIndex <= EndIndex) && (led >= StartIndex && led <= EndIndex))
+         || ((StartIndex >  EndIndex) && (led >= StartIndex || led <= EndIndex)))
+        {
+            CHECK_EQUAL(InObj.Get_Red_PercentOn()  , OutputLedObj[led].Get_Red_PercentOn());
+            CHECK_EQUAL(InObj.Get_Green_PercentOn(), OutputLedObj[led].Get_Green_PercentOn());
+            CHECK_EQUAL(InObj.Get_Blue_PercentOn() , OutputLedObj[led].Get_Blue_PercentOn());
+        }
+        else
+        {
+            CHECK_EQUAL(OutObj.Get_Red_PercentOn()  , OutputLedObj[led].Get_Red_PercentOn());
+            CHECK_EQUAL(OutObj.Get_Green_PercentOn(), OutputLedObj[led].Get_Green_PercentOn());
+            CHECK_EQUAL(OutObj.Get_Blue_PercentOn() , OutputLedObj[led].Get_Blue_PercentOn());
+        }
     }
 }
 
-void CheckLeds_Exclusive(uint16_t StartIndex, uint16_t EndIndex, CLedObj* OutLedObj, CLedObj FirstObj, CLedObj SecondObj, CLedObj ThirdObj)
-{
-    CheckLeds(uint16_t(EndIndex+1), uint16_t(StartIndex-1), OutLedObj, FirstObj, SecondObj, ThirdObj);
-}
 // -- Variables -----------------------------------------------------------
 CLedBehaviorComp*  LedBehavior;
 CLedBehaviorChild* LedBehaviorChild;
@@ -248,14 +238,14 @@ TEST(LedBehaviorTests, BehaviorSetToOperateOnAllLedsByDefault)
 TEST(LedBehaviorTests, NoBlendingPassesColorsThrough)
 {
     LedBehaviorChild->Run(&LedObjs[0]);
-    CheckLeds(0, LastIndex, LedObjs, Off, LedColors, Off);
+    CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, LedColors, Off);
 }
 
 TEST(LedBehaviorTests, DoesNotUpdateLedsWhenDone)
 {
     LedBehaviorChild->Force_DoneConditionMet();
     LedBehaviorChild->Run(&LedObjs[0]);
-    CheckLeds(FirstIndex, LastIndex, LedObjs, Off, Off, Off);
+    CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, Off, Off);
 }
 
 TEST(LedBehaviorTests, BehaviorCanOperateOnOnlyPartOfLeds)
@@ -267,7 +257,7 @@ TEST(LedBehaviorTests, BehaviorCanOperateOnOnlyPartOfLeds)
     CLedBehaviorChild beh(NumLeds, FirstIndex, LastIndex, LedColors);
     beh.Run(&LedObjs[0]);
 
-    CheckLeds(FirstIndex, LastIndex, LedObjs, Off, LedColors, Off);
+    CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, LedColors, Off);
 }
 
 TEST(LedBehaviorTests, BeginningEqualToEndOnlyUpdatesOneLed)
@@ -276,7 +266,7 @@ TEST(LedBehaviorTests, BeginningEqualToEndOnlyUpdatesOneLed)
     CLedBehaviorChild beh(NumLeds, Index, Index, LedColors);
     beh.Run(&LedObjs[0]);
 
-    CheckLeds(Index, Index, LedObjs, Off, LedColors, Off);
+    CheckLeds(Index, Index, NumLeds, LedObjs, LedColors, Off);
 }
 
 TEST(LedBehaviorTests, BeginningAfterEndUpdatesExclusiveSet)
@@ -290,7 +280,7 @@ TEST(LedBehaviorTests, BeginningAfterEndUpdatesExclusiveSet)
     CHECK(beh.Get_FirstLedIndex() > beh.Get_LastLedIndex());
     beh.Run(&LedObjs[0]);
 
-    CheckLeds_Exclusive(FirstIndex, LastIndex, LedObjs, LedColors, Off, LedColors);
+    CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, LedColors, Off);
 }
 
 TEST(LedBehaviorTests, OverwriteBlendingWorks)
@@ -300,7 +290,7 @@ TEST(LedBehaviorTests, OverwriteBlendingWorks)
     LedBehaviorChild->Run(&LedObjs[0]);
     secondBehChild.Run(&LedObjs[0]);
 
-    CheckLeds(FirstIndex, LastIndex, LedObjs, LedColors, FullOn, LedColors);
+    CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, FullOn, LedColors);
 }
 
 TEST(LedBehaviorTests, AverageBlendingWorks)
@@ -312,7 +302,7 @@ TEST(LedBehaviorTests, AverageBlendingWorks)
     firstBehChild .Run(&LedObjs[0]);
     secondBehChild.Run(&LedObjs[0]);
 
-    CheckLeds(FirstIndex, LastIndex, LedObjs, FullOn, HalfOn, FullOn);
+    CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, HalfOn, FullOn);
 }
 
 TEST(LedBehaviorTests, AdditionBlendingWorks)
@@ -324,7 +314,7 @@ TEST(LedBehaviorTests, AdditionBlendingWorks)
     firstBehChild .Run(&LedObjs[0]);
     secondBehChild.Run(&LedObjs[0]);
 
-    CheckLeds(FirstIndex, LastIndex, LedObjs, HalfOn, ThreeQuartersOn, HalfOn);
+    CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, ThreeQuartersOn, HalfOn);
 }
 
 TEST(LedBehaviorTests, AdditionBlendingCapsAtFullOn)
@@ -336,7 +326,7 @@ TEST(LedBehaviorTests, AdditionBlendingCapsAtFullOn)
     firstBehChild .Run(&LedObjs[0]);
     secondBehChild.Run(&LedObjs[0]);
 
-    CheckLeds(FirstIndex, LastIndex, LedObjs, HalfOn, FullOn, HalfOn);
+    CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, FullOn, HalfOn);
 }
 
 TEST(LedBehaviorTests, ChildDoesNotHaveDirectAccessToLeds)

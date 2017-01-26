@@ -2,7 +2,6 @@
 #define __LEDBEHAVIORTESTS_H
 #include "ledObj.h"
 #define NUM_LEDS             5
-void CheckLeds(uint16_t StartIndex, uint16_t EndIndex, CLedObj* OutLedObj, CLedObj FirstObj, CLedObj SecondObj, CLedObj ThirdObj);
-void CheckLeds_Exclusive(uint16_t StartIndex, uint16_t EndIndex, CLedObj* OutLedObj, CLedObj FirstObj, CLedObj SecondObj, CLedObj ThirdObj);
+void CheckLeds(uint16_t StartIndex, uint16_t EndIndex, uint16_t NumLeds, CLedObj* OutputLedObj, CLedObj InObj, CLedObj OutObj);
 #endif //#ifndef __LEDBEHAVIORTESTS_H
 

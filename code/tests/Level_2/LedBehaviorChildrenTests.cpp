@@ -46,7 +46,7 @@ TEST_GROUP(SolidColorTests)
 TEST(SolidColorTests, AllLedsTurnOnToSpecificColor)
 {
     SolidColorBehavior->Run(&LedObjs[0]);
-    CheckLeds(FirstIndex, LastIndex, LedObjs, Off, LedColors, Off);
+    CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, LedColors, Off);
 }
 
 // -- Moving LED band tests -----------------------------------------------
@@ -79,7 +79,7 @@ TEST_GROUP(MovingBandTests)
 TEST(MovingBandTests, FirstRunTurnsOnCorrectNumberOfLeds)
 {
     MovingBandBehavior->Run(&LedObjs[0]);
-    CheckLeds(FirstIndex, LastIndex, LedObjs, Off, LedColors, Off);
+    CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, LedColors, Off);
 }
 
 
@@ -92,7 +92,7 @@ TEST(MovingBandTests, BandMovesEachIterationIfNoSubIterationSet)
     FirstIndex++;
     LastIndex++;
 
-    CheckLeds(FirstIndex, LastIndex, LedObjs, Off, LedColors, Off);
+    CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, LedColors, Off);
 }
 
 TEST(MovingBandTests, BandWrapsAroundEndpoint)
