@@ -83,7 +83,6 @@ TEST(MovingBandTests, FirstRunTurnsOnCorrectNumberOfLeds)
     CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, LedColors, Off);
 }
 
-
 TEST(MovingBandTests, BandMovesEachIterationIfNoSubIterationSet)
 {
     MovingBandBehavior->Run(&LedObjs[0]);
@@ -107,13 +106,5 @@ TEST(MovingBandTests, BandWrapsAroundEndpoint)
     LastIndex  = uint16_t((LastIndex  + 2) % NumLeds);
 
     CheckLeds(FirstIndex, LastIndex, NumLeds, LedObjs, LedColors, Off);
-}
-
-TEST(MovingBandTests, BandStaysStillWhenInbetweenSubIterations)
-{
-}
-
-TEST(MovingBandTests, BandMovesEachSubIteration)
-{
 }
 
