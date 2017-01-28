@@ -38,6 +38,7 @@ void init(void)
     Init_Timers();
 
     leds.Initialize();
+    LedStripDriver.Initialize_Hardware();
     LedStrip.Initialize();
 
     LidMotor.Initialize();
