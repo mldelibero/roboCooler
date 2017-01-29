@@ -26,7 +26,7 @@ TEST(LedObjTests, RgbLevelsClearedAfterConstructor)
 
 TEST(LedObjTests, CanSetRgbLevels)
 {
-    uint8_t level = 10;
+    float level = 10;
 
     LedObj->Set_Red_PercentOn  (level);
     LedObj->Set_Green_PercentOn(level);
@@ -39,7 +39,7 @@ TEST(LedObjTests, CanSetRgbLevels)
 
 TEST(LedObjTests, TurnOffFunWorks)
 {
-    uint8_t level = 10;
+    float level = 10;
 
     LedObj->Set_Red_PercentOn  (level);
     LedObj->Set_Green_PercentOn(level);
@@ -56,7 +56,7 @@ TEST(LedObjTests, TurnOffFunWorks)
 
 TEST(LedObjTests, CannotSetAbove100Percent)
 {
-    uint8_t level = 101;
+    float level = 101;
 
     LedObj->Set_Red_PercentOn  (level);
     LedObj->Set_Green_PercentOn(level);
@@ -69,9 +69,9 @@ TEST(LedObjTests, CannotSetAbove100Percent)
 
 TEST(LedObjTests, CanSetAllThreePercentagesAtOnce)
 {
-    uint8_t Red   = 20;
-    uint8_t Green = 40;
-    uint8_t Blue  = 60;
+    float Red   = 20;
+    float Green = 40;
+    float Blue  = 60;
 
     LedObj->Set_All_PercentOn(Red, Green, Blue);
 
@@ -82,7 +82,7 @@ TEST(LedObjTests, CanSetAllThreePercentagesAtOnce)
 
 TEST(LedObjTests, ObjCeilingsWhenSettingAllThreePercentagesAtOnce)
 {
-    uint8_t level = 110;
+    float level = 110;
 
     LedObj->Set_All_PercentOn(level, level, level);
 
@@ -91,9 +91,9 @@ TEST(LedObjTests, ObjCeilingsWhenSettingAllThreePercentagesAtOnce)
     CHECK_EQUAL(100, LedObj->Get_Blue_PercentOn ());
 }
 
-uint8_t RedPercentOn   = 0;
-uint8_t GreenPercentOn = 0;
-uint8_t BluePercentOn  = 0;
+float RedPercentOn   = 0;
+float GreenPercentOn = 0;
+float BluePercentOn  = 0;
 
 TEST_GROUP(LedObjAltConstructorTests)
 {
