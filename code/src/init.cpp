@@ -13,7 +13,7 @@
 CLedComp leds;
 CLedObj  LedObjArray[NUM_LEDS];
 
-CLedStripDriver LedStripDriver(NUM_LEDS);
+CLedStripDriver LedStripDriver(NUM_LEDS, LED_AHBxPeriph_DMAx, USARTx_TX_DMA_CHANNEL, USARTx_TX_DMA_STREAM, USARTx_TX_DMA_FLAG_TCIF);
 CScene          FirstScene(NUM_LEDS);
 CLedStripComp   LedStrip(&LedStripDriver, &FirstScene, LedObjArray);
 
@@ -39,6 +39,7 @@ void init(void)
 
     leds.Initialize();
     LedStripDriver.Initialize_Hardware();
+    LedStripDriver.Initialize();
     LedStrip.Initialize();
 
     LidMotor.Initialize();

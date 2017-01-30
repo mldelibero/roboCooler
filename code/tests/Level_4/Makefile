@@ -26,6 +26,7 @@ SRC_DIRS = \
 
 SRC_FILES = \
 	../../src/leds/ledStrip.cpp\
+	../mockFiles/ledStripDriverMock.cpp\
 
 TEST_SRC_DIRS = \
 	./\

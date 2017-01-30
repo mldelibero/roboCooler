@@ -17,10 +17,10 @@ void CLedStripComp::Execute(void)
 {
     for (int scene = 0; scene < m_NumScenes; scene++)
     {
-        m_Scenes[scene]->Play(&m_LedObjArray[0]);
+        m_Scenes[scene]->Play(m_LedObjArray);
     }
 
-    m_LedStripDriver->Update();
+    m_LedStripDriver->Update(&m_LedObjArray[0]);
 }
 
 void CLedStripComp::Initialize(void)

@@ -9,7 +9,7 @@ class CLedStripDriverMock : public CLedStripDriver
         ~CLedStripDriverMock(void);
 
         void Initialize_Hardware(void);
-        void Update(void);
+        void Update(CLedObj* LedObjArray);
 
     private:
 };

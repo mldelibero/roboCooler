@@ -21,12 +21,6 @@
 #define LED_USARTx                   USART2
 #define BAUD_RATE                    2700000
 
-#define LED_DMA_AHBxPeriphClockCmd   RCC_AHB1PeriphClockCmd
-#define LED_AHBxPeriph_DMAx          RCC_AHB1Periph_DMA1
-#define USARTx_TX_DMA_CHANNEL        DMA_Channel_4
-#define USARTx_TX_DMA_STREAM         DMA2_Stream6
-#define USARTx_TX_DMA_FLAG_TCIF      DMA_FLAG_TCIF6
-
 #define BUFFERSIZE  56
 #define BITS_000    0xDB
 #define BITS_001    0x9B

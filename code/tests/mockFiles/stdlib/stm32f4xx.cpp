@@ -19,3 +19,7 @@ GPIO_TypeDef* GPIOE = &GPIOE_real;
 I2C_TypeDef I2C1_real; // Actual memory location for I2C
 I2C_TypeDef* I2C1 = &I2C1_real;
 
+// DMA
+DMA_Stream_TypeDef DMAY_StreamX; //!< actual memory location for DMA Stream
+DMA_Stream_TypeDef* DMA2_Stream6 = &DMAY_StreamX;  //!< DMA1_Stream0 pointer
+
