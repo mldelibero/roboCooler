@@ -1,0 +1,140 @@
+---
+LedStripDriver:
+This project will use the WS2812 led driver. The documentation for this chip is stored in the repo.
+
+Data to the drivers is encoded with a 1 or a 0 driving the line high and then low.
+The high time is different for a 1 and a 0, but the period of each bit's information is the same.
+LEDs are connected serially in a strip and the information is cascaded from one to the next.
+*The first LED will accept and latch the first 24bit cmd it sees. It will then pass the rest of the cmds that it sees to the subsequent LEDS. There is no need to provide a clock to push the commands the whole way through the chain (like SPI). For the last LED, you write the cmd into the first LED, and each driver in the chain will use its internal oscillator to push the command the entire was down the chain.
+Each LED will know to accept an update after the RES (reset) pulse, which is a low at approximately the same time length as each bit 0/1.
+Each LED is an RGB LED, with each color having 8 bits of control. The composition of the command is GRB
+
+G7 G6 G5 G4 G3 G2 G2 G1 G0 R7 R6 R5 R4 R3 R2 R2 R1 R0 B7 B6 B5 B4 B3 B2 B2 B1 B0
+
+You need to send out each command with G7 coming first in time and B0 coming last. When you check this on an oscilloscope, you will see G7 on the right and B0 on the left.
+
+The goal here is to use a standard peripheral in a way such that I can load a buffer in memory and then push it out over DMA. We don't want to bit bang.
+
+I am going to explain how to use UART to accomplish this purpose.
+
+We are going to encode every 3 bits of data into 8 bits that we send to the driver. Coupling this with the UART's 1/2 stop bit option, we can get close enough to the correct timing that this will work.the UART's 1/2 stop bit option, we can get close enough to the correct timing that this will work.
+
+UART shifts out the least significant bit first, so we will need to invert the bits before encoding.
+
+Looking at the "Word Length Programming" figure, UART transmission functions as follows:
+
+1. Drive the line high when not transmitting.
+2. Each byte starts with a start bit, which drives the line low for 1/f seconds.
+3. 8 bits are then pushed out, with bit 0 (lsb) first.
+4. An optional parity bit is pushed out next.
+5. A stop bit comes next, which drives the line high for 1/f seconds.
+6. At this point, the driver can send out another start byte (low) to transmit the next byte, or leave the line high until there is more data to send out.
+
+We will use or overcome each of these characteristics to create our driver:
+
+1. We will use a hardware inverter inbetween the MCU pin and the WS2812 driver.
+* We want the line to be driven low on idle to send the reset signal.
+2. Each "bit" to the driver starts with driving the line high, so the inverter helps us here as well. We will need to invert the logic of what we send to the driver.
+*See #5 for a discussion on the timing, including the stop bit.
+4. We will not use the parity bit, since it depends on the content of the byte and is not correlated to the actual data that we want to be sending to the LED driver.
+5. Ideally we would not have a stop bit. But we set it to 1/2 in order to minimize its introduced timing error on the driver spec.
+*The idea with using the start bit plus the 8 data bits is that we can encode data as follows:
+0: 100
+1: 110
+
+This allows us to use an effective 9 UART bits to encode 3 data bits to the driver. The WS2812 does not understand that we are sending it a UART data byte. As long as the timing works out, it will accept the data.
+
+
+Let's take a look at some numbers to see how close we can make the timing to the driver's spec:
+Look at the spreadsheet where I calucated the baud rate.
+
+
+Using a baud rate of 2.7MHz (not adjusted for error), this means that I could update 100 LEDS at ~350Hz.
+
+I will operate this driver by having it start a DMA transfer at a specified frequency.
+When the parent ledStrip issues a data update, we will populate that information in a second buffer and then swap the DMA pointer at the start of the next scheduled DMA transfer. Assuming that the driver can translate the commands into the binary equivalent quickly enough, this means that we can expect a maximum delay of 2 * 1/fupdate.
+
+How does the translation algorithm work?
+
+Information:
+Each LED is represented by an RGB object with each color being a byte representing a percentage
+
+
+Driver internal memory needs:
+
+1. We need 2 DMA buffers of length (NUM_LEDS * 24bits/led * 3encodedBits/bit * 1byte/9bits == NUM_LEDS * 8) bytes
+2. 1 LedObj array of length NUM_LEDS
+
+
+Operations:
+
+1. Translate each LED percentage into an absolute number in the internal Ledobj array.
+2. For each LED, we will need to group the bits like such:
+
+(uint8_t*) DMA_ptr +
+
+0 == G5 G6 G7
+1 == G2 G3 G4
+2 == R7 G0 G1
+3 == R4 R5 R6
+4 == R1 R2 R3
+5 == B6 B7 R0
+6 == B3 B4 B5
+7 == B0 B1 B2
+
+Because we need to send out:
+[G7 G6 G5] [G4 G3 G2] [G1 G0 R7] [R6 R5 R4] [R3 R2 R1] [R0 B7 B6] [B5 B4 B3] [B2 B1 B0]
+
+And UART shifts its bits out backwards.
+
+-------
+
+Let's take a GreenLED as an example:
+Let's show two encodings, so that we can see each position at both values (0&1)
+
+Looking at DMA_ptr + 0, 1
+
+(Let's work backwards):
+Here is what we want the LED Driver to see:
+
+ G7   G6   G5         |   G4   G3   G2
+  0    1    0         |    1    0    1
+100  110  100         |  110  100  110
+
+0000.100110100        |  0000.110100110
+0000.[100][110][100]  |  0000.[110][100][110]
+0000.[ G7][ G6][ G5]  |  0000.[ G4][ G3][ G2]
+
+Since we have an inverter inline, the output pin of the MCU ideally looks like:
+1111.[011][001][011]  |  1111.[001][011][001]
+1111.[ G7][ G6][ G5]  |  1111.[ G4][ G3][ G2]
+
+
+Remember that we have the extra half stop bit from the UART, I am going to treat it as a whole bit for this example for simplicity
+
+1111.[011][001][011]1 |  1111.[001][011][001]1
+1111.[ G7][ G6][ G5]X |  1111.[ G4][ G3][ G2]X
+
+Putting the start bit in as well gives us:
+1111.[SG7][ G6][ G5]X |  1111.[SG4][ G3][ G2]X
+
+This gives us:
+11001011              |  01011001
+
+But since UART shifts the bits out backwards:
+
+11010011              |  10011010
+[110][100][11]        |  [100][110][10]
+[ G5][ G6][G7]        |  [ G2][ G3][G4]
+[  0][  1][ 0]        |  [  1][  0][ 1]
+
+
+What we can conclude from this is:
+Fir the first two bits:
+0 == 110
+1 == 100
+
+And for the second two bits
+0 == 11
+1 == 10
+
