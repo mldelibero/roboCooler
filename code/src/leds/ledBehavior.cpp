@@ -1,5 +1,6 @@
 #include "ledBehavior.h"
 #include "ledObj.h"
+#include <stdio.h>
 
 CLedBehaviorComp::CLedBehaviorComp(uint16_t NumLeds)
 {

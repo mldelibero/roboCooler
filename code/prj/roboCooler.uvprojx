@@ -10,12 +10,12 @@
       <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060183::V5.06 update 2 (build 183)::ARMCC</pCCUsed>
+      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F407VGTx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.9.0</PackID>
+          <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x08000000,0x100000) IRAM(0x20000000,0x20000) IRAM2(0x10000000,0x10000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -330,11 +330,12 @@
             <vShortWch>0</vShortWch>
             <v6Lto>0</v6Lto>
             <v6WtE>0</v6WtE>
+            <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\dev;..\inc;..\lib\stdPeriph\inc;..\src;..\src\drivers</IncludePath>
+              <IncludePath>..\dev;..\inc;..\lib\stdPeriph\inc;..\src;..\src\drivers;..\src\leds</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -347,6 +348,7 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <useXO>0</useXO>
+            <uClangAs>0</uClangAs>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -398,16 +400,6 @@
               <FilePath>..\src\init.h</FilePath>
             </File>
             <File>
-              <FileName>leds.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\leds.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>leds.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\leds.h</FilePath>
-            </File>
-            <File>
               <FileName>lidMotor.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\lidMotor.cpp</FilePath>
@@ -431,6 +423,309 @@
               <FileName>timer.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\src\timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>capTouch.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\capTouch.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>capTouch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\capTouch.h</FilePath>
+            </File>
+            <File>
+              <FileName>limitSwitch.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\limitSwitch.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>limitSwitch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\limitSwitch.h</FilePath>
+            </File>
+            <File>
+              <FileName>loop.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\loop.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>loop.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\loop.h</FilePath>
+            </File>
+            <File>
+              <FileName>pushButton.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\pushButton.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>pushButton.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\pushButton.h</FilePath>
+            </File>
+            <File>
+              <FileName>utils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\utils.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>leds</GroupName>
+          <Files>
+            <File>
+              <FileName>ledBehavior.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\leds\ledBehavior.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ledBehavior.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\leds\ledBehavior.h</FilePath>
+            </File>
+            <File>
+              <FileName>ledBehaviorChildren.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\leds\ledBehaviorChildren.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ledBehaviorChildren.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\leds\ledBehaviorChildren.h</FilePath>
+            </File>
+            <File>
+              <FileName>ledObj.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\leds\ledObj.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ledObj.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\leds\ledObj.h</FilePath>
+            </File>
+            <File>
+              <FileName>leds.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\leds\leds.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>leds.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\leds\leds.h</FilePath>
+            </File>
+            <File>
+              <FileName>ledStrip.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\leds\ledStrip.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ledStrip.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\leds\ledStrip.h</FilePath>
+            </File>
+            <File>
+              <FileName>scene.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\leds\scene.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>scene.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\leds\scene.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>dev</GroupName>
+          <GroupOption>
+            <CommonProperty>
+              <UseCPPCompiler>0</UseCPPCompiler>
+              <RVCTCodeConst>0</RVCTCodeConst>
+              <RVCTZI>0</RVCTZI>
+              <RVCTOtherData>0</RVCTOtherData>
+              <ModuleSelection>0</ModuleSelection>
+              <IncludeInBuild>2</IncludeInBuild>
+              <AlwaysBuild>2</AlwaysBuild>
+              <GenerateAssemblyFile>2</GenerateAssemblyFile>
+              <AssembleAssemblyFile>2</AssembleAssemblyFile>
+              <PublicsOnly>2</PublicsOnly>
+              <StopOnExitCode>11</StopOnExitCode>
+              <CustomArgument></CustomArgument>
+              <IncludeLibraryModules></IncludeLibraryModules>
+              <ComprImg>1</ComprImg>
+            </CommonProperty>
+            <GroupArmAds>
+              <Cads>
+                <interw>2</interw>
+                <Optim>0</Optim>
+                <oTime>2</oTime>
+                <SplitLS>2</SplitLS>
+                <OneElfS>2</OneElfS>
+                <Strict>2</Strict>
+                <EnumInt>2</EnumInt>
+                <PlainCh>2</PlainCh>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <wLevel>2</wLevel>
+                <uThumb>2</uThumb>
+                <uSurpInc>2</uSurpInc>
+                <uC99>2</uC99>
+                <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>0</vShortEn>
+                <vShortWch>0</vShortWch>
+                <v6Lto>0</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath>..\dev;..\inc;..\lib\stdPeriph\inc</IncludePath>
+                </VariousControls>
+              </Cads>
+              <Aads>
+                <interw>2</interw>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <thumb>2</thumb>
+                <SplitLS>2</SplitLS>
+                <SwStkChk>2</SwStkChk>
+                <NoWarn>2</NoWarn>
+                <uSurpInc>2</uSurpInc>
+                <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Aads>
+            </GroupArmAds>
+          </GroupOption>
+          <Files>
+            <File>
+              <FileName>core_cm4.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\core_cm4.h</FilePath>
+            </File>
+            <File>
+              <FileName>core_cmFunc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\core_cmFunc.h</FilePath>
+            </File>
+            <File>
+              <FileName>core_cmInstr.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\core_cmInstr.h</FilePath>
+            </File>
+            <File>
+              <FileName>core_cmSimd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\core_cmSimd.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\stm32f4xx.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\stm32f4xx_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f407xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\dev\stm32f407xx.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>ledDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\ledDriver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ledDriver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\drivers\ledDriver.h</FilePath>
+            </File>
+            <File>
+              <FileName>lidMotorDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\lidMotorDriver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lidMotorDriver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\drivers\lidMotorDriver.h</FilePath>
+            </File>
+            <File>
+              <FileName>timerDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\timerDriver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>timerDriver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\drivers\timerDriver.h</FilePath>
+            </File>
+            <File>
+              <FileName>capTouchDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\capTouchDriver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>capTouchDriver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\drivers\capTouchDriver.h</FilePath>
+            </File>
+            <File>
+              <FileName>CDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\CDriver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CDriver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\drivers\CDriver.h</FilePath>
+            </File>
+            <File>
+              <FileName>ledStripDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\ledStripDriver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ledStripDriver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\drivers\ledStripDriver.h</FilePath>
+            </File>
+            <File>
+              <FileName>limitSwitchDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\limitSwitchDriver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>limitSwitchDriver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\drivers\limitSwitchDriver.h</FilePath>
+            </File>
+            <File>
+              <FileName>pushButtonDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\pushButtonDriver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>pushButtonDriver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\src\drivers\pushButtonDriver.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -520,158 +815,49 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>dev</GroupName>
-          <GroupOption>
-            <CommonProperty>
-              <UseCPPCompiler>0</UseCPPCompiler>
-              <RVCTCodeConst>0</RVCTCodeConst>
-              <RVCTZI>0</RVCTZI>
-              <RVCTOtherData>0</RVCTOtherData>
-              <ModuleSelection>0</ModuleSelection>
-              <IncludeInBuild>2</IncludeInBuild>
-              <AlwaysBuild>2</AlwaysBuild>
-              <GenerateAssemblyFile>2</GenerateAssemblyFile>
-              <AssembleAssemblyFile>2</AssembleAssemblyFile>
-              <PublicsOnly>2</PublicsOnly>
-              <StopOnExitCode>11</StopOnExitCode>
-              <CustomArgument></CustomArgument>
-              <IncludeLibraryModules></IncludeLibraryModules>
-              <ComprImg>1</ComprImg>
-            </CommonProperty>
-            <GroupArmAds>
-              <Cads>
-                <interw>2</interw>
-                <Optim>0</Optim>
-                <oTime>2</oTime>
-                <SplitLS>2</SplitLS>
-                <OneElfS>2</OneElfS>
-                <Strict>2</Strict>
-                <EnumInt>2</EnumInt>
-                <PlainCh>2</PlainCh>
-                <Ropi>2</Ropi>
-                <Rwpi>2</Rwpi>
-                <wLevel>2</wLevel>
-                <uThumb>2</uThumb>
-                <uSurpInc>2</uSurpInc>
-                <uC99>2</uC99>
-                <useXO>2</useXO>
-                <v6Lang>0</v6Lang>
-                <v6LangP>0</v6LangP>
-                <vShortEn>0</vShortEn>
-                <vShortWch>0</vShortWch>
-                <v6Lto>0</v6Lto>
-                <v6WtE>0</v6WtE>
-                <VariousControls>
-                  <MiscControls></MiscControls>
-                  <Define></Define>
-                  <Undefine></Undefine>
-                  <IncludePath>..\dev;..\inc;..\lib\stdPeriph\inc</IncludePath>
-                </VariousControls>
-              </Cads>
-              <Aads>
-                <interw>2</interw>
-                <Ropi>2</Ropi>
-                <Rwpi>2</Rwpi>
-                <thumb>2</thumb>
-                <SplitLS>2</SplitLS>
-                <SwStkChk>2</SwStkChk>
-                <NoWarn>2</NoWarn>
-                <uSurpInc>2</uSurpInc>
-                <useXO>2</useXO>
-                <VariousControls>
-                  <MiscControls></MiscControls>
-                  <Define></Define>
-                  <Undefine></Undefine>
-                  <IncludePath></IncludePath>
-                </VariousControls>
-              </Aads>
-            </GroupArmAds>
-          </GroupOption>
-          <Files>
-            <File>
-              <FileName>core_cm4.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\dev\core_cm4.h</FilePath>
-            </File>
-            <File>
-              <FileName>core_cmFunc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\dev\core_cmFunc.h</FilePath>
-            </File>
-            <File>
-              <FileName>core_cmInstr.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\dev\core_cmInstr.h</FilePath>
-            </File>
-            <File>
-              <FileName>core_cmSimd.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\dev\core_cmSimd.h</FilePath>
-            </File>
-            <File>
-              <FileName>startup_stm32f407xx.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\dev\startup_stm32f407xx.s</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\dev\stm32f4xx.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\dev\stm32f4xx_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f407xx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\dev\stm32f407xx.h</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f4xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\dev\system_stm32f4xx.c</FilePath>
-            </File>
-          </Files>
+          <GroupName>::CMSIS</GroupName>
         </Group>
         <Group>
-          <GroupName>drivers</GroupName>
-          <Files>
-            <File>
-              <FileName>ledDriver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\drivers\ledDriver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ledDriver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\drivers\ledDriver.h</FilePath>
-            </File>
-            <File>
-              <FileName>lidMotorDriver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\drivers\lidMotorDriver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>lidMotorDriver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\drivers\lidMotorDriver.h</FilePath>
-            </File>
-            <File>
-              <FileName>timerDriver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\drivers\timerDriver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>timerDriver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\drivers\timerDriver.h</FilePath>
-            </File>
-          </Files>
+          <GroupName>::Device</GroupName>
         </Group>
       </Groups>
     </Target>
   </Targets>
+
+  <RTE>
+    <apis/>
+    <components>
+      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.0.0" condition="ARMv6_7_8-M Device">
+        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.0.0"/>
+        <targetInfos>
+          <targetInfo name="Target 1"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.6.0" condition="STM32F4 CMSIS">
+        <package name="STM32F4xx_DFP" schemaVersion="1.3" url="http://www.keil.com/pack" vendor="Keil" version="2.11.0"/>
+        <targetInfos>
+          <targetInfo name="Target 1"/>
+        </targetInfos>
+      </component>
+    </components>
+    <files>
+      <file attr="config" category="source" condition="STM32F407xx_ARMCC" name="Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f407xx.s" version="2.6.0">
+        <instance index="0">RTE\Device\STM32F407VGTx\startup_stm32f407xx.s</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.6.0" condition="STM32F4 CMSIS"/>
+        <package name="STM32F4xx_DFP" schemaVersion="1.3" url="http://www.keil.com/pack" vendor="Keil" version="2.11.0"/>
+        <targetInfos>
+          <targetInfo name="Target 1"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="source" name="Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c" version="2.6.0">
+        <instance index="0">RTE\Device\STM32F407VGTx\system_stm32f4xx.c</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.6.0" condition="STM32F4 CMSIS"/>
+        <package name="STM32F4xx_DFP" schemaVersion="1.3" url="http://www.keil.com/pack" vendor="Keil" version="2.11.0"/>
+        <targetInfos>
+          <targetInfo name="Target 1"/>
+        </targetInfos>
+      </file>
+    </files>
+  </RTE>
 
 </Project>

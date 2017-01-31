@@ -2,6 +2,7 @@
 
 #include "component.h"
 #include "timer.h"
+#include <stdio.h>
 
 CComponent::CComponent()
 {

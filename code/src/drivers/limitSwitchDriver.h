@@ -23,7 +23,7 @@ class CLimSwDriver : CDriver
                 uint16_t      GPIO_Pin_x);
         virtual ~CLimSwDriver(void);
 
-        void Initialize_Hardware(void);
+        virtual void      Initialize_Hardware(void);
         virtual BitAction SampleInput(void);
 
     protected:

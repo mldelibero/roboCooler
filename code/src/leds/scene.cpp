@@ -1,4 +1,5 @@
 #include "scene.h"
+#include <stdio.h>
 
 CScene::CScene(uint16_t NumLeds)
 {

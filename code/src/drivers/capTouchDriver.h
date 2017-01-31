@@ -53,7 +53,7 @@ class CCapTouchDriver : CDriver
 
         virtual ~CCapTouchDriver(void);
 
-        void             Initialize_Hardware(void);
+        virtual void     Initialize_Hardware(void);
         virtual bool     Is_DataReady(void);
         virtual uint16_t Read(unsigned char address);
         void             Write(unsigned char address, unsigned char data);

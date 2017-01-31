@@ -1,5 +1,3 @@
-#include <CppUTest/TestHarness.h>
-#include <CppUTestExt/MockSupport.h>
 #include <stm32f4xx_gpio.h>
 #include <stm32f4xx_i2c.h>
 #include <stm32f4xx_rcc.h>
