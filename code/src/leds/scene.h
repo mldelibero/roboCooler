@@ -36,5 +36,15 @@ class CScene
         CLedBehaviorComp* m_Behaviors[MAX_BEHAVIORS];
         uint8_t           m_NumBehaviors; //< Number of behaviors stored in this scene
 };
+
+class CSceneOn : public CScene
+{
+    public:
+        CSceneOn(uint16_t NumLeds);
+        virtual ~CSceneOn(void);
+
+    private:
+        virtual bool Is_StartTriggerMet(void);
+};
 #endif // #ifndef __SCENE_H
 

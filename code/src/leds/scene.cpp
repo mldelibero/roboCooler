@@ -95,3 +95,13 @@ bool CScene::Is_Running(void)
 }
 */
 
+
+CSceneOn::CSceneOn(uint16_t NumLeds) : CScene(NumLeds) {}
+
+CSceneOn::~CSceneOn(void) {}
+
+bool CSceneOn::Is_StartTriggerMet(void)
+{
+    return true;
+}
+

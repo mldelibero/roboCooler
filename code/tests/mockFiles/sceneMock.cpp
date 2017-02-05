@@ -33,6 +33,22 @@ void CScene::Play(CLedObj* LedObjArray)
     SceneHasBeenPlayed = true;
 }
 
+bool CScene::Add_Behavior(CLedBehaviorComp* behavior)
+{
+    mock().actualCall("CScene::Add_Behavior");//.withParameter("behavior", behavior).onObject(this);
+    if (behavior == NULL) return true;
+    return true;
+}
+
+CSceneOn::CSceneOn(uint16_t NumLeds) : CScene(NumLeds) {}
+
+CSceneOn::~CSceneOn(void) {}
+
+bool CSceneOn::Is_StartTriggerMet(void)
+{
+    return true;
+}
+
 //--- Compile abstract mock version with output control
 
 CSceneMock::CSceneMock() : CScene(Mock_NumLeds)

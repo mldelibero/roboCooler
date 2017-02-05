@@ -29,6 +29,7 @@ TEST(InitTests, ModulesInitialized)
     mock().enable();
 
     mock().expectNCalls(1, "Init_Timers");
+    mock().expectNCalls(1, "CScene::Add_Behavior");
     mock().expectNCalls(1, "CLedComp::Initialize");
     mock().expectNCalls(1, "CCapTouchDriver::Initialize_Hardware");
     mock().expectNCalls(1, "CCapTouchComp::Initialize");

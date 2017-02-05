@@ -3,6 +3,7 @@
 #include "CDriver.h"
 #include "ledObj.h"
 #include "component.h"
+#include "hardwareSettings.h"
 #include "stm32f4xx_dma.h"
 #include "stm32f4xx_rcc.h"
 
@@ -12,7 +13,7 @@
 class CLedStripDriver : public CDriver , public CComponent
 {
     public:
-        CLedStripDriver(uint16_t NumLeds, uint32_t RCC_AHB1Periph_DMAX, uint32_t DMA_Channel_X, DMA_Stream_TypeDef* DMAX_StreamX, uint32_t DMA_FLAG_TCIFX);
+        CLedStripDriver(uint16_t NumLeds,DMA_Settings_t DMA_Settings, GPIO_Settings_t GPIO_Settings, UART_Settings_t UART_Settings);
         virtual ~CLedStripDriver(void);
 
         virtual void Execute(void);
@@ -36,6 +37,10 @@ class CLedStripDriver : public CDriver , public CComponent
         bool m_UpdateAvailable;
         inline void UpdatePartialLedValue(uint8_t* WritePointer, uint8_t Index, uint8_t HiBits, uint8_t MedBits, uint8_t LoBits);
         inline void UpdateSingleLed(CLedObj* LedObjArray, uint8_t* WritePointer, uint8_t LedIndex);
+
+        DMA_Settings_t  m_DMA;
+        GPIO_Settings_t m_GPIO;
+        UART_Settings_t m_UART;
 }; // end -- class CLedStripDriver
 
 #define LED_DMA_AHBxPeriphClockCmd   RCC_AHB1PeriphClockCmd
@@ -43,5 +48,16 @@ class CLedStripDriver : public CDriver , public CComponent
 #define USARTx_TX_DMA_CHANNEL        DMA_Channel_4
 #define USARTx_TX_DMA_STREAM         DMA2_Stream6
 #define USARTx_TX_DMA_FLAG_TCIF      DMA_FLAG_TCIF6
+
+// PA2
+#define LED_AHB1Periph_GPIOX         RCC_AHB1Periph_GPIOA
+#define LED_GPIOX                    GPIOA
+#define LED_GPIO_PinSourceN          GPIO_PinSource2
+#define LED_GPIO_AF_PERN             GPIO_AF_USART2
+#define LED_GPIO_PIN_N               GPIO_Pin_2
+
+#define LED_APBNPeriph_USARTN        RCC_APB1Periph_USART2
+#define LED_USARTN                   USART2
+
 #endif //#ifndef __LED_STRIP_DRIVER_H
 

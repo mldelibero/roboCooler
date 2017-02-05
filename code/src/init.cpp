@@ -9,12 +9,20 @@
 #include "ledStrip.h"
 #include "ledStripDriver.h"
 #include "scene.h"
+#include "ledBehaviorChildren.h"
 
 CLedComp leds;
 CLedObj  LedObjArray[NUM_LEDS];
+CLedObj  LedsAt50Percent(50,50,50);
 
-CLedStripDriver LedStripDriver(NUM_LEDS, LED_AHBxPeriph_DMAx, USARTx_TX_DMA_CHANNEL, USARTx_TX_DMA_STREAM, USARTx_TX_DMA_FLAG_TCIF);
-CScene          FirstScene(NUM_LEDS);
+CLedBeh_Solid   SolidLedStrip(NUM_LEDS, 0, NUM_LEDS-1, LedsAt50Percent);
+
+DMA_Settings_t  DMA_Settings  = {USARTx_TX_DMA_CHANNEL,USARTx_TX_DMA_STREAM};
+GPIO_Settings_t GPIO_Settings = {LED_AHB1Periph_GPIOX, LED_GPIOX, LED_GPIO_PinSourceN, LED_GPIO_AF_PERN, LED_GPIO_PIN_N};
+UART_Settings_t UART_Settings = {LED_APBNPeriph_USARTN, LED_USARTN};
+CLedStripDriver LedStripDriver(NUM_LEDS, DMA_Settings, GPIO_Settings, UART_Settings);
+
+CSceneOn        FirstScene(NUM_LEDS);
 CLedStripComp   LedStrip(&LedStripDriver, &FirstScene, LedObjArray);
 
 CCapTouchDriver CapTouchDriver(
@@ -36,6 +44,8 @@ CLidMotorComp LidMotor(&CapTouch, &Closed_Limit, &Opened_Limit);
 void init(void)
 {
     Init_Timers();
+
+    FirstScene.Add_Behavior(&SolidLedStrip);
 
     leds.Initialize();
     LedStripDriver.Initialize_Hardware();

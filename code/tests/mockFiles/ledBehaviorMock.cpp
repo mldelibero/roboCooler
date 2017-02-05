@@ -3,9 +3,9 @@
 #include "ledBehavior.h"
 #include "ledBehaviorMock.h"
 
-uint16_t Mock_NumLeds       = 10;
-uint16_t Mock_StartingIndex = 0;
-uint16_t Mock_EndingIndex   = 9;
+static uint16_t Mock_NumLeds       = 10;
+static uint16_t Mock_StartingIndex = 0;
+static uint16_t Mock_EndingIndex   = 9;
 
 //--- Compile mock version
 CLedBehaviorComp::CLedBehaviorComp(uint16_t NumLeds, uint16_t StartingIndex, uint16_t EndingIndex)

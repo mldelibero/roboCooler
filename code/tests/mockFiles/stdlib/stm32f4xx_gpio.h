@@ -35,6 +35,7 @@
 #define GPIO_Pin_13                ((uint16_t)0x2000)  /* Pin 13 selected */
 #define GPIO_Pin_14                ((uint16_t)0x4000)  /* Pin 14 selected */
 #define GPIO_Pin_15                ((uint16_t)0x8000)  /* Pin 15 selected */
+#define GPIO_AF_USART2         ((uint8_t)0x07)  /* USART2 Alternate Function mapping  */
 
 typedef enum
 { 

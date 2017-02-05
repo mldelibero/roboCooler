@@ -4,18 +4,24 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_dma.h"
 #include "stm32f4xx_rcc.h"
+#include "hardwareSettings.h"
 
 // ------------------------------------------------------------------------
 uint32_t myRCC_AHB1Periph_DMAX     = RCC_AHB1Periph_DMA1;
 uint32_t myDMA_Channel_X           = DMA_Channel_4;
 DMA_Stream_TypeDef* myDMAX_StreamX = DMA2_Stream6;
 uint32_t myDMA_FLAG_TCIFX          = DMA_FLAG_TCIF6;
-//
+
+DMA_Settings_t  DMA_Settings;
+GPIO_Settings_t GPIO_Settings;
+UART_Settings_t UART_Settings;
+
 // -- Accessor Class ------------------------------------------------------
 class CLedStripDriverChild : CLedStripDriver
 {
     public:
-        CLedStripDriverChild(uint16_t NumLeds, uint32_t RCC_AHB1Periph_DMAX, uint32_t DMA_Channel_X, DMA_Stream_TypeDef* DMAX_StreamX, uint32_t DMA_FLAG_TCIFX) : CLedStripDriver(NumLeds, RCC_AHB1Periph_DMAX, DMA_Channel_X, DMAX_StreamX, DMA_FLAG_TCIFX) {}
+        CLedStripDriverChild(uint16_t NumLeds, DMA_Settings_t myDMA_Settings, GPIO_Settings_t myGPIO_Settings, UART_Settings_t myUART_Settings) : CLedStripDriver(NumLeds, myDMA_Settings, myGPIO_Settings, myUART_Settings) {}
+
 
         ~CLedStripDriverChild(void) {}
 
@@ -51,7 +57,7 @@ TEST_GROUP(LedStripDriverTests)
         myDMAX_StreamX        = DMA2_Stream6;
         myDMA_FLAG_TCIFX      = DMA_FLAG_TCIF6;
 
-        LedStripDriver = new CLedStripDriverChild(NumLeds, myRCC_AHB1Periph_DMAX, myDMA_Channel_X, myDMAX_StreamX, myDMA_FLAG_TCIFX);
+        LedStripDriver = new CLedStripDriverChild(NumLeds, DMA_Settings, GPIO_Settings, UART_Settings);
         LedObjArray    = new CLedObj[NumLeds];
     }
 

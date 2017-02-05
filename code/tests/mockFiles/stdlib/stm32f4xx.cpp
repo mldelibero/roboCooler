@@ -23,3 +23,8 @@ I2C_TypeDef* I2C1 = &I2C1_real;
 DMA_Stream_TypeDef DMAY_StreamX; //!< actual memory location for DMA Stream
 DMA_Stream_TypeDef* DMA2_Stream6 = &DMAY_StreamX;  //!< DMA1_Stream0 pointer
 
+// USART
+USART_TypeDef USART_real; // Actual memory location for timers
+USART_TypeDef* USART2 = &USART_real;
+//
+

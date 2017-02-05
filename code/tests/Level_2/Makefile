@@ -40,6 +40,9 @@ TEST_SRC_FILES = \
 	../mockFiles/limitSwitchDriverMock.cpp\
 	../mockFiles/stdlib/stm32f4xx.cpp\
 	../mockFiles/stdlib/stm32f4xx_dma.cpp\
+	../mockFiles/stdlib/stm32f4xx_gpio.cpp\
+	../mockFiles/stdlib/stm32f4xx_rcc.cpp\
+	../mockFiles/stdlib/stm32f4xx_usart.cpp\
 	../../src/capTouch.cpp\
 	../../src/limitSwitch.cpp\
 	../../src/drivers/ledStripDriver.cpp\
