@@ -94,7 +94,7 @@ void CLedStripDriver::Initialize_Hardware(void)
     DMA_InitStructure.DMA_MemoryDataSize     = DMA_MemoryDataSize_Byte;
     DMA_InitStructure.DMA_MemoryInc          = DMA_MemoryInc_Enable;
     DMA_InitStructure.DMA_Mode               = DMA_Mode_Normal;
-//    DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)(&(m_UART.USARTN->DR));
+    DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)(unsigned long int)(&(m_UART.USARTN->DR));
     DMA_InitStructure.DMA_PeripheralBurst    = DMA_PeripheralBurst_Single;
     DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
     DMA_InitStructure.DMA_PeripheralInc      = DMA_PeripheralInc_Disable;
@@ -102,7 +102,7 @@ void CLedStripDriver::Initialize_Hardware(void)
 
     DMA_InitStructure.DMA_Channel            = m_DMA.DMA_Channel_N;
     DMA_InitStructure.DMA_DIR                = DMA_DIR_MemoryToPeripheral;
-    //DMA_InitStructure.DMA_Memory0BaseAddr    =(uint32_t)m_DMA_Ptr[m_DMA_PtrIndex];
+    DMA_InitStructure.DMA_Memory0BaseAddr    =(uint32_t)(unsigned long int)m_DMA_Ptr[m_DMA_PtrIndex];
     DMA_Init(m_DMA.DMAN_StreamN, &DMA_InitStructure);
 
     USART_Cmd(m_UART.USARTN, ENABLE);
