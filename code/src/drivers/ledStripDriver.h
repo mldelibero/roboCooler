@@ -4,8 +4,8 @@
 #include "ledObj.h"
 #include "component.h"
 #include "hardwareSettings.h"
-#include "stm32f4xx_dma.h"
-#include "stm32f4xx_rcc.h"
+#include "stm32f4xx_hal_dma.h"
+#include "stm32f4xx_hal_rcc.h"
 
 #define BIT_LOW     0x06 //110
 #define BIT_HI      0x04 //100
@@ -42,22 +42,5 @@ class CLedStripDriver : public CDriver , public CComponent
         GPIO_Settings_t m_GPIO;
         UART_Settings_t m_UART;
 }; // end -- class CLedStripDriver
-
-#define LED_DMA_AHBxPeriphClockCmd   RCC_AHB1PeriphClockCmd
-#define LED_AHBxPeriph_DMAx          RCC_AHB1Periph_DMA1
-#define USARTx_TX_DMA_CHANNEL        DMA_Channel_4
-#define USARTx_TX_DMA_STREAM         DMA2_Stream6
-#define USARTx_TX_DMA_FLAG_TCIF      DMA_FLAG_TCIF6
-
-// PA2
-#define LED_AHB1Periph_GPIOX         RCC_AHB1Periph_GPIOA
-#define LED_GPIOX                    GPIOA
-#define LED_GPIO_PinSourceN          GPIO_PinSource2
-#define LED_GPIO_AF_PERN             GPIO_AF_USART2
-#define LED_GPIO_PIN_N               GPIO_Pin_2
-
-#define LED_APBNPeriph_USARTN        RCC_APB1Periph_USART2
-#define LED_USARTN                   USART2
-
 #endif //#ifndef __LED_STRIP_DRIVER_H
 

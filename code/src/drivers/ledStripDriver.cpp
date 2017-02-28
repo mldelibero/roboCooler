@@ -1,7 +1,7 @@
 #include "ledStripDriver.h"
-#include "stm32f4xx_dma.h"
-#include "stm32f4xx_gpio.h"
-#include "stm32f4xx_usart.h"
+#include "stm32f4xx_hal_dma.h"
+#include "stm32f4xx_hal_gpio.h"
+#include "stm32f4xx_hal_usart.h"
 #include "hardwareSettings.h"
 
 CLedStripDriver::CLedStripDriver(uint16_t NumLeds, DMA_Settings_t DMA_Settings, GPIO_Settings_t GPIO_Settings, UART_Settings_t UART_Settings)
@@ -55,22 +55,18 @@ void CLedStripDriver::Initialize_Hardware(void)
     DMA_InitTypeDef   DMA_InitStructure;
 
     // Init Peripheral clocks
-    RCC_AHB1PeriphClockCmd(m_GPIO.RCC_AHB1Periph_GPIOX , ENABLE);
+    InitializeGPIOClock(m_GPIO.GPIOX);
     RCC_AHB1PeriphClockCmd(m_UART.RCC_APBNPeriph_USARTN, ENABLE);
     RCC_AHB1PeriphClockCmd(LED_AHBxPeriph_DMAx   , ENABLE);
 
     // Init GPIO
-    GPIO_PinAFConfig(m_GPIO.GPIOX, m_GPIO.PinSourceN, m_GPIO.GPIO_AF_PERN);
+    GPIO_InitStruct.Pin       = m_GPIO.Pin_N;
+    GPIO_InitStruct.Mode      = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStruct.Pull      = GPIO_PULLDOWN;
+    GPIO_InitStruct.Alternate = m_GPIO.GPIO_AF;
 
-    GPIO_StructInit(&GPIO_InitStruct);
-    GPIO_InitStruct.GPIO_Pin   = m_GPIO.Pin_N;
-    GPIO_InitStruct.GPIO_Mode  = GPIO_Mode_AF;
-    GPIO_InitStruct.GPIO_Speed = GPIO_High_Speed;
-    GPIO_InitStruct.GPIO_OType = GPIO_OType_OD;
-    GPIO_InitStruct.GPIO_PuPd  = GPIO_PuPd_DOWN;
-
-    GPIO_Init(m_GPIO.GPIOX, &GPIO_InitStruct);
-
+    HAL_GPIO_Init(m_GPIO.GPIOX, &GPIO_InitStruct);
 
     // Init USART
     USART_DeInit(m_UART.USARTN);

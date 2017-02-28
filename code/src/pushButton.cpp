@@ -1,10 +1,12 @@
+#include <stm32f4xx_hal_gpio.h>
 #include "pushButton.h"
 #include "pushButtonDriver.h"
 #include "timer.h"
+#include "roboCooler.h"
 
 static int32_t timer = 0;
-uint8_t pbUpStatus = 0;
-uint8_t pbDnStatus = 0;
+GPIO_PinState pbUpStatus = GPIO_PIN_RESET;
+GPIO_PinState pbDnStatus = GPIO_PIN_RESET;
 
 void init_PushButton(void)
 {
@@ -16,11 +18,13 @@ void init_PushButton(void)
 void Reset_PushButtonFilters(void)
 {
 }
-uint8_t Get_PbUpStatus(void)
+
+GPIO_PinState Get_PbUpStatus(void)
 {
     return pbUpStatus;
 }
-uint8_t Get_PbDnStatus(void)
+
+GPIO_PinState Get_PbDnStatus(void)
 {
     return pbDnStatus;
 }
@@ -29,7 +33,7 @@ void Run_PushButtons(void)
 {
     IsTimerExpired(timer);
 
-    pbUpStatus = GPIO_ReadInputDataBit(PBUP_GPIOx, PBUP_GPIO_PIN_X);
-    pbDnStatus = GPIO_ReadInputDataBit(PBDN_GPIOx, PBDN_GPIO_PIN_X);
+    pbUpStatus = HAL_GPIO_ReadPin(PBUP_GPIOx, PBUP_GPIO_PIN_X);
+    pbDnStatus = HAL_GPIO_ReadPin(PBDN_GPIOx, PBDN_GPIO_PIN_X);
 }
 
