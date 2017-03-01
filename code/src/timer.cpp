@@ -51,7 +51,7 @@ int32_t Get_TimerValue(int32_t timer)
 
 void TIMER_IRQHandler(void)
 {
-    TIM_ClearITPendingBit(TIMER_TIMx, TIM_IT_Update);
+    __HAL_TIM_ENABLE_IT(TIM_Handle, TIM_IT_UPDATE);
     for (int timer = 0; timer < NUM_TIMERS; timer++)
     {
         if (timers[timer] > 0) timers[timer]--;
