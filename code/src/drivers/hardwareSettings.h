@@ -14,12 +14,6 @@ typedef struct
 
 typedef struct
 {
-    uint32_t RCC_APBNPeriph_USARTN;   // Where N is the Peripheral number  (1,2...)
-    USART_TypeDef* USARTN;
-} UART_Settings_t;
-
-typedef struct
-{
     uint32_t DMA_Channel_N;
     DMA_Stream_TypeDef* DMAN_StreamN;
 } DMA_Settings_t;

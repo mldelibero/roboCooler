@@ -4,7 +4,7 @@
 #include "stm32f4xx_hal_usart.h"
 #include "hardwareSettings.h"
 
-CLedStripDriver::CLedStripDriver(uint16_t NumLeds, DMA_Settings_t DMA_Settings, GPIO_Settings_t GPIO_Settings, UART_Settings_t UART_Settings)
+CLedStripDriver::CLedStripDriver(uint16_t NumLeds, DMA_Settings_t DMA_Settings, GPIO_Settings_t GPIO_Settings, USART_TypeDef* UARTN)
 {
     m_NumLeds     = NumLeds;
     m_DMA_Ptr[0]   = new uint8_t[m_NumLeds*8+1];
@@ -14,7 +14,7 @@ CLedStripDriver::CLedStripDriver(uint16_t NumLeds, DMA_Settings_t DMA_Settings, 
 
     m_DMA  = DMA_Settings;
     m_GPIO = GPIO_Settings;
-    m_UART = UART_Settings;
+    m_USART_Handle.Instance = UARTN;
 
     CLedObj* Off = new CLedObj[m_NumLeds];
     m_UpdateAvailable = false;
@@ -51,7 +51,6 @@ void CLedStripDriver::Initialize(void){}
 void CLedStripDriver::Initialize_Hardware(void)
 {
     GPIO_InitTypeDef  GPIO_InitStruct;
-    USART_InitTypeDef USART_InitStruct;
     DMA_InitTypeDef   DMA_InitStructure;
 
     // Init Peripheral clocks
@@ -69,18 +68,22 @@ void CLedStripDriver::Initialize_Hardware(void)
     HAL_GPIO_Init(m_GPIO.GPIOX, &GPIO_InitStruct);
 
     // Init USART
-    USART_DeInit(m_UART.USARTN);
-    USART_StructInit(&USART_InitStruct);
-    USART_OverSampling8Cmd(m_UART.USARTN, ENABLE);
+    HAL_USART_DeInit(&m_USART_Handle);
 
-    USART_InitStruct.USART_BaudRate            = 2700000; // 2.7MHz
-    USART_InitStruct.USART_WordLength          = USART_WordLength_8b;
-    USART_InitStruct.USART_StopBits            = USART_StopBits_0_5;
-    USART_InitStruct.USART_Parity              = USART_Parity_No;
-    USART_InitStruct.USART_Mode                = USART_Mode_Tx;
-    USART_InitStruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+    m_USART_Handle.Init.BaudRate     = 2700000; // 2.7MHz
+    m_USART_Handle.Init.WordLength   = USART_WORDLENGTH_8B;
+    m_USART_Handle.Init.StopBits     = USART_STOPBITS_0_5;
+    m_USART_Handle.Init.Parity       = USART_PARITY_NONE;
+    m_USART_Handle.Init.Mode         = USART_MODE_TX;
+    // Not sure what these 3 do
+    m_USART_Handle.Init.CLKPolarity  = USART_POLARITY_HIGH;
+    m_USART_Handle.Init.CLKPhase     = USART_PHASE_1EDGE;
+    m_USART_Handle.Init.CLKLastBit   = USART_LASTBIT_DISABLE;
 
-    USART_Init(m_UART.USARTN, &USART_InitStruct);
+//    USART_InitStruct.HwFlowCtl    = UART_HWCONTROL_NONE;
+//    USART_InitStruct.OverSampling = UART_OVERSAMPLING_8;
+
+    HAL_USART_Init(&m_USART_Handle);
 
     // Init DMA
     DMA_InitStructure.DMA_BufferSize         = m_NumLeds * 8 + 1;
