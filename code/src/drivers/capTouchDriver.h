@@ -46,7 +46,7 @@ class CCapTouchDriver : CDriver
 
         // I2C
         uint32_t      m_APBxPeriph_I2Cx;
-        I2C_TypeDef*  m_I2Cx;
+        I2C_HandleTypeDef m_I2C_Handle;
 }; // end -- class CCapTouchDriver
 #endif //#ifndef __CAP_TOUCH_DRIVER_H
 

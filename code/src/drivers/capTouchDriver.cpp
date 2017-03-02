@@ -19,6 +19,7 @@ CCapTouchDriver::CCapTouchDriver(
                 uint32_t      APBxPeriph_I2Cx,
                 I2C_TypeDef*  I2Cx)
 {
+    m_I2C_Handle.Instance      = I2Cx;
     m_SCL_GPIOx                = SCL_GPIOx;
     m_SCL_GPIO_PIN_x           = SCL_GPIO_PIN_x;
 
@@ -30,7 +31,6 @@ CCapTouchDriver::CCapTouchDriver(
 
     m_GPIO_AF                  = GPIO_AF;
     m_APBxPeriph_I2Cx          = APBxPeriph_I2Cx;
-    m_I2Cx                     = I2Cx;
 } // end - CCapTouchDriver::CCapTouchDriver
 
 CCapTouchDriver::~CCapTouchDriver(void)
@@ -40,7 +40,6 @@ CCapTouchDriver::~CCapTouchDriver(void)
 void CCapTouchDriver::Initialize_Hardware(void)
 {
     GPIO_InitTypeDef    GPIO_InitStruct;
-    I2C_InitTypeDef     I2C_InitStruct;
 
     // Init Peripheral clocks
     InitializeGPIOClock(m_SCL_GPIOx);
@@ -76,19 +75,19 @@ void CCapTouchDriver::Initialize_Hardware(void)
     // Init I2C
     RCC_APB1PeriphClockCmd(m_APBxPeriph_I2Cx, ENABLE);
 
-    I2C_DeInit(m_I2Cx);
-    I2C_StructInit(&I2C_InitStruct);
+    HAL_I2C_DeInit(&m_I2C_Handle);
 
-    I2C_InitStruct.I2C_ClockSpeed          = 100000;
-    I2C_InitStruct.I2C_Mode                = I2C_Mode_I2C;
-    I2C_InitStruct.I2C_DutyCycle           = I2C_DutyCycle_2;
-    I2C_InitStruct.I2C_OwnAddress1         = 0;
-    I2C_InitStruct.I2C_Ack                 = I2C_Ack_Enable;
-    I2C_InitStruct.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
+    m_I2C_Handle.Init.ClockSpeed      = 100000;
+    m_I2C_Handle.Init.DutyCycle       = I2C_DUTYCYCLE_2;
+    m_I2C_Handle.Init.OwnAddress1     = 0;
+    m_I2C_Handle.Init.AddressingMode  = I2C_ADDRESSINGMODE_7BIT;
+    m_I2C_Handle.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+    m_I2C_Handle.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+    m_I2C_Handle.Init.NoStretchMode   = I2C_NOSTRETCH_ENABLE;
 
-    I2C_Init(m_I2Cx, &I2C_InitStruct);
+    HAL_I2C_Init(&m_I2C_Handle);
 
-    I2C_Cmd(m_I2Cx, ENABLE);
+    __HAL_I2C_ENABLE(&m_I2C_Handle);
 } // end - void CCapTouchDriver::Initialize_Hardware(void)
 
 bool CCapTouchDriver::Is_DataReady(void)
@@ -99,6 +98,7 @@ bool CCapTouchDriver::Is_DataReady(void)
 
 void CCapTouchDriver::Write(unsigned char address, unsigned char data)
 {
+    /*
     I2C_GenerateSTART(m_I2Cx, ENABLE);
     while (I2C_CheckEvent(m_I2Cx, I2C_EVENT_MASTER_MODE_SELECT) == ERROR);
 
@@ -112,10 +112,12 @@ void CCapTouchDriver::Write(unsigned char address, unsigned char data)
     while (I2C_CheckEvent(m_I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTED) == ERROR);
 
     I2C_GenerateSTOP(m_I2Cx, ENABLE);
+    */
 } // end - void CCapTouchDriver::Write(unsigned char address, unsigned char data)
 
 uint16_t CCapTouchDriver::Read(unsigned char address)
 {
+    /*
     uint16_t data;
 
     // Restart
@@ -141,5 +143,7 @@ uint16_t CCapTouchDriver::Read(unsigned char address)
 
     if (address) return data; // Need to expand function to read from any address
     return data;
+    */
+    return 0;
 } // end - uint16_t CCapTouchDriver::Read(unsigned char address)
 
