@@ -1,15 +1,11 @@
-//#include <misc.h>
 #include <stm32f4xx.h>
-#include <stm32f4xx_hal_rcc.h>
-#include <stm32f4xx_hal_tim.h>
-
+#include <stm32f4xx_hal.h>
 #include "timerDriver.h"
 
 TIM_HandleTypeDef TIM_Handle;
 
 void init_TimerDriver(void)
 {
-    NVIC_InitTypeDef        NVIC_InitStructure;
     uint16_t                PrescalerValue;
 
     TIM_Handle.Instance = TIMER_TIMx;
@@ -28,16 +24,17 @@ void init_TimerDriver(void)
     TIM_Handle.Init.RepetitionCounter = 0;
     HAL_TIM_Base_Init(&TIM_Handle);
 
-    // Interrupt Setup
-    NVIC_InitStructure.NVIC_IRQChannel                   = TIMER_TIMx_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority        = 1;
-    NVIC_InitStructure.NVIC_IRQChannelCmd                = ENABLE;
-    NVIC_Init(&NVIC_InitStructure);
-
     __HAL_TIM_ENABLE_IT(&TIM_Handle, TIM_IT_UPDATE);
 
     // Enable Timer
-    __HAL_TIM_ENABLE(&TIM_Handle);
+    HAL_TIM_Base_Start(&TIM_Handle);
+
+    HAL_NVIC_SetPriority(TIMER_TIMx_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(TIMER_TIMx_IRQn);
 } // end - void init_TimerDriver(void)
+
+extern "C" void TIMER_TIMx_IRQHandler()
+{
+    HAL_TIM_IRQHandler(&TIM_Handle);
+}
 

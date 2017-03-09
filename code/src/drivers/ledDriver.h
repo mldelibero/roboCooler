@@ -42,6 +42,9 @@
 #define LED7_GPIOx                     GPIOE
 #define LED7_GPIO_PIN_X                GPIO_PIN_9
 
+#define TIMER_INT_GPIOx                LED0_GPIOx
+#define TIMER_GPIO_PIN_X               LED0_GPIO_PIN_X
+
 void init_ledDriver(void);
 void SetLeds(uint8_t ledValues);
 uint8_t Get_LedStates(void);

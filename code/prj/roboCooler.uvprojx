@@ -333,7 +333,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F40_41xxx, USE_STDPERIPH_DRIVER</Define>
+              <Define>STM32F407xx USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
               <IncludePath>..\dev;..\inc;..\src;..\src\drivers;..\src\leds</IncludePath>
             </VariousControls>
@@ -380,34 +380,14 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
-              <FileName>component.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\component.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>component.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\component.h</FilePath>
-            </File>
-            <File>
               <FileName>init.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\init.cpp</FilePath>
             </File>
             <File>
-              <FileName>init.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\init.h</FilePath>
-            </File>
-            <File>
-              <FileName>lidMotor.cpp</FileName>
+              <FileName>loop.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\src\lidMotor.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>lidMotor.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\lidMotor.h</FilePath>
+              <FilePath>..\src\loop.cpp</FilePath>
             </File>
             <File>
               <FileName>main.cpp</FileName>
@@ -420,64 +400,9 @@
               <FilePath>..\src\timer.cpp</FilePath>
             </File>
             <File>
-              <FileName>timer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\timer.h</FilePath>
-            </File>
-            <File>
-              <FileName>capTouch.cpp</FileName>
+              <FileName>component.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\src\capTouch.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>capTouch.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\capTouch.h</FilePath>
-            </File>
-            <File>
-              <FileName>limitSwitch.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\limitSwitch.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>limitSwitch.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\limitSwitch.h</FilePath>
-            </File>
-            <File>
-              <FileName>loop.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\loop.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>loop.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\loop.h</FilePath>
-            </File>
-            <File>
-              <FileName>pushButton.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\pushButton.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>pushButton.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\pushButton.h</FilePath>
-            </File>
-            <File>
-              <FileName>utils.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\utils.h</FilePath>
-            </File>
-            <File>
-              <FileName>leds.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\leds\leds.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>leds.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\leds\leds.h</FilePath>
+              <FilePath>..\src\component.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -485,54 +410,9 @@
           <GroupName>leds</GroupName>
           <Files>
             <File>
-              <FileName>ledBehavior.cpp</FileName>
+              <FileName>leds.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\src\leds\ledBehavior.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ledBehavior.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\leds\ledBehavior.h</FilePath>
-            </File>
-            <File>
-              <FileName>ledBehaviorChildren.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\leds\ledBehaviorChildren.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ledBehaviorChildren.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\leds\ledBehaviorChildren.h</FilePath>
-            </File>
-            <File>
-              <FileName>ledObj.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\leds\ledObj.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ledObj.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\leds\ledObj.h</FilePath>
-            </File>
-            <File>
-              <FileName>ledStrip.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\leds\ledStrip.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ledStrip.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\leds\ledStrip.h</FilePath>
-            </File>
-            <File>
-              <FileName>scene.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\leds\scene.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>scene.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\leds\scene.h</FilePath>
+              <FilePath>..\src\leds\leds.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -540,84 +420,14 @@
           <GroupName>drivers</GroupName>
           <Files>
             <File>
-              <FileName>ledDriver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\drivers\ledDriver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ledDriver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\drivers\ledDriver.h</FilePath>
-            </File>
-            <File>
-              <FileName>lidMotorDriver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\drivers\lidMotorDriver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>lidMotorDriver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\drivers\lidMotorDriver.h</FilePath>
-            </File>
-            <File>
               <FileName>timerDriver.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\drivers\timerDriver.cpp</FilePath>
             </File>
             <File>
-              <FileName>timerDriver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\drivers\timerDriver.h</FilePath>
-            </File>
-            <File>
-              <FileName>capTouchDriver.cpp</FileName>
+              <FileName>ledDriver.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\src\drivers\capTouchDriver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>capTouchDriver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\drivers\capTouchDriver.h</FilePath>
-            </File>
-            <File>
-              <FileName>CDriver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\drivers\CDriver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CDriver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\drivers\CDriver.h</FilePath>
-            </File>
-            <File>
-              <FileName>ledStripDriver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\drivers\ledStripDriver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ledStripDriver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\drivers\ledStripDriver.h</FilePath>
-            </File>
-            <File>
-              <FileName>limitSwitchDriver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\drivers\limitSwitchDriver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>limitSwitchDriver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\drivers\limitSwitchDriver.h</FilePath>
-            </File>
-            <File>
-              <FileName>pushButtonDriver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\drivers\pushButtonDriver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>pushButtonDriver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\src\drivers\pushButtonDriver.h</FilePath>
+              <FilePath>..\src\drivers\ledDriver.cpp</FilePath>
             </File>
           </Files>
         </Group>

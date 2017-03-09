@@ -4,9 +4,10 @@
  * @note    The timer module will subtract one from an array of timers at a fixed interval inside of an interrupt. It will not lower a timer below zero. It will have no knowlede of the meaning of any of the timers. Resetting the timers will be the responsibility of the client.
  */
 
-#include <stm32f4xx_hal_tim.h>
+#include <stm32f4xx_hal.h>
 #include "timer.h"
 #include "timerDriver.h"
+#include "ledDriver.h"
 
 static int32_t timers[NUM_TIMERS];
 static uint32_t numTimersAllocated = 0;
@@ -49,9 +50,10 @@ int32_t Get_TimerValue(int32_t timer)
     return timers[timer];
 }
 
-void TIMER_IRQHandler(void)
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-    __HAL_TIM_ENABLE_IT(TIM_Handle, TIM_IT_UPDATE);
+    HAL_GPIO_TogglePin(TIMER_INT_GPIOx, TIMER_GPIO_PIN_X);
+
     for (int timer = 0; timer < NUM_TIMERS; timer++)
     {
         if (timers[timer] > 0) timers[timer]--;
