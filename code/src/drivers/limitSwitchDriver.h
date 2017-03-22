@@ -1,3 +1,10 @@
+/**
+ ******************************************************************************
+ * @file    limitSwitchDriver.h
+ * @author  Michael DeLibero
+ * @brief   Header file for limitSwitchDriver.cpp
+ ******************************************************************************
+ */
 #ifndef __LIMIT_SWITCH_DRIVER_H
 #define __LIMIT_SWITCH_DRIVER_H
 #include <stm32f4xx_hal_gpio.h>

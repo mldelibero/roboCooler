@@ -1,8 +1,15 @@
+/**
+ ******************************************************************************
+ * @file    timerTest.cpp
+ * @author  Michael DeLibero
+ * @brief   ....
+ ******************************************************************************
+ */
 #include <CppUTest/TestHarness.h>
 #include <CppUTestExt/MockSupport.h>
-#include <stdint.h>
-#include <stdio.h>
-#include "timer.h"
+//#include <stdint.h>
+//#include <stdio.h>
+//#include "timer.h"
 #include "timerDriver.h"
 
 int32_t timer = -1;
@@ -12,14 +19,14 @@ TEST_GROUP(TimerTests)
     void setup()
     {
         mock().disable();
-        Init_Timers();
+//        Init_Timers();
         timer = -1;
     }
     void teardown()
     {
     }
 };
-
+/*
 TEST(TimerTests, NumTimersGreaterThanZero)
 {
     CHECK(NUM_TIMERS > 0);
@@ -155,6 +162,7 @@ TEST(TimerDriverTests, TestInitCalls)
     Init_Timers();
 }
 
+*/
 /*
    This is a list of the time functionality that has yet to be tested here.
 

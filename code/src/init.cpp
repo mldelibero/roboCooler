@@ -6,25 +6,25 @@
 //#include "lidMotor.h"
 //#include "limitSwitch.h"
 //#include "limitSwitchDriver.h"
-//#include "ledBehaviorChildren.h"
-//#include "ledStrip.h"
-//#include "ledStripDriver.h"
-//#include "roboCooler.h"
-//#include "scene.h"
+#include "ledBehaviorChildren.h"
+#include "ledStrip.h"
+#include "ledStripDriver.h"
+#include "roboCooler.h"
+#include "scene.h"
 #include "timer.h"
 //
 CLedComp leds;
-//CLedObj  LedObjArray[NUM_LEDS];
-//CLedObj  LedsAt50Percent(50,50,50);
-//
-//CLedBeh_Solid   SolidLedStrip(NUM_LEDS, 0, NUM_LEDS-1, LedsAt50Percent);
-//
-//DMA_Settings_t  DMA_Settings  = {USARTx_TX_DMA_CHANNEL,USARTx_TX_DMA_STREAM};
-//GPIO_Settings_t GPIO_Settings = {LED_GPIOX, LED_GPIO_AF, LED_GPIO_PIN_N};
-//CLedStripDriver LedStripDriver(NUM_LEDS, DMA_Settings, GPIO_Settings, LED_USARTN);
-//
-//CSceneOn        FirstScene(NUM_LEDS);
-//CLedStripComp   LedStrip(&LedStripDriver, &FirstScene, LedObjArray);
+CLedObj  LedObjArray[NUM_LEDS];
+CLedObj  LedsAt50Percent(50,50,50);
+
+CLedBeh_Solid   SolidLedStrip(NUM_LEDS, 0, NUM_LEDS-1, LedsAt50Percent);
+
+DMA_Settings_t  DMA_Settings  = {USARTx_TX_DMA_CHANNEL, USARTx_TX_DMA_STREAM};
+GPIO_Settings_t GPIO_Settings = {LED_GPIOX, LED_GPIO_AF, LED_GPIO_PIN_N};
+CLedStripDriver LedStripDriver(NUM_LEDS, DMA_Settings, GPIO_Settings, LED_USARTN);
+
+CSceneOn        FirstScene(NUM_LEDS);
+CLedStripComp   LedStrip(&LedStripDriver, &FirstScene, LedObjArray);
 //
 //CCapTouchDriver CapTouchDriver(
 //        CAP_SCL_GPIOx, CAP_SCL_GPIO_PIN_x,
@@ -90,13 +90,13 @@ void init(void)
     HAL_Init();
     SystemClock_Config();
     Init_Timers();
-//
-//    FirstScene.Add_Behavior(&SolidLedStrip);
-//
+
+    FirstScene.Add_Behavior(&SolidLedStrip);
+
     leds.Initialize();
-//    LedStripDriver.Initialize_Hardware();
-//    LedStripDriver.Initialize();
-//    LedStrip.Initialize();
+    LedStripDriver.Initialize_Hardware();
+    LedStripDriver.Initialize();
+    LedStrip.Initialize();
 //
 //    LidMotor.Initialize();
 //

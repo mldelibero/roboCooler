@@ -14,9 +14,7 @@ CPP_PLATFORM = Gcc
 # <__STM32_HAL_LEGACY> stops the redefinition of some defines
 # <DSTM32F407xx> allows stm32f4xx.h to compile
 # <_RTE_> allows stm32f4xx_hal_conf.h to include RTE header files
-CPPUTEST_CXXFLAGS = -Wno-c++14-compat -DSTM32F407xx -fmax-errors=5 -D_RTE_
-CPPUTEST_CPPFLAGS = -D_RTE_
-CPPUTEST_CFLAGS = -D_RTE_
+CPPUTEST_CXXFLAGS = -Wno-c++14-compat -DSTM32F407xx -fmax-errors=5
 CPPUTEST_USE_EXTENSIONS = Y
 
 COMPONENT_NAME = roboCooler_Level_1
@@ -27,11 +25,10 @@ CPPUTEST_OBJS_DIR = ./objs/tests/Level_1
 # so that memory leak detection does not conflict with stl.
 #CPPUTEST_MEMLEAK_DETECTOR_NEW_MACRO_FILE = -include ExamplesNewOverrides.h
 SRC_DIRS = \
+	../../src/drivers\
 
 SRC_FILES = \
-	../../src/component.cpp\
 	../../src/timer.cpp\
-	../../src/drivers/timerDriver.cpp\
 
 TEST_SRC_DIRS = \
 	./\
@@ -40,14 +37,16 @@ TEST_SRC_DIRS = \
 
 TEST_SRC_FILES = \
 	../AllTests.cpp\
+	../../src/component.cpp\
+	../../src/leds/ledObj.cpp\
 
 INCLUDE_DIRS =\
   .\
   ./mockFiles\
   ../mockFiles/stdlib\
-  ../mockFiles/stdlib/Legacy\
+  ../integration\
   ../../src\
-  ../../src/drivers\
+  ../../src/leds\
   ../../prj/RTE/Device/STM32F407VGTx\
   ../../prj/RTE/_Target_1\
   $(CPPUTEST_HOME)/include\

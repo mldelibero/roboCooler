@@ -414,6 +414,31 @@
               <FileType>8</FileType>
               <FilePath>..\src\leds\leds.cpp</FilePath>
             </File>
+            <File>
+              <FileName>ledBehavior.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\leds\ledBehavior.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ledBehaviorChildren.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\leds\ledBehaviorChildren.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ledObj.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\leds\ledObj.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ledStrip.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\leds\ledStrip.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>scene.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\leds\scene.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -428,6 +453,16 @@
               <FileName>ledDriver.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\drivers\ledDriver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ledStripDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\ledStripDriver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\CDriver.cpp</FilePath>
             </File>
           </Files>
         </Group>

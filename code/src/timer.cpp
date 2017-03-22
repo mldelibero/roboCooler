@@ -58,5 +58,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     {
         if (timers[timer] > 0) timers[timer]--;
     }
+    if (htim == NULL) return;
 } // end - void TIMER_IRQHandler(void)
 

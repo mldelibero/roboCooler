@@ -2,7 +2,6 @@
 #define _STM32F4XX__H
 
 #include <stdint.h>
-#include "stm32f407xx.h"
 
 #define TIM_OutputState_Enable             ((uint16_t)0x0001)
 
