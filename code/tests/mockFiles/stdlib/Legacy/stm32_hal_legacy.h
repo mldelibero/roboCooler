@@ -48,7 +48,6 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
-#define  GPIO_SPEED_LOW                           GPIO_SPEED_FREQ_LOW     
 
 /** @defgroup HAL_AES_Aliased_Defines HAL CRYP Aliased Defines maintained for legacy purpose
   * @{
@@ -420,26 +419,6 @@
 #define GPIO_AF0_LPTIM                            GPIO_AF0_LPTIM1
 #define GPIO_AF1_LPTIM                            GPIO_AF1_LPTIM1
 #define GPIO_AF2_LPTIM                            GPIO_AF2_LPTIM1
-
-#if defined(STM32L0) || defined(STM32L4) || defined(STM32F4) || defined(STM32F2) || defined(STM32F7)
-#define  GPIO_SPEED_LOW                           GPIO_SPEED_FREQ_LOW     
-#define  GPIO_SPEED_MEDIUM                        GPIO_SPEED_FREQ_MEDIUM     
-#define  GPIO_SPEED_FAST                          GPIO_SPEED_FREQ_HIGH     
-#define  GPIO_SPEED_HIGH                          GPIO_SPEED_FREQ_VERY_HIGH       
-#endif /* STM32L0 || STM32L4 || STM32F4 || STM32F2 || STM32F7 */
-
-#if defined(STM32L1) 
- #define  GPIO_SPEED_VERY_LOW    GPIO_SPEED_FREQ_LOW     
- #define  GPIO_SPEED_LOW         GPIO_SPEED_FREQ_MEDIUM     
- #define  GPIO_SPEED_MEDIUM      GPIO_SPEED_FREQ_HIGH     
- #define  GPIO_SPEED_HIGH        GPIO_SPEED_FREQ_VERY_HIGH     
-#endif /* STM32L1 */
-
-#if defined(STM32F0) || defined(STM32F3) || defined(STM32F1)
- #define  GPIO_SPEED_LOW    GPIO_SPEED_FREQ_LOW
- #define  GPIO_SPEED_MEDIUM GPIO_SPEED_FREQ_MEDIUM
- #define  GPIO_SPEED_HIGH   GPIO_SPEED_FREQ_HIGH
-#endif /* STM32F0 || STM32F3 || STM32F1 */
 
 #define GPIO_AF6_DFSDM                            GPIO_AF6_DFSDM1
 /**

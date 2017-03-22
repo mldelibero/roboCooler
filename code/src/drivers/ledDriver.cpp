@@ -17,8 +17,7 @@ void init_ledDriver(void)
     // Init GPIO
     GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull  = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
-
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Pin   = LED0_GPIO_PIN_X;
     HAL_GPIO_Init(LED0_GPIOx, &GPIO_InitStruct);
 
@@ -56,15 +55,14 @@ void init_ledDriver(void)
 
 void SetLeds(uint8_t ledValues)
 {
-
-    HAL_GPIO_WritePin(LED0_GPIOx, LED0_GPIO_PIN_X, (GPIO_PinState((ledValues & 1<<0) > 0)));
-    HAL_GPIO_WritePin(LED1_GPIOx, LED1_GPIO_PIN_X, (GPIO_PinState((ledValues & 1<<1) > 0)));
-    HAL_GPIO_WritePin(LED2_GPIOx, LED2_GPIO_PIN_X, (GPIO_PinState((ledValues & 1<<2) > 0)));
-    HAL_GPIO_WritePin(LED3_GPIOx, LED3_GPIO_PIN_X, (GPIO_PinState((ledValues & 1<<3) > 0)));
-    HAL_GPIO_WritePin(LED4_GPIOx, LED4_GPIO_PIN_X, (GPIO_PinState((ledValues & 1<<4) > 0)));
-    HAL_GPIO_WritePin(LED5_GPIOx, LED5_GPIO_PIN_X, (GPIO_PinState((ledValues & 1<<5) > 0)));
-    HAL_GPIO_WritePin(LED6_GPIOx, LED6_GPIO_PIN_X, (GPIO_PinState((ledValues & 1<<6) > 0)));
-    HAL_GPIO_WritePin(LED7_GPIOx, LED7_GPIO_PIN_X, (GPIO_PinState((ledValues & 1<<7) > 0)));
+    HAL_GPIO_WritePin(LED0_GPIOx, LED0_GPIO_PIN_X, (GPIO_PinState((ledValues & GPIO_PIN_0) > 0)));
+    HAL_GPIO_WritePin(LED1_GPIOx, LED1_GPIO_PIN_X, (GPIO_PinState((ledValues & GPIO_PIN_1) > 0)));
+    HAL_GPIO_WritePin(LED2_GPIOx, LED2_GPIO_PIN_X, (GPIO_PinState((ledValues & GPIO_PIN_2) > 0)));
+    HAL_GPIO_WritePin(LED3_GPIOx, LED3_GPIO_PIN_X, (GPIO_PinState((ledValues & GPIO_PIN_3) > 0)));
+    HAL_GPIO_WritePin(LED4_GPIOx, LED4_GPIO_PIN_X, (GPIO_PinState((ledValues & GPIO_PIN_4) > 0)));
+    HAL_GPIO_WritePin(LED5_GPIOx, LED5_GPIO_PIN_X, (GPIO_PinState((ledValues & GPIO_PIN_5) > 0)));
+    HAL_GPIO_WritePin(LED6_GPIOx, LED6_GPIO_PIN_X, (GPIO_PinState((ledValues & GPIO_PIN_6) > 0)));
+    HAL_GPIO_WritePin(LED7_GPIOx, LED7_GPIO_PIN_X, (GPIO_PinState((ledValues & GPIO_PIN_7) > 0)));
 }
 
 uint8_t Get_LedStates(void)

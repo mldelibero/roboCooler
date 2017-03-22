@@ -6,6 +6,7 @@ TEST_GROUP(LedDriverTests)
 {
     void setup()
     {
+        init_ledDriver();
         mock().disable();
     }
     void teardown()
@@ -24,10 +25,11 @@ TEST(LedDriverTests, CanSetAndClearAllLEDs)
 
 TEST(LedDriverTests, CanSetLedsIndividually)
 {
-    for (int leds = 1; leds < 0xFF; leds = (leds << 1) + 1)
+    for (int leds = 1; leds < 0xFF;)
     {
         SetLeds(uint8_t(leds));
         CHECK_EQUAL(leds, Get_LedStates());
+        leds = (leds << 1) + 1;
     }
 }
 

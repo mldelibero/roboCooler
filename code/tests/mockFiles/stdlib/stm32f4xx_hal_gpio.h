@@ -14,6 +14,7 @@
 /** @defgroup GPIO_pins_define GPIO pins define
   * @{
   */
+#define  GPIO_SPEED_FREQ_LOW         ((uint32_t)0x00000000U)  /*!< IO works at 2 MHz, please refer to the product datasheet */
 #define GPIO_PIN_0                 ((uint16_t)0x0001U)  /* Pin 0 selected    */
 #define GPIO_PIN_1                 ((uint16_t)0x0002U)  /* Pin 1 selected    */
 #define GPIO_PIN_2                 ((uint16_t)0x0004U)  /* Pin 2 selected    */
