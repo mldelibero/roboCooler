@@ -57,6 +57,26 @@
 #endif /* __cplusplus */
 
 #include "core_cm4.h"             /* Cortex-M4 processor and core peripherals */
+
+#define USART_CR1_TE_Pos              (3U)                                     
+#define USART_CR1_TE_Msk              (0x1U << USART_CR1_TE_Pos)               /*!< 0x00000008 */
+#define USART_CR1_TE                  USART_CR1_TE_Msk                         /*!<Transmitter Enable                     */
+#define USART_CR2_STOP_Pos            (12U)                                    
+#define USART_CR2_STOP_0              (0x1U << USART_CR2_STOP_Pos)             /*!< 0x1000 */
+#define USART_CR2_CPOL_Pos            (10U)                                    
+#define USART_CR2_CPOL_Msk            (0x1U << USART_CR2_CPOL_Pos)             /*!< 0x00000400 */
+#define USART_CR2_CPOL                USART_CR2_CPOL_Msk                       /*!<Clock Polarity                       */
+#define DMA_SxCR_MINC_Pos        (10U)                                         
+#define DMA_SxCR_MINC_Msk        (0x1U << DMA_SxCR_MINC_Pos)                   /*!< 0x00000400 */
+#define DMA_SxCR_MINC            DMA_SxCR_MINC_Msk                             
+#define DMA_SxCR_DIR_Pos         (6U)                                          
+#define DMA_SxCR_DIR_0           (0x1U << DMA_SxCR_DIR_Pos)                    /*!< 0x00000040 */
+#define DMA_SxCR_CIRC_Pos        (8U)                                          
+#define DMA_SxCR_CIRC_Msk        (0x1U << DMA_SxCR_CIRC_Pos)                   /*!< 0x00000100 */
+#define DMA_SxCR_CIRC            DMA_SxCR_CIRC_Msk                             
+#define DMA_SxCR_PL_Pos          (16U)                                         
+#define DMA_SxCR_PL_1            (0x2U << DMA_SxCR_PL_Pos)                     /*!< 0x00020000 */
+
 #define TIM_DIER_UIE_Pos          (0U)                                         
 #define TIM_DIER_UIE_Msk          (0x1U << TIM_DIER_UIE_Pos)                   /*!< 0x00000001 */
 #define TIM_DIER_UIE              TIM_DIER_UIE_Msk                             /*!<Update interrupt enable */

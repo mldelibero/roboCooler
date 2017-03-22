@@ -2,26 +2,23 @@
 #include <CppUTestExt/MockSupport.h>
 #include "ledStripDriver.h"
 #include "stm32f4xx.h"
-#include "stm32f4xx_dma.h"
-#include "stm32f4xx_rcc.h"
+#include "stm32f4xx_hal.h"
 #include "hardwareSettings.h"
 
 // ------------------------------------------------------------------------
-uint32_t myRCC_AHB1Periph_DMAX     = RCC_AHB1Periph_DMA1;
-uint32_t myDMA_Channel_X           = DMA_Channel_4;
-DMA_Stream_TypeDef* myDMAX_StreamX = DMA2_Stream6;
-uint32_t myDMA_FLAG_TCIFX          = DMA_FLAG_TCIF6;
+//uint32_t myRCC_AHB1Periph_DMAX     = RCC_AHB1Periph_DMA1;
+//uint32_t myDMA_Channel_X           = DMA_Channel_4;
+//DMA_Stream_TypeDef* myDMAX_StreamX = DMA2_Stream6;
+//uint32_t myDMA_FLAG_TCIFX          = DMA_FLAG_TCIF6;
 
 DMA_Settings_t  DMA_Settings;
 GPIO_Settings_t GPIO_Settings;
-UART_Settings_t UART_Settings;
-
+USART_TypeDef* UARTN;
 // -- Accessor Class ------------------------------------------------------
 class CLedStripDriverChild : CLedStripDriver
 {
     public:
-        CLedStripDriverChild(uint16_t NumLeds, DMA_Settings_t myDMA_Settings, GPIO_Settings_t myGPIO_Settings, UART_Settings_t myUART_Settings) : CLedStripDriver(NumLeds, myDMA_Settings, myGPIO_Settings, myUART_Settings) {}
-
+        CLedStripDriverChild(uint16_t myNumLeds, DMA_Settings_t myDMA_Settings, GPIO_Settings_t myGPIO_Settings, USART_TypeDef* myUARTN) : CLedStripDriver(myNumLeds, myDMA_Settings, myGPIO_Settings, myUARTN) {}
 
         ~CLedStripDriverChild(void) {}
 
@@ -52,12 +49,12 @@ TEST_GROUP(LedStripDriverTests)
         mock().disable();
         NumLeds = 2;
 
-        myRCC_AHB1Periph_DMAX = RCC_AHB1Periph_DMA1;
-        myDMA_Channel_X       = DMA_Channel_4;
-        myDMAX_StreamX        = DMA2_Stream6;
-        myDMA_FLAG_TCIFX      = DMA_FLAG_TCIF6;
+//        myRCC_AHB1Periph_DMAX = RCC_AHB1Periph_DMA1;
+//        myDMA_Channel_X       = DMA_Channel_4;
+ //       myDMAX_StreamX        = DMA2_Stream6;
+   //     myDMA_FLAG_TCIFX      = DMA_FLAG_TCIF6;
 
-        LedStripDriver = new CLedStripDriverChild(NumLeds, DMA_Settings, GPIO_Settings, UART_Settings);
+        LedStripDriver = new CLedStripDriverChild(NumLeds, DMA_Settings, GPIO_Settings, UARTN);
         LedObjArray    = new CLedObj[NumLeds];
     }
 

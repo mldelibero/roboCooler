@@ -1,7 +1,5 @@
 #include "ledStripDriver.h"
-#include "stm32f4xx_hal_dma.h"
-#include "stm32f4xx_hal_gpio.h"
-#include "stm32f4xx_hal_usart.h"
+#include "stm32f4xx_hal.h"
 #include "hardwareSettings.h"
 
 CLedStripDriver::CLedStripDriver(uint16_t NumLeds, DMA_Settings_t DMA_Settings, GPIO_Settings_t GPIO_Settings, USART_TypeDef* UARTN)

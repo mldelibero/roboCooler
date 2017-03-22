@@ -10,11 +10,14 @@
 #include "stm32f4xx_hal_def.h"
 
 #define  GPIO_MODE_OUTPUT_PP                    ((uint32_t)0x00000001U)   /*!< Output Push Pull Mode                 */
+#define  GPIO_MODE_AF_PP                        ((uint32_t)0x00000002U)   /*!< Alternate Function Push Pull Mode     */
 #define  GPIO_NOPULL        ((uint32_t)0x00000000U)   /*!< No Pull-up or Pull-down activation  */
+#define  GPIO_PULLUP        ((uint32_t)0x00000001U)   /*!< Pull-up activation                  */
 /** @defgroup GPIO_pins_define GPIO pins define
   * @{
   */
 #define  GPIO_SPEED_FREQ_LOW         ((uint32_t)0x00000000U)  /*!< IO works at 2 MHz, please refer to the product datasheet */
+#define  GPIO_SPEED_FREQ_HIGH        ((uint32_t)0x00000002U)  /*!< range 25 MHz to 100 MHz, please refer to the product datasheet  */
 #define GPIO_PIN_0                 ((uint16_t)0x0001U)  /* Pin 0 selected    */
 #define GPIO_PIN_1                 ((uint16_t)0x0002U)  /* Pin 1 selected    */
 #define GPIO_PIN_2                 ((uint16_t)0x0004U)  /* Pin 2 selected    */

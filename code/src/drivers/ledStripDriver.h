@@ -4,9 +4,7 @@
 #include "ledObj.h"
 #include "component.h"
 #include "hardwareSettings.h"
-#include "stm32f4xx_hal_dma.h"
-#include "stm32f4xx_hal_rcc.h"
-#include "stm32f4xx_hal_usart.h"
+#include "stm32f4xx_hal.h"
 
 #define BIT_LOW     0x06 //110
 #define BIT_HI      0x04 //100

@@ -51,8 +51,6 @@ INCLUDE_DIRS =\
   ../../src\
   ../../src/drivers\
   ../../src/leds\
-  ../../prj/RTE/Device/STM32F407VGTx\
-  ../../prj/RTE/_Target_1\
   $(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk

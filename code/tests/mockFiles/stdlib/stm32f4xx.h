@@ -98,6 +98,10 @@ extern GPIO_TypeDef* GPIOB;
 extern GPIO_TypeDef* GPIOC;
 extern GPIO_TypeDef* GPIOD;
 extern GPIO_TypeDef* GPIOE;
+extern GPIO_TypeDef* GPIOF;
+extern GPIO_TypeDef* GPIOG;
+extern GPIO_TypeDef* GPIOH;
+extern GPIO_TypeDef* GPIOI;
 
 extern I2C_TypeDef*  I2C1;
 

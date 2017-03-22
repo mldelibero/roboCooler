@@ -15,6 +15,12 @@
 #define __HAL_RCC_GPIOC_CLK_ENABLE()   {}
 #define __HAL_RCC_GPIOD_CLK_ENABLE()   {}
 #define __HAL_RCC_GPIOE_CLK_ENABLE()   {}
+#define __HAL_RCC_GPIOF_CLK_ENABLE()   {}
+#define __HAL_RCC_GPIOG_CLK_ENABLE()   {}
+#define __HAL_RCC_GPIOH_CLK_ENABLE()   {}
+#define __HAL_RCC_GPIOI_CLK_ENABLE()   {}
+#define __HAL_RCC_USART2_CLK_ENABLE()  {}
+#define __HAL_RCC_DMA2_CLK_ENABLE()    {}
 
 #ifdef __cplusplus
 }
