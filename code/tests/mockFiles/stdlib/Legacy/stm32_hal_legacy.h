@@ -48,6 +48,8 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
+#define  GPIO_SPEED_LOW                           GPIO_SPEED_FREQ_LOW     
+
 /** @defgroup HAL_AES_Aliased_Defines HAL CRYP Aliased Defines maintained for legacy purpose
   * @{
   */

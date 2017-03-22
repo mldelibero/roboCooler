@@ -32,6 +32,8 @@ SRC_FILES = \
 	../../src/component.cpp\
 	../../src/timer.cpp\
 	../../src/drivers/timerDriver.cpp\
+	../../src/leds/leds.cpp\
+	../../src/leds/ledObj.cpp\
 
 TEST_SRC_DIRS = \
 	./\
@@ -40,6 +42,9 @@ TEST_SRC_DIRS = \
 
 TEST_SRC_FILES = \
 	../AllTests.cpp\
+	../../src/leds/leds.cpp\
+	../../src/leds/ledObj.cpp\
+	../../src/drivers/ledDriver.cpp\
 
 INCLUDE_DIRS =\
   .\
@@ -48,6 +53,7 @@ INCLUDE_DIRS =\
   ../mockFiles/stdlib/Legacy\
   ../../src\
   ../../src/drivers\
+  ../../src/leds\
   ../../prj/RTE/Device/STM32F407VGTx\
   ../../prj/RTE/_Target_1\
   $(CPPUTEST_HOME)/include\

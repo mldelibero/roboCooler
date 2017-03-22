@@ -8,6 +8,14 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal_def.h"
 #include "stm32f4xx_hal_rcc_ex.h"
+
+
+#define __HAL_RCC_GPIOA_CLK_ENABLE()   {}
+#define __HAL_RCC_GPIOB_CLK_ENABLE()   {}
+#define __HAL_RCC_GPIOC_CLK_ENABLE()   {}
+#define __HAL_RCC_GPIOD_CLK_ENABLE()   {}
+#define __HAL_RCC_GPIOE_CLK_ENABLE()   {}
+
 #ifdef __cplusplus
 }
 #endif

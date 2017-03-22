@@ -1,5 +1,6 @@
 #ifndef __LEDDRIVER_H
 #define __LEDDRIVER_H
+#include "stm32f4xx_hal.h"
 #include <stm32f4xx.h>
 
 // PC1

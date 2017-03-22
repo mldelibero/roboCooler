@@ -467,6 +467,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>tmp</GroupName>
+          <Files>
+            <File>
+              <FileName>limitSwitchDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\limitSwitchDriver.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
         <Group>
