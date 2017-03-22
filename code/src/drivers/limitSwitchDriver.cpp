@@ -1,5 +1,3 @@
-#include <stm32f4xx_hal_gpio.h>
-#include <stm32f4xx_hal_rcc.h>
 #include "limitSwitchDriver.h"
 
 CLimSwDriver::CLimSwDriver(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin_x)
