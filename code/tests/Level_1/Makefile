@@ -48,7 +48,6 @@ INCLUDE_DIRS =\
   .\
   ./mockFiles\
   ../mockFiles/stdlib\
-  ../mockFiles/stdlib/Legacy\
   ../../src\
   ../../src/drivers\
   ../../src/leds\
