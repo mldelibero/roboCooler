@@ -15,8 +15,6 @@ CPP_PLATFORM = Gcc
 # <DSTM32F407xx> allows stm32f4xx.h to compile
 # <_RTE_> allows stm32f4xx_hal_conf.h to include RTE header files
 CPPUTEST_CXXFLAGS = -Wno-c++14-compat -DSTM32F407xx -fmax-errors=5 -D_RTE_
-CPPUTEST_CPPFLAGS = -D_RTE_
-CPPUTEST_CFLAGS = -D_RTE_
 CPPUTEST_USE_EXTENSIONS = Y
 
 COMPONENT_NAME = roboCooler_Level_1
