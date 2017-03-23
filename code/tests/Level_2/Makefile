@@ -41,6 +41,7 @@ TEST_SRC_FILES = \
 	../mockFiles/stdlib/stm32f4xx_hal_usart.cpp\
 	../mockFiles/stdlib/stm32f4xx_hal_tim.cpp\
 	../../src/leds/ledObj.cpp\
+	../../src/leds/leds.cpp\
 	../../src/drivers/ledStripDriver.cpp\
 	../../src/drivers/timerDriver.cpp\
 	../../src/timer.cpp\
