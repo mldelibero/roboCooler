@@ -1,3 +1,10 @@
+/**
+  ******************************************************************************
+  * @file    timerDriver.h
+  * @author  Michael DeLibero
+  * @brief   Header file for timerDriver.cpp
+  ******************************************************************************
+  */
 #ifndef __TIMER_DRIVER_H
 #define __TIMER_DRIVER_H
 #include "stm32f4xx_hal.h"

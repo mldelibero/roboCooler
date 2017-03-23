@@ -11,7 +11,7 @@ endif
 
 #--- Outputs ---#
 CPP_PLATFORM = Gcc
-CPPUTEST_CXXFLAGS = -Wno-c++14-compat
+CPPUTEST_CXXFLAGS = -Wno-c++14-compat -D_RTE_
 CPPUTEST_USE_EXTENSIONS = Y
 
 COMPONENT_NAME = roboCooler_Level_2
@@ -25,39 +25,35 @@ SRC_DIRS = \
 	./mockFiles\
 
 SRC_FILES = \
-	../../src/leds/leds.cpp\
-	../../src/limitSwitch.cpp\
+	../../src/drivers/ledStripDriver.cpp\
 	../../src/drivers/CDriver.cpp\
-	../mockFiles/component.cpp\
 
 TEST_SRC_DIRS = \
 	./\
-	./mockFiles\
 
 TEST_SRC_FILES = \
 	../AllTests.cpp\
-	../mockFiles/capTouchDriverMock.cpp\
-	../mockFiles/limitSwitchDriverMock.cpp\
+	../mockFiles/component.cpp\
 	../mockFiles/stdlib/stm32f4xx.cpp\
-	../mockFiles/stdlib/stm32f4xx_dma.cpp\
-	../mockFiles/stdlib/stm32f4xx_gpio.cpp\
-	../mockFiles/stdlib/stm32f4xx_rcc.cpp\
-	../mockFiles/stdlib/stm32f4xx_usart.cpp\
-	../../src/capTouch.cpp\
-	../../src/limitSwitch.cpp\
-	../../src/drivers/ledStripDriver.cpp\
-	../../src/leds/ledBehavior.cpp\
-	../../src/leds/ledBehaviorChildren.cpp\
+	../mockFiles/stdlib/stm32f4xx_hal_cortex.cpp\
+	../mockFiles/stdlib/stm32f4xx_hal_dma.cpp\
+	../mockFiles/stdlib/stm32f4xx_hal_gpio.cpp\
+	../mockFiles/stdlib/stm32f4xx_hal_usart.cpp\
+	../mockFiles/stdlib/stm32f4xx_hal_tim.cpp\
 	../../src/leds/ledObj.cpp\
-	../../src/leds/leds.cpp\
+	../../src/drivers/ledStripDriver.cpp\
+	../../src/drivers/timerDriver.cpp\
+	../../src/timer.cpp\
 
 INCLUDE_DIRS =\
-  .\
-  ./mockFiles\
-  ../Level_1/mockFiles\
-  ../mockFiles\
-  ../mockFiles/stdlib\
-  $(CPPUTEST_HOME)/include\
+	.\
+	../mockFiles/stdlib\
+	../../src\
+	../../src/drivers\
+	../../src/leds\
+	../../prj/RTE/Device/STM32F407VGTx\
+	../../prj/RTE/_Target_1\
+	$(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
 
