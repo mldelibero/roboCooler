@@ -1,11 +1,9 @@
 #ifndef __CAP_TOUCH_DRIVER_H
 #define __CAP_TOUCH_DRIVER_H
-#include <stm32f4xx_hal_gpio.h>
-#include <stm32f4xx_hal_i2c.h>
-#include <stm32f4xx_hal_rcc.h>
+#include <stm32f4xx_hal.h>
 #include "CDriver.h"
 
-#define PROX_STATUS_BIT                    0X1000 // in ELE Touch Status Register -- 1 indicates a touch is detected
+#define PROX_STATUS_BIT 0X1000 // in ELE Touch Status Register -- 1 indicates a touch is detected
 
 class CCapTouchDriver : CDriver
 {
@@ -21,8 +19,7 @@ class CCapTouchDriver : CDriver
                 uint16_t      IRQ_GPIO_PIN_x,
 
                 uint8_t       GPIO_AF,
-                uint32_t      m_APBxPeriph_I2Cx,
-                I2C_TypeDef*  m_I2Cx);
+                I2C_TypeDef*  I2Cx);
 
         virtual ~CCapTouchDriver(void);
 

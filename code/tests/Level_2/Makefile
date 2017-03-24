@@ -33,6 +33,7 @@ TEST_SRC_DIRS = \
 TEST_SRC_FILES = \
 	../AllTests.cpp\
 	../mockFiles/component.cpp\
+	../mockFiles/capTouchDriverMock.cpp\
 	../mockFiles/ledDriver.cpp\
 	../mockFiles/limitSwitchDriverMock.cpp\
 	../mockFiles/stdlib/stm32f4xx.cpp\
@@ -41,6 +42,7 @@ TEST_SRC_FILES = \
 	../mockFiles/stdlib/stm32f4xx_hal_gpio.cpp\
 	../mockFiles/stdlib/stm32f4xx_hal_usart.cpp\
 	../mockFiles/stdlib/stm32f4xx_hal_tim.cpp\
+	../../src/capTouch.cpp\
 	../../src/drivers/ledStripDriver.cpp\
 	../../src/drivers/timerDriver.cpp\
 	../../src/leds/ledObj.cpp\

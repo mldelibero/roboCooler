@@ -1,8 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    roboCooler.h
+  * @author  Michael DeLibero
+  * @brief   ...
+  ******************************************************************************
+  */
 #ifndef __ROBOCOOLER_H
 #define __ROBOCOOLER_H
-#include "stm32f4xx_hal_gpio.h"
-#include "stm32f4xx_hal_gpio_ex.h"
-
+#include "stm32f4xx_hal.h"
 
 // Limit Switch Driver ---------------------------
 // PE6

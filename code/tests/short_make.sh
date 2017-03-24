@@ -1,1 +1,1 @@
-while true; do make; sleep 5; done
+while true; do make; sleep 5; echo "-------------------------------------------------------------------"; done

@@ -19,7 +19,7 @@ class CCapTouchDriverMock : public CCapTouchDriver
         uint16_t Read(unsigned char address);
 
     private:
-        BitAction m_MockInputValue;
+        GPIO_PinState m_MockInputValue;
         bool m_Mock_DataReady;
         bool m_Mock_TouchDetected;
 };

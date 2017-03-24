@@ -8,6 +8,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal_def.h"
+#include "stm32f4xx_hal_gpio_ex.h"
 
 /** 
   * @brief  GPIO Bit SET and Bit RESET enumeration 

@@ -1,6 +1,4 @@
-#include <stm32f4xx_hal_gpio.h>
-#include <stm32f4xx_hal_i2c.h>
-#include <stm32f4xx_hal_rcc.h>
+#include <stm32f4xx_hal.h>
 #include "capTouchDriver.h"
 
 #define CS_I2C_ADDR_RE     0xB5
@@ -16,7 +14,6 @@ CCapTouchDriver::CCapTouchDriver(
                 uint16_t      IRQ_GPIO_PIN_x,
 
                 uint8_t       GPIO_AF,
-                uint32_t      APBxPeriph_I2Cx,
                 I2C_TypeDef*  I2Cx)
 {
     m_I2C_Handle.Instance      = I2Cx;
@@ -30,7 +27,6 @@ CCapTouchDriver::CCapTouchDriver(
     m_IRQ_GPIO_PIN_x           = IRQ_GPIO_PIN_x;
 
     m_GPIO_AF                  = GPIO_AF;
-    m_APBxPeriph_I2Cx          = APBxPeriph_I2Cx;
 } // end - CCapTouchDriver::CCapTouchDriver
 
 CCapTouchDriver::~CCapTouchDriver(void)
@@ -73,7 +69,8 @@ void CCapTouchDriver::Initialize_Hardware(void)
     HAL_GPIO_Init(m_IRQ_GPIOx, &GPIO_InitStruct);
 
     // Init I2C
-    RCC_APB1PeriphClockCmd(m_APBxPeriph_I2Cx, ENABLE);
+    if      (m_I2Cx == I2C1) __HAL_RCC_FMPI2C1_CLK_ENABLE();
+    else if (m_I2Cx == I2C3) __HAL_RCC_I2C3_CLK_ENABLE();
 
     HAL_I2C_DeInit(&m_I2C_Handle);
 
