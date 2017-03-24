@@ -22,43 +22,26 @@ CPPUTEST_OBJS_DIR = ./objs/tests/Level_3
 # so that memory leak detection does not conflict with stl.
 #CPPUTEST_MEMLEAK_DETECTOR_NEW_MACRO_FILE = -include ExamplesNewOverrides.h
 SRC_DIRS = \
-	./mockFiles\
-	../Level_2/mockFiles\
-	../Level_1/mockFiles\
-	../mockFiles/stdlib\
 
 SRC_FILES = \
-	../mockFiles/capTouchDriverMock.cpp\
 	../mockFiles/component.cpp\
-	../mockFiles/limitSwitchMock.cpp\
-	../../src/drivers/CDriver.cpp\
-	../../src/lidMotor.cpp\
+	../mockFiles/ledBehaviorMock.cpp\
+	../../src/leds/scene.cpp\
 
 TEST_SRC_DIRS = \
 	./\
-	./mockFiles\
-	../Level_2/mockFiles\
-	../Level_1/mockFiles\
-	../mockFiles/stdlib\
+	../../src/leds/scene.cpp\
 
 TEST_SRC_FILES = \
 	../AllTests.cpp\
-	../../src/leds/scene.cpp\
-	../mockFiles/capTouchMock.cpp\
-	../mockFiles/ledBehaviorMock.cpp\
-	../mockFiles/limitSwitchDriverMock.cpp\
-	../mockFiles/limitSwitchMock.cpp\
 
 INCLUDE_DIRS =\
   .\
   ./mockFiles\
   ../mockFiles\
+  ../mockFiles/stdlib\
   ../../src\
-  ../../src/drivers\
   ../../src/leds\
-  ../Level_2/mockFiles\
-  ../Level_1/mockFiles\
-  ../mockFiles/stdLib\
   $(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
