@@ -22,7 +22,6 @@ CPPUTEST_OBJS_DIR = ./objs/tests/Level_2
 # so that memory leak detection does not conflict with stl.
 #CPPUTEST_MEMLEAK_DETECTOR_NEW_MACRO_FILE = -include ExamplesNewOverrides.h
 SRC_DIRS = \
-	./mockFiles\
 
 SRC_FILES = \
 	../../src/drivers/ledStripDriver.cpp\
@@ -34,22 +33,26 @@ TEST_SRC_DIRS = \
 TEST_SRC_FILES = \
 	../AllTests.cpp\
 	../mockFiles/component.cpp\
+	../mockFiles/ledDriver.cpp\
+	../mockFiles/limitSwitchDriverMock.cpp\
 	../mockFiles/stdlib/stm32f4xx.cpp\
 	../mockFiles/stdlib/stm32f4xx_hal_cortex.cpp\
 	../mockFiles/stdlib/stm32f4xx_hal_dma.cpp\
 	../mockFiles/stdlib/stm32f4xx_hal_gpio.cpp\
 	../mockFiles/stdlib/stm32f4xx_hal_usart.cpp\
 	../mockFiles/stdlib/stm32f4xx_hal_tim.cpp\
+	../../src/drivers/ledStripDriver.cpp\
+	../../src/drivers/timerDriver.cpp\
 	../../src/leds/ledObj.cpp\
 	../../src/leds/leds.cpp\
 	../../src/leds/ledBehavior.cpp\
 	../../src/leds/ledBehaviorChildren.cpp\
-	../../src/drivers/ledStripDriver.cpp\
-	../../src/drivers/timerDriver.cpp\
+	../../src/limitSwitch.cpp\
 	../../src/timer.cpp\
 
 INCLUDE_DIRS =\
 	.\
+	../mockFiles\
 	../mockFiles/stdlib\
 	../../src\
 	../../src/drivers\

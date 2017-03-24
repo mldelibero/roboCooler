@@ -2,3 +2,4 @@
 *.stackdump
 notes_uncontrolled
 *.scvd
+fileTemplate.*

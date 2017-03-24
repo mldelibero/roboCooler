@@ -1,3 +1,10 @@
+/**
+  ******************************************************************************
+  * @file    RTE_Components.h
+  * @author  Michael DeLibero
+  * @brief   ...
+  ******************************************************************************
+  */
 
 /*
  * Auto generated Run-Time-Environment Component Configuration File
