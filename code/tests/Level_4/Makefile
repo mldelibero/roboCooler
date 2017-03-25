@@ -11,7 +11,7 @@ endif
 
 #--- Outputs ---#
 CPP_PLATFORM = Gcc
-CPPUTEST_CXXFLAGS = -Wno-c++14-compat
+CPPUTEST_CXXFLAGS = -Wno-c++14-compat -D_RTE_
 CPPUTEST_USE_EXTENSIONS = Y
 
 COMPONENT_NAME = roboCooler_Level_4
@@ -46,14 +46,15 @@ TEST_SRC_FILES = \
 	../../src/leds/ledStrip.cpp\
 
 INCLUDE_DIRS =\
-  .\
-  ./mockFiles\
-  ../mockFiles\
-  ../mockFiles/stdLib\
-  ../../src\
-  ../../src/drivers\
-  ../../src/leds\
-  $(CPPUTEST_HOME)/include\
+	.\
+	../mockFiles\
+	../mockFiles/stdLib\
+	../../prj/RTE/Device/STM32F407VGTx\
+	../../prj/RTE/_Target_1\
+	../../src\
+	../../src/drivers\
+	../../src/leds\
+	$(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
 

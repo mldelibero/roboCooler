@@ -8,16 +8,16 @@
 static uint16_t        Mock_NumLeds = 10;
 static DMA_Settings_t  Mock_DMA_Settings;
 static GPIO_Settings_t Mock_GPIO_Settings;
-static UART_Settings_t Mock_UART_Settings;
+static USART_TypeDef*  Mock_UARTN;
 
 // --- Mock to compile ledDriverDriver
-CLedStripDriver::CLedStripDriver(uint16_t NumLeds, DMA_Settings_t DMA_Settings, GPIO_Settings_t GPIO_Settings, UART_Settings_t UART_Settings)
+CLedStripDriver::CLedStripDriver(uint16_t NumLeds, DMA_Settings_t DMA_Settings, GPIO_Settings_t GPIO_Settings, USART_TypeDef* UARTN)
 {
     m_NumLeds     = NumLeds;
 
-    if (DMA_Settings.DMA_Channel_N         ) return;
-    if (GPIO_Settings.PinSourceN           ) return;
-    if (UART_Settings.RCC_APBNPeriph_USARTN) return;
+    if (DMA_Settings.DMA_Channel_N) return;
+    if (GPIO_Settings.Pin_N       ) return;
+    if (UARTN == NULL             ) return;
 }
 
 CLedStripDriver::~CLedStripDriver(void)
@@ -45,7 +45,7 @@ void CLedStripDriver::Initialize(void)
 }
 
 // -- Mock that abstracts ledDriverDriver and allows input control
-CLedStripDriverMock::CLedStripDriverMock() : CLedStripDriver(Mock_NumLeds, Mock_DMA_Settings, Mock_GPIO_Settings, Mock_UART_Settings)
+CLedStripDriverMock::CLedStripDriverMock() : CLedStripDriver(Mock_NumLeds, Mock_DMA_Settings, Mock_GPIO_Settings, Mock_UARTN)
 {
 }
 
