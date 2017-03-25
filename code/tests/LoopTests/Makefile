@@ -11,7 +11,7 @@ endif
 
 #--- Outputs ---#
 CPP_PLATFORM = Gcc
-CPPUTEST_CXXFLAGS = -Wno-c++14-compat -DIN_TEST_MODE
+CPPUTEST_CXXFLAGS = -Wno-c++14-compat -DIN_TEST_MODE -D_RTE_
 CPPUTEST_USE_EXTENSIONS = Y
 
 COMPONENT_NAME = roboCooler_LoopTests
@@ -37,6 +37,7 @@ SRC_FILES = \
 	../mockFiles/limitSwitchMock.cpp\
 	../mockFiles/sceneMock.cpp\
 	../mockFiles/stdlib/stm32f4xx.cpp\
+	../mockFiles/stdlib/stm32f4xx_hal.cpp\
 	../mockFiles/timer.cpp\
 	../../src/drivers/CDriver.cpp\
 	../../src/init.cpp\
@@ -48,15 +49,18 @@ TEST_SRC_DIRS = \
 TEST_SRC_FILES =\
 	../AllTests.cpp\
 	../../src/leds/ledObj.cpp\
+	../mockfiles/stdlib/stm32f4xx_hal_rcc.cpp\
 
 INCLUDE_DIRS =\
-  .\
-  ../mockfiles\
-  ../mockFiles/stdlib\
-  ../../src\
-  ../../src/drivers\
-  ../../src/leds\
-  $(CPPUTEST_HOME)/include\
+	.\
+	../mockfiles\
+	../mockFiles/stdlib\
+	../../prj/RTE/Device/STM32F407VGTx\
+	../../prj/RTE/_Target_1\
+	../../src\
+	../../src/drivers\
+	../../src/leds\
+	$(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
 
