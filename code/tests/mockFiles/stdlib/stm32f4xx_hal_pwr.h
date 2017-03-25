@@ -8,6 +8,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal_def.h"
+#include "stm32f4xx_hal_pwr_ex.h"
 
 
 #ifdef __cplusplus

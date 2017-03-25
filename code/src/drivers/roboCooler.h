@@ -50,7 +50,6 @@
 #define CAP_IRQ_GPIO_PIN_x                 GPIO_PIN_1
 
 #define CAP_GPIO_AF                        GPIO_AF4_I2C1
-#define CAP_APBxPeriph_I2Cx                RCC_APB1Periph_I2C1
 #define CAP_I2Cx                           I2C1
 
 

@@ -17,6 +17,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal_def.h"
+
+#define GPIO_AF7_USART2        ((uint8_t)0x07U)  /* USART2 Alternate Function mapping     */
+
 #ifdef __cplusplus
 }
 #endif

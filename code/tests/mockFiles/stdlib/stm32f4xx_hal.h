@@ -16,6 +16,7 @@
 #include "stm32f4xx_hal_conf.h"
 
 
+HAL_StatusTypeDef HAL_Init(void);
 #ifdef __cplusplus
 }
 #endif

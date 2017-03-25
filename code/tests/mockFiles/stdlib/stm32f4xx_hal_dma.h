@@ -6,6 +6,7 @@
  extern "C" {
 #endif
 
+#define DMA_CHANNEL_4        ((uint32_t)0x08000000U)  /*!< DMA Channel 4 */
 #define DMA_MEMORY_TO_PERIPH         ((uint32_t)DMA_SxCR_DIR_0)  /*!< Memory to peripheral direction */
 #define DMA_PINC_DISABLE       ((uint32_t)0x00000000U)     /*!< Peripheral increment mode disable */
 #define DMA_MINC_ENABLE         ((uint32_t)DMA_SxCR_MINC)  /*!< Memory increment mode enable  */

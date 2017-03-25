@@ -58,6 +58,20 @@
 
 #include "core_cm4.h"             /* Cortex-M4 processor and core peripherals */
 
+#define FLASH_ACR_LATENCY_5WS          0x00000005U                             
+#define RCC_CFGR_PPRE1_DIV2                0x00001000U                         /*!< HCLK divided by 2  */
+#define RCC_CFGR_HPRE_DIV1                 0x00000000U                         /*!< SYSCLK not divided    */
+#define RCC_CFGR_SW_PLL                    0x00000002U                         /*!< PLL selected as system clock */
+#define RCC_PLLCFGR_PLLSRC_HSE_Pos         (22U)                               
+#define RCC_PLLCFGR_PLLSRC_HSE_Msk         (0x1U << RCC_PLLCFGR_PLLSRC_HSE_Pos) /*!< 0x00400000 */
+#define RCC_PLLCFGR_PLLSRC_HSE             RCC_PLLCFGR_PLLSRC_HSE_Msk          
+#define RCC_CR_HSEON_Pos                   (16U)                               
+#define RCC_CR_HSEON_Msk                   (0x1U << RCC_CR_HSEON_Pos)          /*!< 0x00010000 */
+#define RCC_CR_HSEON                       RCC_CR_HSEON_Msk                    
+#define PWR_CR_VOS_Pos         (14U)                                           
+#define PWR_CR_VOS_Msk         (0x1U << PWR_CR_VOS_Pos)                        /*!< 0x00004000 */
+#define PWR_CR_VOS             PWR_CR_VOS_Msk                                  /*!< VOS bit (Regulator voltage scaling output selection) */
+
 #define USART_CR1_TE_Pos              (3U)                                     
 #define USART_CR1_TE_Msk              (0x1U << USART_CR1_TE_Pos)               /*!< 0x00000008 */
 #define USART_CR1_TE                  USART_CR1_TE_Msk                         /*!<Transmitter Enable                     */

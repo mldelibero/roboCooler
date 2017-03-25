@@ -11,7 +11,7 @@ endif
 
 #--- Outputs ---#
 CPP_PLATFORM = Gcc
-CPPUTEST_CXXFLAGS = -Wno-c++14-compat
+CPPUTEST_CXXFLAGS = -Wno-c++14-compat -D_RTE_ -fmax-errors=5
 CPPUTEST_USE_EXTENSIONS = Y
 
 COMPONENT_NAME = roboCooler_InitTests
@@ -54,14 +54,15 @@ TEST_SRC_FILES =\
 	../mockFiles/limitSwitchMock.cpp\
 
 INCLUDE_DIRS =\
-  .\
-  ./mockFiles\
-  ../mockFiles\
-  ../../src\
-  ../../src/drivers\
-  ../../src/leds\
-  ../mockFiles/stdLib\
-  $(CPPUTEST_HOME)/include\
+	.\
+	../mockFiles\
+	../../prj/RTE/Device/STM32F407VGTx\
+	../../prj/RTE/_Target_1\
+	../../src\
+	../../src/drivers\
+	../../src/leds\
+	../mockFiles/stdLib\
+	$(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
 
