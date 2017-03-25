@@ -1,26 +1,9 @@
-#---------
-#
-# CppUTest Examples Makefile
-#
-#----------
+# CppUTest Makefile
 
-#Set this to @ to keep the makefile quiet
-ifndef SILENCE
-	SILENCE = @
-endif
-
-#--- Outputs ---#
-CPP_PLATFORM = Gcc
-CPPUTEST_CXXFLAGS = -Wno-c++14-compat -D_RTE_ -fmax-errors=5
-CPPUTEST_USE_EXTENSIONS = Y
-
+#--- Inputs ----#
 COMPONENT_NAME = roboCooler_InitTests
-CPPUTEST_OBJS_DIR = ./objs/tests/InitTests
+include ../settings/Makefile
 
-# This line is overriding the default new macros.  This is helpful
-# when using std library includes like <list> and other containers
-# so that memory leak detection does not conflict with stl.
-#CPPUTEST_MEMLEAK_DETECTOR_NEW_MACRO_FILE = -include ExamplesNewOverrides.h
 SRC_DIRS = \
 
 SRC_FILES = \
@@ -43,27 +26,18 @@ SRC_FILES = \
 	../../src/drivers/CDriver.cpp\
 	../../src/limitSwitch.cpp\
 
-TEST_SRC_DIRS = \
+TEST_SRC_DIRS += \
 	./\
 	./mockFiles\
 	../mockFiles/stdlib\
 
-TEST_SRC_FILES =\
-	../AllTests.cpp\
+TEST_SRC_FILES +=\
 	../../src/leds/ledObj.cpp\
 	../mockFiles/limitSwitchMock.cpp\
 
-INCLUDE_DIRS =\
-	.\
-	../mockFiles\
-	../../prj/RTE/Device/STM32F407VGTx\
-	../../prj/RTE/_Target_1\
-	../../src\
+INCLUDE_DIRS +=\
 	../../src/drivers\
 	../../src/leds\
-	../mockFiles/stdLib\
-	$(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
-
 
