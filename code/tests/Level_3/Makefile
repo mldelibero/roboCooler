@@ -11,7 +11,7 @@ endif
 
 #--- Outputs ---#
 CPP_PLATFORM = Gcc
-CPPUTEST_CXXFLAGS = -Wno-c++14-compat
+CPPUTEST_CXXFLAGS = -Wno-c++14-compat -D_RTE_
 CPPUTEST_USE_EXTENSIONS = Y
 
 COMPONENT_NAME = roboCooler_Level_3
@@ -30,19 +30,29 @@ SRC_FILES = \
 
 TEST_SRC_DIRS = \
 	./\
-	../../src/leds/scene.cpp\
 
 TEST_SRC_FILES = \
 	../AllTests.cpp\
+	../mockFiles/capTouchDriverMock.cpp\
+	../mockFiles/capTouchMock.cpp\
+	../mockFiles/limitSwitchDriverMock.cpp\
+	../mockFiles/limitSwitchMock.cpp\
+	../mockFiles/lidMotorDriver.cpp\
+	../mockFiles/stdlib/stm32f4xx.cpp\
+	../../src/drivers/CDriver.cpp\
+	../../src/leds/scene.cpp\
+	../../src/lidMotor.cpp\
 
 INCLUDE_DIRS =\
-  .\
-  ./mockFiles\
-  ../mockFiles\
-  ../mockFiles/stdlib\
-  ../../src\
-  ../../src/leds\
-  $(CPPUTEST_HOME)/include\
+	.\
+	../mockFiles\
+	../mockFiles/stdlib\
+	../../prj/RTE/Device/STM32F407VGTx\
+	../../prj/RTE/_Target_1\
+	../../src\
+	../../src/drivers\
+	../../src/leds\
+	$(CPPUTEST_HOME)/include\
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
 
