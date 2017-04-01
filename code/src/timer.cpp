@@ -36,7 +36,7 @@ int32_t AllocateTimer(void)
     else                                 return -1;
 }
 
-bool IsTimerExpired(int32_t timer)
+Bool     IsTimerExpired(int32_t timer)
 {
     if (timer > -1 && timer < NUM_TIMERS && timers[timer] == 0) return true;
     else                                                        return false;
