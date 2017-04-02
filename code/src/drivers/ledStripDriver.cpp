@@ -32,6 +32,7 @@ CLedStripDriver::~CLedStripDriver(void)
     delete [] m_DMA_Ptr[1];
 }
 
+uint8_t data = 0x69;
 void CLedStripDriver::Execute(void)
 {
     if (m_UpdateAvailable == true)
@@ -45,8 +46,10 @@ void CLedStripDriver::Execute(void)
 
     DMA_Cmd(m_DMA.DMAN_StreamN,ENABLE);
     USART_DMACmd(m_UART.USARTN, USART_DMAReq_Tx, ENABLE);
-*/
+
     m_UpdateAvailable = false;
+    */
+    HAL_USART_Transmit(&m_USART_Handle, &data, 1, 100);
 }
 
 void CLedStripDriver::Initialize(void){}
@@ -124,7 +127,6 @@ void CLedStripDriver::Update(CLedObj* LedObjArray)
 
 inline void CLedStripDriver::UpdateSingleLed(CLedObj* LedObjArray, uint8_t* WritePointer, uint8_t LedIndex)
 {
-
     uint8_t GreenLevel = uint8_t(0.5f + (LedObjArray[LedIndex].Get_Green_PercentOn() / 100.0f * 255));
     uint8_t RedLevel   = uint8_t(0.5f + (LedObjArray[LedIndex].Get_Red_PercentOn()   / 100.0f * 255));
     uint8_t BlueLevel  = uint8_t(0.5f + (LedObjArray[LedIndex].Get_Blue_PercentOn()  / 100.0f * 255));
