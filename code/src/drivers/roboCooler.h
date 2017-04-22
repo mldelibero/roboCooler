@@ -26,14 +26,11 @@
 #define USARTx_TX_DMA_STREAM         DMA2_Stream6
 #define USARTx_TX_DMA_FLAG_TCIF      DMA_FLAG_TCIF6
 
-// PA2
-#define LED_AHB1Periph_GPIOX         RCC_AHB1Periph_GPIOA
-#define LED_GPIOX                    GPIOA
-#define LED_GPIO_AF                  GPIO_AF7_USART2
-#define LED_GPIO_PIN_N               GPIO_PIN_2
-
-#define LED_APBNPeriph_USARTN        RCC_APB1Periph_USART2
-#define LED_USARTN                   USART2
+// PC6
+#define LED_GPIOX                    GPIOC
+#define LED_GPIO_AF                  GPIO_AF8_USART6
+#define LED_GPIO_PIN_N               GPIO_PIN_6
+#define LED_USARTN                   USART6
 
 
 // Cap Touch Driver ------------------------------
