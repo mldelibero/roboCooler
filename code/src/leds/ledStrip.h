@@ -6,7 +6,7 @@
 #include "scene.h"
 
 //!< @bug Need to see if I can dynamically allocate m_LedArray in the mcu to remove this define
-#define NUM_LEDS    100
+#define NUM_LEDS    2
 
 class CLedStripComp : public CComponent
 {

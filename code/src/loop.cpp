@@ -1,10 +1,8 @@
-#include "loop.h"
-
-#include "capTouch.h"
+//#include "capTouch.h"
 #include "ledDriver.h"
-#include "limitSwitch.h"
-#include "lidMotor.h"
-#include "utils.h"
+//#include "limitSwitch.h"
+//#include "lidMotor.h"
+//#include "utils.h"
 #include "ledStrip.h"
 #include "ledStripDriver.h"
 #include "timer.h"
@@ -26,15 +24,15 @@ void loop(void)
     uint32_t led_num = 0;
     int32_t timer = AllocateTimer();
     bool on = false;
-
-    WHILE(1)
+    //    WHILE(1)
+    while(1)
     {
         HAL_GPIO_TogglePin(LOOP_INT_GPIOx, LOOP_GPIO_PIN_X);
         //        Opened_Limit.Run();
         //        Closed_Limit.Run();
         //        CapTouch.Run();
         //        LidMotor.Run();
-//        LedStrip.Run();
+        LedStrip.Run();
         LedStripDriver.Run();
 
         if (IsTimerExpired(timer) == true)
@@ -53,6 +51,6 @@ void loop(void)
                 on = true;
             }
         }
-    }
+    } // end - WHILE(1)
 }
 

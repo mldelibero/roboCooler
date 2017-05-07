@@ -34,6 +34,7 @@ class CLedStripDriver : public CDriver , public CComponent
 
     private:
         USART_HandleTypeDef m_USART_Handle;
+        USART_HandleTypeDef m_UART_Handle;
         __DMA_HandleTypeDef m_DMA_Handle;
         bool m_UpdateAvailable;
         inline void UpdatePartialLedValue(uint8_t* WritePointer, uint8_t Index, uint8_t HiBits, uint8_t MedBits, uint8_t LoBits);
@@ -42,5 +43,7 @@ class CLedStripDriver : public CDriver , public CComponent
         DMA_Settings_t  m_DMA;
         GPIO_Settings_t m_GPIO;
 }; // end -- class CLedStripDriver
+
+void DMA2_Stream6_IRQHandler(void);
 #endif //#ifndef __LED_STRIP_DRIVER_H
 
