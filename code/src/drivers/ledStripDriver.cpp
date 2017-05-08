@@ -2,14 +2,14 @@
 #include "stm32f4xx_hal.h"
 #include "hardwareSettings.h"
 
-UART_HandleTypeDef huart6;
+USART_HandleTypeDef husart6;
 DMA_HandleTypeDef hdma_usart6_tx;
 uint8_t data[] = {0x7E, 0x69};
 
 #define LED_USART_Pin GPIO_PIN_6
 #define LED_USART_GPIO_Port GPIOC
 
-CLedStripDriver::CLedStripDriver(uint16_t NumLeds, DMA_Settings_t DMA_Settings, GPIO_Settings_t GPIO_Settings, USART_TypeDef* UARTN)
+CLedStripDriver::CLedStripDriver(uint16_t NumLeds, DMA_Settings_t DMA_Settings, GPIO_Settings_t GPIO_Settings, USART_TypeDef* USARTN)
 {
     m_NumLeds      = NumLeds;
     m_DMA_Ptr[0]   = new uint8_t[m_NumLeds*8+1];
@@ -21,8 +21,7 @@ CLedStripDriver::CLedStripDriver(uint16_t NumLeds, DMA_Settings_t DMA_Settings, 
     m_DMA_Handle.Init.Channel = DMA_Settings.DMA_Channel_N;
 
     m_GPIO = GPIO_Settings;
-//    m_USART_Handle.Instance = UARTN;
-    m_UART_Handle.Instance = USART6;
+    m_USART_Handle.Instance = USARTN;
 
     CLedObj* Off = new CLedObj[m_NumLeds];
     m_UpdateAvailable = false;
@@ -50,12 +49,12 @@ void CLedStripDriver::Execute(void)
     m_UpdateAvailable = false;
 
     // Fix to enable multiple msgs to be transmitted
-    UART_HandleTypeDef* huart = ( UART_HandleTypeDef* )((DMA_HandleTypeDef* )(&hdma_usart6_tx))->Parent;
-    huart->gState=HAL_UART_STATE_READY; 
+    USART_HandleTypeDef* husart = (USART_HandleTypeDef* )((DMA_HandleTypeDef* )(&hdma_usart6_tx))->Parent;
+    husart->State=HAL_USART_STATE_READY; 
 
     //DMA_MemoryTargetConfig(m_DMA.DMAN_StreamN, *(uint32_t*)m_DMA_Ptr[m_DMA_PtrIndex], DMA_Memory_0);
-    //HAL_UART_Transmit_DMA(&huart6,&data[0],sizeof(data));
-    HAL_UART_Transmit_DMA(&huart6,m_DMA_Ptr[m_DMA_PtrIndex],m_NumLeds * 8 + 1);
+    //HAL_USART_Transmit_DMA(&huart6,&data[0],sizeof(data));
+    HAL_USART_Transmit_DMA(&husart6,m_DMA_Ptr[m_DMA_PtrIndex],m_NumLeds * 8 + 1);
 }
 
 void CLedStripDriver::Initialize(void){}
@@ -70,65 +69,70 @@ void CLedStripDriver::Initialize_Hardware(void)
     HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
 
-    huart6.Instance          = USART6;
-    huart6.Init.BaudRate     = 2700000;
-    huart6.Init.BaudRate     = 100000;
-    huart6.Init.WordLength   = UART_WORDLENGTH_8B;
-    huart6.Init.StopBits     = UART_STOPBITS_1;
-    huart6.Init.Parity       = UART_PARITY_NONE;
-    //huart6.Init.Mode = UART_MODE_TX_RX;
-    huart6.Init.Mode         = UART_MODE_TX;
-    huart6.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
-    huart6.Init.OverSampling = UART_OVERSAMPLING_8;
-    if (HAL_HalfDuplex_Init(&huart6) != HAL_OK)
+    husart6.Instance          = USART6;
+    husart6.Init.BaudRate     = 2700000;
+    husart6.Init.BaudRate     = 2650000; // Shouldn't need to do this.
+    husart6.Init.WordLength   = USART_WORDLENGTH_8B;
+    husart6.Init.StopBits     = USART_STOPBITS_0_5;
+    husart6.Init.Parity       = USART_PARITY_NONE;
+    husart6.Init.Mode         = USART_MODE_TX;
+    //husart6.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
+    //husart6.Init.OverSampling = UART_OVERSAMPLING_8;
+    if (HAL_USART_Init(&husart6) != HAL_OK)
     {
         //        Error_Handler();
     }
 }
 
-void HAL_UART_MspInit(UART_HandleTypeDef* huart)
+USART_TypeDef* CLedStripDriver::Get_UsartN(void)
 {
-
-    GPIO_InitTypeDef GPIO_InitStruct;
-    if(huart->Instance==USART6)
-    {
-        /* USER CODE BEGIN USART6_MspInit 0 */
-
-        /* USER CODE END USART6_MspInit 0 */
-        /* Peripheral clock enable */
-        __HAL_RCC_USART6_CLK_ENABLE();
-
-        /**USART6 GPIO Configuration    
-          PC6     ------> USART6_TX 
-          */
-        GPIO_InitStruct.Pin = LED_USART_Pin;
-        GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-        GPIO_InitStruct.Pull = GPIO_PULLUP;
-        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-        GPIO_InitStruct.Alternate = GPIO_AF8_USART6;
-        HAL_GPIO_Init(LED_USART_GPIO_Port, &GPIO_InitStruct);
-
-        /* Peripheral DMA init*/
-        hdma_usart6_tx.Instance                 = DMA2_Stream6;
-        hdma_usart6_tx.Init.Channel             = DMA_CHANNEL_5;
-        hdma_usart6_tx.Init.Direction           = DMA_MEMORY_TO_PERIPH;
-        hdma_usart6_tx.Init.PeriphInc           = DMA_PINC_DISABLE;
-        hdma_usart6_tx.Init.MemInc              = DMA_MINC_ENABLE;
-        hdma_usart6_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
-        hdma_usart6_tx.Init.MemDataAlignment    = DMA_MDATAALIGN_BYTE;
-        hdma_usart6_tx.Init.Mode                = DMA_NORMAL;
-        hdma_usart6_tx.Init.Priority            = DMA_PRIORITY_LOW;
-        hdma_usart6_tx.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
-        if (HAL_DMA_Init(&hdma_usart6_tx) != HAL_OK)
-        {
-  //          Error_Handler();
-        }
-
-        __HAL_LINKDMA(huart,hdmatx,hdma_usart6_tx);
-    }
+    return m_USART_Handle.Instance;
 }
 
-void CLedStripDriver::Update(CLedObj* LedObjArray) {
+void CLedStripDriver::HAL_USART_MspInit(void)
+{
+    GPIO_InitTypeDef GPIO_InitStruct;
+
+    __HAL_RCC_USART6_CLK_ENABLE();
+//#define ret(n) n
+ //   #define USART_CLK_ENABLE(USARTN)  __HAL_RCC_## USARTN## _CLK_ENABLE();
+//#define USART_CLK_ENABLE(USARTN)  __HAL_RCC_## ret(USARTN)## _CLK_ENABLE();
+
+//    USART_CLK_ENABLE(m_USART.Instance);
+    //USART_CLK_ENABLE(USART6);
+
+    GPIO_InitStruct.Pin       = m_GPIO.Pin_N;
+    GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
+    //GPIO_InitStruct.Mode      = GPIO_MODE_AF_OD;
+//    GPIO_InitStruct.Pull      = GPIO_PULLUP;
+    GPIO_InitStruct.Pull      = GPIO_NOPULL;
+    GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Alternate = m_GPIO.GPIO_AF;
+
+    //InitializeGPIOClock(m_GPIO.GPIOX);
+    HAL_GPIO_Init(m_GPIO.GPIOX, &GPIO_InitStruct);
+
+    /* Peripheral DMA init*/
+    hdma_usart6_tx.Instance                 = DMA2_Stream6;
+    hdma_usart6_tx.Init.Channel             = DMA_CHANNEL_5;
+    hdma_usart6_tx.Init.Direction           = DMA_MEMORY_TO_PERIPH;
+    hdma_usart6_tx.Init.PeriphInc           = DMA_PINC_DISABLE;
+    hdma_usart6_tx.Init.MemInc              = DMA_MINC_ENABLE;
+    hdma_usart6_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+    hdma_usart6_tx.Init.MemDataAlignment    = DMA_MDATAALIGN_BYTE;
+    hdma_usart6_tx.Init.Mode                = DMA_NORMAL;
+    hdma_usart6_tx.Init.Priority            = DMA_PRIORITY_LOW;
+    hdma_usart6_tx.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
+    if (HAL_DMA_Init(&hdma_usart6_tx) != HAL_OK)
+    {
+        //          Error_Handler();
+    }
+
+    __HAL_LINKDMA(&husart6,hdmatx,hdma_usart6_tx);
+}
+
+void CLedStripDriver::Update(CLedObj* LedObjArray)
+{
     m_UpdateAvailable = true;
     //    if (LedObjArray == NULL) return;
     uint8_t* WrPtr = m_DMA_Ptr[m_DMA_PtrIndex xor 1];
@@ -218,22 +222,12 @@ void tempfun(void)
     // USART clock enable
     __HAL_RCC_USART6_CLK_ENABLE():
 
-    // Init GPIO
-    InitializeGPIOClock(m_GPIO.GPIOX);
-    GPIO_InitStruct.Pin       = m_GPIO.Pin_N;
-    GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Pull      = GPIO_PULLUP;
-    GPIO_InitStruct.Alternate = m_GPIO.GPIO_AF;
-
-    HAL_GPIO_Init(m_GPIO.GPIOX, &GPIO_InitStruct);
-
     // Init USART
     ///@bug Shouldn't know that this is USART6
     //__HAL_RCC_USART6_CLK_ENABLE();
     //HAL_USART_DeInit(&m_USART_Handle);
     HAL_UART_DeInit(m_UART_Handle);
-    
+
     m_USART_Handle.Init.BaudRate     = 2700000; // 2.7MHz
     m_USART_Handle.Init.WordLength   = USART_WORDLENGTH_8B;
     m_USART_Handle.Init.StopBits     = USART_STOPBITS_0_5;

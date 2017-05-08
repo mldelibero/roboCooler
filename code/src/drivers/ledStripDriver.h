@@ -12,7 +12,7 @@
 class CLedStripDriver : public CDriver , public CComponent
 {
     public:
-        CLedStripDriver(uint16_t NumLeds, DMA_Settings_t DMA_Settings, GPIO_Settings_t GPIO_Settings, USART_TypeDef* UARTN);
+        CLedStripDriver(uint16_t NumLeds, DMA_Settings_t DMA_Settings, GPIO_Settings_t GPIO_Settings, USART_TypeDef* USARTN);
         virtual ~CLedStripDriver(void);
 
         virtual void Execute(void);
@@ -20,6 +20,8 @@ class CLedStripDriver : public CDriver , public CComponent
 
         virtual void Initialize_Hardware(void);
         void Update(CLedObj* LedObjArray);
+        USART_TypeDef* Get_UsartN(void);
+        void HAL_USART_MspInit(void);
 
     protected:
         uint16_t m_NumLeds;
@@ -34,7 +36,6 @@ class CLedStripDriver : public CDriver , public CComponent
 
     private:
         USART_HandleTypeDef m_USART_Handle;
-        USART_HandleTypeDef m_UART_Handle;
         __DMA_HandleTypeDef m_DMA_Handle;
         bool m_UpdateAvailable;
         inline void UpdatePartialLedValue(uint8_t* WritePointer, uint8_t Index, uint8_t HiBits, uint8_t MedBits, uint8_t LoBits);

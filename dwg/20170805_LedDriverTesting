@@ -1,0 +1,33 @@
+Changed to PP and No Pull
+Changed to 2.7MHz
+
+First bit is ~368.88ns instead of 370.37
+
+At the end of the transmission, the line exponentially decays. This is telling me that we are disabling the USART peripheral.
+
+CR3->HDSEL (Half-Duplex) is set. Clearing this bit restores the line high. I need to change the init function used.
+
+Changing to the normal UART init causes the bus to IDLE high.
+
+I need to figure out how to set the 1/2 stop bit
+Currently: CR2->STOP == 0
+
+After changing to the USART init, we are now at 357ns, which is further off course.
+Chaning the baud setting to 2.65MHz gives me 368.88ns, which is close enough.
+
+-Width, +Width (as see by scope)
+001 = [738.22,368.88] -- low is not long enough
+011 = [369.22,737.85] -- Within spec
+011 = [369.20,916.43] -- With the half stop bit -- within spec
+
+
+Looking at the spreadsheet again, I can get closer to spec if I change to 2.4MHz
+Changed to 2.5Mhz to get t=416.49ns (looking for 416.67ns)
+
+-Width, +Width (as see by scope)
+001 = [833.46,416.49] -- low is not long enough
+011 = [416.83,833.09] -- Within spec
+011 = [416.83,1034.5] -- With the half stop bit -- way out of spec
+
+just noticed that the .5stop bit is really bad during this change. I moved back to 2.65MHz
+

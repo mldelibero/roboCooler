@@ -380,6 +380,16 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\main.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\stm32f4xx_it.c</FilePath>
+            </File>
+            <File>
               <FileName>init.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\init.cpp</FilePath>
@@ -390,34 +400,9 @@
               <FilePath>..\src\loop.cpp</FilePath>
             </File>
             <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\main.cpp</FilePath>
-            </File>
-            <File>
               <FileName>timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>component.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\component.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\stm32f4xx_it.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>leds</GroupName>
-          <Files>
-            <File>
-              <FileName>leds.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\leds\leds.cpp</FilePath>
             </File>
             <File>
               <FileName>ledBehavior.cpp</FileName>
@@ -435,9 +420,19 @@
               <FilePath>..\src\leds\ledObj.cpp</FilePath>
             </File>
             <File>
+              <FileName>leds.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\leds\leds.cpp</FilePath>
+            </File>
+            <File>
               <FileName>ledStrip.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\leds\ledStrip.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>component.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\component.cpp</FilePath>
             </File>
             <File>
               <FileName>scene.cpp</FileName>
@@ -450,11 +445,6 @@
           <GroupName>drivers</GroupName>
           <Files>
             <File>
-              <FileName>timerDriver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\drivers\timerDriver.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ledDriver.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\drivers\ledDriver.cpp</FilePath>
@@ -465,19 +455,14 @@
               <FilePath>..\src\drivers\ledStripDriver.cpp</FilePath>
             </File>
             <File>
+              <FileName>timerDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\timerDriver.cpp</FilePath>
+            </File>
+            <File>
               <FileName>CDriver.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\drivers\CDriver.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>tmp</GroupName>
-          <Files>
-            <File>
-              <FileName>limitSwitchDriver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\src\drivers\limitSwitchDriver.cpp</FilePath>
             </File>
           </Files>
         </Group>
