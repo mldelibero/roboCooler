@@ -20,18 +20,14 @@
 
 
 // Led Strip Driver ------------------------------
-#define LED_DMA_AHBxPeriphClockCmd   RCC_AHB1PeriphClockCmd
-#define LED_AHBxPeriph_DMAx          RCC_AHB1Periph_DMA1
-#define USARTx_TX_DMA_CHANNEL        DMA_CHANNEL_4
-#define USARTx_TX_DMA_STREAM         DMA2_Stream6
-#define USARTx_TX_DMA_FLAG_TCIF      DMA_FLAG_TCIF6
-
-// PC6
-#define LED_GPIOX                    GPIOC
-#define LED_GPIO_AF                  GPIO_AF8_USART6
-#define LED_GPIO_PIN_N               GPIO_PIN_6
-#define LED_USARTN                   USART6
-
+extern ARM_DRIVER_USART Driver_USART6;
+#define RTE_USART6_TX_DMA               1
+#define RTE_USART6_TX_DMA_NUMBER        2
+#define RTE_USART6_TX_DMA_STREAM        6
+#define RTE_USART6_TX_DMA_CHANNEL       5
+#define RTE_USART6_TX_DMA_PRIORITY      1
+#define RTE_USART6_TX_ID                2 // PC6
+#define LED_Driver_USARTn               Driver_USART6
 
 // Cap Touch Driver ------------------------------
 #define CAP_SCL_RCC_AHB1Periph_GPIOx       RCC_AHB1Periph_GPIOA

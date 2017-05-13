@@ -11,11 +11,5 @@ typedef struct
     uint8_t       GPIO_AF;              // Where PER is the Peripheral type and X is the Peripheral number
     uint16_t      Pin_N;                // Where N is the Pin number  (1,2...)
 } GPIO_Settings_t;
-
-typedef struct
-{
-    uint32_t DMA_Channel_N;
-    DMA_Stream_TypeDef* DMAN_StreamN;
-} DMA_Settings_t;
 #endif //#ifndef __HARDWARESETTINGS_H
 

@@ -21,9 +21,7 @@ CLedObj  LedsAt50Percent(50,50,50);
 
 CLedBeh_Solid   SolidLedStrip(NUM_LEDS, 0, NUM_LEDS-1, LedsAt50Percent);
 
-DMA_Settings_t  DMA_Settings  = {USARTx_TX_DMA_CHANNEL, USARTx_TX_DMA_STREAM};
-GPIO_Settings_t GPIO_Settings = {LED_GPIOX, LED_GPIO_AF, LED_GPIO_PIN_N};
-CLedStripDriver LedStripDriver(NUM_LEDS, DMA_Settings, GPIO_Settings, LED_USARTN);
+CLedStripDriver LedStripDriver(NUM_LEDS, &LED_Driver_USARTn);
 
 CSceneOn        FirstScene(NUM_LEDS);
 CLedStripComp   LedStrip(&LedStripDriver, &FirstScene, LedObjArray);

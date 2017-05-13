@@ -27,7 +27,7 @@
 
 #ifndef __RTE_DEVICE_H
 #define __RTE_DEVICE_H
-
+#include "roboCooler.h"
 
 #define GPIO_PORT0      GPIOA
 #define GPIO_PORT1      GPIOB
@@ -596,7 +596,10 @@
 #define RTE_USART6                      1
 
 //   <o> USART6_TX Pin <0=>Not Used <1=>PA11 <2=>PC6 <3=>PG14
-#define RTE_USART6_TX_ID                2
+#ifndef RTE_USART6_TX_ID
+#define RTE_USART6_TX_ID                0
+#endif  // RTE_USART6_TX_ID
+
 #if    (RTE_USART6_TX_ID == 0)
 #define RTE_USART6_TX                   0
 #elif  (RTE_USART6_TX_ID == 1)
@@ -709,7 +712,10 @@
 //     <o4> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
 //     <i>  Selects DMA Priority
 //   </e>
-#define RTE_USART6_TX_DMA               1
+#ifndef RTE_USART6_TX_DMA
+#define RTE_USART6_TX_DMA               0
+#endif // RTE_USART6_TX_DMA
+
 #define RTE_USART6_TX_DMA_NUMBER        2
 #define RTE_USART6_TX_DMA_STREAM        6
 #define RTE_USART6_TX_DMA_CHANNEL       5
