@@ -143,8 +143,8 @@ void init(void)
 /**
  * @brief User implementations of USART initialization functions
  */
-void HAL_USART_MspInit(USART_HandleTypeDef* husart)
-{
-    if(husart->Instance==LedStripDriver.Get_UsartN()) LedStripDriver.HAL_USART_MspInit();
-}
+//void HAL_USART_MspInit(USART_HandleTypeDef* husart)
+//{
+ //   if(husart->Instance==LedStripDriver.Get_UsartN()) LedStripDriver.HAL_USART_MspInit();
+//}
 

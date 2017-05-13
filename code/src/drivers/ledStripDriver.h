@@ -20,8 +20,8 @@ class CLedStripDriver : public CDriver , public CComponent
 
         virtual void Initialize_Hardware(void);
         void Update(CLedObj* LedObjArray);
-        USART_TypeDef* Get_UsartN(void);
-        void HAL_USART_MspInit(void);
+//        USART_TypeDef* Get_UsartN(void);
+//        void HAL_USART_MspInit(void);
 
     protected:
         uint16_t m_NumLeds;
