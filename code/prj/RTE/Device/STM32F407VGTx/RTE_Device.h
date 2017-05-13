@@ -593,10 +593,10 @@
 
 // <e> USART6 (Universal synchronous asynchronous receiver transmitter) [Driver_USART6]
 // <i> Configuration settings for Driver_USART6 in component ::CMSIS Driver:USART
-#define RTE_USART6                      0
+#define RTE_USART6                      1
 
 //   <o> USART6_TX Pin <0=>Not Used <1=>PA11 <2=>PC6 <3=>PG14
-#define RTE_USART6_TX_ID                0
+#define RTE_USART6_TX_ID                2
 #if    (RTE_USART6_TX_ID == 0)
 #define RTE_USART6_TX                   0
 #elif  (RTE_USART6_TX_ID == 1)

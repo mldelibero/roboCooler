@@ -31,3 +31,8 @@ Changed to 2.5Mhz to get t=416.49ns (looking for 416.67ns)
 
 just noticed that the .5stop bit is really bad during this change. I moved back to 2.65MHz
 
+----
+Modifying code to not use hardcoded variables
+
+For some reason a lot of the DMA transfer interrupts are enabled
+HAL_DMA_IRQHandler disables the half transfer interrupt and TCIE

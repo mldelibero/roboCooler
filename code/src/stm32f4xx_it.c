@@ -31,6 +31,3 @@ void DMA2_Stream6_IRQHandler(void)
   /* USER CODE END DMA2_Stream6_IRQn 1 */
 }
 
-/* USER CODE BEGIN 1 */
-
-/* USER CODE END 1 */
