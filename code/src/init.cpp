@@ -1,6 +1,6 @@
 #include <stm32f4xx_hal.h>
-//#include "capTouch.h"
-//#include "capTouchDriver.h"
+#include "capTouch.h"
+#include "capTouchDriver.h"
 #include "leds.h"
 //#include "lidMotor.h"
 //#include "limitSwitch.h"
@@ -26,13 +26,8 @@ CLedStripDriver LedStripDriver(NUM_LEDS, &LED_Driver_USARTn);
 CSceneOn        FirstScene(NUM_LEDS);
 CLedStripComp   LedStrip(&LedStripDriver, &FirstScene, LedObjArray);
 
-//CCapTouchDriver CapTouchDriver(
-//        CAP_SCL_GPIOx, CAP_SCL_GPIO_PIN_x,
-//        CAP_SDA_GPIOx, CAP_SDA_GPIO_PIN_x,
-//        CAP_IRQ_GPIOx, CAP_IRQ_GPIO_PIN_x,
-//        CAP_GPIO_AF, CAP_I2Cx);
-//
-//CCapTouchComp CapTouch(&CapTouchDriver);
+CCapTouchDriver CapTouchDriver(CAP_IRQ_GPIOx, CAP_IRQ_GPIO_PIN_x, &CAP_DRIVER_I2Cn);
+CCapTouchComp CapTouch(&CapTouchDriver);
 
 //CLimSwDriver Opened_LimSwDriver(OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
 //CLimSwDriver Closed_LimSwDriver(OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
@@ -107,8 +102,8 @@ void init(void)
 
     //    LidMotor.Initialize();
 
-    //    CapTouchDriver.Initialize_Hardware();
-    //    CapTouch.Initialize();
+    CapTouchDriver.Initialize_Hardware();
+    CapTouch.Initialize();
 
     //    Closed_LimSwDriver.Initialize_Hardware();
     //    Closed_LimSwDriver.Initialize_Hardware();

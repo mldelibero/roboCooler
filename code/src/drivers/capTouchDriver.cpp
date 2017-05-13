@@ -3,30 +3,11 @@
 
 #define CS_I2C_ADDR_RE     0xB5
 
-CCapTouchDriver::CCapTouchDriver(
-                GPIO_TypeDef* SCL_GPIOx,
-                uint16_t      SCL_GPIO_PIN_x,
-
-                GPIO_TypeDef* SDA_GPIOx,
-                uint16_t      SDA_GPIO_PIN_x,
-
-                GPIO_TypeDef* IRQ_GPIOx,
-                uint16_t      IRQ_GPIO_PIN_x,
-
-                uint8_t       GPIO_AF,
-                I2C_TypeDef*  I2Cx)
+CCapTouchDriver::CCapTouchDriver(GPIO_TypeDef* IRQ_GPIOx, uint16_t IRQ_GPIO_PIN_x, ARM_DRIVER_I2C* Driver_I2Cn)
 {
-    m_I2C_Handle.Instance      = I2Cx;
-    m_SCL_GPIOx                = SCL_GPIOx;
-    m_SCL_GPIO_PIN_x           = SCL_GPIO_PIN_x;
-
-    m_SDA_GPIOx                = SDA_GPIOx;
-    m_SDA_GPIO_PIN_x           = SDA_GPIO_PIN_x;
-
-    m_IRQ_GPIOx                = IRQ_GPIOx;
-    m_IRQ_GPIO_PIN_x           = IRQ_GPIO_PIN_x;
-
-    m_GPIO_AF                  = GPIO_AF;
+    m_Driver_I2Cn    = Driver_I2Cn;
+    m_IRQ_GPIOx      = IRQ_GPIOx;
+    m_IRQ_GPIO_PIN_x = IRQ_GPIO_PIN_x;
 } // end - CCapTouchDriver::CCapTouchDriver
 
 CCapTouchDriver::~CCapTouchDriver(void)
@@ -35,6 +16,11 @@ CCapTouchDriver::~CCapTouchDriver(void)
 
 void CCapTouchDriver::Initialize_Hardware(void)
 {
+    m_Driver_I2Cn->Initialize(NULL);
+    m_Driver_I2Cn->PowerControl(ARM_POWER_FULL);
+    m_Driver_I2Cn->Control(ARM_I2C_BUS_SPEED_STANDARD | ARM_I2C_OWN_ADDRESS | ARM_I2C_BUS_CLEAR, 0);
+
+    /*
     GPIO_InitTypeDef    GPIO_InitStruct;
 
     // Init Peripheral clocks
@@ -69,8 +55,8 @@ void CCapTouchDriver::Initialize_Hardware(void)
     HAL_GPIO_Init(m_IRQ_GPIOx, &GPIO_InitStruct);
 
     // Init I2C
-    if      (m_I2Cx == I2C1) __HAL_RCC_FMPI2C1_CLK_ENABLE();
-    else if (m_I2Cx == I2C3) __HAL_RCC_I2C3_CLK_ENABLE();
+    if      (m_I2C_Handle.Instance == I2C1) __HAL_RCC_I2C1_CLK_ENABLE();
+    else if (m_I2C_Handle.Instance == I2C3) __HAL_RCC_I2C3_CLK_ENABLE();
 
     HAL_I2C_DeInit(&m_I2C_Handle);
 
@@ -85,6 +71,7 @@ void CCapTouchDriver::Initialize_Hardware(void)
     HAL_I2C_Init(&m_I2C_Handle);
 
     __HAL_I2C_ENABLE(&m_I2C_Handle);
+    */
 } // end - void CCapTouchDriver::Initialize_Hardware(void)
 
 bool CCapTouchDriver::Is_DataReady(void)

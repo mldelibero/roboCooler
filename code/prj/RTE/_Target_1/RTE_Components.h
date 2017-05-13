@@ -28,6 +28,9 @@
 #define RTE_DEVICE_HAL_UART
 #define RTE_DEVICE_HAL_USART
 #define RTE_DEVICE_STARTUP_STM32F4XX    /* Device Startup for STM32F4 */
+#define RTE_Drivers_I2C1                /* Driver I2C1 */
+        #define RTE_Drivers_I2C2                /* Driver I2C2 */
+        #define RTE_Drivers_I2C3                /* Driver I2C3 */
 #define RTE_Drivers_USART1              /* Driver USART1 */
         #define RTE_Drivers_USART2              /* Driver USART2 */
         #define RTE_Drivers_USART3              /* Driver USART3 */
