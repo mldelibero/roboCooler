@@ -53,13 +53,6 @@ void CLedStripDriver::Initialize_Hardware(void)
             );
     m_Driver_USARTn->Control(ARM_USART_CONTROL_TX, 1); // Enable Transmitter
     m_Driver_USARTn->Control(ARM_USART_CONTROL_RX, 0); // Disable Receiver
-
-    /*
-    m_USART_Handle.Init.BaudRate     = 2650000; // Shouldn't need to do this.
-    __HAL_RCC_DMA2_CLK_ENABLE();
-    HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
-    */
 }
 
 void CLedStripDriver::Update(CLedObj* LedObjArray)

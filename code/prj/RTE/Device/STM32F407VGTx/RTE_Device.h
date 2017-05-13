@@ -714,13 +714,13 @@
 //   </e>
 #ifndef RTE_USART6_TX_DMA
 #define RTE_USART6_TX_DMA               0
-#endif // RTE_USART6_TX_DMA
+
 
 #define RTE_USART6_TX_DMA_NUMBER        2
 #define RTE_USART6_TX_DMA_STREAM        6
 #define RTE_USART6_TX_DMA_CHANNEL       5
 #define RTE_USART6_TX_DMA_PRIORITY      0
-
+#endif // RTE_USART6_TX_DMA
 // </e>
 
 // <e> UART7 (Universal asynchronous receiver transmitter) [Driver_USART7]
