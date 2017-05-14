@@ -2,18 +2,16 @@
 #include "capTouch.h"
 #include "capTouchDriver.h"
 #include "leds.h"
-//#include "lidMotor.h"
-//#include "limitSwitch.h"
-//#include "limitSwitchDriver.h"
+#include "lidMotor.h"
+#include "lidMotorDriver.h"
+#include "limitSwitch.h"
+#include "limitSwitchDriver.h"
 #include "ledBehaviorChildren.h"
 #include "ledStrip.h"
 #include "ledStripDriver.h"
 #include "roboCooler.h"
 #include "scene.h"
 #include "timer.h"
-//extern "C" {
-//#include "Board_LED.h"                  // ::Board Support:LED
-//}
 
 CLedComp leds;
 CLedObj  LedObjArray[NUM_LEDS];
@@ -29,13 +27,14 @@ CLedStripComp   LedStrip(&LedStripDriver, &FirstScene, LedObjArray);
 CCapTouchDriver CapTouchDriver(CAP_IRQ_GPIOx, CAP_IRQ_GPIO_PIN_x, &CAP_DRIVER_I2Cn);
 CCapTouchComp CapTouch(&CapTouchDriver);
 
-//CLimSwDriver Opened_LimSwDriver(OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
-//CLimSwDriver Closed_LimSwDriver(OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
+CLimSwDriver Opened_LimSwDriver(OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
+CLimSwDriver Closed_LimSwDriver(OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
 
-//CLimSwComp Opened_Limit(&Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
-//CLimSwComp Closed_Limit(&Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
+CLimSwComp Opened_Limit(&Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
+CLimSwComp Closed_Limit(&Opened_LimSwDriver, LIM_SW_LO_CUTOFF, LIM_SW_Hi_CUTOFF, LIM_SW_BUFFER_SIZE);
 
-//CLidMotorComp LidMotor(&CapTouch, &Closed_Limit, &Opened_Limit);
+CLidMotorDriver LidMotorDriver;
+CLidMotorComp LidMotor(&LidMotorDriver, &CapTouch, &Closed_Limit, &Opened_Limit);
 
 void SystemClock_Config(void)
 {
@@ -100,7 +99,8 @@ void init(void)
     LedStripDriver.Initialize();
     LedStrip.Initialize();
 
-    //    LidMotor.Initialize();
+    LidMotorDriver.Initialize_Hardware();
+    LidMotor.Initialize();
 
     CapTouchDriver.Initialize_Hardware();
     CapTouch.Initialize();

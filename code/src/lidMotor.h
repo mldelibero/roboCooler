@@ -2,6 +2,7 @@
 #define __LID_MOTOR_H
 #include <stm32f4xx.h>
 #include "component.h"
+#include "lidMotorDriver.h"
 #include "limitSwitch.h"
 #include "capTouch.h"
 
@@ -15,7 +16,7 @@ typedef enum
 class CLidMotorComp: public CComponent
 {
     public:
-        CLidMotorComp(CCapTouchComp* CapTouch_p, CLimSwComp* ClosedLimSw_p, CLimSwComp* OpenedLimSw_p);
+        CLidMotorComp(CLidMotorDriver* LidMotorDriver_p, CCapTouchComp* CapTouch_p, CLimSwComp* ClosedLimSw_p, CLimSwComp* OpenedLimSw_p);
 
         virtual void Execute(void);
         virtual void Initialize(void);
@@ -30,6 +31,7 @@ class CLidMotorComp: public CComponent
         CLimSwComp* m_OpenedLimSw_p;
         CLimSwComp* m_ClosedLimSw_p;
         CCapTouchComp* m_CapTouch_p;
+        CLidMotorDriver* m_LidMotorDriver_p;
 };
 
 #endif // #ifndef __LID_MOTOR_H
