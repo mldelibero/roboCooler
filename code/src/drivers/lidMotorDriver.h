@@ -2,10 +2,6 @@
 #define __LIDMOTOR_DRIVER_H
 #include "CDriver.h"
 
-void motorStop(void);
-void lidMotor_Open(void);
-void lidMotor_Close(void);
-
 class CLidMotorDriver : CDriver
 {
     public:
@@ -13,6 +9,9 @@ class CLidMotorDriver : CDriver
         virtual ~CLidMotorDriver(void);
 
         virtual void Initialize_Hardware(void);
+        void Close(void);
+        void Open(void);
+        void Stop(void);
 
     private:
 }; // end - class CLidMotorDriver : CDriver

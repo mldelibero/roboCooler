@@ -53,12 +53,12 @@ void CLidMotorDriver::Initialize_Hardware(void)
     sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
 
     sConfigOC.OCPolarity   = TIM_OCPOLARITY_HIGH;
-    if (HAL_TIM_OC_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1) != HAL_OK) // Error_Handler();
-    if (HAL_TIM_OC_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2) != HAL_OK) // Error_Handler();
+    HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC,TIM_CHANNEL_1);
+    HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC,TIM_CHANNEL_3);
 
     sConfigOC.OCPolarity = TIM_OCPOLARITY_LOW;
-    if (HAL_TIM_OC_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_3) != HAL_OK) // Error_Handler();
-    if (HAL_TIM_OC_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_4) != HAL_OK) // Error_Handler();
+    HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC,TIM_CHANNEL_2);
+    HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC,TIM_CHANNEL_4);
 
     sBreakDeadTimeConfig.OffStateRunMode  = TIM_OSSR_DISABLE;
     sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_DISABLE;
@@ -68,18 +68,27 @@ void CLidMotorDriver::Initialize_Hardware(void)
     sBreakDeadTimeConfig.BreakPolarity    = TIM_BREAKPOLARITY_HIGH;
     sBreakDeadTimeConfig.AutomaticOutput  = TIM_AUTOMATICOUTPUT_DISABLE;
     if (HAL_TIMEx_ConfigBreakDeadTime(&htim1, &sBreakDeadTimeConfig) != HAL_OK) {}// Error_Handler();
+
+    HAL_TIM_PWM_Init(&htim1);
 }
 
 
-void motorStop(void)
+void CLidMotorDriver::Stop(void)
 {
+    HAL_TIM_PWM_Stop (&htim1, TIM_CHANNEL_1 | TIM_CHANNEL_3);
+    HAL_TIM_PWM_Stop (&htim1, TIM_CHANNEL_2 | TIM_CHANNEL_4);
+    __HAL_TIM_DISABLE(&htim1);
 }
 
-void lidMotor_Open(void)
+void CLidMotorDriver::Open(void)
 {
+    HAL_TIM_PWM_Stop (&htim1, TIM_CHANNEL_2 | TIM_CHANNEL_4);
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1 | TIM_CHANNEL_3);
 }
 
-void lidMotor_Close(void)
+void CLidMotorDriver::Close(void)
 {
+    HAL_TIM_PWM_Stop (&htim1, TIM_CHANNEL_1 | TIM_CHANNEL_3);
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2 | TIM_CHANNEL_4);
 }
 

@@ -18,13 +18,13 @@ void CLidMotorComp::Execute(void)
     if (m_OpenedLimSw_p->At_Limit() == true) m_LidState = LID_ATFULLOPEN;
     if (m_ClosedLimSw_p->At_Limit() == true) m_LidState = LID_ATFULLCLOSE;
 
-    if (m_LidState != LID_MOVING) motorStop();
+    if (m_LidState != LID_MOVING) m_LidMotorDriver_p->Stop();
 
     // Update from Capacitive touch sensor
     if (m_CapTouch_p->Is_TouchDetected() == true)
     {
-        if      (m_LidState == LID_ATFULLCLOSE) lidMotor_Open();
-        else if (m_LidState == LID_ATFULLOPEN ) lidMotor_Close();
+        if      (m_LidState == LID_ATFULLCLOSE) m_LidMotorDriver_p->Open();
+        else if (m_LidState == LID_ATFULLOPEN ) m_LidMotorDriver_p->Close();
     }
 }
 
