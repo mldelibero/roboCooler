@@ -1,7 +1,7 @@
 #include "capTouch.h"
 #include "ledDriver.h"
 //#include "limitSwitch.h"
-//#include "lidMotor.h"
+#include "lidMotor.h"
 //#include "utils.h"
 #include "ledStrip.h"
 #include "ledStripDriver.h"
@@ -14,7 +14,7 @@ extern "C" {
 //extern CLimSwComp Opened_Limit;
 //extern CLimSwComp Closed_Limit;
 extern CCapTouchComp CapTouch;
-//extern CLidMotorComp LidMotor;
+extern CLidMotorComp LidMotor;
 extern CLedStripDriver LedStripDriver;
 extern CLedStripComp LedStrip;
 
@@ -31,7 +31,7 @@ void loop(void)
         //        Opened_Limit.Run();
         //        Closed_Limit.Run();
         CapTouch.Run();
-        //        LidMotor.Run();
+        LidMotor.Run();
         LedStrip.Run();
         LedStripDriver.Run();
 

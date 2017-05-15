@@ -102,8 +102,8 @@ void init(void)
     LidMotorDriver.Initialize_Hardware();
     LidMotor.Initialize();
 
-    CapTouchDriver.Initialize_Hardware();
-    CapTouch.Initialize();
+//    CapTouchDriver.Initialize_Hardware();
+//    CapTouch.Initialize();
 
     //    Closed_LimSwDriver.Initialize_Hardware();
     //    Closed_LimSwDriver.Initialize_Hardware();

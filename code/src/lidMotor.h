@@ -27,6 +27,7 @@ class CLidMotorComp: public CComponent
         CCapTouchComp*  Get_CapSensePtr(void);
 
     private:
+        bool fwd;
         lidMotorState_t m_LidState;
         CLimSwComp* m_OpenedLimSw_p;
         CLimSwComp* m_ClosedLimSw_p;

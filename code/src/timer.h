@@ -3,7 +3,7 @@
 
 #include <stm32f4xx.h>
 
-#define NUM_TIMERS 5
+#define NUM_TIMERS 8
 typedef int Bool;
 #define FALSE   0
 #define TRUE    1

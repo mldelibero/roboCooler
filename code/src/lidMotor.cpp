@@ -4,6 +4,7 @@
 
 CLidMotorComp::CLidMotorComp(CLidMotorDriver* LidMotorDriver_p, CCapTouchComp* CapTouch_p, CLimSwComp* ClosedLimSw_p, CLimSwComp* OpenedLimSw_p)
 {
+    fwd = true;
     m_CapTouch_p       = CapTouch_p;
     m_ClosedLimSw_p    = ClosedLimSw_p;
     m_OpenedLimSw_p    = OpenedLimSw_p;
@@ -12,8 +13,12 @@ CLidMotorComp::CLidMotorComp(CLidMotorDriver* LidMotorDriver_p, CCapTouchComp* C
 
 void CLidMotorComp::Execute(void)
 {
-    m_LidState = LID_MOVING;
+    if (fwd == true) m_LidMotorDriver_p->Open();
+    else             m_LidMotorDriver_p->Close();
+    fwd = !fwd;
 
+    m_LidState = LID_MOVING;
+/*
     // Update from Limit Switches
     if (m_OpenedLimSw_p->At_Limit() == true) m_LidState = LID_ATFULLOPEN;
     if (m_ClosedLimSw_p->At_Limit() == true) m_LidState = LID_ATFULLCLOSE;
@@ -26,10 +31,12 @@ void CLidMotorComp::Execute(void)
         if      (m_LidState == LID_ATFULLCLOSE) m_LidMotorDriver_p->Open();
         else if (m_LidState == LID_ATFULLOPEN ) m_LidMotorDriver_p->Close();
     }
+    */
 }
 
 void CLidMotorComp::Initialize(void)
 {
+    Set_ComponentPeriod_ms(2000);
 }
 
 lidMotorState_t CLidMotorComp::Get_State(void)
