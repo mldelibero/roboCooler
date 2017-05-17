@@ -470,6 +470,11 @@
               <FilePath>..\src\drivers\CDriver.cpp</FilePath>
             </File>
             <File>
+              <FileName>halDriver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\src\drivers\halDriver.cpp</FilePath>
+            </File>
+            <File>
               <FileName>ledDriver.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\src\drivers\ledDriver.cpp</FilePath>
