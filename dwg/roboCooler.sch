@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:roboCooler-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -1111,7 +1112,7 @@ F 3 "" H 1700 1300 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L USB_A J12
+L USB_A-RESCUE-roboCooler J12
 U 1 1 577EB3A0
 P 850 1800
 F 0 "J12" V 550 1900 50  0000 C CNN
