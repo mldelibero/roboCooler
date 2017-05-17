@@ -1,6 +1,7 @@
 #include <stm32f4xx_hal.h>
 #include "capTouch.h"
 #include "capTouchDriver.h"
+#include "halDriver.h"
 #include "leds.h"
 #include "lidMotor.h"
 #include "lidMotorDriver.h"
@@ -18,14 +19,15 @@ CLedObj  LedObjArray[NUM_LEDS];
 CLedObj  LedsAt50Percent(50,50,50);
 
 CLedBeh_Solid   SolidLedStrip(NUM_LEDS, 0, NUM_LEDS-1, LedsAt50Percent);
-
 CLedStripDriver LedStripDriver(NUM_LEDS, &LED_Driver_USARTn);
-
 CSceneOn        FirstScene(NUM_LEDS);
 CLedStripComp   LedStrip(&LedStripDriver, &FirstScene, LedObjArray);
 
 CCapTouchDriver CapTouchDriver(CAP_IRQ_GPIOx, CAP_IRQ_GPIO_PIN_x, &CAP_DRIVER_I2Cn);
 CCapTouchComp CapTouch(&CapTouchDriver);
+
+CHalDriver Hal1_Driver(Hal1_GPIOn, Hal1_GPIO_PIN_n);
+CHalDriver Hal2_Driver(Hal2_GPIOn, Hal2_GPIO_PIN_n);
 
 CLimSwDriver Opened_LimSwDriver(OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
 CLimSwDriver Closed_LimSwDriver(OPEN_LIMSW_GPIOx, OPEN_LIMSW_GPIO_PIN_X);
@@ -91,6 +93,9 @@ void init(void)
 
     //  LED_Initialize();
     Init_Timers();
+
+    Hal1_Driver.Initialize_Hardware();
+    Hal2_Driver.Initialize_Hardware();
 
     FirstScene.Add_Behavior(&SolidLedStrip);
 

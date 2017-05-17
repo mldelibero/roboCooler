@@ -52,5 +52,14 @@ extern ARM_DRIVER_I2C Driver_I2C1;
 #define PBDN_GPIOx                    GPIOD
 #define PBDN_GPIO_PIN_X               GPIO_PIN_11
 
+// Hal Drivers
+// PE6
+#define Hal1_GPIOn          GPIOE
+#define Hal1_GPIO_PIN_n     GPIO_PIN_6
+
+// PE4
+#define Hal2_GPIOn          GPIOE
+#define Hal2_GPIO_PIN_n     GPIO_PIN_4
+
 #endif // #ifndef __ROBOCOOLER_H
 

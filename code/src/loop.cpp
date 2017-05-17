@@ -1,5 +1,6 @@
 #include "capTouch.h"
 #include "ledDriver.h"
+#include "halDriver.h"
 //#include "limitSwitch.h"
 #include "lidMotor.h"
 //#include "utils.h"
@@ -17,6 +18,8 @@ extern CCapTouchComp CapTouch;
 extern CLidMotorComp LidMotor;
 extern CLedStripDriver LedStripDriver;
 extern CLedStripComp LedStrip;
+extern CHalDriver Hal1_Driver;
+extern CHalDriver Hal2_Driver;
 
 void loop(void)
 {
@@ -28,6 +31,10 @@ void loop(void)
     while(1)
     {
         HAL_GPIO_TogglePin(LOOP_INT_GPIOx, LOOP_GPIO_PIN_X);
+
+        if (Hal1_Driver.Is_Triggered()) SetLeds(1);
+        else                            SetLeds(0);
+
         //        Opened_Limit.Run();
         //        Closed_Limit.Run();
         CapTouch.Run();
