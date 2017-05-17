@@ -4,7 +4,21 @@
 
 TIM_HandleTypeDef htim1;
 
-CLidMotorDriver::CLidMotorDriver(void) {}
+CLidMotorDriver::CLidMotorDriver(void)
+{
+    // PA8
+    m_PWM_GPIOn        = GPIOA;
+    m_PWM_GPIO_PIN_n   = GPIO_PIN_8;
+
+    // PD0
+    m_Open_GPIOn       = GPIOD;
+    m_Open_GPIO_PIN_n  = GPIO_PIN_0;
+
+    // PC11
+    m_Close_GPIOn      = GPIOC;
+    m_Close_GPIO_PIN_n = GPIO_PIN_11;
+}
+
 CLidMotorDriver::~CLidMotorDriver(void) {}
 
 #define PERIOD      63000
@@ -40,12 +54,6 @@ void MX_TIM1_Init(void)
 
     sConfigOC.OCPolarity   = TIM_OCPOLARITY_HIGH;
     HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC,TIM_CHANNEL_1);
-    HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC,TIM_CHANNEL_3);
-
-    sConfigOC.OCPolarity = TIM_OCPOLARITY_LOW;
-    HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC,TIM_CHANNEL_2);
-    HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC,TIM_CHANNEL_4);
-    HAL_TIM_PWM_Init(&htim1);
 }
 
 void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef* htim_pwm)
@@ -53,16 +61,26 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef* htim_pwm)
     GPIO_InitTypeDef               GPIO_InitStruct;
     memset(&GPIO_InitStruct, 0 , sizeof(GPIO_InitStruct));
 
-    __HAL_RCC_GPIOE_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOD_CLK_ENABLE();
 
     if(htim_pwm->Instance==TIM1)
     {
-        GPIO_InitStruct.Pin       = GPIO_PIN_9|GPIO_PIN_11|GPIO_PIN_13|GPIO_PIN_14;
         GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
         GPIO_InitStruct.Pull      = GPIO_NOPULL;
         GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_HIGH;
         GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
-        HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+        GPIO_InitStruct.Pin       = GPIO_PIN_8;
+        HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+        GPIO_InitStruct.Mode      = GPIO_MODE_OUTPUT_PP;
+        GPIO_InitStruct.Pin       = GPIO_PIN_0;
+        HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+        GPIO_InitStruct.Pin       = GPIO_PIN_11;
+        HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
     }
 }
 
@@ -93,29 +111,25 @@ void CLidMotorDriver::Initialize_Hardware(void)
     */
 }
 
-
 void CLidMotorDriver::Stop(void)
 {
     HAL_TIM_PWM_Stop (&htim1, TIM_CHANNEL_1);
-    HAL_TIM_PWM_Stop (&htim1, TIM_CHANNEL_2);
-    HAL_TIM_PWM_Stop (&htim1, TIM_CHANNEL_3);
-    HAL_TIM_PWM_Stop (&htim1, TIM_CHANNEL_4);
+    HAL_GPIO_WritePin(m_Open_GPIOn , m_Open_GPIO_PIN_n , GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(m_Close_GPIOn, m_Close_GPIO_PIN_n, GPIO_PIN_RESET);
     __HAL_TIM_DISABLE(&htim1);
 }
 
 void CLidMotorDriver::Open(void)
 {
-    HAL_TIM_PWM_Stop (&htim1, TIM_CHANNEL_2);
-    HAL_TIM_PWM_Stop (&htim1, TIM_CHANNEL_4);
+    HAL_GPIO_WritePin(m_Close_GPIOn, m_Close_GPIO_PIN_n, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(m_Open_GPIOn , m_Open_GPIO_PIN_n , GPIO_PIN_SET);
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
 }
 
 void CLidMotorDriver::Close(void)
 {
-    HAL_TIM_PWM_Stop (&htim1, TIM_CHANNEL_1);
-    HAL_TIM_PWM_Stop (&htim1, TIM_CHANNEL_3);
-    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
+    HAL_GPIO_WritePin(m_Open_GPIOn , m_Open_GPIO_PIN_n , GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(m_Close_GPIOn, m_Close_GPIO_PIN_n, GPIO_PIN_SET);
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 }
 
