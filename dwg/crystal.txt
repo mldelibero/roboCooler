@@ -1,0 +1,43 @@
+Specifying the Crystal:
+
+Evaluating this crystal:
+ABM3-8.000MHZ-D2Y-T
+https://www.digikey.com/product-detail/en/abracon-llc/ABM3-8.000MHZ-D2Y-T/535-10630-1-ND/2344632
+
+
+3.3 Specifying the Load Capacitance
+The purpose here is to find the capacitance values for the two external capacitors connected to the crystal.
+
+3.4 Oscillator Transconductance
+We need to make sure that there is enough gain in the circuit to start up the oscillation.
+
+gain_margin = g_m / g_mcrit
+g_mcrit = 4 * ESR * (2*pi*f)^2 * 
+This needs to be > 5. It is pretty close.
+
+
+3.5.1 Drive Level
+I am going to skip this b/c I don't have the instrumentation to measure it.
+Max Drive Level = 100uW (10uW typical)
+
+
+3.5.3
+R_EXT has the purpose of limiting the drive level of the crystal and filtering out overtones of the fundamental frequency.
+
+R_EXT = 1 / (2*pi*f*C_L2) = 904Ohms
+
+Recalculate the gain margin:
+g_mcrit = 4 * (ESR+R_EXT) * (2*pi*f)^2 * (C_0+C_L)^2
+
+
+--- I can't find a crystal that allows for enough gain at the end. The problem is a low g_m and adding any extern (R_EXT) resistance kills the oscillation.
+
+----
+http://www.ti.com/lit/an/swra495e/swra495e.pdf
+
+3.2.3 Drive Level
+DL = ESR * (pi*f*(C_L + C_M)*Vpp)^2
+Vpp is the peak to peak voltage across the crystal (Can we assume 1.2V)
+C_M is the motional capacitance. Part of the xtl model. This parameter is is typically not given in the datasheet.
+
+3.3 Negative resistance
