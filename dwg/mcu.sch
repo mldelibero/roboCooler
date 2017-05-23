@@ -59,47 +59,47 @@ F 3 "" H 5950 3700 50  0001 C CNN
 $EndComp
 Text HLabel 10450 4700 2    60   Input ~ 0
 LED_0
-Text HLabel 10450 1300 2    60   Input ~ 0
+Text HLabel 10450 1300 2    60   Output ~ 0
 LED_1
-Text HLabel 10450 1500 2    60   Input ~ 0
+Text HLabel 10450 1500 2    60   Output ~ 0
 LED_2
-Text HLabel 10450 1900 2    60   Input ~ 0
+Text HLabel 10450 1900 2    60   Output ~ 0
 LED_3
-Text HLabel 10450 5100 2    60   Input ~ 0
+Text HLabel 10450 5100 2    60   Output ~ 0
 LED_4
-Text HLabel 10450 3000 2    60   Input ~ 0
+Text HLabel 10450 3000 2    60   Output ~ 0
 LED_5
-Text HLabel 1450 3600 0    60   Input ~ 0
+Text HLabel 1450 3600 0    60   Output ~ 0
 LED_6
-Text HLabel 1450 3800 0    60   Input ~ 0
+Text HLabel 1450 3800 0    60   Output ~ 0
 LED_7
-Text HLabel 10450 1400 2    60   Input ~ 0
+Text HLabel 10450 1400 2    60   Output ~ 0
 LED_UART
 Text HLabel 10450 5600 2    60   Input ~ 0
 HAL_1
 Text HLabel 1450 4700 0    60   Input ~ 0
 HAL_2
-Text HLabel 1450 3400 0    60   Input ~ 0
+Text HLabel 1450 3400 0    60   Output ~ 0
 PUSH_1
 Text HLabel 10450 5900 2    60   Input ~ 0
 PUSH_2
 Text HLabel 10450 3800 2    60   Input ~ 0
 CS_IRQ
-Text HLabel 10450 3700 2    60   Input ~ 0
+Text HLabel 10450 3700 2    60   Output ~ 0
 CS_SCL
-Text HLabel 10450 3600 2    60   Input ~ 0
+Text HLabel 10450 3600 2    60   BiDi ~ 0
 CS_SDA
-Text HLabel 1450 4800 0    60   Input ~ 0
+Text HLabel 1450 4800 0    60   Output ~ 0
 MOTOR_SB
-Text HLabel 1450 4600 0    60   Input ~ 0
+Text HLabel 1450 4600 0    60   Output ~ 0
 MOTOR_FWD
-Text HLabel 10450 5700 2    60   Input ~ 0
+Text HLabel 10450 5700 2    60   Output ~ 0
 MOTOR_REV
-Text HLabel 10450 2000 2    60   Input ~ 0
+Text HLabel 10450 2000 2    60   Output ~ 0
 MOTOR_PWM
-Text HLabel 10450 5200 2    60   Input ~ 0
+Text HLabel 10450 5200 2    60   Output ~ 0
 FAN_PWM
-Text HLabel 10450 5500 2    60   Input ~ 0
+Text HLabel 10450 5500 2    60   Output ~ 0
 PUMP_PWM
 $Comp
 L C_Small C21
@@ -107,7 +107,7 @@ U 1 1 591EE19D
 P 1400 8300
 F 0 "C21" H 1410 8370 50  0000 L CNN
 F 1 "0.1uF" H 1410 8220 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 1400 8300 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 1400 8300 50  0001 C CNN
 F 3 "" H 1400 8300 50  0001 C CNN
 	1    1400 8300
 	-1   0    0    -1  
@@ -140,7 +140,7 @@ U 1 1 591DA663
 P 1700 8500
 F 0 "R19" H 1730 8520 50  0000 L CNN
 F 1 "10k" H 1730 8460 50  0000 L CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 1700 8500 50  0001 C CNN
+F 2 "Resistors_SMD:R_0603_HandSoldering" H 1700 8500 50  0001 C CNN
 F 3 "" H 1700 8500 50  0001 C CNN
 	1    1700 8500
 	1    0    0    -1  
@@ -151,7 +151,7 @@ U 1 1 591DA9AB
 P 1600 8500
 F 0 "R18" H 1630 8520 50  0000 L CNN
 F 1 "10k" H 1630 8460 50  0000 L CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 1600 8500 50  0001 C CNN
+F 2 "Resistors_SMD:R_0603_HandSoldering" H 1600 8500 50  0001 C CNN
 F 3 "" H 1600 8500 50  0001 C CNN
 	1    1600 8500
 	-1   0    0    -1  
@@ -192,7 +192,7 @@ U 1 1 591E1F8B
 P 1150 9850
 F 0 "C19" H 1160 9920 50  0000 L CNN
 F 1 "10uF" H 1160 9770 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 1150 9850 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 1150 9850 50  0001 C CNN
 F 3 "" H 1150 9850 50  0001 C CNN
 	1    1150 9850
 	-1   0    0    -1  
@@ -203,7 +203,7 @@ U 1 1 591E1FCB
 P 1400 9850
 F 0 "C22" H 1410 9920 50  0000 L CNN
 F 1 "0.1uF" H 1410 9770 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 1400 9850 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 1400 9850 50  0001 C CNN
 F 3 "" H 1400 9850 50  0001 C CNN
 	1    1400 9850
 	-1   0    0    -1  
@@ -225,7 +225,7 @@ U 1 1 591E4275
 P 1650 9850
 F 0 "C23" H 1660 9920 50  0000 L CNN
 F 1 "0.1uF" H 1660 9770 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 1650 9850 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 1650 9850 50  0001 C CNN
 F 3 "" H 1650 9850 50  0001 C CNN
 	1    1650 9850
 	-1   0    0    -1  
@@ -236,7 +236,7 @@ U 1 1 591E42AF
 P 1900 9850
 F 0 "C24" H 1910 9920 50  0000 L CNN
 F 1 "0.1uF" H 1910 9770 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 1900 9850 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 1900 9850 50  0001 C CNN
 F 3 "" H 1900 9850 50  0001 C CNN
 	1    1900 9850
 	-1   0    0    -1  
@@ -247,7 +247,7 @@ U 1 1 591E42B7
 P 2150 9850
 F 0 "C25" H 2160 9920 50  0000 L CNN
 F 1 "0.1uF" H 2160 9770 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 2150 9850 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 2150 9850 50  0001 C CNN
 F 3 "" H 2150 9850 50  0001 C CNN
 	1    2150 9850
 	-1   0    0    -1  
@@ -258,7 +258,7 @@ U 1 1 591E4355
 P 2400 9850
 F 0 "C26" H 2410 9920 50  0000 L CNN
 F 1 "0.1uF" H 2410 9770 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 2400 9850 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 2400 9850 50  0001 C CNN
 F 3 "" H 2400 9850 50  0001 C CNN
 	1    2400 9850
 	-1   0    0    -1  
@@ -269,7 +269,7 @@ U 1 1 591E435D
 P 2650 9850
 F 0 "C27" H 2660 9920 50  0000 L CNN
 F 1 "0.1uF" H 2660 9770 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 2650 9850 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 2650 9850 50  0001 C CNN
 F 3 "" H 2650 9850 50  0001 C CNN
 	1    2650 9850
 	-1   0    0    -1  
@@ -280,7 +280,7 @@ U 1 1 591E5255
 P 700 1700
 F 0 "C17" H 710 1770 50  0000 L CNN
 F 1 "0.1uF" H 710 1620 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 700 1700 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 700 1700 50  0001 C CNN
 F 3 "" H 700 1700 50  0001 C CNN
 	1    700  1700
 	-1   0    0    -1  
@@ -335,7 +335,7 @@ U 1 1 591E6469
 P 5350 8700
 F 0 "C29" H 5360 8770 50  0000 L CNN
 F 1 "1uF" H 5360 8620 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 5350 8700 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 5350 8700 50  0001 C CNN
 F 3 "" H 5350 8700 50  0001 C CNN
 	1    5350 8700
 	-1   0    0    -1  
@@ -346,7 +346,7 @@ U 1 1 591E64B1
 P 5600 8700
 F 0 "C31" H 5610 8770 50  0000 L CNN
 F 1 "0.1uF" H 5610 8620 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 5600 8700 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 5600 8700 50  0001 C CNN
 F 3 "" H 5600 8700 50  0001 C CNN
 	1    5600 8700
 	-1   0    0    -1  
@@ -383,7 +383,7 @@ U 1 1 591E8372
 P 3350 8400
 F 0 "C18" H 3360 8470 50  0000 L CNN
 F 1 "2.2uF" H 3360 8320 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 3350 8400 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 3350 8400 50  0001 C CNN
 F 3 "" H 3350 8400 50  0001 C CNN
 	1    3350 8400
 	-1   0    0    -1  
@@ -394,7 +394,7 @@ U 1 1 591E843A
 P 3550 8400
 F 0 "C20" H 3560 8470 50  0000 L CNN
 F 1 "2.2uF" H 3560 8320 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 3550 8400 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 3550 8400 50  0001 C CNN
 F 3 "" H 3550 8400 50  0001 C CNN
 	1    3550 8400
 	1    0    0    -1  
@@ -428,7 +428,7 @@ U 1 1 591F3C97
 P 8950 8300
 F 0 "R21" H 8980 8320 50  0000 L CNN
 F 1 "10k" H 8980 8260 50  0000 L CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 8950 8300 50  0001 C CNN
+F 2 "Resistors_SMD:R_0603_HandSoldering" H 8950 8300 50  0001 C CNN
 F 3 "" H 8950 8300 50  0001 C CNN
 	1    8950 8300
 	1    0    0    1   
@@ -502,9 +502,9 @@ L CONN_02X05 J13
 U 1 1 5922E662
 P 8500 8100
 F 0 "J13" H 8500 8400 50  0000 C CNN
-F 1 "CONN_02X05" H 8500 7800 50  0000 C CNN
-F 2 "Connectors:IDC_Header_Straight_10pins" H 8500 6900 50  0001 C CNN
-F 3 "" H 8500 6900 50  0001 C CNN
+F 1 "3221-10-0100-00" H 8500 7800 50  0000 C CNN
+F 2 "roboCooler:Header_02x05_50mil" H 8500 6900 50  0001 C CNN
+F 3 "http://cnctech.us/pdfs/3221-XX-0100-00.pdf" H 8500 6900 50  0001 C CNN
 	1    8500 8100
 	-1   0    0    -1  
 $EndComp

@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name roboCooler)(type KiCad)(uri "$(KIPRJMOD)/roboCooler.pretty")(options "")(descr ""))
+)
