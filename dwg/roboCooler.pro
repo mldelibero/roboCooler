@@ -1,4 +1,4 @@
-update=5/17/2017 5:32:49 PM
+update=5/24/2017 5:57:56 PM
 version=1
 last_client=kicad
 [pcbnew]
@@ -61,3 +61,4 @@ LibName29=contrib
 LibName30=valves
 LibName31=roboCooler
 LibName32=stm32
+LibName33=dc-dc
