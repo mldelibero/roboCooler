@@ -2,7 +2,7 @@
 #include "stm32f4xx_hal.h"
 #include <string.h>
 
-CHalDriver::CHalDriver(GPIO_TypeDef* GPIOn, uint16_t m_GPIO_PIN_n)
+CHalDriver::CHalDriver(GPIO_TypeDef* GPIOn, uint16_t GPIO_PIN_n)
 {
     m_GPIOn        = GPIOn;
     m_GPIO_PIN_n   = GPIO_PIN_n;

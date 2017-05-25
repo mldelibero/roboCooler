@@ -1,6 +1,7 @@
-#ifndef __LIDMOTOR_DRIVER_H
-#define __LIDMOTOR_DRIVER_H
+#ifndef __HAL_DRIVER_H
+#define __HAL_DRIVER_H
 #include "CDriver.h"
+#include "stm32f4xx_hal.h"
 
 class CHalDriver : CDriver
 {
@@ -15,5 +16,5 @@ class CHalDriver : CDriver
         GPIO_TypeDef* m_GPIOn;
         uint16_t      m_GPIO_PIN_n;
 }; // end - class CHalDriver : CDriver
-#endif //#ifndef __LIDMOTOR_DRIVER_H
+#endif //#ifndef __HAL_DRIVER_H
 
